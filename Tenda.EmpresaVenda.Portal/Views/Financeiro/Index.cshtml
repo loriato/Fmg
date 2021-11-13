@@ -1,0 +1,184 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.Domain.EmpresaVenda.Models.Views
+@using Europa.Extensions
+
+@model Tenda.EmpresaVenda.Domain.Services.Models.FechamentoContabilDto
+
+@{
+    ViewBag.Codigo = "EVS19";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<link href="https://cdn.datatables.net/rowgroup/1.0.2/css/rowGroup.dataTables.min.css" rel="stylesheet" type="text/css" />
+<script src="https://cdn.datatables.net/rowgroup/1.0.2/js/dataTables.rowGroup.min.js"></script>
+<script src="~/Static/projeto/financeiro/financeiro.js"></script>
+<link href="~/Static/projeto/financeiro/financeiro.css" rel="stylesheet" />
+
+<script src="~/Static/projeto/financeiro/historico-nota-fiscal.js"></script>
+<link href="~/Static/projeto/financeiro/historico-nota-fiscal.css" rel="stylesheet" />
+
+<script>
+    Europa.Controllers.Financeiro.UrlListar = '@Url.Action("Listar","Financeiro")';
+    Europa.Controllers.Financeiro.UrlUpload = '@Url.Action("UploadNotaFiscal","Financeiro")';
+    Europa.Controllers.Financeiro.UrlExportarPagina = '@Url.Action("ExportarPagina","Financeiro")';
+    Europa.Controllers.Financeiro.UrlExportarTodos = '@Url.Action("ExportarTodos","Financeiro")';
+    Europa.Controllers.Financeiro.UrlDownloadPdf = '@Url.Action("DownloadPdf", "Financeiro")';
+    Europa.Controllers.Financeiro.UrlBuscarTotal = '@Url.Action("BuscarTotal","Financeiro")';
+    Europa.Controllers.Financeiro.UrlHistoricoNotaFiscal = '@Url.Action("HistoricoNotaFiscal", "Financeiro")';
+
+    Europa.Controllers.Financeiro.UrlExibirNotaFiscal = '@Url.Action("ExibirNotaFiscal","Financeiro")';
+
+    Europa.Controllers.Financeiro.EmFechamentoContabil = '@Model.EmFechamentoContabil'=='True';
+
+</script>
+
+<style>
+    .aviso {
+        width: 837px;
+        height: 104px;
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.35);
+        background-color: #f2a900;
+        padding: 16px 40px 16px 40px;
+    }
+
+    .aviso-titulo {
+        font-family: AktivGrotesk;
+        font-size: 20px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: var(--marine-blue);
+    }
+
+    .aviso-conteudo {
+        font-family: AktivGrotesk;
+        font-size: 14px;
+        font-weight: 500;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: 1.43;
+        letter-spacing: normal;
+        color: var(--marine-blue);
+    }
+
+    .nota-recusada {
+        color: #e71e44;
+        font-weight: bold;
+    }
+</style>
+
+<div class="menu-options" size="large">
+    <div class="col-md-24" id="titlebar-name" style="width: 100%;">
+        <div class="col-md-24">
+            <div class="col-md-3" style="padding-top:10px">
+                @GlobalMessages.RelatorioFinanceiro
+            </div>
+            <div class="col-md-4 col-md-offset-2" style="padding-right: 10px">
+                @Html.Label(GlobalMessages.DataComissao, new { style = "color:white" })
+                <div class="input-group">
+                    <span class="input-group-addon date-filter-label">@GlobalMessages.De</span>
+                    @Html.TextBox("DataComissaoDe", "", new { @class = "form-control date-filter-input", datepicker = "datepicker", parent = "#form_filtro" })
+                    <span class="input-group-btn date-filter-input-btn-wrapper">
+                        <button class="btn btn-default btn-date-filter-input" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <img src="~/Static/europa/css/icons/calendar.svg" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4" style="padding-right: 10px;padding-left: 10px; padding-top:23px;">
+                <div class="input-group">
+                    <span class="input-group-addon date-filter-label">@GlobalMessages.Ate</span>
+                    @Html.TextBox("DataComissaoAte", "", new { @class = "form-control date-filter-input", datepicker = "datepicker", parent = "#form_filtro" })
+                    <span class="input-group-btn date-filter-input-btn-wrapper">
+                        <button class="btn btn-default btn-date-filter-input" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <img src="~/Static/europa/css/icons/calendar.svg" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1" style="padding-left: 10px;">
+                @Html.Label(GlobalMessages.Situacao, new { style = "color:white" })
+                @Html.DropDownList("situacao_nota_fiscal", EnumHelper.GetSelectList(typeof(SituacaoNotaFiscal)), "Situação", new { @class = "form-control date-filter-input" })
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-4 col-md-offset-5" style="padding-right: 10px;">
+                @Html.Label(GlobalMessages.DataPrevisaoPagamento, new { style = "color:white" })
+                <div class="input-group">
+                    <span class="input-group-addon date-filter-label">@GlobalMessages.De</span>
+                    @Html.TextBox("data_previsao_pagamento_inicio", "", new { @class = "form-control date-filter-input", datepicker = "datepicker", parent = "#form_filtro" })
+                    <span class="input-group-btn date-filter-input-btn-wrapper">
+                        <button class="btn btn-default btn-date-filter-input" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <img src="~/Static/europa/css/icons/calendar.svg" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4" style="padding-right: 10px;padding-left: 10px; padding-top:23px;">
+                <div class="input-group">
+                    <span class="input-group-addon date-filter-label">@GlobalMessages.Ate</span>
+                    @Html.TextBox("data_previsao_pagamento_termino", "", new { @class = "form-control date-filter-input", datepicker = "datepicker", parent = "#form_filtro" })
+                    <span class="input-group-btn date-filter-input-btn-wrapper">
+                        <button class="btn btn-default btn-date-filter-input" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <img src="~/Static/europa/css/icons/calendar.svg" />
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1" style="padding-left: 10px; padding-top: 20px;">
+                @Html.TextBox("total", "", new { @class = "form-control date-filter-input", @readonly = true, @placeholder = "Valor Total" })
+            </div>
+            <div class="col-md-3 pull-right" style="padding-left: 10px; padding-top:20px;">
+                <button class="btn btn-white btn-filtrar" style="margin-top:-3px;" title="@GlobalMessages.Filtrar"
+                        type="button" onclick="Europa.Controllers.Financeiro.Filtrar()">
+                    <i aria-hidden="true"></i> @GlobalMessages.Filtrar
+                </button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+@if (Model.EmFechamentoContabil)
+{
+    <div class="col-md-24 " style="align-items: center; justify-content: center; flex-direction: row; display: flex;">
+        <div class="col-md-24 aviso">
+            <div class="col-md-24 ">
+                @Html.Label(GlobalMessages.AvisoFechamentoContabil_Titulo, new { @class = "aviso-titulo" })
+            </div>
+            <div class="col-md-24">
+                <label class="aviso-conteudo">@string.Format(GlobalMessages.AvisoFechamentoContabil_Conteudo, Model.InicioFechamento.ToDate(), Model.TerminoFechamento.ToDate())</label>
+            </div>
+        </div>
+    </div>
+}
+
+<div class="col-md-24" style="padding:24px 0px;">
+    <div class="col-md-12">
+        @Html.Label(GlobalMessages.ComissoesReceber, new { @class = "control-label sub-titulo" })
+    </div>
+    <div class="col-md-11 text-right" style="float: right; padding-top:3px;">
+        <button class="btn btn-blue" type="button" onclick="Europa.Controllers.Financeiro.ExportarPagina()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina</button>
+        <button class="btn btn-blue" type="button" onclick="Europa.Controllers.Financeiro.ExportarTodos()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos</button>
+    </div>
+</div>
+
+<div class="col-md-24">
+    <div ng-controller="FinanceiroDatatable as table">
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class=""
+               dt-column-defs="table.dtColumnDefs">
+        </table>
+    </div>
+</div>
+
+<form id="Exportar"></form>
+
+@{
+    Html.RenderPartial("_DocumentoNotaFiscalModal");
+    Html.RenderPartial("_DadosNFModal");
+    Html.RenderPartial("_HistoricoNotaFiscal", new Tenda.Domain.EmpresaVenda.Models.NotaFiscalPagamento());
+}

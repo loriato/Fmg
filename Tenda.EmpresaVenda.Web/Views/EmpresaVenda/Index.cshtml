@@ -1,0 +1,79 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Models
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "EVS01";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/empresa-venda/empresa-venda.js"></script>
+
+<script>
+    Europa.Controllers.EmpresaVenda.UrlListar = '@Url.Action("Listar", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlIncluir = '@Url.Action("Incluir", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlAtualizar = '@Url.Action("Atualizar", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlExcluir = '@Url.Action("Excluir", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlReativar = '@Url.Action("Reativar", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlSuspender = '@Url.Action("Suspender", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlCancelar = '@Url.Action("Cancelar", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlUploadFoto = '@Url.Action("UploadFoto", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlMeuCadastro = '@Url.Action("Detalhar", "MeuCadastro")';
+    Europa.Controllers.EmpresaVenda.UrlBuscarEmpresaVenda = '@Url.Action("BuscarEmpresaVenda", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlExportarPagina = '@Url.Action("ExportarPagina", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.UrlExportarTodos = '@Url.Action("ExportarTodos", "EmpresaVenda")';
+    Europa.Controllers.EmpresaVenda.urlBuscarRegionaisEmpresa = '@Url.Action("ListarRegionaisPorEmpresa", "RegionalEmpresa")';
+    
+
+    Europa.Controllers.EmpresaVenda.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar").ToString().ToLower()',
+        Reativar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Reativar").ToString().ToLower()',
+        Suspender: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Suspender").ToString().ToLower()',
+        Cancelar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Cancelar").ToString().ToLower()',
+        UploadFoto: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "UploadFoto").ToString().ToLower()',
+        Exportar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Exportar").ToString().ToLower()'
+    };
+    Europa.Controllers.EmpresaVenda.Situacao =
+        '@Html.Raw(Ajax.JavaScriptStringEncode(Html.DropDownList("Situacao", EnumHelper.GetSelectList(typeof(Tenda.Domain.Core.Enums.Situacao)), new { @class = "form-control" }).ToHtmlString()))';
+
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+    {
+        <div id="botoes_visualizacao">
+            <button class="btn btn-default" title="@GlobalMessages.Novo" type="button" onclick="Europa.Controllers.EmpresaVenda.HabilitarEdicao()">
+                <i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Novo
+            </button>
+        </div>
+        <div id="botoes_edicao" style="display:none">
+            <button type="button" title="@GlobalMessages.Configuracoes" class="btn btn-default" onClick="Europa.Controllers.EmpresaVenda.AbrirModalConfig()"><i class="fa fa-cog"></i> @GlobalMessages.Configuracoes</button>
+            <button type="button" title="@GlobalMessages.Salvar" class="btn btn-default" onClick="Europa.Controllers.EmpresaVenda.Salvar()"><i class="fa fa-floppy-o"></i> @GlobalMessages.Salvar</button>
+            <button type="button" title="@GlobalMessages.Cancelar" class="btn btn-default" onClick="Europa.Controllers.EmpresaVenda.CancelarEdicao()"><i class="fa fa-ban"></i> @GlobalMessages.Cancelar</button>
+        </div>
+    }
+</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    <div id="div_visualizacao">
+        @{
+            Html.RenderPartial("_DataTableEmpresaVenda");
+        }
+    </div>
+
+    <div id="div_edicao" style="display:none">
+        @{
+            Html.RenderPartial("_FormularioCompleto", new EmpresaVenda());
+        }
+    </div>
+}
+
+@{ 
+    Html.RenderPartial("_ModalUploadArquivo");
+}

@@ -1,0 +1,156 @@
+variables:
+  GITLAB_DOMAIN: git.tenda.com
+
+stages:
+- test
+- copy
+- build
+- release
+
+# Job de análise on-demand da aplicação no SonarQube.
+.code-review-sonarqube-msbuild:
+  image: $CI_REGISTRY/ansible/recipes
+  stage: test
+  variables:
+    SONAR_URL: https://sonar.tenda.com
+    BUILD_BREAKER: "false"
+    SLN: "Tenda.sln"
+    VERBOSE_MODE: "false"
+  before_script:
+    - source pipeline.conf
+  script:
+    - cd /project
+    - ansible-playbook -i inventory/build.yml -l sgcpgitbuild003 -t copy,extract,sonarqube,clean sonarqube.yml -vvv
+  only:
+    - quality
+
+#Job de teste de software com Cucumber
+.cucumber-selenium-test:
+  stage: test
+  variables:
+    browser: chrome
+    environment: staging
+  allow_failure: true
+  image: agilitynetworks/cucumber:master
+  services:
+   - name: agilitynetworks/$browser-webdriver:1.0
+     alias: selenium-webdriver
+  before_script:
+    - source /scripts/functions.sh
+    - wait_for_test_environment
+  script:
+    - e2e_test $environment $browser
+  artifacts:
+   paths:
+    - ./resultados_$browser.html
+   when: always
+
+build:
+  stage: build
+  image: $CI_REGISTRY/ansible/recipes
+  script:
+    - cd /project
+    - ansible-playbook -i inventory/build.yml -l sgcpgitbuild003 -t copy,build,artifact,clean_build,clean app-evs.yml -v
+  artifacts:
+    paths:
+    - artifacts
+
+development: &deployment
+  stage: release
+  image: $CI_REGISTRY/ansible/recipes
+  environment:
+    name: development
+    on_stop: stop_development_app
+  variables:
+    DB_USER: $DEV_DB_USER
+    DB_PASS: $DEV_DB_PASS
+    DB_HOST: $DEV_DB_HOST
+    DB_PORT: $DEV_DB_PORT
+    DB_SCHEMA: $DEV_DB_SCHEMA
+    ENVIRONMENT_YAML: app-evs-develop.yml
+  dependencies:
+    - build
+  script:
+    - cd /project
+    - ansible-playbook -i inventory/$ENVIRONMENT_YAML -t push,extract,deploy,deploy_clean app-evs.yml -v
+  only:
+    - develop
+
+stop_development_app: &destroy
+  stage: release
+  image: $CI_REGISTRY/ansible/recipes
+  when: manual
+  environment:
+    name: development
+    action: stop
+  variables:
+    ENVIRONMENT_YAML: app-evs-develop.yml
+  script:
+    - cd /project
+    - ansible-playbook -i inventory/$ENVIRONMENT_YAML -t destroy app-evs.yml -v
+  only:
+    - develop
+
+#QA
+qa:
+  <<: *deployment
+  when: manual
+  environment:
+    name: qa
+    on_stop: stop_qa_app
+  variables:
+    DB_USER: $QA_DB_USER
+    DB_PASS: $QA_DB_PASS
+    DB_HOST: $QA_DB_HOST
+    DB_PORT: $QA_DB_PORT
+    DB_SCHEMA: $QA_DB_SCHEMA
+    ENVIRONMENT_YAML: app-evs-quality.yml
+  only:
+    - development
+    - quality
+    - /^repasse-.*/ 
+    - /^sprint-.*/ 
+    - /^loja-.*/
+    - /^evs-.*/
+
+stop_qa_app:
+  <<: *destroy
+  environment:
+    name: qa
+    action: stop
+  variables:
+    ENVIRONMENT_YAML: app-evs-quality.yml
+  only:
+    - development
+    - quality
+    - /^repasse-.*/ 
+    - /^sprint-.*/ 
+    - /^loja-sprint-.*/
+    - /^evs-.*/
+
+# PRODUCTION
+production:
+  <<: *deployment
+  when: manual
+  environment:
+    name: production
+    on_stop: stop_production_app
+  variables:
+    DB_USER: $PRD_DB_USER
+    DB_PASS: $PRD_DB_PASS
+    DB_HOST: $PRD_DB_HOST
+    DB_PORT: $PRD_DB_PORT
+    DB_SCHEMA: $PRD_DB_SCHEMA
+    ENVIRONMENT_YAML: app-evs-production.yml
+  only:
+    - master
+
+stop_production_app:
+  <<: *destroy
+  environment:
+    name: production
+    action: stop
+  variables:
+    ENVIRONMENT_YAML: app-evs-production.yml
+  only:
+    - master

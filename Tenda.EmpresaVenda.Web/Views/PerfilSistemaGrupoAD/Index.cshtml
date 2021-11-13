@@ -1,0 +1,32 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "SEG13";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/administrativo/perfil-sistema-active-directory/perfil-sistema-ad.js"></script>
+<script>
+    Europa.Controllers.PerfilSistemaGrupoAD.UrlListar = '@Url.Action("Listar", "PerfilSistemaGrupoAD")';
+    Europa.Controllers.PerfilSistemaGrupoAD.UrlIncluir = '@Url.Action("Incluir", "PerfilSistemaGrupoAD")';
+    Europa.Controllers.PerfilSistemaGrupoAD.UrlAlterar = '@Url.Action("Alterar", "PerfilSistemaGrupoAD")';
+    Europa.Controllers.PerfilSistemaGrupoAD.UrlExcluir = '@Url.Action("Excluir", "PerfilSistemaGrupoAD")';
+    Europa.Controllers.PerfilSistemaGrupoAD.UrlExportarPagina = '@Url.Action("ExportarPagina", "PerfilSistemaGrupoAD")';
+    Europa.Controllers.PerfilSistemaGrupoAD.UrlExportarTodos = '@Url.Action("ExportarTodos", "PerfilSistemaGrupoAD")';
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    @Html.Partial("_Datatable")
+}
+else
+{
+    <div>
+        <h5>
+            @GlobalMessages.PermissaoPaginaAcessoNegado
+        </h5>
+    </div>
+}

@@ -1,0 +1,13 @@
+﻿@using Tenda.Domain.Shared
+<script src="~/Static/projeto/consulta-estoque/empreendimento-datatable.js"></script>
+<script>
+    Europa.Components.ConsultaEstoqueEmpreendimentoDatatable.UrlListar = '@Url.Action("Empreendimento", "ConsultaEstoque")';
+</script>
+
+<div class="col-md-12">
+    <div ng-controller="estoqueEmpreendimentoTable as table">
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>

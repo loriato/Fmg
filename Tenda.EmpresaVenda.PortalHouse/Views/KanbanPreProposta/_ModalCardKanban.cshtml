@@ -1,0 +1,25 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.ApiService.Models.KanbanPreProposta
+
+@model CardKanbanPrePropostaDto
+
+<div class="modal" id="modal_card_kanban" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" style="overflow: auto">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Europa.Controllers.KanbanPreProposta.FecharModalCardKanban()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cadastrar Card Kanban</h4>
+            </div>
+            <div class="modal-body">
+                <div id="div-card-kanban">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" onclick="Europa.Controllers.KanbanPreProposta.SalvarCardKanbanPreProposta()"><i class="fa fa-save" aria-hidden="true"></i> @GlobalMessages.Salvar</button>
+                    <button type="button" class="btn btn-default" onclick="Europa.Controllers.KanbanPreProposta.FecharModalCardKanban()"><i class="fa fa-close" aria-hidden="true"></i> @GlobalMessages.Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

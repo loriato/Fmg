@@ -1,0 +1,56 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Models
+@using Tenda.Domain.Core.Models
+@using Tenda.EmpresaVenda.Web.Models
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "EVS13";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+
+<script src="~/Static/projeto/loja/loja.js"></script>
+<script src="~/Static/projeto/loja/loja-datatable.js"></script>
+
+<script>
+    Europa.Controllers.Loja.UrlListar = '@Url.Action("Listar", "Loja")';
+    Europa.Controllers.Loja.UrlExportarPagina = '@Url.Action("ExportarPagina", "Loja")';
+    Europa.Controllers.Loja.UrlExportarTodos = '@Url.Action("ExportarTodos", "Loja")';
+    Europa.Controllers.Loja.UrlIntegrarCentralImobiliariaSuat = '@Url.Action("IntegrarLoja", "Loja")';
+
+    Europa.Controllers.Loja.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Exportar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Exportar").ToString().ToLower()',
+        Importar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Importar").ToString().ToLower()',
+        Integrar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Importar").ToString().ToLower()'
+    };
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons">
+    <div id="botoes_visualizacao">
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarTabelas"))
+        {
+            <button type="button" class="btn btn-default"
+                    onclick="Europa.Controllers.Loja.Import.AbrirModal()">
+                <i class="fa fa-cog"></i> @GlobalMessages.ImportarLojas
+            </button>
+        }
+        <button type="button" class="btn btn-default"
+                    onclick="Europa.Controllers.Loja.IntegrarLoja()">
+                <i class="fa fa-cog"></i> @GlobalMessages.IntegrarSuat
+            </button>
+    </div>
+</div>
+
+<div id="div_visualizacao">
+    @{
+        Html.RenderPartial("_LojaDataTable");
+    }
+</div>
+
+@{
+    Html.RenderPartial("_Anexo");
+    Html.RenderPartial("_StatusImportacao");
+}

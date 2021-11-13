@@ -1,0 +1,56 @@
+﻿@using Europa.Resources
+<script src="~/Static/projeto/cliente/modal-cliente.js"></script>
+<script>
+    Europa.Components.ClienteModal.UrlListar = '@Url.Action("ListarClientes", "Cliente")';
+</script>
+
+<div class="modal col-md-18" id="modal_busca_clientes" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header center">
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.PesquisarClientesCadastrado</h4>
+                <img data-dismiss="modal" class="btn-close modal-close" aria-label="Close" src="~/Static/images/x-icon-red.png" />
+            </div>
+            <div class="modal-body" ng-controller="listClientes as table">
+                <form id="form_modal_preclientes">
+                    <div class="col-md-24">
+                        <div class="col-md-6 form-group">
+                            <label>@GlobalMessages.Nome</label>
+                            <input type="text" id="cliente_filtro_nome" name="nome" class="form-control" aria-describedby="basic-addon2" maxlength="128">
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <label>@GlobalMessages.Email</label>
+                            <input type="text" id="cliente_filtro_email" name="email" class="form-control" aria-describedby="basic-addon2" maxlength="128">
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <label>@GlobalMessages.Telefone</label>
+                            <input type="text" id="cliente_filtro_telefone" name="telefone" class="form-control" aria-describedby="basic-addon2" maxlength="128">
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            <label>@GlobalMessages.CpfCnpj</label>
+                            <input type="text" id="cliente_filtro_cpf_cnpj" name="cpfCnpj" class="form-control" aria-describedby="basic-addon2" maxlength="128">
+                        </div>
+                    </div>
+                    <div>
+                        <div id="barra_datatable_modal_cliente">
+                            <div class="col-md-18 form-group">
+                                <h5>@GlobalMessages.ClientesEncontrados</h5>
+                            </div>
+                            <div class="pull-right">
+                                <button class="btn" type="submit" title="@GlobalMessages.Filtrar" ng-click="reloadData()"><i class="fa fa-filter" aria-hidden="true"></i>  @GlobalMessages.Filtrar</button>
+                                <button class="btn" type="button" title="@GlobalMessages.Limpar" onclick="Europa.Components.ClienteModal.LimparBusca()"><i class="fa fa-eraser" aria-hidden="true"></i>  @GlobalMessages.Limpar</button>
+                            </div>
+                        </div>
+                        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                               dt-instance="table.dtInstance" class="table"
+                               dt-column-defs="table.dtColumnDefs"></table>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" title="@GlobalMessages.Selecionar" onclick="Europa.Components.ClienteModal.Selecionar()"><i class="fa fa-check" aria-hidden="true"></i>  @GlobalMessages.Selecionar</button>
+                <button type="button" class="btn" data-dismiss="modal" title="@GlobalMessages.Desistir"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

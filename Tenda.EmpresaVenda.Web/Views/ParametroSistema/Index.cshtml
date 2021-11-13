@@ -1,0 +1,101 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+<script src="~/Static/administrativo/parametro-sistema/parametro-sistema.js"></script>
+<script>
+    Europa.Controllers.ParametroSistema.UrlSalvar = '@Url.Action("Salvar","ParametroSistema")';
+    Europa.Controllers.ParametroSistema.UrlListarFluxoVendas = '@Url.Action("ListarFluxoVendas", "ParametroSistema")';
+</script>
+@model Tenda.Domain.Security.Models.ParametroSistema
+
+@{
+    ViewBag.Codigo = "SEG02";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+    bool podeAlterar = SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar");
+    bool podeIncluir = SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir");
+    bool isViewOnly = !(podeAlterar || podeIncluir);
+}
+<div id="titlebar-name">@ViewBag.Title</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    Html.RenderPartial("~/Views/Shared/Componentes/_PerfilModal.cshtml");
+    if (!isViewOnly)
+    {
+        <div id="titlebar-buttons">
+            <div class="col-md-24" style="display: inline-flex">
+                <button type="button" id="btnSalvar" class="btn btn-default" onClick="Europa.Controllers.ParametroSistema.SubmitForm()"><i class="fa fa-floppy-o"></i> Salvar</button>
+                <button type="button" class="btn btn-default" onClick=" location.href = '@Url.Action("Cancelar", "ParametroSistema")' "><i class="fa fa-ban"></i> Cancelar</button>
+            </div>
+        </div>
+    }
+
+    <div>
+        @using (Html.BeginForm("Salvar", "ParametroSistema", FormMethod.Post, new { enctype = "multipart/form-data", id= "formParametroSistema", @class="form-group" }))
+        {
+                @Html.HiddenFor(x => x.Id)
+                <div class="col-md-24">
+                    <div class="geenFieldSet" style="padding-top: 15px;">
+                        <div class="panel-heading">
+                            <div>
+                                <h3 class="panel-title pull-left">Configurações para o para o controle de acesso</h3>
+                                <div class="pull-right">
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-8 form-group">
+                            @Html.Label(GlobalMessages.Sistema)
+                            @Html.TextBoxFor(x => x.Sistema.Nome, new { @class = "form-control", maxlength = 254, disabled = "disabled" })
+                            @Html.HiddenFor(x => x.Sistema.Id)
+                        </div>
+                        <div class="col-md-1 form-group"></div>
+                        <div class="col-md-15 form-group">
+                            @Html.Label(GlobalMessages.PerfilInicial)
+                            <div class="input-group">
+                                @if (!isViewOnly)
+                                {
+                                    <select id="autocomplete_perfil" class="select2-container form-control"></select>
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick=" Europa.Controllers.ParametroSistema.AbrirModal() ">
+                                            <i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                }
+                                else
+                                {
+                                    <select id="autocomplete_perfil" class="select2-container form-control" disabled="disabled"></select>
+                                }
+                            </div>
+                            @Html.HiddenFor(x => x.PerfilInicial.Nome)
+                            @Html.HiddenFor(x => x.PerfilInicial.Id)
+                        </div>
+                    </div>
+                    <div class="col-md-24">
+                        <div class="col-md-8 form-group">
+                            @Html.Label(GlobalMessages.ServidorAd)
+                            @(isViewOnly ? Html.TextBoxFor(x => x.ServidorAD, new { @class = "form-control", maxlength = 254, disabled = "disabled" }) : Html.TextBoxFor(x => x.ServidorAD, new { @class = "form-control", maxlength = 254 }))
+
+                        </div>
+                        <div class="col-md-1 form-group"></div>
+                        <div class="col-md-7 form-group">
+                            @Html.Label(GlobalMessages.DominioAd)
+                            @(isViewOnly ? @Html.TextBoxFor(x => x.DominioAD, new { @class = "form-control", maxlength = 254, disabled = "disabled" }) : Html.TextBoxFor(x => x.DominioAD, new { @class = "form-control", maxlength = 254 }))
+                        </div>
+                        <div class="col-md-1 form-group"></div>
+                        <div class="col-md-7 form-group">
+                            @Html.Label(GlobalMessages.GrupoAd)
+                            @(isViewOnly ? Html.TextBoxFor(x => x.GrupoAD, new { @class = "form-control", maxlength = 254, disabled = "disabled" }) : Html.TextBoxFor(x => x.GrupoAD, new { @class = "form-control", maxlength = 254 }))
+                        </div>
+                    </div>
+                </div>
+        }
+    </div>
+}
+else
+{
+    <div>
+        <h3>
+            @GlobalMessages.PermissaoNegada
+        </h3>
+    </div>
+}

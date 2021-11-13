@@ -1,0 +1,59 @@
+﻿body {
+}
+
+.modal-info {
+    max-width: 674px;
+    max-height: 175px;
+    /*box-shadow: 0 20px 31px 0 rgba(0, 0, 0, 0.12);*/
+    background-image: linear-gradient(255deg, #fcfcfc, #ececec 0%);
+}
+
+.novo-header {
+    font-family: AktivGrotesk;
+    font-size: 22px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.14;
+    letter-spacing: normal;
+    color: #003d62;
+}
+
+.novo-body {
+    font-family: AktivGrotesk;
+    font-size: 18px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    color: #003d62;
+}
+
+.modal-confirm {
+    max-width: 544px;
+    max-height: 131px;
+    box-shadow: 0 20px 31px 0 rgba(0, 0, 0, 0.12);
+    background-image: linear-gradient(256deg, #fcfcfc, #ececec);
+}
+
+.btn-confirmar {
+    min-width: 142px;
+    height: 42px;
+    border-radius: 20.8px;
+    background-color: #e4002b;
+    border: none;
+    padding-top: 5px;
+
+    font-family: AktivGrotesk;
+    font-size: 19.2px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--white);
+
+    
+}

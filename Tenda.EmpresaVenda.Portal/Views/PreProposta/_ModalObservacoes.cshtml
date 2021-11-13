@@ -1,0 +1,25 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.PrePropostaDTO
+
+<div class="col-md-24">
+    <div class="modal" id="modal_observacoes" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 800px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Observacoes</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-24">
+                        @Html.TextAreaFor(reg => reg.PreProposta.Observacao, new { @class = "form-control", style = "height: 300px;", maxlength = 700, @readonly = "readonly" })
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal" title="@GlobalMessages.Fechar">
+                        <i class="fa fa-ban"></i> @GlobalMessages.Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,30 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Web.Models.ClienteDTO
+
+<link rel="stylesheet" href="~/Static/europa/css/europa-bootstrap-nav-vertical.css">
+
+<div class="col-md-4">
+    <nav id="menu_cliente" class="col-md-4 affix side-menu" data-spy="affix">
+        <ul id="tabMenu" class="navbar nav nav-tabs tabs-left">
+            <li id="tabGeral" class="active"><a href="#tabGeralContent">@GlobalMessages.Geral</a></li>
+            <li id="tabProprietario"><a href="#tabProprietarioContent">@GlobalMessages.Proprietario</a></li>
+            <li id="tabEndereco"><a href="#tabEnderecoContent">@GlobalMessages.Enderecos</a></li>
+            <li id="tabDadoPessoal"><a href="#tabDadoPessoalContent">@GlobalMessages.DadosPessoais</a></li>
+            <li id="tabEmpresa"><a href="#tabEmpresaContent">@GlobalMessages.EmpresaTrabalha</a></li>
+            <li id="tabDadoFinanceiro"><a href="#tabDadoFinanceiroContent">@GlobalMessages.DadoFinanceiro</a></li>
+            <li id="tabInformacoesComplementares"><a href="#tabInformacoesComplementaresContent">@GlobalMessages.InformacoesComplementares</a></li>
+            <li id="tabReferencia"><a href="#tabReferenciaContent">@GlobalMessages.Referencias</a></li>
+        </ul>
+    </nav>
+</div>
+<div class="col-md-20" style="height: 100%; margin-bottom: 100px">
+    <div class="tab-content">
+        <div class="tab-pane active" style="padding-left: 20px; padding-right: 20px;">
+            <div id="tabsContent">
+                @{
+                    Html.RenderPartial("_Formulario", Model);
+                }
+            </div>
+        </div>
+    </div>
+</div>

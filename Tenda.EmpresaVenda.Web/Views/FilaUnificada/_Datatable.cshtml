@@ -1,0 +1,29 @@
+﻿@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.Core.Enums
+
+
+<div ng-controller="FilaUnificadaDatatable as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="pull-right">
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+            {
+                <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.FilaUnificada.ExportarPagina()">
+                    <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                </button>
+            }
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+            {
+                <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.FilaUnificada.ExportarTodos()">
+                    <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                </button>
+            }
+        </div>
+
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

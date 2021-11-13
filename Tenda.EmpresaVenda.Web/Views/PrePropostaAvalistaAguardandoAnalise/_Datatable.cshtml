@@ -1,0 +1,185 @@
+﻿@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.Core.Enums
+
+<script src="~/Static/projeto/pre-proposta-avalista-aguardando-analise/datatable-pre-proposta-avalista-aguardando-analise.js"></script>
+
+<style>
+    .dataTables_wrapper.no-footer .dataTables_scrollBody {
+        border-bottom: none;
+    }
+
+    .hr-mais-filtro {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-top: 2px solid #eee;
+    }
+</style>
+
+<form id="filtro">
+    <div class="col-md-24">
+        <div class="col-md-3 form-group">
+            @Html.Label(GlobalMessages.Regional)
+            <select id="autocomplete_regional" multiple="multiple" name="autocomplete_regional" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            @Html.Label(GlobalMessages.Codigo)
+            @Html.TextBox("CodigoPreProposta", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-6 col-md-offset-1">
+            <div class="col-md-11">
+                @Html.Label(GlobalMessages.DataUltimoEnvio)
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.De</span>
+                    @Html.TextBox("DataUltimoEnvioDe", "", new { @class = "form-control", datepicker = "datepicker" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-11 col-md-offset-2">
+                @Html.Label(GlobalMessages.DataUltimoEnvio, new { style = "visibility:hidden" })
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                    @Html.TextBox("DataUltimoEnvioAte", "", new { @class = "form-control", datepicker = "datepicker" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div> <!-- Fim do componente de data -->
+        <div class="col-md-8 col-md-offset-1">
+            @{
+                var situacoesParaVisualizacao = new List<SituacaoProposta>() {
+                                        SituacaoProposta.AguardandoAnaliseSimplificada,
+                                        SituacaoProposta.AguardandoAuditoria,
+                                        SituacaoProposta.AguardandoFluxo,
+                                        SituacaoProposta.AnaliseSimplificadaAprovada,
+                                        SituacaoProposta.Cancelada,
+                                        SituacaoProposta.Condicionada,
+                                        SituacaoProposta.DocsInsuficientesSimplificado,
+                                        SituacaoProposta.DocsInsuficientesCompleta,
+                                        SituacaoProposta.EmAnaliseSimplificada,
+                                        SituacaoProposta.FluxoEnviado,
+                                        SituacaoProposta.AguardandoIntegracao,
+                                        SituacaoProposta.SICAQComErro,
+                                        SituacaoProposta.Integrada,
+                                        SituacaoProposta.Reprovada,
+                                        SituacaoProposta.EmAnaliseCompleta,
+                                        SituacaoProposta.AguardandoAnaliseCompleta
+                                    };
+
+                var situacoesSelectList = new List<SelectListItem>();
+                foreach (var situacao in situacoesParaVisualizacao)
+                {
+                    situacoesSelectList.Add(new SelectListItem { Text = situacao.AsString(), Value = situacao.GetHashCode().ToString() });
+                }
+                situacoesSelectList = situacoesSelectList.AsQueryable().OrderBy(reg => reg.Text).ToList();
+            }
+            @Html.Label(GlobalMessages.SituacaoPreProposta)
+            @Html.DropDownList("SituacoesPreProposta", situacoesSelectList, new { @class = "form-control", multiple = "multiple" })
+        </div>
+    </div>
+    <div class="col-md-24 mais-filtros">
+        <div class="col-md-6">
+            @Html.Label(GlobalMessages.Viabilizador)
+            <select id="autocomplete_viabilizador" multiple="multiple" name="autocomplete_viabilizador" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            @Html.Label(GlobalMessages.Cliente)
+            @Html.TextBox("Cliente", null, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.Cpf)
+            @Html.TextBox("CpfProponente", null, new { @class = "form-control" })
+        </div>
+        <div class="col-md-5 col-md-offset-1">
+            @Html.Label(GlobalMessages.Produto)
+            <select id="autocomplete_breve_lancamento" multiple="multiple" name="autocomplete_breve_lancamento" class="select2-container form-control"></select>
+        </div>
+    </div>
+    <div class="col-md-24 mais-filtros">
+        <div class="col-md-6">
+            @Html.Label(GlobalMessages.EmpresaVendas)
+            <select id="autocomplete_empresa_venda" multiple="multiple" name="autocomplete_empresa_venda" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            <div class="col-md-11">
+                @Html.Label(GlobalMessages.DataElaboracao)
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.De</span>
+                    @Html.TextBox("DataElaboracaoDe", "", new { @class = "form-control", datepicker = "datepicker", onchange = "Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.OnChangeDatePicker()" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-11 col-md-offset-2">
+                @Html.Label(GlobalMessages.DataElaboracao, new { style = "visibility:hidden" })
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                    @Html.TextBox("DataElaboracaoAte", "", new { @class = "form-control", datepicker = "datepicker" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>  <!-- Fim do componente de data -->
+        <div class="col-md-9 col-md-offset-1">
+            <div class="col-md-12 ">
+                @Html.Label(GlobalMessages.SituacaoAvalista)
+                @Html.DropDownList("situacao_avalista", EnumHelper.GetSelectList(typeof(SituacaoAvalista)), new { @class = "form-control", multiple = "multiple" })
+            </div>
+            <div class="col-md-11 col-md-offset-1">
+                @Html.Label(GlobalMessages.UF)
+                @Html.DropDownList("UF", new SelectList(EstadosSelectList.ValuesWithEmpty, "Value", "Text"), new { @class = "form-control", multiple = "multiple" })
+            </div>
+        </div>
+    </div>
+    
+</form>
+
+<div class="col-md-24 teste-aparecer" style="text-align: center;margin-top: 7px;"><hr class="hr-mais-filtro" /><a id="btn-show-hide-filtro" style="cursor: pointer;text-decoration:none" onclick="Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.AlternarExibicaoInformacoes()"><p id="info-hide-filtro" style="margin-bottom:inherit"></p></a></div>
+
+<div class="col-md-24">
+    <div class="col-md-4 pull-right">
+        <div class="col-md-24 text-right " style="vertical-align:central">
+            @Html.Label(GlobalMessages.Filtrar, new { style = "visibility:hidden" })
+            <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.Filtrar()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+            <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+        </div>
+    </div>
+</div>
+
+<div ng-controller="PrePropostasAguardandoAnalise as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="pull-right">
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+            {
+                <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.ExportarPagina()">
+                    <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                </button>
+            }
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTudo"))
+            {
+                <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.ExportarTodos()">
+                    <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                </button>
+            }
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

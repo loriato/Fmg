@@ -1,0 +1,57 @@
+﻿@using Europa.Resources
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "SEG14";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/relatorio-acessos/relatorio-acessos.js"></script>
+<script>
+    Europa.Controllers.RelatorioAcessos.UrlExportar = '@Url.Action("Exportar","RelatorioAcesso")';
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<style>
+    .filtro {
+        height: 29px;
+    }
+</style>
+
+<div class="col-md-24">
+    <div class="col-md-3">
+        @Html.Label(GlobalMessages.Periodo)
+        <div class="input-group">
+            <span class="input-group-addon">@GlobalMessages.De</span>
+            @Html.TextBox("DataInicio", "", new { @class = "form-control filtro", datepicker = "datepicker" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+        @Html.Label(GlobalMessages.DataFim, new { style = "visibility:hidden" })
+        <div class="input-group">
+            <span class="input-group-addon">@GlobalMessages.Ate</span>
+            @Html.TextBox("DataFim", "", new { @class = "form-control filtro", datepicker = "datepicker" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-6 col-md-offset-2">
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarRelatorios"))
+        {
+            <button type="button" title="@GlobalMessages.Exportar" class="btn btn-default filtro" onclick="Europa.Controllers.RelatorioAcessos.Exportar()" style="margin-top: 18px;">
+                <i class="fa fa-file-excel-o"></i> @GlobalMessages.Exportar @ViewBag.Title
+            </button>
+        }
+    </div>
+</div>
+
+<form id="Exportar"></form>

@@ -1,0 +1,171 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.PreCadastroDTO
+
+@{
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+<script type="text/javascript" src="~/Static/projeto/pre-cadastro-ev/pre-cadastro-ev.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pre-cadastro-ev/documento-empresa-venda.js"></script>
+<script>
+    Europa.Controllers.PreCadastroEv.UrlIncluir = '@Url.Action("Incluir", "PreCadastro")';
+    Europa.Controllers.PreCadastroEv.UrlFor = '@Url.Action("BuscarCeP","PreCadastro")';
+</script>
+
+<style>
+    .extra {
+        padding: 0px 25px;
+    }
+
+    #titlebar-name-target {
+        float: left;
+        font-weight: bold;
+        padding: 8px 0 0 0;
+        font-size: 20px;
+    }
+
+    .tituloImagem {
+        margin: 27px 32px;
+        width: 144px;
+        height: 39px;
+    }
+
+    .titulo {
+        margin: 30px 0px 24px;
+        font-size: 20px;
+        width: 465px;
+        height: 39px;
+        font-family: AktivGrotesk;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 0.18px;
+        color: var(--white);
+        text-transform: uppercase;
+    }
+
+    .subTitle {
+        width: 934px;
+        height: 26px;
+        font-family: AktivGrotesk;
+        font-size: 19px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: var(--slate-grey);
+    }
+
+    .subTitle2 {
+        width: 934px;
+        height: 26px;
+        font-family: AktivGrotesk;
+        font-size: 16px;
+        font-weight: normal;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: var(--slate-grey);
+    }
+
+    .botao {
+        margin-right: 46px;
+        width: 184px;
+        height: 46px;
+        font-family: AktivGrotesk;
+        font-size: 24px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 0.22px;
+        text-align: center;
+        margin-top: -18px;
+    }
+
+    #titlebar-extra-target .nav > li > a {
+        padding: 23px 80px 0px 80px;
+    }
+</style>
+<div id="titlebar-name">
+    <p class="titulo">@GlobalMessages.FichaCadastroEmpresaVendas</p>
+</div>
+<div id="titlebar-buttons">
+    <img class="tituloImagem pull-right" src="~/Static/images/logo-branco.png" />
+</div>
+<div id="titlebar-extra">
+    <div class="col-md-24 extra">
+        <div class="col-md-24" style="padding-top:25px;">
+            <div class="col-md-24">
+                <p class="subTitle">@GlobalMessages.MsgInformativaParceiro</p>
+            </div>
+            <div class="col-md-24">
+                <br />
+                <p class="col-md-22 subTitle2">@GlobalMessages.MsgPreencherFormulario</p>
+                <button type="button" onclick="Europa.Controllers.PreCadastroEv.Salvar()" class="btn btn-steel botao pull-right">
+                    @GlobalMessages.Enviar
+                </button>
+            </div>
+        </div>
+        <nav class="col-md-24" style="padding-top:25px;">
+            <ul id="tabMenu" class="nav nav-tabs" role="tablist" style="background-color: #FFFFFF">
+                <li id="tabDadosCadastrais" class="active">
+                    <a href="#area_dados_cadastrais">@GlobalMessages.DadosCadastrais</a>
+                </li>
+                <li id="tabDadosRepresentante">
+                    <a href="#area_dados_representante">@GlobalMessages.DadosRepresentante</a>
+                </li>
+                <li id="tabResponsavelTecnico">
+                    <a href="#area_responsavel_tecnico">@GlobalMessages.ResponsavelTecnico</a>
+                </li>
+                <li id="tabDadosTributarios">
+                    <a href="#area_dados_tributarios">@GlobalMessages.DadosTributarios</a>
+                </li>
+                <li id="tabDocumentosEmpresaVenda">
+                    <a href="#area_documentos_empresa_venda">@GlobalMessages.DocumentosEmpresaVenda</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div class="col-md-24" id="scrollable_div" style="padding-bottom: 25px;">
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div id="tabsContent">
+                <div class="col-md-24">
+                    <fieldset id="fieldset_pre_ev">
+                        <div class="col-md-24" id="area_dados_cadastrais">
+                            @{
+                                Html.RenderPartial("_DadosCadastrais", Model);
+                            }
+                        </div>
+                        <div class="col-md-24" id="area_dados_representante">
+                            @{
+                                Html.RenderPartial("_DadosRepresentante", Model);
+                            }
+                        </div>
+                        <div class="col-md-24" id="area_responsavel_tecnico">
+                            @{
+                                Html.RenderPartial("_ResponsavelTecnico", Model);
+                            }
+                        </div>
+                        <div class="col-md-24" id="area_dados_tributarios">
+                            @{
+                                Html.RenderPartial("_DadosTributarios", Model);
+                            }
+                        </div>
+                        <div class="col-md-24" id="area_documentos_empresa_venda">
+                            @{ 
+                                Html.RenderPartial("_DocumentoEmpresaVenda");
+                            }
+                        </div>
+                    </fieldset>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,26 @@
+﻿@using Europa.Resources
+<script src="~/Static/projeto/modal-mensagens/modal-novas-mensagens.js"></script>
+
+<div id="modal-novas-mensagens" class="modal col-md-12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" style="padding: 30px;">
+        <div class="modal-content modal-alert-content">
+            <div class="modal-header" style="padding: 0;">
+                <img title="@GlobalMessages.Fechar" data-dismiss="modal" style="margin-bottom: 15px; text-align: right;" class="btn-close pull-right" src="~/Static/images/x-icon-red.png"
+                     width="20px" height="18px"/>
+                <div class="col-md-24" style="opacity: 0.95;border-radius: 3px;">
+                    <div class="col-md-4">
+                        <img src="~/Static/images/tenda-logo.png" width="52px" height="52px" style="margin: 10px;"/>
+                    </div>
+                    <div class="col-md-19" style="margin-top: 28px;color: var(--slate);">
+                        <span style="font-size: 22px; font-weight: bold;">@GlobalMessages.FiqueAtendoNovasMensagens</span><br>
+                        <div style="margin-top: 7px;">
+                            <span style="font-size: 18px; font-family: sans-serif;">@GlobalMessages.AcesseNotificacoes</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body" style="display: none;"></div>
+            <div class="modal-footer" style="display: none;"></div>
+        </div>
+    </div>
+</div>

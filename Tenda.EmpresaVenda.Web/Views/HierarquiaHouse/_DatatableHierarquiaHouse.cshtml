@@ -1,0 +1,94 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+
+<script type="text/javascript" src="~/Static/projeto/hierarquia-house/datatable-hierarquia-house.js"></script>
+
+<script>
+    Europa.Controllers.HierarquiaHouse.UrlListarHierarquiaHouse = '@Url.Action("ListarHierarquiaHouse", "HierarquiaHouse")';
+</script>
+
+<div class="col-md-24 form-group">
+    <form>
+        @*<div class="col-md-6 form-group hidden">
+            @Html.Label(GlobalMessages.Coordenador)
+            <select id="autocomplete_coordenador_house_filtro" name="autocomplete_coordenador_house_filtro" class="select2-container form-control"></select>
+        </div>*@
+        <div class="col-md-5 form-group">
+            @Html.Label(GlobalMessages.Supervisor)
+            <select id="autocomplete_supervisor_house" name="autocomplete_supervisor_house" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-5 form-group  col-md-offset-1 hidden">
+            @Html.Label(GlobalMessages.AgenteVenda)
+            <select id="autocomplete_agente_venda_house" name="autocomplete_agente_venda_house" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-5 form-group col-md-offset-1 ">
+            @Html.Label(GlobalMessages.House)
+            <select id="autocomplete_house_filtro" name="autocomplete_house_filtro" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-6 form-group col-md-offset-1">
+            <div class="col-md-11">
+                @Html.Label(GlobalMessages.Periodo)
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.De</span>
+                    @Html.TextBox("PeriodoDe", "", new { @class = "form-control", datepicker = "datepicker", onchange = "Europa.Controllers.HierarquiaHouse.OnChangePeriodoDe()" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-11 col-md-offset-2">
+                @Html.Label(GlobalMessages.Periodo, new { style = "visibility:hidden" })
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                    @Html.TextBox("PeriodoAte", "", new { @class = "form-control", datepicker = "datepicker" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 form-group  col-md-offset-1">
+            @{ 
+                var situacao = EnumHelper.GetSelectList(typeof(SituacaoHierarquiaHouse));
+                situacao.Add(new SelectListItem { Text = GlobalMessages.Selecione, Value = "0" ,Selected=true});
+            }
+            @Html.Label(GlobalMessages.Situacao)
+            @Html.DropDownList("situacao_hierarquia_house",situacao , new { @class = "form-control" })
+        </div>
+        <div class="pull-right" style="margin-top:20px">
+            <button class="btn btn-default" onclick="Europa.Controllers.HierarquiaHouse.FiltrarDatatableHierarquiaHouse()"><i class="fa fa-filter" aria-hidden="true"></i> @GlobalMessages.Filtrar</button>
+            <button class="btn btn-default" type="button" onclick="Europa.Controllers.HierarquiaHouse.LimparFiltroHierarquiaHouse()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+        </div>
+    </form>
+
+</div>
+
+<div ng-controller="DatatableHierarquiaHouse as table">
+    <div id="hierarquia_house_datatable_barra" class="col-md-24 container-fluid">
+        <div class="pull-right">
+           
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+            {
+                <button title="@GlobalMessages.ExportarPagina" type="button" class="btn btn-default hidden"
+                        onclick="Europa.Controllers.RegraComissao.ExportarPagina()">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina
+                </button>
+            }
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+            {
+                <button title="@GlobalMessages.ExportarTodos" type="button" class="btn btn-default hidden"
+                        onclick="Europa.Controllers.RegraComissao.ExportarTodos()">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos
+                </button>
+            }
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

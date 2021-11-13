@@ -1,0 +1,46 @@
+﻿@using Europa.Resources
+
+<script type="text/javascript" src="~/Static/projeto/documento-formulario/index-documento-formulario.js"></script>
+
+<script>
+    Europa.Controllers.DocumentoFormulario.UrlListarDocumentos = '@Url.Action("ListarDocumentos","DocumentoFormulario")';
+    Europa.Controllers.DocumentoFormulario.UrlUploadDocumento = '@Url.Action("UploadDocumento", "DocumentoFormulario")';
+    Europa.Controllers.DocumentoFormulario.UrlExcluirDocumento = '@Url.Action("ExcluirDocumento", "DocumentoFormulario")';
+    Europa.Controllers.DocumentoFormulario.UrlDownloadDocumentoFormulario = '@Url.Action("DownloadDocumentoFormulario", "DocumentoFormulario")';
+</script>
+
+<div class="modal" id="modal-formulario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.DocumentoFormulario.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Formulario</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-24">
+                    <div class="col-md-24">
+                        @using (Html.BeginForm("ImportFormulario", "DocumentoFormulario", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline", id = "formulario_upload_documento" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <label>@GlobalMessages.EnvioArquivo</label>
+                            <input type="file" style="margin-top: 5px" id="file" name="file">
+                        }
+                    </div>
+                    <div class="col-md-24">
+                        <div ng-controller="DocumentoFormularioDatatable as table">
+                            @*<div id="documento_formulario_datatable_barra" class="col-md-24 container-fluid">
+                            </div>*@
+                            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                                   dt-column-defs="table.dtColumnDefs"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Europa.Controllers.DocumentoFormulario.EnviarArquivo()"><i class="fa fa-upload" aria-hidden="true"></i> @GlobalMessages.Importar</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.DocumentoFormulario.CloseModal()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

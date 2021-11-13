@@ -1,0 +1,148 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Models
+@using Tenda.Domain.EmpresaVenda.Models.Views
+@using Tenda.EmpresaVenda.Portal.Models
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@model List<Tenda.EmpresaVenda.Portal.Models.ProdutoViewModel>
+
+@{
+    ViewBag.Codigo = "EVS07";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/static/projeto/produto/produto.js"></script>
+<link rel="stylesheet" type="text/css" href="~/static/projeto/produto/produto.css">
+
+@Scripts.Render("~/bundles/slick")
+@Styles.Render("~/css/slick")
+
+<script>
+    //$('.titlebar').remove();
+    Europa.Controllers.Produto.UrlListar = '@Url.Action("Produtos", "Produto")';
+    Europa.Controllers.Produto.UrlPreProposta = '@Url.Action("Index", "PreProposta")';
+    Europa.Controllers.Produto.UrlAbrirModalInfo = '@Url.Action("ObterBl", "Produto")';
+    Europa.Controllers.Produto.UrlSalvarBook = '@Url.Action("SalvarBook", "Produto")';
+    Europa.Controllers.Produto.UrlSalvarSimulador =  '@Url.Action("DownloadSimulador", "Produto")';
+    Europa.Controllers.Produto.UrlVerificarArquivo = '@Url.Action("VerificarArquivo", "Produto")';
+    Europa.Controllers.Produto.UrlTabelaNominal = '@Url.Action("Index", "TabelaValorNominal")';
+</script>
+
+<style>
+</style>
+
+<div class="menu-options" size="large">
+    <div id="titlebar-name" style="width: 100%;">
+        <div class="pull-left">@GlobalMessages.ProdutosDisponiveis</div>
+    </div>
+    <div id="titlebar-buttons">
+        <div class="col-md-24" style="display: inline-flex; color:white">
+            <span style="font-size:14px;margin-top: 7px; margin-right: 10px;">@GlobalMessages.Filtrar:</span>
+            <div class="form-check" style="margin-right: 20px;">
+                <input onclick="Europa.Controllers.Produto.Search()" class="form-check-input" type="radio" name="filtroProduto" id="filtro_todos" value="" checked>
+                <label class="form-check-label" for="filtro_todos" style="color:white;font-size:13px">
+                    @GlobalMessages.Todos
+                </label>
+            </div>
+            <div class="form-check" style="margin-right: 20px;">
+                <input onclick="Europa.Controllers.Produto.Search()" class="form-check-input" type="radio" name="filtroProduto" id="filtro_empreendimentos" value="true">
+                <label class="form-check-label" for="filtro_empreendimentos" style="color:white;font-size:13px">
+                    @GlobalMessages.Empreendimento
+                </label>
+            </div>
+            <div class="form-check">
+                <input onclick="Europa.Controllers.Produto.Search()" class="form-check-input" type="radio" name="filtroProduto" id="filtro_lancamentos" value="false">
+                <label class="form-check-label" for="filtro_lancamentos" style="color:white;font-size:13px">
+                    @GlobalMessages.BreveLancamento
+                </label>
+            </div>
+        </div>
+    </div>
+    <div id="titlebar-extra" style="background-color: white;">
+        <div class="form-group" style="width: 96%; margin: auto;">
+            <label for="search" class="sr-only">Digite o nome, bairro, cidade ou estado e pressione enter...</label>
+            <img onclick="Europa.Controllers.Produto.Search()" style="width: 20px; position: absolute; margin-left: 93%; margin-top: 9px;" src="~/static/images/search-icon-copy.png" />
+            <input type="text" class="form-control" id="search" name="q" style="margin-top: 10px;padding: 20px 20px 15px;font-size: 15px; border-radius: 29.5px;" placeholder="Digite o nome, bairro e cidade..." onKeyDown="if (event.keyCode == 13) { Europa.Controllers.Produto.Search(this.value)}">
+        </div>
+    </div>
+</div>
+
+<div id="book-empreendimento-target" class="col-md-24"></div>
+
+<div id="book-empreendimento-spinner" class="col-md-23 col-md-offset-1">
+    <div style="margin-right:auto; margin-left:auto; margin-top: 50px; width:100px">
+        <b style="color:#f44336">Aguarde...</b>
+        <div class="lds-ring" style="margin-right:auto; margin-left:auto; margin-top: 50px;"><div></div><div></div><div></div><div></div></div>
+    </div>
+</div>
+
+<div id="book-empreendimento-card-template" style="display:none;">
+    <div id="{id}" class="col-md-7 book-empreendimento-card">
+        <div class="col-md-24 header">
+            <span style="font-size:16px;font-weight:bold">{cidade}</span>
+            <br />
+            {bairro}
+        </div>
+        <div class="col-md-24 images">
+            {imagens}
+        </div>
+        <div class="col-md-24 name {verificarEmpreendimento}" style="background-color: #24ccb8;">
+            <span style="color:#465662; font-weight:bold;font-size:14px">
+                {nome}
+            </span>
+            <div style="display:flex;position: absolute; right: 10px;">
+                <img style="max-width: 22px; max-height: 20px;margin-right: 2px;" src="~/Static/images/predinho.png" />
+                <div style="margin-left: 4px; padding-top: 4px;">
+                    <span style="color:#4880ff;font-size:12px; font-weight:500">
+                        @GlobalMessages.Empreendimento
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-24 name {verificarEmpreendimento}" style="background-color: #dbdcdc;">
+            <span style="color:#465662; font-weight:bold;font-size:14px">
+                {nome}
+            </span>
+            <div style="display:flex;position: absolute; right: 10px;">
+                <img style="max-width: 17px; max-height: 15px;" src="~/Static/images/star.png" />
+                <div style="margin-left: 4px; padding-top: 1px;">
+                    <span style="color:#4880ff;font-size:12px; font-weight:500">
+                        @GlobalMessages.BreveLancamento
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div style="font-size: 14px; font-weight: bold; color: #d43e32;" class="col-md-24 address">
+            <img style="margin-right:16px; width:18px" src="~/Static/images/map-gps.png" />
+            <span style="margin-top: 3px;">{endereco}</span>
+        </div>
+        <div class="col-md-24 info">
+            <div style="overflow: auto;max-height: 49px; height: 49px;">
+                <p style="white-space: initial;color:#748591;font-size:13px;padding-top: 1px;">{informacoes}</p>
+            </div>
+            <div style="margin-left: 4%;display:inline-flex;">
+                <button onclick="Europa.Controllers.Produto.AbrirModal({idEmpreendimento}, {verificarEmpreendimento})" class="btn {verificarEmpreendimento}" style="width: 87px; height: 30px; padding: 4px 10px;">@GlobalMessages.BtnInfo.ToUpper()</button>
+                <button onclick="Europa.Controllers.Produto.AbrirModal({idBreveLancamento}, {verificarEmpreendimento})" class="btn {verificarEmpreendimento}" style="width: 87px; height: 30px; padding: 4px 10px;">@GlobalMessages.BtnInfo.ToUpper()</button>
+                @using (Html.BeginForm("Index", "PreProposta", FormMethod.Post, new { @class = "col-md-24" }))
+                {
+                    <input style="display:none" id="idEmpre" name="idEmpre" value="{idBreveLancamento}" />
+                    <button type="submit" class="btn btn-default" style="margin-left: 85%; width: 140px; height: 30px; padding: 4px 10px;">@GlobalMessages.BtnPreProposta.ToUpper()</button>
+                }
+            </div>
+        </div>
+        <div class="col-md-24 details"></div>
+    </div>
+</div>
+
+<div id="div_breve_lancamento_info">
+    @{
+        Html.RenderPartial("_ModalInfo", new InfoBreveLancamentoViewModel { ArquivoBreveLancamento = new List<ViewArquivoBreveLancamento>(), Endereco = new EnderecoBreveLancamento { BreveLancamento = new BreveLancamento() }, ListaArquivo = new List<ArquivoDto>() });
+    }
+</div>
+
+<div id="div_plata">
+    @{
+        Html.RenderPartial("_ModalPlanta3D", new InfoBreveLancamentoViewModel { ArquivoBreveLancamento = new List<ViewArquivoBreveLancamento>(), Endereco = new EnderecoBreveLancamento { BreveLancamento = new BreveLancamento() }, ListaArquivo = new List<ArquivoDto>() });
+    }
+</div>

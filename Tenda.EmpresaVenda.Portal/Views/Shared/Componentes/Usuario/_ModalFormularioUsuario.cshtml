@@ -1,0 +1,95 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@model Tenda.EmpresaVenda.Portal.Models.PreferenciasUsuarioViewModel.PreferenciasUsuarioViewModel
+
+<script src="~/Static/administrativo/usuario/modal-formulario-usuario.js"></script>
+<script>
+    Europa.Components.Modal.FormularioUsuario.GetUsuario = '@Url.Action("GetUser", "Usuario")';
+    Europa.Components.Modal.FormularioUsuario.GetPerfis = '@Url.Action("ListarPerfis", "Usuario")';
+    Europa.Components.Modal.FormularioUsuario.UrlIncluirPerfil = '@Url.Action("IncluirPerfil", "Usuario")';
+    Europa.Components.Modal.FormularioUsuario.UrlExcluirPerfil = '@Url.Action("ExcluirPerfil", "Usuario")';
+    Europa.Components.Modal.FormularioUsuario.PermExcluir =
+        '@SessionAttributes.Current().HasPermission("SEG03", "ExcluirPerfil")' === 'True';
+</script>
+
+<div class="modal" id="usuarioModal" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <!-- #region header -->
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Components.Modal.FormularioUsuario.CloseModal()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="usuarioModal_titulo"></h4>
+            </div>
+            <!-- #endregion -->
+            <!-- #region body -->
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form id="usuarioModal_formulario" class="form-group">
+                        <fieldset id="usuarioModal_formulario_fieldset">
+                            <div class="col-md-24">
+                                <div class="col-md-11">
+                                    @Html.HiddenFor(x => x.Usuario.Id)
+                                    @Html.Label(GlobalMessages.Nome, new {@class = "control-label"}) *
+                                    @Html.TextBoxFor(x => x.Usuario.Nome, new {@class = "form-control", maxlength = 254})
+                                </div>
+                                <div class="col-md-6 col-md-offset-1">
+                                    @Html.Label(GlobalMessages.Login, new {@class = "control-label"}) *
+                                    @Html.TextBoxFor(x => x.Usuario.Login, new {@class = "form-control", maxlength = 254})
+                                </div>
+                                <div class="col-md-5  col-md-offset-1">
+                                    @Html.Label(GlobalMessages.Situacao, new {@class = "control-label"}) *
+                                    @Html.TextBoxFor(x => x.Usuario.Situacao, new {@class = "form-control", @readonly = "readonly"})
+                                </div>
+                            </div>
+                            <div class="col-md-24">
+                                <div class="col-md-11">
+                                    @Html.Label(GlobalMessages.Email, new {@class = "control-label"})
+                                    @Html.TextBoxFor(x => x.Usuario.Email, new {@class = "form-control", maxlength = 254})
+                                </div>         
+                            </div>
+
+                            <div class="col-md-24 " style="padding-top: 17px">
+                                @Html.CheckBox("Usuario.IgnoraVerificacaoCadastral", Model.Usuario.IgnoraVerificacaoCadastral, new {style = "margin-top: 5px;"}) @Html.Label(GlobalMessages.IgnorarVerificacaoCadastral)
+                            </div>
+
+                            <div class="col-md-24" ng-controller="PerfisDataTable as perfilTable">
+                                <div id="usuario_datable_header_perfil">
+                                    <div class="col-md-5 pull-left">
+                                        <h5>@GlobalMessages.Perfis</h5>
+                                    </div>
+                                    <div class="col-md-19">
+                                        @if (SessionAttributes.Current().HasPermission("SEG03", "IncluirPerfil"))
+                                        {
+                                            <button id="usuarioModal_formulario_btn_perfil" class="btn pull-right"
+                                                    type="button" onclick="Europa.Components.Modal.FormularioUsuario.AbrirModalPerfil();">
+                                                <i class="fa fa-plus"></i> @GlobalMessages.IncluirPerfil
+                                            </button>
+                                        }
+                                    </div>
+                                </div>
+                                <table datatable="" dt-options="perfilTable.dtOptions" dt-columns="perfilTable.dtColumns"
+                                       dt-instance="perfilTable.dtInstance" class="table"
+                                       dt-column-defs="perfilTable.dtColumnDefs">
+                                </table>
+                            </div>
+
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+            <!-- #endregion -->
+            <!-- #region footer -->
+            <div class="modal-footer">
+                <button id="usuarioModal_btnSelecionar" type="button" class="btn" onclick="Europa.Components.Modal.FormularioUsuario.MainAction()">
+                    <i class="fa fa-save"></i> @GlobalMessages.Salvar
+                </button>
+                <button id="usuarioModal_btnDesistir" type="button" class="btn" onclick="Europa.Components.Modal.FormularioUsuario.CloseModal() ">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Cancelar
+                </button>
+            </div>
+            <!-- #endregion -->
+        </div>
+    </div>
+</div>

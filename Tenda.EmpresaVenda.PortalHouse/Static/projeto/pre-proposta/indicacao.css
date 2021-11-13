@@ -1,0 +1,167 @@
+﻿:root {
+    --marine-blue: #003d62;
+    --light-blue: #BBE5EE;
+    --neutral-three: #545D69;
+    --brown-grey: #b3b3b3;
+    --chery-red: #e4002b;
+}
+
+.title-indicacao {
+    background-color: var(--light-blue);
+    padding: 16px 0px 12px 7px;
+    margin-top: 24px;
+}
+
+.panel-heading {
+    border-bottom: 1px solid transparent;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    padding: 0 0 4px;
+    text-align: center;
+}
+.geenFieldSet .panel-heading {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-bottom: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-color: var(--brown-grey) !important;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 10px 0px;
+}
+#modal-inclusao-indicacao .hidden {
+display: none !important;
+}
+
+
+#nao-indicar {
+    height: 24px;
+    width: 24px;
+    margin: 0px;
+}
+
+input[type="checkbox"] {
+    visibility: hidden;
+    position: absolute;
+    margin-top: 10px;
+}
+
+input[type=checkbox]:disabled + label:before {
+    opacity: 0.2;
+}
+
+input[type=checkbox] + label {
+    cursor: pointer;
+    position: relative;
+}
+
+input[type=checkbox]:disabled + label {
+    cursor: not-allowed;
+}
+
+
+input[type=checkbox] + label:before {
+    border-radius: 50%;
+}
+
+input[type=checkbox] + label:before {
+    height: 24px;
+    width: 24px;
+    border: 1px solid var(--marine-blue);
+    border-radius: 4px;
+    margin-right: 10px;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+}
+
+input[type=checkbox]:checked + label:after {
+    background: var(--marine-blue);
+    position: absolute;
+    left: 4px;
+    top: 4px;
+    content: " ";
+    height: 16px;
+    width: 16px;
+    border-radius: 4px;
+    display: inline-block;
+    margin-right: 14px;
+}
+#modal-inclusao-indicacao .modal-body {
+    padding: 10px 10px 10px;
+    max-height: calc(102vh - 100px);
+    width: 96%;
+    margin-left: 2%;
+    overflow-y: auto;
+    overflow-x:hidden;
+}
+
+/*buttons*/
+#modal-inclusao-indicacao .btn {
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 14px;
+    border-width: 2px;
+    border-style: solid;
+    padding: 4px 20px 0 20px;
+}
+    #modal-inclusao-indicacao .btn,
+    #modal-inclusao-indicacao .btn:active,
+    #modal-inclusao-indicacao .btn:focus {
+        color: var(--chery-red);
+        background-color: transparent;
+        border-color: var(--chery-red);
+    }
+
+        #modal-inclusao-indicacao .btn:hover {
+            color: white;
+            background-color: var(--chery-red);
+            border-color: var(--chery-red);
+        }
+#modal-inclusao-indicacao .btn[disabled]:hover {
+    color: #DBDCDC;
+    border-color: #DBDCDC;
+    background-color: #ffff;
+}
+
+#modal-inclusao-indicacao .btn[disabled] {
+    cursor: not-allowed;
+    opacity: .65;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    color: #DBDCDC;
+    border-color: #DBDCDC;
+}
+
+
+.btn-blue, .btn-blue:active, .btn-blue:focus {
+    color: var(--marine-blue);
+    background-color: transparent;
+    border-color: var(--marine-blue);
+}
+
+.btn-indicar {
+    height: 40px;
+    width: 148px;
+}
+
+#modal-inclusao-indicacao .btn-md {
+    border-style: solid;
+    border-width: 2px;
+    padding: 0rem 2rem;
+    font-size: 16px;
+}
+
+#modal-inclusao-indicacao .btn-blue,
+#modal-inclusao-indicacao .btn-blue:active,
+#modal-inclusao-indicacao .btn-blue:focus {
+    color: var(--marine-blue);
+    background-color: transparent;
+    border-color: var(--marine-blue);
+}
+
+    #modal-inclusao-indicacao .btn-blue:hover {
+        color: white;
+        background-color: var(--marine-blue);
+        border-color: var(--marine-blue);
+    }

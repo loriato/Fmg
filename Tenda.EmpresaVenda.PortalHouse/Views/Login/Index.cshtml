@@ -1,0 +1,114 @@
+﻿@model Tenda.EmpresaVenda.ApiService.Models.Login.LoginRequestDto
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Portal Loja</title>
+    <link rel="shortcut icon" href="~/Static/svg/icon-tenda.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Index</title>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/europa")
+    @Styles.Render("~/css/bootstrap")
+
+    <link rel="stylesheet" href="~/Static/css/font-face.css" />
+    <link rel="stylesheet" href="~/Static/css/login.css" />
+    <script src="~/Static/js/main.js"></script>
+    <script src="~/Static/js/login/login.js"></script>
+</head>
+<body>
+    @{
+        var invalidLogin = ViewBag.InvalidLogin ?? false;
+    }
+
+    <div class="main container d-flex-column mt-5 pt-5 pb-5">
+        <section class="header">
+            <img src="~/Static/svg/icon-tenda.svg" width="56" height="45">
+            <label class="mt-3" style="font-family:FontTenda; font-weight:500;"><b>Portal Loja</b></label>
+            <label class="my-5">Acesso exclusivo</label>
+        </section>
+
+        <section class="login mt-5">
+            <div class="@(invalidLogin? "input-error" : "")">
+                @using (Html.BeginForm("Logar", "Login", FormMethod.Post, new { role = "form", id = "login-form", @class = "needs-validation", novalidate = "true" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.Hidden("ReturnUrl", Request["ReturnUrl"])
+
+                    <label>Login</label>
+                    <div class="input-group mb-5">
+                        <svg id="icon-mail" class="icon-input icon" xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 25">
+                            <path d="M18 6c0 3.315-2.685 6-6 6S6 9.315 6 6s2.685-6 6-6 6 2.685 6 6zM0 21c0-3.99 7.995-6 12-6s12 2.01 12 6v1.5c0 .825-.675 1.5-1.5 1.5h-21C.675 24 0 23.325 0 22.5V21z"
+                                  transform="translate(-1232 -23) translate(1079 23) translate(153) translate(2 2)" />
+                        </svg>
+                        <input type="text" id="username" name="username" pattern="\S+" class="form-control" placeholder="Seu login" value="@(Model?.Username)" required />
+                        <div class="invalid-feedback">
+                            * Este campo é obrigatório
+                        </div>
+                    </div>
+
+                    <label>Senha</label>
+                    <div id="group-password" class="input-group">
+                        <svg class="icon-input mt-2 icon" xmlns="http://www.w3.org/2000/svg" width="27" height="15" viewBox="0 0 27 15">
+                            <path d="M14.154 5.401C13.014 2.173 9.658.001 5.906.745 3.16 1.297.93 3.493.355 6.241c-.983 4.644 2.541 8.76 7.025
+                                  8.76 3.13 0 5.79-2.004 6.774-4.8h5.215v2.4c0 1.32 1.079 2.4 2.397 2.4 1.32 0 2.398-1.08 2.398-2.4v-2.4c1.319
+                                  0 2.398-1.08 2.398-2.4 0-1.32-1.079-2.4-2.398-2.4h-10.01zm-6.774 4.8c-1.319 0-2.398-1.08-2.398-2.4 0-1.32 1.08-2.4
+                                  2.398-2.4 1.319 0 2.398 1.08 2.398 2.4 0 1.32-1.08 2.4-2.398 2.4z"
+                                  transform="translate(-454 -474) translate(438 321) translate(0 104) translate(0 32) translate(16 17)" />
+                        </svg>
+                        <input type="password" id="password" name="password" pattern="\S+" class="form-control" placeholder="Senha" value="@(Model?.Password)" required />
+                        <div class="d-flex flex-column text-center justify-content-center align-items-center mr-3" id="btn-mostrar-senha" height="25" width="30">
+                            <svg id="mostrar-senha" class="icon" xmlns="http://www.w3.org/2000/svg" width="24" height="16" viewBox="0 0 24 16" style="display: none">
+                                <path class="teste" d="M11.69.057C6.55.057 2.162 3.256.385 7.771c1.777 4.516 6.165 7.715 11.303 7.715 5.138 0 9.526-3.2
+                              11.303-7.715C21.215 3.256 16.827.057 11.689.057zm0 12.857c-2.837 0-5.14-2.304-5.14-5.143 0-2.838 2.303-5.142
+                              5.14-5.142 2.835 0 5.137 2.304 5.137 5.142 0 2.84-2.302 5.143-5.138 5.143zm0-8.228c-1.707 0-3.084 1.378-3.084
+                              3.085 0 1.708 1.377 3.086 3.083 3.086 1.705 0 3.082-1.378 3.082-3.086 0-1.707-1.377-3.085-3.082-3.085z"
+                                      transform="translate(-822 -473) translate(438 321) translate(0 104) translate(384 48)" />
+                            </svg>
+                            <svg id="esconder-senha" class="icon" xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 23 20">
+                                <path d="M11.69 2.057c-5.14 0-9.527 3.199-11.304 7.714 1.777 4.516 6.165 7.715 11.303
+                              7.715 5.138 0 9.526-3.2 11.303-7.715-1.777-4.515-6.165-7.714-11.303-7.714zm0 12.857c-2.837 0-5.14-2.304-5.14-5.143
+                              0-2.838 2.303-5.142 5.14-5.142 2.835 0 5.137 2.304 5.137 5.142 0 2.84-2.302 5.143-5.138 5.143zm0-8.228c-1.707 0-3.084
+                              1.378-3.084 3.085 0 1.708 1.377 3.086 3.083 3.086 1.705 0 3.082-1.378 3.082-3.086 0-1.707-1.377-3.085-3.082-3.085z"
+                                      transform="translate(-822 -471) translate(438 321) translate(0 104) translate(384 46)" />
+                                <path class="stroke" stroke="#dbdcdc" stroke-linecap="round" stroke-width="2" d="M19.5 0.5L4.709 19.4"
+                                      transform="translate(-822 -471) translate(438 321) translate(0 104) translate(384 46) rotate(-4.047 12.104 9.95)" />
+                            </svg>
+                        </div>
+                        <div class="invalid-feedback">
+                            * Este campo é obrigatório
+                        </div>
+                    </div>
+
+                    if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="col-md-12 p-0 mt-2 server-validation">
+                            @foreach (var modelState in ViewData.ModelState.Values)
+                            {
+                                foreach (var modelError in modelState.Errors)
+                                {
+                                    <div>* @modelError.ErrorMessage</div>
+                                }
+                            }
+                        </div>
+                    }
+
+                    <div id="div-btn" class="d-flex justify-content-end">
+                        <button id="btn-entrar" type="submit" class="button__gradient" disabled>Entrar</button>
+                    </div>
+                }
+            </div>
+        </section>
+    </div>
+    @{
+        Html.RenderPartial("_Footer");
+    }
+</body>
+</html>

@@ -1,0 +1,45 @@
+﻿@using Europa.Resources
+<script src="~/Static/portal-pos-venda/areaNegocioModal.js"></script>
+<script>
+    Europa.Components.AreaNegocioModal.listAction = '@Url.Action("ListarAreaNegocioDataTable", "AreaNegocio")';
+</script>
+@model PortalPosVenda.Domain.Models.AreaNegocio
+
+<div class="modal" id="buscaAreaNegocio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Components.AreaNegocioModal.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.BuscarAreaNegocio</h4>
+            </div>
+            <div class="modal-body" ng-controller="listAreaNegocio as table">
+                <div>
+                    <label>@GlobalMessages.Nome</label>
+                    @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", id = "areaNegocioFiltroNome" })
+                </div>
+                <div>
+                    <div id="barra_datatable_modal_area_negocio">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label>@GlobalMessages.AreasEncontradas</label>
+                            </div>
+                            <div class="pull-right">
+                                <button id="modal_area_negocio_filtrar" class="btn btn-default" type="button" ng-click="reloadData()"><i class="fa fa-filter" aria-hidden="true"></i>  Filtrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                           dt-column-defs="table.dtColumnDefs">
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Europa.Components.AreaNegocioModal.Selecionar()"><i class="fa fa-check" aria-hidden="true"></i> @GlobalMessages.Selecionar</button>
+                <button type="button" class="btn btn-default pull-left" onclick="Europa.Components.AreaNegocioModal.LimparBusca()"><i class="fa fa-eraser" aria-hidden="true"></i> @GlobalMessages.LimparFiltro</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Components.AreaNegocioModal.CloseModal()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>
+

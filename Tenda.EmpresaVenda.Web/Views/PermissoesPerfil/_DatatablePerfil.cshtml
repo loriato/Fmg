@@ -1,0 +1,24 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.Security.Models
+<script src="~/Static/administrativo/permissao-perfil/perfil-datatable.js"></script>
+<script>
+    Europa.Components.Datatable.Perfil.listAction = '@Url.Action("ListaPerfis", "Perfil")';
+</script>
+
+<div ng-controller="PerfilDataTable as table">
+    <div id="PerfilDatatable_barra" class="col-md-24 container-fluid">
+        <form>
+            <div class="col-md-24 form-group">
+                <div class="col-md-15">
+                    <input type="text" id="filtroPerfils" placeholder="@GlobalMessages.Perfil" class="form-control">
+                </div>
+            </div>
+        </form>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>
+@{
+    Html.RenderPartial("_ModalEdicaoPerfil", new Perfil());
+}

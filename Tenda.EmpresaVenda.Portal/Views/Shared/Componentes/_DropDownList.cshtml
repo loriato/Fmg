@@ -1,0 +1,10 @@
+﻿@using Tenda.EmpresaVenda.Portal.Models
+
+@model DropDownViewModel
+@if (Model.IsMutiple)
+{
+    @Html.DropDownList(Model.Name, Model.List, Model.OptionLabel, new { @class = "form-control select2-container" , id = Model.Id, multiple ="multiple" })
+}
+else{
+    @Html.DropDownList(Model.Name, Model.List, Model.OptionLabel, new { @class = "form-control select2-container" , id = Model.Id})
+}

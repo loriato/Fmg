@@ -1,0 +1,37 @@
+﻿.div-area-kanabn {
+    margin: 0px;
+    /*text-align: center;*/
+    border-radius: 10px;
+    /*width:10%;*/
+}
+
+.titulo-area-kanban {
+    font-size: 24px;
+    font-weight: 700;
+}
+
+.div-estado-kanban {
+    margin: 0px;
+    /*text-align: center;*/
+    border-radius: 10px;
+    /*width:10%;*/
+    color: black;
+}
+
+.titulo-estado-kanban {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.div-preview {
+    border-radius: 5px;
+    text-align: center;
+    min-height: 80px;
+    padding: 4%;
+}
+
+.div-card-kanban {
+    color: black;
+    border-radius: 5px;
+    margin:0.5%;
+}

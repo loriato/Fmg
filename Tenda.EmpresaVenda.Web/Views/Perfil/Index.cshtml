@@ -1,0 +1,24 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "SEG11";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/administrativo/perfil/perfil.js"></script>
+<script>
+    Europa.Controllers.CadastroPerfil.UrlListar = '@Url.Action("ListaPerfis", "Perfil")';
+    Europa.Controllers.CadastroPerfil.UrlIncluir = '@Url.Action("IncluirPerfil", "Perfil")';
+    Europa.Controllers.CadastroPerfil.UrlAlterar = '@Url.Action("AlterarPerfil", "Perfil")';
+    Europa.Controllers.CadastroPerfil.UrlSuspender = '@Url.Action("SuspenderPerfil", "Perfil")';
+    Europa.Controllers.CadastroPerfil.UrlReativar = '@Url.Action("ReativarPerfil", "Perfil")';
+    Europa.Controllers.CadastroPerfil.UrlCancelar = '@Url.Action("CancelarPerfil", "Perfil")';
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    @Html.Partial("_Datatable")
+}

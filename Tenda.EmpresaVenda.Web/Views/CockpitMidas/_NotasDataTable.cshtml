@@ -1,0 +1,33 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.Core.Enums
+@using Tenda.Domain.EmpresaVenda.Enums;
+@using Europa.Resources
+
+<div class="col-md-24">
+    <div ng-controller="notasTable as table">
+        <div id="notas_datatable_header" class="col-md-24">
+            <div class="col-md-8" style="margin-top:5px; font-weight:bolder; font-size: 14px">
+                @Html.Label(@GlobalMessages.NotasFiscaisPagamentos)
+            </div>
+            <div class="pull-right">
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.CockpitMidas.ExportarPaginaNotas()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                    </button>
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.CockpitMidas.ExportarTodosNotas()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                    </button>
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>
+
+<form id="ExportarNotas"></form>

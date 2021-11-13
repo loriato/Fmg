@@ -1,0 +1,55 @@
+﻿@using Europa.Resources
+<script type="text/javascript">
+    Europa.Components.ModalPerfil = new Europa.Components.Modal()
+        .WithTargetSuffix("perfil")
+        .WithAction('@Url.Action("ListaPerfis", "Perfil")');
+</script>
+<script src="~/Static/administrativo/usuario/perfil-modal.js"></script>
+
+<div class="modal" id="modal_perfil" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Components.ModalPerfil.Cancel()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@GlobalMessages.BuscarPerfil</h4>
+            </div>
+            <div class="modal-body" ng-controller="listPerfis as table">
+                <div class="col-md-16">
+                    <label>@GlobalMessages.Nome</label>
+                    <input type="text" id="modal_perfil_nome" class="form-control">
+                </div> 
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <label for=""> </label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="checkboxSuspensos" id="idSuspensos"> @GlobalMessages.ConsiderarSuspensos
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div id="barra_datatable_modal_perfil">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label>@GlobalMessages.PerfisEncontrados</label>
+                            </div>
+                            <div class="pull-right">
+                                <button id="modal_perfil_btn_filtrar" class="btn" type="button" ng-click="reloadData()"><i class="fa fa-filter" aria-hidden="true"></i> @GlobalMessages.Filtrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                            dt-instance="table.dtInstance" class="table"
+                            dt-column-defs="table.dtColumnDefs">
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="modal_perfil_btn_selecionar" onclick="Europa.Components.ModalPerfil.Select()"><i class="fa fa-check" aria-hidden="true"></i> @GlobalMessages.Selecionar</button>
+                <button type="button" class="btn pull-left" id="modal_perfil_btn_limpar" onclick="Europa.Components.ModalPerfil.LimparBusca()"><i class="fa fa-eraser" aria-hidden="true"></i> @GlobalMessages.LimparFiltro</button>
+                <button type="button" class="btn" id="modal_perfil_btn_desistir" onclick="Europa.Components.ModalPerfil.Cancel()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>
+

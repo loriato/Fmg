@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://gerarrequisicaodecompra.cadastro.webservice.tenda.com.br/" xmlns:ns1="http://br.com.tenda.zeus/cadastro/request" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" name="GerarRequisicaoCompra" targetNamespace="http://gerarrequisicaodecompra.cadastro.webservice.tenda.com.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://br.com.tenda.zeus/cadastro/request" location="http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process?wsdl=GerarRequisicaoCompra.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="GerarRequisicaoCompraSoapBinding" type="ns1:GerarRequisicaoCompra">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GerarRequisicaoCompra">
+      <soap:operation soapAction="GerarRequisicaoCompra" style="document" />
+      <wsdl:input name="GerarRequisicaoCompra">
+        <soap:header message="ns1:GerarRequisicaoCompra" part="AuditoriaHeader" use="literal" />
+        <soap:body use="literal" parts="GerarRequisicaoCompraRequest" />
+      </wsdl:input>
+      <wsdl:output name="GerarRequisicaoCompraResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GerarRequisicaoCompra">
+    <wsdl:port name="GerarRequisicaoCompraPort" binding="tns:GerarRequisicaoCompraSoapBinding">
+      <soap:address location="http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

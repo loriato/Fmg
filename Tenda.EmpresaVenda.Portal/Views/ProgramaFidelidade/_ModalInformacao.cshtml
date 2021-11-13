@@ -1,0 +1,57 @@
+﻿@using Europa.Resources
+
+<script type="text/javascript" src="~/Static/projeto/programa-fidelidade/novo-dialogo.js"></script>
+<link href="~/Static/projeto/programa-fidelidade/novo-dialogo.css" rel="stylesheet" />
+
+<style>
+    .close {
+        color: var(--chery-red) !important;
+    }
+</style>
+
+@* Novo Modal Informação*@
+<div class="modal col-md-12 " id="nova-info-alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-info" role="document">
+        <div class="modal-content ">
+            <div class="modal-header col-md-24" style="width: 100%;height:auto;padding: 16px 16px 0px 0px;">
+                <img title="@GlobalMessages.Fechar" onclick="Europa.NovaInformacao.Hide();"
+                     class="btn-close pull-right"
+                     src="~/Static/images/x-icon-red.png"
+                     style="width:18px; height:16px;" />
+            </div>
+            <div class="modal-body col-md-24" style="padding: 4px 103px 32px 32px;">
+                <div id="nova-info-header" class="col-md-24 novo-header" style="min-width:499px; height:31px;"></div>
+                <div id="nova-info-body" class="col-md-24 novo-body" style="width:539px; height:72px;"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+@* Novo Modal Confirmação *@
+<div class="modal col-md-12" id="nova-confirm-alert" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-confirm" role="document">
+        <div class="modal-content ">
+            <div class="modal-header col-md-24" style="width: 100%;height:auto;padding: 16px 16px 0px 0px;">
+                <img title="@GlobalMessages.Fechar" onclick="Europa.NovaConfirmacao.Hide();"
+                     class="btn-close pull-right"
+                     src="~/Static/images/x-icon-red.png"
+                     style="width:18px; height:16px;" />
+            </div>
+            <div class="modal-body col-md-24" style="padding: 0px 16px 20px 32px;margin-left:0px">
+                <div class="col-md-18">
+                    <div id="nova-confirm-header" class="col-md-24 novo-header" style="width: 250px; min-height: 57px;"></div>
+                    <div id="nova-confirm-body" class="col-md-24 novo-body" style="width: 333px; min-height: 23px;"></div>
+                </div>
+                <div class="col-md-6" style="height:inherit;">
+                    <button id="nova-confirm-positive-button" type="button" class="btn-confirmar pull-right"
+                            onclick="Europa.NovaConfirmacao.Confirm();" style="margin-top: 30px;">
+                        @GlobalMessages.Confirmar
+                    </button>
+                </div>
+            </div>
+            <div class="modal-footer"></div>
+        </div>
+    </div>
+</div>

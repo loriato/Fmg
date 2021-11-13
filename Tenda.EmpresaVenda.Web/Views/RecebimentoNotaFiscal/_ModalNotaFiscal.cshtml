@@ -1,0 +1,24 @@
+﻿@using Europa.Resources
+
+<div class="col-md-24">
+    <div class="modal" id="dados_nota_fiscal" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 1000px">
+            <div class="modal-content" style="opacity: 1;">
+                <div class="modal-header">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-md btn-blue" title="@GlobalMessages.Download" onclick="Europa.Controllers.RecebimentoNF.DownloadNFEspelho()">
+                            @GlobalMessages.Download
+                        </button>
+                        <button type="button" class="btn btn-md btn-blue" data-dismiss="modal" title="@GlobalMessages.Fechar" >
+                            @GlobalMessages.Fechar
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="nota_fiscal"></div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

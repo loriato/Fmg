@@ -1,0 +1,235 @@
+@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.EmpresaVenda.Web.Models.Application
+@model Tenda.Domain.EmpresaVenda.Models.RegraComissao
+
+@{
+    ViewBag.Codigo = "EVS14";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+
+    var permissaoAdd = SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir");
+    var permissaoAlterar = SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar");
+    var novo = ViewBag.Novo != null && ViewBag.Novo;
+
+    var habilitarEdicao = (Model.Id == 0 && permissaoAdd) || (Model.Id > 0 && (permissaoAlterar || (novo && permissaoAdd)));
+
+    var interromperCampanha = SessionAttributes.Current().HasPermission("EVS14", "InterromperCampanha");
+}
+
+<script src="~/Static/projeto/matriz-pagadoria/matriz-pagadoria.js"></script>
+<script type="text/javascript" src="~/Static/projeto/matriz-pagadoria/matriz-pagadoria-nominal.js"></script>
+<script>
+	Europa.Controllers.MatrizPagadoria.Url.Index = '@(Url.Action("Index", "MatrizPagadoria"))';
+	Europa.Controllers.MatrizPagadoria.Url.Listar = '@(Url.Action("BuscarMatriz", "MatrizPagadoria"))';
+	Europa.Controllers.MatrizPagadoria.Url.Salvar = '@(Url.Action("Salvar", "MatrizPagadoria"))';
+	Europa.Controllers.MatrizPagadoria.Url.GerarPdf = '@(Url.Action("GerarPdf", "MatrizPagadoria"))';
+	Europa.Controllers.MatrizPagadoria.Url.DownloadPdf = '@(Url.Action("DownloadPdf", "MatrizPagadoria"))';
+	Europa.Controllers.MatrizPagadoria.Url.GerarExcel = '@(Url.Action("GerarExcel", "MatrizPagadoria"))';
+	Europa.Controllers.MatrizPagadoria.Editavel = @(((Model.Situacao == SituacaoRegraComissao.Rascunho || ViewBag.Novo) && habilitarEdicao).ToString().ToLower());
+	Europa.Controllers.MatrizPagadoria.PreCarregado = @(ViewBag.Novo.ToString().ToLower());
+	Europa.Controllers.MatrizPagadoria.BuscarAtivoAtual = @(ViewBag.PorUltimaAtualizacao.ToString().ToLower());
+	Europa.Controllers.MatrizPagadoria.Evs = [];
+	Europa.Controllers.MatrizPagadoria.UrlInterromperCampanha = '@Url.Action("InterromperCampanha","RegraComissao")';
+
+    Europa.Controllers.MatrizPagadoria.IdEmpresaVenda =@ViewBag.IdEmpresaVenda;
+    
+	$(document).ready(function () {
+		if (Europa.Controllers.MatrizPagadoria.IdEmpresaVenda > 0) {
+			Europa.Controllers.MatrizPagadoria.Evs = [Europa.Controllers.MatrizPagadoria.IdEmpresaVenda];
+		}
+
+		Europa.Controllers.MatrizPagadoria.BuscarMatriz();
+		Europa.Controllers.MatrizPagadoria.BuscarMatrizNominal();
+
+		$("#tab1").click();
+	});
+</script>
+
+@if (ViewBag.NomeEmpresaVenda != null)
+{
+    <script>
+        Europa.Controllers.MatrizPagadoria.NomeEmpresaVenda='@ViewBag.NomeEmpresaVenda';
+    </script>
+}
+
+
+@if (ViewBag.EvsEdicao != null && ViewBag.EvsEdicao.Length > 0)
+{
+    foreach (var evs in ViewBag.EvsEdicao)
+    {
+        <script>
+			Europa.Controllers.MatrizPagadoria.Evs.push('@(evs)');
+        </script>
+    }
+}
+<link href="~/Static/projeto/matriz-pagadoria/matriz-pagadoria.css" rel="stylesheet" />
+<link href="~/Static/projeto/grupo-cca/grupo-cca.css" rel="stylesheet" />
+
+<div id="titlebar-name">
+    @GlobalMessages.MatrizPagadoriaTenda
+</div>
+<div id="titlebar-buttons">
+    <div class="pull-right" style="width: 100%">
+        <button class="btn btn-default"
+                onClick="location.href='@Url.Action("Index", "RegraComissao")'">
+            <i class="fa fa-chevron-left"></i> @GlobalMessages.Voltar
+        </button>
+        @if (habilitarEdicao)
+        {
+            <button id="btn_salvar" class="btn btn-default" onClick="Europa.Controllers.MatrizPagadoria.Salvar()">
+                <i class="fa fa-save"></i> @GlobalMessages.Salvar
+            </button>
+            <button id="btn_download" class="btn btn-default"
+                    onClick="Europa.Controllers.MatrizPagadoria.GerarExcel()">
+                <i class="fa fa-download"></i> @GlobalMessages.Exportar Excel
+            </button>
+        }
+        @if (Model.Id > 0 && !ViewBag.Novo)
+        {
+            if (Model.Situacao == SituacaoRegraComissao.Rascunho)
+            {
+                <button id="btn_gerar" class="btn btn-default"
+                        onClick="Europa.Controllers.MatrizPagadoria.GerarPdf()">
+                    <i class="fa fa-file"></i> @GlobalMessages.GerarPDF
+                </button>
+            }
+            <button id="btn_download_pdf" class="btn btn-default"
+                    style="display: @(Model.Arquivo.HasValue() ? "inline" : "none")"
+                    onClick="Europa.Controllers.ModalDownloadPdfRegraComissao.Abrir(@(Model.Id))">
+                <i class="fa fa-download"></i> @GlobalMessages.Download @GlobalMessages.PDF
+            </button>
+        }
+        @if (Model.Id > 0 && Model.Tipo == TipoRegraComissao.Campanha && Model.Situacao == SituacaoRegraComissao.Ativo && interromperCampanha)
+        {
+            <button id="btn_interromper_campanha" class="btn btn-default"
+                    onclick="Europa.Controllers.MatrizPagadoria.ConfirmarInterromperCampanha(@Model.Id)">
+                <i class="fa fa-stop"></i> @GlobalMessages.InterromperCampanha
+            </button>
+        }
+    </div>
+</div>
+
+<div class="col-md-24 matriz-page-content">
+    <div id="dados_regra_comissao" class="col-md-24">
+        @Html.HiddenFor(x => x.Id)
+
+        <input type="hidden" id="EmpresasVendasSelecionadas" value="@ViewBag.EmpresasVendasSelecionadas" />
+        <div class="col-md-6">
+            @Html.Label(GlobalMessages.Regional + " *", new { @class = "control-label" })
+            @if (Model.Regional.IsEmpty() && habilitarEdicao)
+            {
+                @Html.DropDownListFor(x => x.Regional, RegionalHelper.RegionaisMatrizSelectListItem, new { @class = "form-control", onchange = "Europa.Controllers.MatrizPagadoria.OnRegionalChanged()" })
+            }
+            else
+            {
+                @Html.TextBoxFor(x => x.Regional, new { @class = "form-control", @readonly = "readonly" })
+            }
+        </div>
+        <div class="col-md-12 col-md-offset-1">
+            @Html.Label(GlobalMessages.Descricao + " *", new { @class = "control-label" })
+            @if (habilitarEdicao && Model.Situacao == SituacaoRegraComissao.Rascunho)
+            {
+                @Html.TextBoxFor(x => x.Descricao, new { @class = "form-control", maxlength = 255 })
+            }
+            else
+            {
+                @Html.TextBoxFor(x => x.Descricao, new { @class = "form-control", @readonly = true })
+            }
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            @Html.Label(GlobalMessages.TipoRegraComissao + " *", new { @class = "control-label" })
+            @if ((Model.Situacao.IsEmpty() || Model.Situacao == SituacaoRegraComissao.Rascunho) && habilitarEdicao)
+            {
+                @Html.EnumDropDownListFor(x => x.Tipo, GlobalMessages.Selecione, new { @class = "form-control", onchange = "Europa.Controllers.MatrizPagadoria.OnChangeVigencia()" })
+            }
+            else
+            {
+                @Html.TextBoxFor(x => x.Tipo, new { @class = "form-control", @readonly = "readonly" })
+            }
+        </div>
+    </div>
+    <div id="vigencia" class="col-md-24">
+
+        <div class="col-md-4 form-group">
+            @Html.Label(GlobalMessages.InicioVigencia + " *", new { @class = "control-label" })
+            @if ((Model.Situacao.IsEmpty() || Model.Situacao == SituacaoRegraComissao.Rascunho) && habilitarEdicao)
+            {
+                @Html.TextBoxFor(x => x.InicioVigencia, new { @class = "form-control", maxlength = 128, @datepicker = "datepicker", onchange = "Europa.Controllers.MatrizPagadoria.OnChangeInicioVigencia()" })
+            }
+            else if (Model.Tipo == TipoRegraComissao.Campanha)
+            {
+                @Html.TextBox("inicio", Model.InicioVigencia.Value.ToString(), new { @class = "form-control", @readonly = "readonly" })
+            }
+        </div>
+        <div class="col-md-4 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.TerminoVigencia + " *", new { @class = "control-label" })
+            @if ((Model.Situacao.IsEmpty() || Model.Situacao == SituacaoRegraComissao.Rascunho) && habilitarEdicao)
+            {
+                @Html.TextBoxFor(x => x.TerminoVigencia, new { @class = "form-control", maxlength = 128, @datepicker = "datepicker" })
+            }
+            else if (Model.Tipo == TipoRegraComissao.Campanha)
+            {
+                @Html.TextBox("termino", Model.TerminoVigencia.Value.ToString(), new { @class = "form-control", @readonly = "readonly" })
+            }
+        </div>
+
+    </div>
+    <div id="filtro_matriz" class="col-md-24">
+        <div class="col-md-24">
+            <div class="geenFieldSet">
+                <div class="panel-heading">
+                    <div>
+                        <h3 class="panel-title pull-left">@GlobalMessages.Filtros</h3>
+                        <div class="pull-right">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            @Html.Label(GlobalMessages.Empreendimento)
+            <select id="autocomplete_empreendimentos" class="select2-container form-control"></select>
+        </div>
+        <div class="col-md-6 col-md-offset-1">
+            @Html.Label(GlobalMessages.EmpresaVenda)
+            <select id="autocomplete_empresa_venda" class="select2-container form-control"></select>
+        </div>
+        <div class="pull-right" style="margin-top:20px">
+            <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.MatrizPagadoria.AplicarFiltro()">
+                <i class="fa fa-filter"></i> @GlobalMessages.Filtrar
+            </button>
+            <button class="btn btn-default" type="button" title="@GlobalMessages.Limpar" onClick="Europa.Controllers.MatrizPagadoria.LimparFiltro()">
+                <i class="fa fa-eraser"></i> @GlobalMessages.Limpar
+            </button>
+        </div>
+    </div>
+    <div class="tabs-container col-md-24">
+        <input type="radio" name="tabs" class="tabs" id="tab1" checked>
+        <label for="tab1">@GlobalMessages.Fixa</label>
+        <div style="padding-top: 0px;
+			padding-left: 0px;
+			padding-right: 0px;
+			padding-bottom: 0px;">
+            <div id="matriz_pagadoria" class="col-md-24">
+            </div>
+        </div>
+
+        <input type="radio" name="tabs" class="tabs" id="tab2" checked>
+        <label for="tab2">@GlobalMessages.Nominal</label>
+        <div style="padding-top: 0px;
+			padding-left: 0px;
+			padding-right: 0px;
+			padding-bottom: 0px;">
+            <div id="matriz_pagadoria_nominal" class="col-md-24">
+            </div>
+        </div>
+    </div>
+</div>
+
+@{
+    Html.RenderPartial("~/Views/RegraComissao/_ModalDownloadPdfRegraComissao.cshtml");
+}

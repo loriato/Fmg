@@ -1,0 +1,8 @@
+﻿@using Europa.Resources
+
+@model IEnumerable<SelectListItem>
+
+<div class="col-md-24 form-group">
+    @Html.Label(GlobalMessages.Situacao+" "+ GlobalMessages.Proposta, new { @class = "control-label" })
+    @Html.DropDownList("situacao_pre_proposta", Model, GlobalMessages.Selecione, new { @class="form-control"})
+</div>

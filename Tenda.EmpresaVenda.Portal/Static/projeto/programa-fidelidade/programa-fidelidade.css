@@ -1,0 +1,571 @@
+﻿.Programa-de-fidelida {
+    width: 372px;
+    height: 19px;
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    color: var(--white);
+}
+
+.titlebar {
+    border: 1px solid transparent;
+    position: relative;
+    min-height: 20px;
+    padding: 7px 25px;
+    background-color: var(--bluey-grey);
+    color: white;
+}
+
+.btn-fidelidade {
+    width: 190px;
+    height: 38px;
+    border: solid 1.8px var(--steel);
+    background-color: var(--white);
+    margin-left: 15px;
+}
+
+.titulo {
+    /*width: 819px;*/
+    height: 64px;
+    font-family: AktivGrotesk;
+    font-size: 40px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #003d62;
+    margin: 80px 0px 0px 0px;
+}
+
+.subtitulo {
+    height: 28px;
+    font-family: AktivGrotesk;
+    font-size: 23.8px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.18;
+    letter-spacing: normal;
+    text-align: center;
+    color: #6b6c6f;
+    /*margin: 0px 0px 80px 0px;*/
+}
+
+.fidel-icon {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+.pontos {
+    /*margin-top:24px;*/
+    width: 192px;
+    /*height: 111px;*/
+    font-family: AktivGrotesk;
+    font-size: 64px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: 0.58px;
+    text-align: center;
+    color: var(--white);
+}
+
+.btn-resgatar-agora {
+    width: 172px;
+    height: 44px;
+    font-family: AktivGrotesk;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.15px;
+    /*text-align: center;*/
+    color: #ec1d24;
+    border-radius: 40px;
+    border: 2px solid var(--white);
+    /*padding: 4px 20px 0 20px;*/
+    /*margin-top:32px;*/
+    padding-top: 4px;
+}
+
+.Rectangle-1 {
+    width: 343px;
+    height: 354px;
+    border-radius: 48px;
+    box-shadow: 9px 9px 36px 0 rgba(0, 0, 0, 0.2);
+    background-color: #e4002b;
+    /*margin-right: 86px;*/
+    display: block;
+    margin-right: 86px;
+}
+
+.Rectangle-2 {
+    width: 343px;
+    height: 355px;
+    border-radius: 48px;
+    border: solid 2px var(--steel);
+    background-color: var(--white);
+    display: block;
+    margin-left: 86px;
+}
+
+.pontos-1 {
+    /*width: 192px;*/
+    /*height: 111px;*/
+    font-family: AktivGrotesk;
+    font-size: 32px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    letter-spacing: 0.29px;
+    text-align: center;
+    color: var(--white);
+}
+
+.text-style {
+    font-size: 64px;
+    letter-spacing: 0.58px;
+}
+
+.pontos-disponveis-para-resgate {
+    width: 404px;
+    height: 28px;
+    font-family: AktivGrotesk;
+    font-size: 23.8px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.18;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--chery-red);
+}
+
+.confira-nosso-parceiro {
+    min-width: 807px;
+    height: 32px;
+    font-family: AktivGrotesk;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.17;
+    letter-spacing: normal;
+    text-align: center;
+    color: #003d62;
+    margin-bottom: 56px;
+    margin-top: 131px;
+}
+
+.banner {
+    width:100%;
+    height: 224px;
+    background-color: #d41f30;
+}
+
+/*pontos a faturar*/
+.painel-ponto-faturar {
+    width: 343px;
+    height: inherit;
+    border-radius: 48px;
+    border: solid 2px var(--steel);
+    background-color: var(--white);
+    text-align: center;
+    padding: 55px 75px 52px 76px;
+    margin: 0px 28px 33px 33px;
+    min-height: 405px;
+}
+
+.fidel-icon-2 {
+    width: 82px;
+    height: 25px;
+    object-fit: contain;
+}
+
+.pontos-faturar {
+    /*width: 404px;*/
+    height: 28px;
+    font-family: AktivGrotesk;
+    font-size: 23.8px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.18;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--steel);
+}
+
+.Voc-no-possui-pont {
+    /*width: 237px;*/
+    height: 44px;
+    font-family: AktivGrotesk;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.15px;
+    /*text-align: center;*/
+    color: #6b6c6f;
+    /*margin-top: 32px;*/
+    /*padding-top: 25px;*/
+}
+
+.MinMax {
+    min-width: 52px;
+    height: 44px;
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    text-align: center;
+    color: #003d62;
+    margin-top:24px;
+}
+
+.deslize-para-escolhe {
+    width: 629px;
+    height: 44px;
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    color: #003d62;
+}
+
+.Rectangle {
+    width: 343px;
+    height: 354px;
+    border-radius: 48px;
+    box-shadow: 9px 9px 36px 0 rgba(0, 0, 0, 0.2);
+    border: solid 2px #e4002b;
+    background-color: var(--white);
+    padding-bottom: 43px;
+    padding-top: 42px;
+    text-align: center;
+    display: block;
+}
+
+.restantes {
+    width: 340px;
+    height: 28px;
+    font-family: AktivGrotesk;
+    font-size: 23.8px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.18;
+    letter-spacing: normal;
+    text-align: center;
+    color: #e4002b;
+}
+
+.-pontos {
+    /*width: 288px;*/
+    height: 85px;
+    font-family: AktivGrotesk;
+    /*font-size: 48px;*/
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    /*letter-spacing: 0.44px;*/
+    text-align: center;
+    color: #e4002b;
+    /*padding-right: 27px;*/
+    /*padding-left: 28px;*/
+    font-size: 96px;
+    letter-spacing: 0.87px;
+}
+
+.pon {
+    font-size: 45px;
+    letter-spacing: 0.87px;
+    text-align: center;
+    font-family: AktivGrotesk;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.25;
+    color: #e4002b;
+    
+}
+
+/*slidebar*/
+.slidecontainer {
+    width: 100%; /* Width of the outside container */
+    /*background-color: #748591;*/
+    border-radius: 20px;
+}
+
+.slider {
+    -webkit-appearance: none;
+    /*width: 1%;*/
+    height: 25px;
+    border-radius: 20px;
+    /*background: #748591;*/
+    background-color: #f5f5f5;
+    outline: none;
+    /*opacity: 0.7;*/
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+}
+
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;    
+
+    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.26);
+    background-color: #e4002b;
+
+    cursor: pointer;
+    /*opacity:1;*/
+}
+
+.slider::-moz-range-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;    
+
+    box-shadow: 0 1px 13px 0 rgba(0, 0, 0, 0.26);
+    background-color: #e4002b;
+
+    cursor: pointer;
+
+    /*opacity:1;*/
+}
+
+ /*Mouse-over effects*/ 
+.slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+}
+
+/*Resgate de Pontos*/
+.voce-selecionou {
+    width: 230px;
+    /*height: 124px;*/
+    font-family: AktivGrotesk;
+    font-size: 32px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.41;
+    letter-spacing: normal;
+    text-align: center;
+    color: #003d62;
+}
+
+.text-style-1 {
+    font-weight: bold;
+}
+
+.btn-resgatar {
+    width: 177px;
+    height: 52px;
+    font-family: AktivGrotesk;
+    font-size: 24px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: var(--white);
+    background-color: #e4002b;
+    border-radius: 40px;
+    border-width: 0px;
+}
+
+.pontos-solicitados {
+    font-family: AktivGrotesk;
+    font-size: 32px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.29px;
+    text-align: center;
+    /*min-width: 148px;*/
+    /*min-height: 44px;*/
+    color: #e4002b;
+    padding: 11px 18px 10px 19px;
+    width: 185px;
+    height: 65px;
+    border-radius: 15px;
+    border: solid 2px var(--brown-grey);
+    background-color: var(--white);
+}
+
+.-at-a-validade-do {
+    width: 724px;
+    height: 28px;
+    font-family: AktivGrotesk;
+    font-size: 16px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    color: #6b6c6f;
+}
+
+.texto-novo {
+    /*width: 168px;*/
+    height: 28px;
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 3;
+    letter-spacing: 0.18px;
+    color: var(--steel);
+    margin-top: -3px;
+}
+
+copiar {
+    width: 25px;
+    height: 31px;
+    object-fit: contain;
+}
+
+.ilustra_como_funciona {
+    width: 604px;
+    height: 456px;
+    object-fit: contain;
+}
+
+/*Como funciona*/
+.como-funciona {
+    width: 567px;
+    height: 37px;
+    font-family: AktivGrotesk;
+    font-size: 29px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #003d62;
+    margin-top: 24px;
+}
+
+.Voc-merece-esse-ben {
+    /*width: 567px;*/
+    height: 50px;
+    font-family: AktivGrotesk;
+    font-size: 40px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: #e4002b;
+    margin-top: 10px;
+}
+
+.texto-como-funciona {
+    /*width: 619px;*/
+    /*height: 256px;*/
+    font-family: AktivGrotesk;
+    font-size: 15.3px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.78;
+    letter-spacing: normal;
+    color: #6b6c6f;
+}
+
+.Parceiro-exclusivo {
+    width: 662px;
+    height: 31px;
+    font-family: AktivGrotesk;
+    font-size: 15px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    color: #6b6c6f;
+
+}
+
+.banner-pontos {
+    margin-top: 57.5px;
+    margin-bottom: 72px;
+    min-width: 1106px;
+    height: 195px;
+}
+
+.-Pontos-elegveis-p {
+    /*width: 1097px;*/
+    height: 31px;
+    font-family: AktivGrotesk;
+    font-size: 16px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.75;
+    letter-spacing: normal;
+    text-align: center;
+    color: #003d62;
+}
+
+.voucher-datatable {
+    font-family: AktivGrotesk;
+    /*font-size: 24px;*/
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.88;
+    letter-spacing: normal;
+    color: #003d62;
+}
+
+.Pesquisar {
+    width: 188px;
+    height: 48px;
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.18px;
+    text-align: center;
+    color: var(--chery-red);
+}
+
+.form-data {
+    height: 44px;
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: var(--steel);
+    padding-top:12px;
+}

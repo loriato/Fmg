@@ -1,0 +1,35 @@
+﻿@model Tenda.Domain.EmpresaVenda.Models.ContratoCorretagem
+@using Europa.Resources
+
+<div class="col-md-24">
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.ContratoCorretagem</h3>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-24">
+    <form id="form_contrato_corretagem">
+        @Html.HiddenFor(x => x.Id)
+        <div class="col-md-9">
+            @Html.Label(GlobalMessages.NomeArquivo)
+            @Html.TextBoxFor(x => x.NomeDoubleCheck, new { @class = "form-control", disabled = "disabled" })
+        </div>
+        <div class="col-md-2 col-md-offset-1">
+            @Html.Label(GlobalMessages.IdArquivo)
+            @Html.TextBoxFor(x => x.IdArquivoDoubleCheck, new { @class = "form-control", disabled = "disabled" })
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.ContentType)
+            @Html.TextBoxFor(x => x.ContentTypeDoubleCheck, new { @class = "form-control", disabled = "disabled" })
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            @Html.Label(GlobalMessages.HashArquivo)
+            @Html.TextBoxFor(x => x.HashDoubleCheck, new { @class = "form-control", disabled = "disabled" })
+        </div>
+    </form>
+</div>

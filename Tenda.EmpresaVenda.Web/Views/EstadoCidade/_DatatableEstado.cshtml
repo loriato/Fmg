@@ -1,0 +1,24 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+<div ng-controller="DatatableEstado as table">
+    <div id="datatable_estado_barra" class="col-md-24 container-fluid">
+        <div class="col-md-24 form-group">
+            <form>
+                <div class="col-md-5" style="margin-right:5px">
+                    <input type="text" id="filtroEstado" style="text-transform: uppercase" maxlength="2" placeholder="@GlobalMessages.Estado" class="form-control">
+                </div>
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarCidade"))
+                {
+                    <div class="col-md-5" style="margin-left: 5px">
+                        <button class="btn btn-default" onclick="Europa.Controllers.EstadoCidade.FiltrarEstados()"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                        <button class="btn btn-default" type="button" onclick="Europa.Controllers.EstadoCidade.LimparFiltroEstado()"><i class="fa fa-eraser"></i></button>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

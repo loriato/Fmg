@@ -1,0 +1,93 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Security.Models
+@model Tenda.Domain.Security.Models.WebServiceMessage
+
+@{
+    ViewBag.Codigo = "SEG08";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/administrativo/log-webservice/log-webservice.js"></script>
+<script src="~/Static/administrativo/log-webservice/log-webservice-datatable.js"></script>
+<script>
+    Europa.Components.Datatable.LogWebService.listAction = '@Url.Action("Listar", "LogWebService")';
+    Europa.Controllers.LogWebService.UrlExcluir = '@Url.Action("Excluir", "LogWebService")';
+</script>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExcluirLog"))
+    {
+        <button id="btnExcluirLog" type="button" class="btn btn-default" onclick="Europa.Controllers.LogWebService.ExcluirLogs()" title="@GlobalMessages.ExcluirLogs">
+            <i class="fa fa-trash"></i> @GlobalMessages.ExcluirLogs
+        </button>
+    }
+</div>
+
+@{
+    if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+    {
+        <div class="col-md-24">
+            <form id="form_filtro_log_webservice">
+                <div class="col-md-3">
+                    @Html.Label(GlobalMessages.Endpoint)
+                    @Html.TextBoxFor(x => x.Endpoint, new { @class = "form-control" })
+                </div>
+                <div class="col-md-3" style="margin-left: 10px">
+                    @Html.Label(GlobalMessages.Operacao)
+                    @Html.TextBoxFor(x => x.Action, new { @class = "form-control" })
+                </div>
+                <div class="col-md-6" style="margin-left: 10px">
+                    @Html.Label(GlobalMessages.Horario)
+                    <div class="input-group">
+                        <div class="input-group">
+                            @Html.Label("De", new { @for = "DiaDe", @class = "input-group-addon", id = "diaLabel", style = "width: 35px;" })
+                            @Html.TextBox("HorarioInicio", "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro_log_webservice", format = "DD/MM/YYYY HH:MM" })
+                            @Html.Label("Até", new { @for = "DiaAte", @class = "input-group-addon", id = "diaAteLabel", style = "width: 35px;" })
+                            @Html.TextBox("HorarioFim", "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro_log_webservice", format = "DD/MM/YYYY HH:MM" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3" style="margin-left: 10px">
+                    @Html.Label(GlobalMessages.Sentido)
+                    <select id="Stage" name="Stage" class="form-control">
+                        <option value="">@GlobalMessages.Selecione</option>
+                        <option value="2">@GlobalMessages.DepoisSerializar</option>
+                        <option value="4">@GlobalMessages.AntesSerializar</option>
+                    </select>
+
+                </div>
+                <div class="col-md-4" style="margin-left: 10px">
+                    @Html.Label(GlobalMessages.Conteudo)
+                    @Html.TextBoxFor(x => x.Content, new { @class = "form-control" })
+                </div>
+                <div class="col-md-4" style="margin-left: 10px">
+                    <div class="pull-right" style="margin-top: 20px">
+                        <button title="@GlobalMessages.Filtrar" class="btn btn-default" style="width: 100px" onClick="Europa.Components.Datatable.LogWebService.Filtrar()">
+                            <i class="fa fa-filter"></i> @GlobalMessages.Filtrar
+                        </button>
+                        <button title="@GlobalMessages.Limpar" class="btn btn-default" style="width: 100px" onClick="Europa.Controllers.LogWebService.LimparFiltros()">
+                            <i class="fa fa-eraser"></i> @GlobalMessages.Limpar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div ng-controller="LogWebServiceDataTable as table">
+            <div class="col-md-24">
+                <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                       dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                       dt-column-defs="table.dtColumnDefs"></table>
+            </div>
+        </div>
+        
+        }
+    }
+@{
+    Html.RenderPartial("~/Views/LogWebService/_DetalhamentoModal.cshtml", new WebServiceMessage());
+}

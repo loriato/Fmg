@@ -1,0 +1,5 @@
+﻿@using Europa.Resources
+
+@model IEnumerable<SelectListItem>
+
+@Html.DropDownList("LojaPadrao.Id", Model, "", new { @class = "form-control select2-container", id = "autocomplete_loja" })

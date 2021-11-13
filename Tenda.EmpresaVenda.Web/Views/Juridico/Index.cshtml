@@ -1,0 +1,48 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+
+@{ ViewBag.Codigo = "";
+                ViewBag.Title = "Jurídico"; }
+
+<script type="text/javascript" src="~/Static/projeto/juridico/index-juridico.js"></script>
+<script>
+    Europa.Controllers.Juridico.UrlUploadDocumentoJuridico = '@Url.Action("UploadDocumentoJuridico", "Juridico")';
+</script>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+
+<div id="titlebar-buttons">
+    <button class="btn btn-default" title="@GlobalMessages.Importar" onclick="Europa.Controllers.Juridico.OpenModal()">
+        <i class="fa fa-cog"></i> @GlobalMessages.Importar
+    </button>
+</div>
+
+<div ng-controller="JuridicoController" class="modal" id="modal-upload-documento-juridico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.Juridico.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Importar</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-24">
+                    <div class="col-md-24">
+                        @using (Html.BeginForm("UploadDocumentoJuridico", "Juridico", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline", id = "formularioUploadAnexo" }))
+                        {
+            @Html.AntiForgeryToken()
+                            <label>@GlobalMessages.EnvioArquivo</label>
+                            <input type="file" style="margin-top: 5px" id="file" name="file">
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="enviarArquivo()"><i class="fa fa-upload" aria-hidden="true"></i> @GlobalMessages.Importar</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.Juridico.CloseModal()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

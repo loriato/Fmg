@@ -1,0 +1,54 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models
+@using Europa.Extensions;
+@using System;
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Domain.Repository.Models
+
+@{
+    Layout = "~/Views/Shared/_LayoutPublico.cshtml";
+}
+
+@{
+    ViewBag.Codigo = "EVS22";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+@model BannerPortalEvDTO
+<style>
+    .block-content {
+        padding-top: 0px;
+    }
+
+    .aling-content {
+        margin-top: -15px;
+    }
+</style>
+
+<script src="~/Static/europa/js/pdf.js"></script>
+<script src="~/Static/europa/js/pdf.worker.js"></script>
+
+<script src="~/Static/projeto/politica-privacidade/index-politica-privacidade.js"></script>
+
+<script>
+    Europa.Controllers.PoliticaPrivacidade.UrlHome = '@Url.Action("Index","Home")';
+    Europa.Controllers.PoliticaPrivacidade.UrlPoliticaPrivacidade = '@Model.Url';
+    Europa.Controllers.PoliticaPrivacidade.CarregarPoliticaPrivacidade();
+</script>
+
+<div class="menu-options" align='center'>
+    <div id="titlebar-name">@ViewBag.Title</div>
+    <div id="titlebar-buttons">
+        <button class="btn btn-white" onclick="location.href=Europa.Controllers.PoliticaPrivacidade.UrlHome"> @GlobalMessages.Voltar</button>
+    </div>
+</div>
+
+<div style="width:100%">
+    <div id="div-pdf" style="overflow-x: hidden;width: max-content; margin: auto;height: 80vh; overflow-y: auto;margin-top:25px">
+    </div>    
+</div>
+
+

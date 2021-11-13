@@ -1,0 +1,5 @@
+﻿Segue algumas informações para estilização de e-mail:
+
+- Para fazer a estrutura do layout recomenda-se a utilização de tabelas (table), podendo utilizar se necessário, tabelas dentro de tabelas.
+- Alguns atributos CSS não funcionam, alguns desses atributos estão listados nesse link, recomendo que leia (https://templates.mailchimp.com/resources/email-client-css-support/)
+- Qualquer texto que fique em cima de uma imagem provavelmente todo texto e imagem pertencem a um único arquivo (imagem), não tendo como alinhar itens sobre itens.

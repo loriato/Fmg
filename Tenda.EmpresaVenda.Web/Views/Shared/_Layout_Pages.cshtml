@@ -1,0 +1,19 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<nav class="menu-actions titlebar">
+    <div class="container-fluid">
+        <div href="#" id="titlebar-name-target" class="col-md-11"></div>
+        <div id="titlebar-buttons-target"  style="padding-right: 10px;text-align: right;"></div>
+    </div>
+</nav>
+
+<hr class="botton-title" />
+
+<div class="block-content" id="block_content_page">
+    @RenderBody()
+    <script>
+        Europa.AjustTitleAndMenuAcitons();
+    </script>
+</div>

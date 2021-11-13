@@ -1,0 +1,36 @@
+@using Europa.Resources
+<script type="text/javascript" src="~/Static/projeto/consulta-estoque/modal-unidade.js"></script>
+
+<div class="modal" id="disponibilidadeUnidade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document" style="width:90%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.ConsultaEstoqueUnidade</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-24">
+                    <div class="col-md-7">
+                        @Html.Label(GlobalMessages.Empreendimento)
+                        @Html.TextBox("modal_unidade_empreendimento", "", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="col-md-8 col-md-offset-1">
+                        @Html.Label(GlobalMessages.Caracteristicas)
+                        @Html.TextBox("modal_unidade_caracteristicas", "", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="col-md-3 col-md-offset-1">
+                        @Html.Label(GlobalMessages.PrevisaoEntrega)
+                        @Html.TextBox("modal_unidade_previsao_entrega", "", new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                </div>
+                @{
+                    Html.RenderPartial("~/Views/ConsultaEstoque/_UnidadeDatatable.cshtml");
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Europa.Components.ConsultaEstoqueModalUnidade.PreSelecionar()"><i class="fa fa-send" aria-hidden="true"></i> @GlobalMessages.EnviarParaIntegracao</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Components.ConsultaEstoqueModalUnidade.CloseModal()"><i class="fa fa-close" aria-hidden="true"></i> @GlobalMessages.Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

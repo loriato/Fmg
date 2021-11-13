@@ -1,0 +1,38 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Domain.Repository.Models.PontuacaoFidelidadeDTO
+
+<div class="modal" id="modal_aprovar_resgate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.EfetivarSolicitacaoResgate.FecharModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.AprovarResgate</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_aprovar_resgate">
+                    @Html.HiddenFor(x => x.IdResgate)
+                    @Html.HiddenFor(x => x.IdEmpresaVenda)
+                    <div class="col-md-24">
+                        <div class="col-md-24 aprovar hidden">
+                            @Html.Label(GlobalMessages.Voucher)
+                            @Html.TextBoxFor(x => x.Voucher, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-24 reprovar hidden">
+                            @Html.Label(GlobalMessages.Motivo)
+                            @Html.TextAreaFor(x => x.Motivo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_salvar" class="btn" type="button" onclick="Europa.Controllers.EfetivarSolicitacaoResgate.Confirmar()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Confirmar
+                </button>
+                <button id="btn_desistir" class="btn" type="button" onclick="Europa.Controllers.EfetivarSolicitacaoResgate.FecharModal()">
+                    <i class="fa fa-close"></i> @GlobalMessages.Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,47 @@
+label {
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: var(--slate);
+    margin: 5px 0 0 0;
+}
+
+.geenFieldSetTitle {
+}
+
+.geenFieldSet {
+    padding: 16px 0px;
+}
+
+.geenFieldSet .panel-heading {
+    background: rgba(0, 0, 0, 0) none repeat scroll 0 0;
+    border-bottom: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-color: var(--brown-grey) !important;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 10px 0px;
+}
+
+.geenFieldSet .panel-title {
+    color: inherit;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 0;
+    padding-left: 0px;
+    padding-top: 0px;
+    text-align: left;
+}
+
+.geenFieldSet .panel-body {
+    padding: 2px 0 0;
+}
+
+.geenFieldSet .navbar-btn {
+    margin-bottom: 0px;
+    margin-top: 0px;
+}

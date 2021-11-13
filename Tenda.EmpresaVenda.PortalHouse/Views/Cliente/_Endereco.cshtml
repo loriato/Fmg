@@ -1,0 +1,62 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@using Tenda.EmpresaVenda.PortalHouse.Models.Application
+@model Tenda.EmpresaVenda.ApiService.Models.Cliente.ClienteDto
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+
+<div>
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.Endereco</h3>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    @Html.HiddenFor(x => x.EnderecoClienteDto.Id)
+    <div class="col-md-3 form-group">
+        @Html.Label(GlobalMessages.CEP, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.EnderecoClienteDto.Cep, new { @class = "form-control form-control-sm cep", maxlength = 9, onchange = "Europa.Controllers.Cliente.OnChangeCepEnderecoCliente(this)" })
+    </div>
+    <div class="col-md-5 form-group">
+        @Html.Label(GlobalMessages.Endereco, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.EnderecoClienteDto.Logradouro, new { @class = "form-control form-control-sm", maxlength = 24 })
+    </div>
+    <div class="col-md-1 form-group">
+        @Html.Label(GlobalMessages.Numero, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.EnderecoClienteDto.Numero, new { @class = "form-control form-control-sm text-right", maxlength = 5 })
+    </div>
+    <div class="col-md-3 form-group">
+        @Html.Label(GlobalMessages.Complemento)
+        @Html.TextBoxFor(x => x.EnderecoClienteDto.Complemento, new { @class = "form-control form-control-sm", maxlength = 8 })
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-4 form-group">
+        @Html.Label(GlobalMessages.Bairro, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.EnderecoClienteDto.Bairro, new { @class = "form-control form-control-sm", maxlength = 40 })
+    </div>
+    <div class="col-md-4  form-group">
+        @Html.Label(GlobalMessages.Cidade, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.EnderecoClienteDto.Cidade, new { @class = "form-control form-control-sm", maxlength = 40 })
+    </div>
+    <div class="col-md-2 form-group">
+        @Html.Label(GlobalMessages.Estado, new { @class = "control-label" })
+        @{
+            if (Model.HasValue() && Model.EnderecoClienteDto.HasValue() && Model.EnderecoClienteDto.Estado.HasValue())
+            {
+                Html.RenderPartial("_EstadosDropDownList", Tuple.Create("EnderecoClienteDto.Estado", Model.EnderecoClienteDto.Estado));
+            }
+            else
+            {
+                Html.RenderPartial("_EstadosDropDownList", Tuple.Create("EnderecoClienteDto.Estado", "Estado"));
+            }
+        }
+    </div>
+</div>

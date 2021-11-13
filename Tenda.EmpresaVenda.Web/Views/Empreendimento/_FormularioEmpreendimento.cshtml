@@ -1,0 +1,140 @@
+﻿@using Europa.Resources
+@model Tenda.Domain.EmpresaVenda.Models.Empreendimento
+
+@{
+    var disponivelString = Model.DisponivelParaVenda ? GlobalMessages.Sim : GlobalMessages.Nao;
+    var disponivelCatalogo = Model.Id == 0 || Model.DisponivelCatalogo;
+    var catalogoOptions = new[]
+    {
+        new {Text = GlobalMessages.Sim, Value = true.ToString()},
+        new {Text = GlobalMessages.Nao, Value = false.ToString()}
+    };
+    var disponibilizarCatalago = Model.DisponivelCatalogo ? GlobalMessages.Sim : GlobalMessages.Nao;
+}
+
+    <form id="form_empreendimento">
+        @Html.HiddenFor(x => x.Id)
+        <div class="col-md-24">
+            <div class="col-md-7 form-group">
+                @Html.Label(GlobalMessages.Nome + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", maxlength = 128, disabled = "disabled" })
+            </div>
+            <div class="col-md-4 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.DisponibilizarCatalogo, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.DisponivelCatalogo, disponibilizarCatalago, new { @class = "form-control", @readonly = true })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.CodigoSap, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Divisao, new { @class = "form-control", maxlength = 30, disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.IdSuat, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.IdSuat, new { @class = "form-control", maxlength = 30, disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.DisponivelParaVenda, new { @class = "control-label" })
+                @Html.TextBox("DisponivelParaVenda", disponivelString, new { @class = "form-control", maxlength = 30, disabled = "disabled" })
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-7 form-group">
+                @Html.Label(GlobalMessages.CodigoEmpresa + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.CodigoEmpresa, new { @class = "form-control", maxlength = 10, disabled = "disabled" })
+            </div>
+            <div class="col-md-4 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.NomeEmpresa, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.NomeEmpresa, new { @class = "form-control", maxlength = 128, disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Regional + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Regional, new { @class = "form-control", maxlength = 20, disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Divisao, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Divisao, new { @class = "form-control", maxlength = 20, disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Cnpj + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.CNPJ, new { @class = "form-control", maxlength = 20, disabled = "disabled" })
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-7 form-group">
+                @Html.Label(GlobalMessages.RegistroIncorporacao, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.RegistroIncorporacao, new { @class = "form-control", maxlength = 128, disabled = "disabled" })
+            </div>
+            <div class="col-md-4 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Mancha, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Mancha, new { @class = "form-control", maxlength = 256 })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.DataLancamento, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.DataLancamento, "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.PrevisaoEntrega, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.PrevisaoEntrega, "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", disabled = "disabled" })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.DataEntrega, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.DataEntrega, "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", disabled = "disabled" })
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-24 form-group">
+                @Html.Label(GlobalMessages.Informacoes, new { @class = "control-label" })
+                @Html.TextAreaFor(x => x.Informacoes, new { @class = "form-control", maxlength = 1024 })
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-24 form-group">
+                @Html.Label(GlobalMessages.FichaTecnica, new { @class = "control-label" })
+                @Html.TextAreaFor(x => x.FichaTecnica, new { @class = "form-control", maxlength = 1024 })
+            </div>
+        </div>
+
+        <div class="col-md-24">
+            <br />
+            <div class="geenFieldSet">
+                <div class="panel-heading">
+                    <div>
+                        <h3 class="panel-title pull-left">@GlobalMessages.RegraComissao</h3>
+                        <div class="pull-right">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-24">
+            <div class="col-md-4 form-group">
+                @Html.Label(GlobalMessages.PriorizarRegraComissao, new { @class = "control-label" })
+                @Html.DropDownListFor(x => x.PriorizarRegraComissao, new SelectList(catalogoOptions, "Value", "Text", disponivelCatalogo.ToString()), new { @class = "form-control" })
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.ModalidadeComissao)
+                @Html.EnumDropDownListFor(x => x.ModalidadeComissao, new { @class = "form-control" })
+            </div>
+        </div>
+        <div class="col-md-24">
+            <br />
+            <div class="geenFieldSet">
+                <div class="panel-heading">
+                    <div>
+                        <h3 class="panel-title pull-left">@GlobalMessages.ProgramaFidelidade</h3>
+                        <div class="pull-right">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-24">
+            <div class="col-md-4 form-group">
+                @Html.Label(GlobalMessages.ModalidadeProgramaFidelidade)
+                @Html.EnumDropDownListFor(x => x.ModalidadeProgramaFidelidade, new { @class = "form-control" })
+            </div>
+        </div>
+    </form>

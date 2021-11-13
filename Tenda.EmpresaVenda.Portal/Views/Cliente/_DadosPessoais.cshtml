@@ -1,0 +1,135 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+<div class="col-md-24">
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.DadosPessoais</h3>
+                <div class="pull-right">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-24">
+    <div class="col-md-3 form-group">
+        @Html.Label(GlobalMessages.DataNascimento, new { @class = "control-label" })
+        <div class="input-group">
+            @Html.TextBoxFor(x => x.Cliente.DataNascimento, new { @class = "form-control", datepicker = "datepicker", parent = "#form_cliente", onchange = "Europa.Controllers.Cliente.CalcIdade()" })
+            <span class="input-group-btn">
+                <button class="btn control-label" type="button" onclick="Europa.Components.DatePicker.Closest(this)">
+                    <img src="~/Static/europa/css/icons/calendar.svg" />
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-2 col-md-offset-1">
+        @Html.Label(GlobalMessages.Idade)
+        @Html.TextBox("Idade", "", new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+        @Html.Label(GlobalMessages.NFilhos)
+        @Html.TextBoxFor(x => x.Cliente.QuantidadeFilhos, new { @class = "form-control text-right inteiro" })
+    </div>
+    <div class="col-md-3 col-md-offset-1">
+        @Html.Label(GlobalMessages.EstadoCivil)
+        @Html.EnumDropDownListFor(x => x.Cliente.EstadoCivil, GlobalMessages.Selecione, new { @class = "form-control", onchange= "Europa.Controllers.Cliente.HabilitarConjuge()" })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Conjuge, new { @class = "control-label" })
+        <div class="input-group">
+            @Html.TextBox("Familiar.Cliente2.NomeCompleto", Model.Familiar?.Cliente2.NomeCompleto, new { @class = "form-control", @readonly = true, data_entity = "Cliente2", data_id = Model.Familiar?.Cliente2.Id })
+            @Html.HiddenFor(x => x.Familiar.Cliente1.Id, new { @value = Model.Cliente.Id })
+            @Html.HiddenFor(x => x.Familiar.Cliente2.Id)
+            @Html.HiddenFor(x => x.Familiar.Cliente2.NomeCompleto)
+            <span class="input-group-btn">
+                <button id="btn_select_cliente" type="button" class="btn control-label" onclick="Europa.Components.ClienteModal.AbrirModal(Europa.Controllers.Cliente.SelectConjuge)">
+                    <i class="fa fa-search"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.RegimeBens)
+        @Html.EnumDropDownListFor(x => x.Cliente.RegimeBens, GlobalMessages.Selecione, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="col-md=24">
+    <div id="div_profissao" class="col-md-10 form-group">
+        @Html.Label(GlobalMessages.Profissao, new { @class = "control-label" })
+        @Html.HiddenFor(x => x.Cliente.Profissao.Id)
+        @Html.HiddenFor(x => x.Cliente.Profissao.Nome)
+        <select name="Cliente.Profissao.Id" id="autocomplete_profissao_cliente" class="select2-container form-control"></select>
+    </div>
+    <div class="col-md-8 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Cargo, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.Cargo, new { @class = "form-control", maxlength = 128 })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.GrauInstrucao, new { @class = "control-label" })
+        @Html.EnumDropDownListFor(x => x.Cliente.Escolaridade, GlobalMessages.Selecione, new { @class = "form-control" })
+    </div>
+</div>
+
+<div class="col-md=24">
+    <div class="col-md-5 form-group">
+        @Html.Label(GlobalMessages.TipoIdentificacao, new { @class = "control-label" })
+        @Html.EnumDropDownListFor(x => x.Cliente.TipoDocumento, GlobalMessages.Selecione, new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.NumeroDocumento, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.NumeroDocumento, new { @class = "form-control", maxlength = 128 })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Emissor, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.OrgaoEmissor, new { @class = "form-control", maxlength = 30 })
+    </div>
+    <div class="col-md-3 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.EstadoEmissor, new { @class = "control-label" })
+        @{ Html.RenderPartial("_EstadosDropDownList", Tuple.Create("Cliente.EstadoEmissor", Model.Cliente?.EstadoEmissor));}
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.DataEmissao, new { @class = "control-label" })
+        <div class="input-group">
+            @Html.TextBoxFor(x => x.Cliente.DataEmissao, "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", parent = "#cliente_form" })
+            <span class="input-group-btn">
+                <button class="btn control-label" type="button" onclick="Europa.Components.DatePicker.Closest(this)">
+                    <img src="~/Static/europa/css/icons/calendar.svg" />
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="col-md=24">
+    <div class="col-md-5">
+        @Html.Label(GlobalMessages.Nacionalidade)
+        @Html.TextBoxFor(x => x.Cliente.Nacionalidade, new { @class = "form-control", maxlength = 128, @readonly = "readonly", Value = "BR" })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Naturalidade, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.Naturalidade, new { @class = "form-control", maxlength = 128 })
+    </div>
+    <div class="col-md-13 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Filiacao, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.Filiacao, new { @class = "form-control", maxlength = 256 })
+    </div>
+</div>
+
+<div class="col-md=24">
+    <div class="col-md-5 form-group">
+        @Html.Label(GlobalMessages.TipoResidencia, new { @for = "Cliente_TipoResidencia", @class = "control-label" })
+        @Html.EnumDropDownListFor(x => x.Cliente.TipoResidencia, GlobalMessages.Selecione, new { @class = "form-control", onchange = "Europa.Controllers.Cliente.TipoResidenciaOnChange()" })
+    </div>
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.ValorAluguel)
+        @Html.TextBoxFor(x => x.Cliente.ValorAluguel, new { @class = "form-control text-right dinheiro", maxlength = 13, Value = $"{Model.Cliente?.ValorAluguel:n2}" })
+    </div>
+</div>

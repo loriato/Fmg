@@ -1,0 +1,93 @@
+﻿@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Europa.Resources
+@using Europa.Extensions
+@model Tenda.EmpresaVenda.Portal.Models.MeuCadastroDTO
+
+@{
+    ViewBag.Codigo = "EVS01";
+    ViewBag.Title = GlobalMessages.MeuCadastro;
+}
+
+<div id="titlebar-name">
+    @if (Model.EmpresaVenda.IsEmpty())
+    {
+        <div class="pull-left">@ViewBag.Title</div>
+    }
+    else
+    {
+        <div class="pull-left">@ViewBag.Title - @Model.EmpresaVenda.RazaoSocial | @Model.EmpresaVenda.CNPJ.ToCNPJFormat() </div>
+    }
+</div>
+
+<script src="~/Static/projeto/meu-cadastro/meu-cadastro.js"></script>
+
+<div id="titlebar-buttons">
+    <button class="btn btn-default" title="@GlobalMessages.Voltar" type="button" onclick="window.history.back()">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i> @GlobalMessages.Voltar
+    </button>
+</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    <fieldset disabled>
+        <div class="col-md-24">
+            <div class="col-md-15" id="div_form">
+                <div class="col-md-24">
+                    <div class="col-md-12">
+                        @Html.Label(GlobalMessages.RazaoSocial)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.RazaoSocial, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-11 col-md-offset-1">
+                        @Html.Label(GlobalMessages.NomeFantasia)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.NomeFantasia, new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="col-md-24">
+                    <div class="col-md-12">
+                        @Html.Label(GlobalMessages.Cnpj)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.CNPJ, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-11 col-md-offset-1">
+                        @Html.Label(GlobalMessages.CreciJuridico)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.CreciJuridico, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-24">
+                        @Html.Label(GlobalMessages.Sede)
+                        @Html.TextBoxFor(x => x.Sede, new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="col-md-24">
+                    <br />
+                    <div class="geenFieldSet">
+                        <div class="panel-heading">
+                            <br />
+
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-24">
+                    <div class="col-md-24">
+                        @Html.Label(GlobalMessages.RepresentanteLegal)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.Corretor.Nome, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-12">
+                        @Html.Label(GlobalMessages.RG)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.Corretor.RG, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-11 col-md-offset-1">
+                        @Html.Label(GlobalMessages.Cpf)
+                        @Html.TextBoxFor(x => x.EmpresaVenda.Corretor.CPF, new { @class = "form-control" })
+                    </div>
+                </div>
+            </div>
+            <div id="div_image" class="col-md-9" style="text-align: center;">
+                @Html.Hidden("url-foto", Model.Foto)
+                <h2 id="text_indisponivel" style="margin-top: 20%; display:none"> @GlobalMessages.ImagemIndisponivel</h2>
+                <img id="img_foto_fachada" src="" style="width: 98%; height: 100%; margin: 5px; object-fit: contain; display:none;image-orientation: from-image;" />
+            </div>
+        </div>
+    </fieldset>
+}

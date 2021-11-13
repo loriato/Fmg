@@ -1,0 +1,33 @@
+﻿@using Europa.Resources
+<script src="~/Static/projeto/cliente/modal-mudar-corretor.js"></script>
+<script>
+    Europa.Components.CorretorModal.UrlMudarCorretor = '@Url.Action("MudarCorretor", "Cliente")';
+</script>
+
+
+<div class="modal col-md-16" id="modal-mudar-corretor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header center">
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.AlteracaoCorretorCliente</h4>
+                <img data-dismiss="modal" class="btn-close modal-close" aria-label="Close" src="~/Static/images/x-icon-red.png" />
+            </div>
+            <div class="modal-body">
+                <div class="col-md-24">
+                    <div class="col-md-11 form-group">
+                        @Html.Label(GlobalMessages.CorretorAtual, new { @class = "control-label" })
+                        @Html.TextBox("NomeCorretorAtual", null, new { @class = "form-control", @readonly = "readonly" })
+                    </div>
+                    <div class="col-md-11 col-md-offset-2 form-group">
+                        @Html.Label(GlobalMessages.NovoCorretor, new { @class = "control-label" })
+                        <select id="autocomplete_corretor" name="autocomplete_corretor" class="select2-container form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" title="@GlobalMessages.Salvar" onclick="Europa.Components.CorretorModal.Salvar()"><i class="fa fa-check" aria-hidden="true"></i>  @GlobalMessages.Salvar</button>
+                <button type="button" class="btn" data-dismiss="modal" title="@GlobalMessages.Desistir"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

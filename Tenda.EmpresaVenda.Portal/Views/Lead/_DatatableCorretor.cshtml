@@ -1,0 +1,52 @@
+﻿@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Europa.Resources
+
+<style>
+    .lead-titlebar {
+        background-color: var(--bluey-grey);
+        padding: 14px 0px 13px 24px;
+        margin: 15px 0px 15px 0px;
+    }
+
+    .lead-title {
+        width: 372px;
+        height: 19px;
+        font-family: AktivGrotesk;
+        font-size: 20px;
+        font-weight: bold;
+        font-stretch: normal;
+        font-style: normal;
+        line-height: normal;
+        letter-spacing: 0.18px;
+        color: var(--white);
+    }
+</style>
+
+<div id="titlebar-name" class="col-md-24 lead-titlebar">
+    @Html.Label(GlobalMessages.Leads.ToUpper(), new { @class = "control-label lead-title" })
+</div>
+
+<div class="col-md-24">
+    <div class="col-md-11 text-right" style="float: right;">
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+        {
+            <button class="btn" type="button" onclick="Europa.Controllers.Leads.ExportarPaginaCorretor()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina</button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+        {
+            <button class="btn" type="button" onclick="Europa.Controllers.Leads.ExportarTodosCorretor()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos</button>
+        }
+    </div>
+</div>
+
+<div class="col-md-24">
+    <div ng-controller="CorretorDatatable as table">
+        <div id="corretor_datatable_header">
+
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table"
+               dt-column-defs="table.dtColumnDefs">
+        </table>
+    </div>
+</div>

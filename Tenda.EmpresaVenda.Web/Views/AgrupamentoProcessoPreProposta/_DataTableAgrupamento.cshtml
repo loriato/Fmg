@@ -1,0 +1,39 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+<script type="text/javascript" src="~/Static/projeto/AgrupamentoProcessoPreProposta/datatable-agrupamento.js"></script>
+
+<div ng-controller="AgrupamentoProcessoDatatable as table">
+    <div id="AgrupamentoProcesso_datatable_header" class="col-md-24 container-fluid">
+        <div class="col-md-24 form-group">
+            <form>
+                <div class="col-md-17">
+                    @Html.Label(GlobalMessages.Nome)
+                    <input id="filtro_nome" name="filtro_nome" class="form-control" placeholder="@GlobalMessages.Nome" />
+                </div>
+                @*<div class="col-md-8 col-md-offset-1">
+                    @Html.Label(GlobalMessages.Sistema)
+                    <select id="autocomplete_sistemas" name="autocomplete_sistemas" class="select2-container form-control"></select>
+                </div>*@
+                <div class="col-md-6 pull-right" style="margin-top: 3%;">
+
+                    <div class="">
+                        <button type="submit" class="btn btn-default" onclick="Europa.Controllers.AgrupamentoProcesso.FiltrarAgrupamentoProcesso()">
+                            <i class="fa fa-filter"></i>
+                        </button>
+                        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+                        {
+                            <button class="btn btn-default" onclick="Europa.Controllers.AgrupamentoProcessoPreProposta.Novo()">
+                                <i class="fa fa-plus"></i> @GlobalMessages.Incluir
+                            </button>
+                        }
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

@@ -1,0 +1,81 @@
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+<script src="~/Static/projeto/regra-comissao/nova-regra-comissao-modal.js"></script>
+<script>
+    Europa.Controllers.ModalNovaRegraComissao.Url.Matriz = '@Url.Action("Index", "MatrizPagadoria")';
+    Europa.Controllers.ModalNovaRegraComissao.Url.ListarEvs = '@Url.Action("ListarTree", "EmpresaVenda")';
+</script>
+
+<style>
+    #modalNovaRegraComissao .empresa-venda-wrapper {
+        margin-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(133,166,176,0.42);
+    }
+    #modalNovaRegraComissao #empresa_venda_treeview {
+        max-height: 35vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #modalNovaRegraComissao #empresa_venda_treeview .list-group {
+        margin: 0;
+        padding: 0;
+    }
+    #modalNovaRegraComissao #empresa_venda_treeview li {
+        padding: 8px 0 7px 0;
+    }
+</style>
+
+<div class="modal" id="modalNovaRegraComissao" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.ModalNovaRegraComissao.Fechar()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalNovaRegraComissao_titulo">@GlobalMessages.Nova @GlobalMessages.RegraComissao</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="col-md-24">
+                        @Html.Hidden("IdRegraComissaoReferencia")
+                        @Html.Label(GlobalMessages.Regional)
+                        @Html.DropDownList("Regional", RegionalHelper.RegionaisMatrizSelectListItem, new {@class = "select2-container form-control", onchange = "Europa.Controllers.ModalNovaRegraComissao.OnRegionalChanged()"})
+                    </div>
+                    <div class="col-md-24 empresa-venda-wrapper">
+                        <div class="col-md-10">
+                            @Html.Label(GlobalMessages.EmpresaVendas)
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" onclick="Europa.Controllers.ModalNovaRegraComissao.MarcarTodos()">
+                                @GlobalMessages.MarcarTodos</button>
+                            <button type="button" class="btn btn-default" onclick="Europa.Controllers.ModalNovaRegraComissao.DesmarcarTodos()">
+                                @GlobalMessages.DesmarcarTodos</button>
+                        </div>
+                        <div class="col-md-24" id="empresa_venda_treeview"></div>
+                    </div>
+                    <div id="opcao_buscar_ultima_wrapper" class="col-md-24" style="padding-top: 8px;">
+                        <label class="col-md-24">
+                            @Html.RadioButton("BuscarUltimaAtt", false, new {@checked = true}) @GlobalMessages.CriarEmBranco
+                        </label>
+                        <label class="col-md-24">
+                            @Html.RadioButton("BuscarUltimaAtt", true) @GlobalMessages.UtilizarRegrasRecentes
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.ModalNovaRegraComissao.Confirmar()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Confirmar</button>
+                <button type="button" class="btn btn-default" onclick=" Europa.Controllers.ModalNovaRegraComissao.Fechar() ">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Cancelar</button>
+            </div>
+            <!-- #endregion -->
+        </div>
+    </div>
+</div>

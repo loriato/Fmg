@@ -1,0 +1,119 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@model Tenda.Domain.EmpresaVenda.Models.LeadEmpresaVenda
+
+<script src="~/Static/projeto/lead/modal-detalhar-lead.js"></script>
+
+<div class="modal" id="modal_detalhar_lead" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document" style="width: 1200px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.Lead.FecharModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Detalhes</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_detalhar_lead">
+                    @Html.HiddenFor(x => x.Id)
+                    @Html.HiddenFor(x => x.EmpresaVenda.Id)
+                    <div class="col-md-12">
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Pacote)
+                            @Html.TextBoxFor(x => x.Lead.DescricaoPacote, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-24">
+                            <div class="col-md-12">
+                                @Html.Label(GlobalMessages.Situacao)
+                                @Html.EnumDropDownListFor(x => x.Situacao, new { @class = "form-control", onchange = "Europa.Controllers.Lead.OnChangeSituacao()" })
+                            </div>
+                            <div class="col-md-11 col-md-offset-1">
+                                @Html.Label(GlobalMessages.PreProposta)
+                                <select multiple="multiple" name="autocomplete_pre_proposta" id="autocomplete_pre_proposta" class="form-control"></select>
+                            </div>
+
+                        </div>
+                        <div class="col-md-12 desistencia hidden">
+                            @Html.Label(GlobalMessages.MotivoDesistencia)
+                            @Html.EnumDropDownListFor(x => x.Desistencia, new { @class = "form-control", onchange = "Europa.Controllers.Lead.OnChangeDesistencia()" })
+                        </div>
+                        <div class="col-md-11 col-md-offset-1 outro hidden">
+                            @Html.Label(GlobalMessages.DescricaoOutros)
+                            @Html.TextBoxFor(x => x.DescricaoDesistencia, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Nome)
+                            @Html.TextBoxFor(x => x.Lead.NomeCompleto, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-12">
+                            @Html.Label(GlobalMessages.Telefone1)
+                            @Html.TextBoxFor(x => x.Lead.Telefone1, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-11 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Telefone2)
+                            @Html.TextBoxFor(x => x.Lead.Telefone2, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Email)
+                            @Html.TextBoxFor(x => x.Lead.Email, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-19">
+                            @Html.Label(GlobalMessages.Logradouro)
+                            @Html.TextBoxFor(x => x.Lead.Logradouro, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Numero)
+                            @Html.TextBoxFor(x => x.Lead.Numero, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-10">
+                            @Html.Label(GlobalMessages.Complemento)
+                            @Html.TextBoxFor(x => x.Lead.Complemento, new { @class = "form-control cep", disabled = true })
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Bairro)
+                            @Html.TextBoxFor(x => x.Lead.Bairro, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Cidade)
+                            @Html.TextBoxFor(x => x.Lead.Cidade, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-5">
+                            @Html.Label(GlobalMessages.Estado)
+                            @Html.TextBoxFor(x => x.Lead.Estado, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-8 col-md-offset-1">
+                            @Html.Label(GlobalMessages.CEP)
+                            @Html.TextBoxFor(x => x.Lead.Cep, new { @class = "form-control cep", disabled = true })
+                        </div>
+                        <div class="col-md-12">
+                            @Html.Label(GlobalMessages.NomeIndicador)
+                            @Html.TextBoxFor(x => x.Lead.NomeIndicador, new { @class = "form-control", disabled = true })
+                        </div>
+                        <div class="col-md-11 col-md-offset-1">
+                            @Html.Label(GlobalMessages.CpfIndicador)
+                            @Html.TextBoxFor(x => x.Lead.CpfIndicador, new { @class = "form-control cpf", disabled = true })
+                        </div>
+
+                    </div>
+                    <div class="col-md-11 col-md-offset-1">
+                        <div class="col-md-24" style="height:380px">
+                            @Html.Label(GlobalMessages.Anotacao)
+                            @Html.TextAreaFor(x => x.Anotacoes, new { @class = "form-control", style = "height: inherit;" })
+                        </div>
+
+                        <div class="col-md-24 hidden">
+                            @Html.Label(GlobalMessages.Corretor)
+                            @Html.TextBoxFor(x => x.Corretor.Nome, new { @class = "form-control", disabled = true })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_salvar" class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.AtualizarLeadEmpresaVenda()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Salvar
+                </button>
+                <button id="btn_desistir" class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.FecharModal()">
+                    <i class="fa fa-close"></i> @GlobalMessages.Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

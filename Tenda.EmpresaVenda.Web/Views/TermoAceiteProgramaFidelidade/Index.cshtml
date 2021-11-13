@@ -1,0 +1,56 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.EmpresaVenda.Domain.Services.Models
+@using Europa.Resources
+@using Europa.Extensions
+
+@{
+    ViewBag.Codigo = "GEC11";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<script src="~/Static/projeto/termo-aceite-programa-fidelidade/termo-aceite-programa-fidelidade.js"></script>
+
+<script>
+    Europa.Controllers.TermoAceite.UrlRenderTermoAceiteProgramaFidelidade = '@Url.Action("RenderTermoAceiteProgramaFidelidade","TermoAceiteProgramaFidelidade")';
+    Europa.Controllers.TermoAceite.UrlDownload = '@Url.Action("DownloadTermoAceite", "TermoAceiteProgramaFidelidade")';
+
+    Europa.Controllers.TermoAceite.UrlListar = '@Url.Action("Listar", "TermoAceiteProgramaFidelidade")';
+
+    Europa.Controllers.TermoAceite.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()'
+    }
+</script>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+   
+    <div id="botao-incluir-contrato" class="btn btn-default" onclick="Europa.Controllers.TermoAceite.PreDownload()">
+        <i class="fa fa-download"></i> @GlobalMessages.Download @GlobalMessages.TermoAceite
+    </div>
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+    {
+        <div id="botao-incluir-contrato" class="btn btn-default" onclick="Europa.Controllers.TermoAceite.AbrirModal()">
+            <i class="fa fa-file-text-o"></i> @GlobalMessages.Incluir @GlobalMessages.TermoAceite
+        </div>
+    }
+</div>
+
+<div id="secao-termo-aceite"></div>
+
+
+<div ng-controller="TermoAceite as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="col-md-24">
+            @ViewBag.Title
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>
+
+@{
+    Html.RenderPartial("_AnexoTermoAceite");
+}
+<form id="form_download"></form>

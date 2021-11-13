@@ -1,0 +1,35 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "CAD05";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<script src="~/Static/projeto/classificacao/classificacao.js"></script>
+<script>
+    Europa.Controllers.Classificacao.UrlListar = '@Url.Action("Listar", "Classificacao")';
+    Europa.Controllers.Classificacao.UrlExcluir = '@Url.Action("Remover", "Classificacao")';
+    Europa.Controllers.Classificacao.UrlIncluir = '@Url.Action("Incluir", "Classificacao")';
+    Europa.Controllers.Classificacao.UrlAlterar = '@Url.Action("Alterar", "Classificacao")';
+
+    Europa.Controllers.Classificacao.Permissoes = {
+    Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+    Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+    Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+    Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar").ToString().ToLower()'
+    };
+
+</script>
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+    <button class="btn btn-default" type="button" onclick="Europa.Controllers.Classificacao.Novo()"><i class="fa fa-plus"></i> @GlobalMessages.Novo</button>
+</div>
+<div ng-controller="Classificacao as table">
+    <div id="datatable_header" class="col-md-24">
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

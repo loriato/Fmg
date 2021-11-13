@@ -1,0 +1,10 @@
+﻿@using Europa.Resources
+
+@model IEnumerable<SelectListItem>
+
+@*<div class="col-md-4">
+    @Html.Label(GlobalMessages.TipoDocumento, new { @class = "control-label", @style = "font-size: 12px; font-weight: bolder;" })
+</div>*@
+<div class="col-md-19">
+    @Html.DropDownList("filtro_tipo_documento", Model, GlobalMessages.TipoDocumento+"...", new { @class = "form-control"})
+</div>

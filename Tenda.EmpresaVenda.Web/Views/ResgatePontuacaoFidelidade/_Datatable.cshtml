@@ -1,0 +1,25 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+<div class="col-md-24">
+    <div ng-controller="PontuacaoDatatable as table">
+        <div id="pontuacao_datatable_barra" class="col-md-24 container-fluid">
+            <div class="pull-right">
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.ResgatePontuacaoFidelidade.ExportarPaginaPontuacao ()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                    </button>
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.ResgatePontuacaoFidelidade.ExportarTodosPontuacao()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                    </button>
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "EVS08";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/ponto-venda/ponto-venda.js"></script>
+<script src="~/Static/projeto/ponto-venda/ponto-venda-datatable.js"></script>
+
+<script>
+    Europa.Controllers.PontoVenda.UrlListar = '@Url.Action("Listar", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlIncluir = '@Url.Action("Incluir", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlAlterar = '@Url.Action("Alterar", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlExcluir = '@Url.Action("Remover", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlReativar = '@Url.Action("Ativar", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlSuspender = '@Url.Action("Suspender", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlCancelar = '@Url.Action("Cancelar", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlExportarPagina = '@Url.Action("ExportarPagina", "PontoVenda")';
+    Europa.Controllers.PontoVenda.UrlExportarTodos = '@Url.Action("ExportarTodos", "PontoVenda")';
+    Europa.Controllers.PontoVenda.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Remover").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar").ToString().ToLower()'
+    };
+
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+    {
+        <button class="btn btn-default" title="@GlobalMessages.Novo" onclick="Europa.Controllers.PontoVenda.Novo()">
+            <i class="fa fa-plus"></i> @GlobalMessages.Novo
+        </button>
+    }
+</div>
+
+@{
+    Html.RenderPartial("_PontoVendaDataTable");
+}

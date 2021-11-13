@@ -1,0 +1,35 @@
+﻿@using Europa.Resources
+
+<script src="~/Static/projeto/carga-valor-nominal-referencia/modal-anexo.js"></script>
+
+<script>
+    Europa.Controllers.ImportExcel.UrlSalvarArquivo = '@Url.Action("UploadImportFile", "CargaValorNominalReferencia")';
+</script>
+
+<div ng-controller="CargaController" class="modal" id="ImportExcel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.ImportExcel.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Importar</h4>
+            </div>
+            <div class="modal-body" >
+                <div class="col-md-24">
+                    <div class="col-md-12">
+                        @using (Html.BeginForm("UploadImportFile", "CargaValorNominalReferencia", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline", id = "formularioUploadArquivoAnexo" }))
+                        {
+                            @Html.AntiForgeryToken()
+                            <label>@GlobalMessages.EnvioArquivo</label>
+                            <input type="file" style="margin-top: 5px" id="file" name="file">
+                        }
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="enviarArquivo()"><i class="fa fa-upload" aria-hidden="true"></i> @GlobalMessages.Importar</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.ImportExcel.CloseModal()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

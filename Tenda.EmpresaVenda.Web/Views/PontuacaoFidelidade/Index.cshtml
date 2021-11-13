@@ -1,0 +1,53 @@
+﻿@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.EmpresaVenda.Domain.Repository.Models
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "PAG06";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/pontuacao-fidelidade/index-pontuacao-fidelidade.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pontuacao-fidelidade/datatable-pontuacao-fidelidade.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pontuacao-fidelidade/modal-pontuacao-fidelidade.js"></script>
+
+<script>
+    Europa.Controllers.PontuacaoFidelidade.Url = {
+        //Datatable pontuação fidelidade
+        ListarDatatablePontuacaoFidelidade: '@Url.Action("ListarDatatablePontuacaoFidelidade","PontuacaoFidelidade")',
+        MatrizPontuacaoFidelidade: '@Url.Action("MatrizPontuacaoFidelidade", "PontuacaoFidelidade")',
+        Liberar: '@Url.Action("Liberar", "PontuacaoFidelidade")',
+        ExportarPagina: '@Url.Action("ExportarPagina","PontuacaoFidelidade")',
+        ExportarTodos: '@Url.Action("ExportarTodos","PontuacaoFidelidade")',
+        Excluir: '@Url.Action("Excluir", "PontuacaoFidelidade")',
+        DownloadPdfPontuacaoFidelidadeEvs : '@Url.Action("DownloadPdfPontuacaoFidelidadeEvs", "PontuacaoFidelidade")',
+
+        //Modal
+        ListarTreeEvs: '@Url.Action("ListarTreeEvs", "EmpresaVenda")',
+        ListarTreeEmpreendimentos: '@Url.Action("ListarTreeEmpreendimentos", "Empreendimento")',
+
+        //Matriz de Pontuação Fidelidae
+        Index: '@Url.Action("Index","PontuacaoFidelidade")'
+
+    };
+
+    Europa.Controllers.PontuacaoFidelidade.Permissoes = {
+        Detalhar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar")' == 'True',
+        Liberar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Liberar")' == 'True',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir")' == 'True',
+        Donwload: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar")' == 'True'
+    };
+
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons"></div>
+
+@{
+    Html.RenderPartial("_Filtro", new PontuacaoFidelidadeDTO());
+    Html.RenderPartial("_DatatablePontuacaoFidelidade");
+    Html.RenderPartial("_ModalNovaPontuacaoFidelidade");
+}

@@ -1,0 +1,32 @@
+﻿@using Europa.Resources
+@using System
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div id="title-bar-display">
+    <nav class="menu-actions titlebar">
+        <div id="titlebar-wrapper" class="container-fluid">
+            <div id="titlebar-empty-space"></div>
+            <div href="#" id="titlebar-name-target"></div>
+            <div id="titlebar-buttons-target"></div>
+        </div>
+    </nav>
+    <div id="titlebar-extra-target"></div>
+</div>
+
+
+<div id="block_content_page" class="block-content">
+    <div id="corpo-conteudo-layout" class="aling-content content">
+        @RenderBody()
+    </div>
+    <script>
+        Europa.AjustTitleAndMenuAcitons();
+    </script>
+    <div id="footer" class="footer">
+        <img class="logo-tenda" src="~/Static/europa/css/icons/tenda.svg" />
+        <p>Todos os direitos reservados Tenda @DateTime.Now.Year</p>
+    </div>
+</div>

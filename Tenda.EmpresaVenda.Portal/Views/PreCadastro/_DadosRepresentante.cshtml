@@ -1,0 +1,98 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@model Tenda.EmpresaVenda.Portal.Models.PreCadastroDTO
+<div class="col-md-24">
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.DadosRepresentanteLegal</h3>
+                <div class="pull-right">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-24">
+    <form id="form_representante_legal">
+        <div class="col-md-24">
+            <div class="col-md-7 form-group">
+                @Html.Label(GlobalMessages.Nome + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Nome, new { @class = "form-control", @maxlength = 128 })
+            </div>
+            <div class="col-md-4 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Nacionalidade + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Nacionalidade, new { @class = "form-control", @maxlength = 60 })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Cpf + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.CPF, new { @class = "form-control", @maxlength = 30 })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.RG + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.RG, new { @class = "form-control", @maxlength = 30 })
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Telefone + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Telefone, "", new { @class = "form-control", @maxlength = 20 })
+            </div>
+        </div>
+        <div class="col-md-3 form-group">
+            @Html.Label(GlobalMessages.CreciFisico + " *", new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Corretor.Creci, new { @class = "form-control", @maxlength = 128 })
+        </div>
+        <div class="col-md-3 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.DataNascimento + " *", new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Corretor.DataNascimento, new { @class = "form-control", @datepicker = "datepicker" })
+        </div>
+        <div class="col-md-4 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Email + " *", new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Corretor.Email, new { @class = "form-control", @maxlength = 60 })
+        </div>
+    </form>
+    <form id="form_endereco_corretor">
+
+        <div class="col-md-3 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.CEP + " *", new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Corretor.Cep, new { @class = "form-control", maxlength = 9, onchange = "Europa.Controllers.PreCadastroEv.OnChangeCepCorretor(this)" })
+        </div>
+        <div class="col-md-7 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Endereco + " *", new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Corretor.Logradouro, new { @class = "form-control", maxlength = 60 })
+        </div>
+
+        <div class="col-md-24">
+            <div class="col-md-3 form-group">
+                @Html.Label(GlobalMessages.Numero + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Numero, new { @class = "form-control text-right", maxlength = 10 })
+            </div>
+            <div class="col-md-3  col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Complemento, new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Complemento, new { @class = "form-control", maxlength = 30 })
+            </div>
+            <div class="col-md-4 col-md-offset-1  form-group">
+                @Html.Label(GlobalMessages.Bairro + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Bairro, new { @class = "form-control", maxlength = 40 })
+            </div>
+            <div class="col-md-7 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Cidade + " *", new { @class = "control-label" })
+                @Html.TextBoxFor(x => x.Corretor.Cidade, new { @class = "form-control", maxlength = 40 })
+            </div>
+
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Estado + " *", new { @class = "control-label" })
+                @{
+                    if (Model.HasValue() && Model.HasValue() && Model.Corretor.Estado.HasValue())
+                    {
+                        Html.RenderPartial("_EstadosDropDownList", Tuple.Create("Corretor.Estado", Model.Corretor.Estado));
+                    }
+                    else
+                    {
+                        Html.RenderPartial("_EstadosDropDownList", Tuple.Create("Corretor.Estado", "Corretor_Estado"));
+                    }
+                }
+            </div>
+        </div>
+    </form>
+</div>

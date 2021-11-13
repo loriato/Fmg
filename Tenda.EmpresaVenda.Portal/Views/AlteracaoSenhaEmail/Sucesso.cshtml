@@ -1,0 +1,85 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ApplicationInfo.NomeSistema()</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Static/images/favicon.ico" />
+
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/europa")
+    @Scripts.Render("~/Static/scripts/jquery-placeholder.js")
+
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+    <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/login.css" rel="stylesheet" />
+    <script src="~/Static/projeto/alteracao-senha/alteracao-senha.js"></script>
+    <script>
+        Europa.Controllers.DefinirSenha.UrlLogin = '@Url.Action("Index","Login")';
+    </script>
+    <style>
+        #btn_href {
+            box-shadow: 2px 8px 11px 0 rgba(0, 0, 0, 0.2);
+            width: 100%;
+            height: 48px;
+            background-color: #ec1d24;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: 400;
+        }
+    </style>
+</head>
+<body>
+    <div class="col-md-24 div-imgs-balls">
+        <img src="~/Static/images/logo-credenciada.png" style="visibility:hidden" />
+        <img src="~/Static/images/login/bola-gde-menor-red-cima.png" />
+        <img src="~/Static/images/login/bola-rosa-menor-alto.png" />
+    </div>
+    <div class="col-md-24 wrapper container-fluid" style="float: left;margin: 0;margin-top:8%;height:100%;">
+        <div class="div-text-login">
+            <img src="~/Static/images/layout-contrato/tenda-vermelho.png" style="width:154px; height:161px;margin-right: 6px;;" />
+        </div>
+        <img class="img-3-bolls" src="~/Static/images/login/3-bolas-rosas.png" />
+        <div class="div-text-login" style="font-size: 23px;">
+            <span>@GlobalMessages.ParabensSenhaAlterada</span>
+            <img class="small-ball" src="~/Static/images/login/bola-menor.png" />
+        </div>
+        <div class="msg-acesso" style="margin-top: 10px;">
+            <span>@GlobalMessages.ParaConcluirLogin</span>
+        </div>
+        <div style="margin-left: auto;margin-right: auto; width: 450px;margin-top: 30px;">
+            <div class="form-group col-md-13 col-sm-13 col-xs-13 col-md-offset-5 col-sm-offset-5 col-xs-offset-5" style="margin-top:25px;margin-left: 102px;">
+                <button id="btn_href" onclick="Europa.Controllers.DefinirSenha.Login()">@GlobalMessages.IrParaLogin</button>
+            </div>
+            <div class="div-img-footer">
+                <img src="~/Static/images/login/bola-rosa.png" />
+                <img src="~/Static/images/login/bola-gde-menor-red-baixo.png" />
+            </div>
+        </div>
+        <div class="col-md-24 msg-footer-tenda">
+            <div class="col-md-23 col-md-offset-1">
+                <img src="~/Static/images/tenda-logo.png" />
+                <p>@string.Format(GlobalMessages.TodosDireitosReservadosTenda, DateTime.Now.Year)</p>
+            </div>
+        </div>
+        <div class="col-md-24" style="color: transparent; font-size: smaller">
+            @{Html.RenderPartial("~/Views/Shared/Footer.cshtml");}
+        </div>
+
+    </div>
+</body>
+</html>

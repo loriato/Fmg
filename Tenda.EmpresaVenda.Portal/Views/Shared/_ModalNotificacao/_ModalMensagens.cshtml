@@ -1,0 +1,26 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Models
+
+
+<script src="~/Static/projeto/modal-mensagens/modal-mensagens.js"></script>
+
+<script>
+    Europa.Controllers.ModalMensagens.UrlListar = '@Url.Action("Listar", "Notificacao")';
+</script>
+
+<div id="modal-mensagens" class="modal col-md-12" tabindex="-1" style="z-index:1050;top: -470px;left: 20%;" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" style="padding: 30px;">
+        <div class="modal-content modal-alert-content" id="conteudo-msg-modal" style="background-color: white;opacity: 1;box-shadow: 0 2px 14px 0 rgba(0, 0, 0, 0.21);">
+            <div class="modal-header" style="padding: 0;display:none">
+            </div>
+            <div class="modal-body" style="overflow-y:hidden">
+                <div class="col-md-24">
+                    <span style="font-size:14px">@GlobalMessages.Avisos</span>
+                </div>
+                <div style="border-bottom: solid 1px var(--dark); width: 100%; margin-top: 20px;"></div>
+                <div id="solicitacao_exibir" style="max-height: 350px;width:100%;overflow-y: auto; overflow-x: hidden;"></div>
+            </div>
+            <div class="modal-footer" style="display: none;"></div>
+        </div>
+    </div>
+</div>

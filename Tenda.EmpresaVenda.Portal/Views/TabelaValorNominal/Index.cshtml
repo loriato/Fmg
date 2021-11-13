@@ -1,0 +1,49 @@
+﻿@using Europa.Extensions;
+@using System;
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+
+@model Tenda.EmpresaVenda.Portal.Models.TabelaValorNominalDTO
+
+@{
+    ViewBag.Codigo = "EVS21";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<link href="~/Static/projeto/tabela-valor-nominal/tabela-valor-nominal.css" rel="stylesheet" />
+<script src="~/Static/projeto/tabela-valor-nominal/tabela-valor-nominal.js"></script>
+<script>
+    Europa.Controllers.ValorNominal.UrlListar = '@Url.Action("Listar","TabelaValorNominal")';
+    Europa.Controllers.ValorNominal.UrlExportarPagina = '@Url.Action("ExportarPagina","TabelaValorNominal")';
+    Europa.Controllers.ValorNominal.UrlExportarTodos = '@Url.Action("ExportarTodos","TabelaValorNominal")';
+</script>
+<div id="titlebar-name">
+    @ViewBag.Title.ToUpper()
+</div>
+
+<div class="col-md-24" style="padding: 24px 0px;">
+    <div class="col-md-7">
+        @Html.Label(GlobalMessages.PesquisePorEmpreendimento, new { @class = "filtro-label" })
+    </div>
+    <div class="pull-right">
+        @Html.TextBoxFor(x=>x.Nome, "", new { @class = "filtro-input", @placeholder = GlobalMessages.Digite, @id= "empreendimento_filtro" })
+        <button class="btn btn-md pull-right" type="button" onclick="Europa.Controllers.ValorNominal.Filtrar()" style="margin-left: 17px; ">@GlobalMessages.Pesquisar</button>
+    </div>
+</div>
+<div class="col-md-24">
+    <div ng-controller="ValorNominal as table">
+        <div id="valor_nominal_datatable_header" style="padding:15px 0px 60px 0px">
+            <div class="pull-right">
+                <button class="btn btn-md btn-blue" type="button" onclick="Europa.Controllers.ValorNominal.ExportarPagina()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina</button>
+                <button class="btn btn-md btn-blue" type="button" onclick="Europa.Controllers.ValorNominal.ExportarTodos()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos</button>
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table"
+               dt-column-defs="table.dtColumnDefs">
+        </table>
+    </div>
+</div>
+
+<form id="Exportar"></form>

@@ -1,0 +1,90 @@
+﻿@using Europa.Resources
+
+@model Tenda.EmpresaVenda.ApiService.Models.Cliente.ClienteDto
+
+<script type="text/javascript" src="~/Static/projeto/cliente/modal-integracao-conecta.js"></script>
+
+<script>
+    Europa.Controllers.Cliente.UrlBuscarLeadConecta = '@Url.Action("ListarLeadConectaNomeCompleto", "Conecta")';
+    Europa.Controllers.Cliente.UrlCriarLeadConecta = '@Url.Action("CriarLeadConecta", "Conecta")';
+    Europa.Controllers.Cliente.UrlIntegrarClienteConecta = '@Url.Action("IntegrarClienteConecta", "Conecta")';
+</script>
+
+<div class="modal fade bd-example-modal-lg" id="modal_integracao_conecta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content body-lead">
+            <div class="modal-header header-integracao">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h5>Integração</h5>
+                        <h4>Portal Loja - Conecta</h4>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-body line-bottom">
+                <form id="form_modal_integracao_conecta">
+                    @Html.HiddenFor(x => x.InformacoesGeraisDto.UuidLead)
+                    <div class="row d-flex flex-row">
+                        <div class="col-md-9">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    @Html.Label("Esse cliente veio através de um outro lead do Conecta?", new { @class = "h4" })
+                                </div>
+
+                                <div class="col-md-2 custom-control custom-radio">
+                                    @Html.RadioButton("Cliente_terceiro", true, new { @id = "Cliente_terceiro_sim", @class = "custom-control-input", name = "grupo_cliente_terceiro", onclick = "Europa.Controllers.Cliente.OnSelectTerceiro()" })
+                                    <label class="control-label" for="Cliente_terceiro_sim">@GlobalMessages.Sim</label>
+                                </div>
+
+                                <div class="col-md-2 custom-control custom-radio">
+                                    @Html.RadioButton("Cliente_terceiro", false, new { @id = "Cliente_terceiro_nao", @class = "custom-control-input", name = "grupo_cliente_terceiro", onclick = "Europa.Controllers.Cliente.OnSelectTerceiro()" })
+                                    <label class="control-label" for="Cliente_terceiro_nao">@GlobalMessages.Nao</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 btn-integrar">
+                            <button id="btn-integrar-cliente-conecta2" type="button" class="button__red__outline px-3 mx-2 hidden btn-bloq" title="@GlobalMessages.Integrar" onclick="Europa.Controllers.Cliente.Salvar(true)">
+                                @GlobalMessages.Integrar
+                                <img class="icon-circulo-seta-direita" src="~/Static/svg/circulo-borda-branca-com-seta-direita-branca.svg" />
+                            </button>
+                        </div>
+                    </div>
+                    <!--<div class="row d-flex flex-row">-->
+                        @*<button id="btn-salvar-cliente-conecta" type="button" class="button__red__outline px-3 mx-2 hidden" title="@GlobalMessages.Salvar" onclick="Europa.Controllers.Cliente.Salvar(true)"><i class="fa fa-floppy-o"></i> @GlobalMessages.Salvar</button>
+                    <button id="btn-integrar-cliente-conecta" type="button" class="button__red__outline px-3 mx-2 hidden" title="@GlobalMessages.Integrar" onclick="Europa.Controllers.Cliente.IntegrarClienteConecta()"><i class="fa fa-check" aria-hidden="true"></i>  @GlobalMessages.Integrar</button>
+                    <button id="btn-fechar-integrar-cliente-conecta" type="button" class="button__red__outline px-3 mx-2 hidden" data-dismiss="modal" title="@GlobalMessages.Fechar"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Fechar</button>*@
+                    <!--</div>-->
+                    <div class="row d-flex flex-row invisible " id="busca-lead">
+                        <div class=" col-md-12 header-lead">
+                            <h3>LEAD DO CONECTA</h3>
+                        </div>
+                        <div class="col-md-12 input-lead">
+                            <div class="row">
+                                <div class="col-md-8 input-group mb-3 w-2">
+                                    <img style="margin: 0.5em;" src="~/Static/svg/icon-user-line.svg" />
+                                    @Html.TextBoxFor(x => x.InformacoesGeraisDto.NomeCompleto, new { @class = "form-control ", placeholder = "Insira o Nome do Cliente" })
+                                    <button class="btn-seach-lead" onclick="Europa.Controllers.Cliente.BuscarLeadConecta()">
+                                        <span id="basic-addon2"><i class="fa fa-search"></i></span>
+                                    </button>
+                                </div>
+                                <div class="col-md-3 mb-3 ml-2">
+                                    @Html.TextBoxFor(x => x.InformacoesGeraisDto.NomeLead, new { @class = "form-control invisible",  disabled = "disabled" })
+                                    @Html.TextBoxFor(x => x.InformacoesGeraisDto.TelefoneLead, new { @class = "form-control invisible", disabled = "disabled" })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="break"></div>
+            <div class="row">
+                <div id="result-pesquisa-lead"></div>
+            </div>
+        </div>
+    </div>
+</div>

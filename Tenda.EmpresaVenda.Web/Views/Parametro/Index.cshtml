@@ -1,0 +1,19 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "SEG10";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<div id="titlebar-name">
+    @GlobalMessages.Parametros
+</div>
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    <div class="col-md-24" id="datatable_parametros_id">
+        @{
+            Html.RenderPartial("_Datatable");
+        }
+    </div>
+            }

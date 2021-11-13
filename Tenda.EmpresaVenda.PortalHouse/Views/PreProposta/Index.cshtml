@@ -1,0 +1,377 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@using Tenda.EmpresaVenda.PortalHouse.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+@model Tenda.EmpresaVenda.ApiService.Models.PreProposta.PrePropostaCreateDto
+
+@{
+    ViewBag.Codigo = "EVS10";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+    ViewBag.PageTitle = ViewBag.Title.ToUpper();
+    var nomeEmpre = "";
+    long idEmpre = 0;
+    var breveLancamentoForaCatalogo = (Model.PreProposta.Id > 0);
+    nomeEmpre = ViewBag.NomeEmpreendimento;
+    idEmpre = ViewBag.IdEmpreendimento == null ? 0 : ViewBag.IdEmpreendimento;
+
+    var exibeAvalista = Model.AvalistaDto != null && Model.AvalistaDto.Avalista != null && Model.AvalistaDto.Avalista.Id > 0;
+
+}
+
+<script type="text/javascript" src="~/static/projeto/pre-proposta/pre-proposta.js"></script>
+<script type="text/javascript" src="~/static/projeto/pre-proposta/detalhamento-financeiro.js"></script>
+<script type="text/javascript" src="~/static/projeto/pre-proposta/itbi-emolumento.js"></script>
+<script type="text/javascript" src="~/static/projeto/pre-proposta/proponente.js"></script>
+<script type="text/javascript" src="~/static/projeto/pre-proposta/documento-proponente.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pre-proposta/dados-avalista.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pre-proposta-workflow/pre-proposta-workflow.js"></script>
+
+<script>
+    Europa.Controllers.PreProposta.NomeEmpre = '@nomeEmpre';
+    Europa.Controllers.PreProposta.IdEmpre = '@idEmpre';
+    Europa.Controllers.PreProposta.BreveLancamentoForaCatalogo = '@breveLancamentoForaCatalogo';
+
+    // URLs
+    Europa.Controllers.PreProposta.UrlIndex = '@Url.Action("Index", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlBuscarCliente = '@Url.Action("BuscarDadosCliente", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlIncluirPreProposta = '@Url.Action("Incluir", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlAlterarPreProposta = '@Url.Action("Alterar", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlCancelarPreProposta = '@Url.Action("Cancelar", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlEnviarPreProposta = '@Url.Action("Enviar", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlRetornarPreProposta = '@Url.Action("Retornar", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlRevisarPreProposta = '@Url.Action("Revisar", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlAlterarCorretor = '@Url.Action("AlterarCorretor", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlProponenteDropDown = '@Url.Action("RenderPropoponenteDropDownList", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlTotalFinanceiro = '@Url.Action("RenderTotalFinanceiro", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlNegativarAnexo = '@Url.Action("NegativaAnexarDocumentoProponente", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlClonarPreProposta = '@Url.Action("ClonarPreProposta", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlBaixarTodosDocumentos = '@Url.Action("BaixarTodosDocumentos", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlPreBaixarBoleto = '@Url.Action("PreBaixarBoleto", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlPreBaixarContrato = '@Url.Action("PreBaixarContrato", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlBaixarContrato = '@Url.Action("BaixarContrato", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlBaixarBoleto = '@Url.Action("BaixarBoleto", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlHistorico = '@Url.Action("BuscarHistoricoPreProposta", "PreProposta")';
+
+    Europa.Controllers.PrePropostaWorkflow.UrlAnaliseSimplificadaAprovada = '@Url.Action("AprovarAnaliseSimplificadaAprovadaProposta", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAnaliseCompletaAprovada = '@Url.Action("AprovarAnaliseCompletaAprovadaProposta", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAguardandoIntegracao = '@Url.Action("AguardandoIntegracao", "PrePropostaWorkflow")';
+
+    Europa.Controllers.PreProposta.UrlBaixarFormularios = '@Url.Action("BaixarFormularios", "DocumentoFormulario")';
+    Europa.Controllers.PreProposta.UrlAguardandoAnaliseCompleta = '@Url.Action("AguardandoAnaliseCompleta", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlBase = '@Url.Content("~/PreProposta")';
+
+    Europa.Controllers.PreProposta.UrlReenviarSuat = '@Url.Action("SalvarNovoBreveLancamento", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlValidarEmpreendimento = '@Url.Action("ValidarEmpreendimento", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlDefinirUnidadePreProposta = '@Url.Action("DefinirUnidadePreProposta", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlIntegrarPreProposta = '@Url.Action("IntegrarPrePropostaSUAT", "PreProposta")';
+    Europa.Controllers.PreProposta.UrlMudarFatorSocial = '@Url.Action("MudarFatorSocial", "PreProposta")';
+
+    Europa.Controllers.PreProposta.UrlDetalharEmpreendimento = '@Model.UrlDetalharEmpreendimento';
+    Europa.Controllers.PreProposta.UrlDetalharTorre = '@Model.UrlDetalharTorre';
+    Europa.Controllers.PreProposta.UrlDetalharUnidade = '@Model.UrlDetalharUnidade';
+
+    Europa.Controllers.PrePropostaWorkflow.UrlReenviarAnaliseCompletaAprovada = '@Url.Action("ReenviarAnaliseCompletaAprovada", "PrePropostaWorkflow")';
+
+    Europa.Controllers.PreProposta.Permissoes = {
+        DetalhamentoFinanceiroManual:'@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "DetalhamentoFinanceiroManual").ToString().ToLower()'=='true',
+    }
+
+</script>
+<style>
+
+
+   /* .btnMatrizOfertas {
+        z-index: 0;
+        height: 41.08px;
+    }
+
+    .btnDropDown {
+        z-index: 1;
+        position: absolute;
+        margin-left: 196px;
+        height: 37px;
+        width: 20px;
+    }*/
+
+    .btnRedOutline {
+        background: #d0021b;
+        cursor: pointer;
+        padding: 0.5rem 2rem;
+        font-size: 1rem;
+        text-align: center;
+        color: white;
+        text-decoration: none;
+        border-top-right-radius: 100px;
+        border-bottom-right-radius: 100px;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;
+        -webkit-border-radius: 100px;
+        -moz-border-radius: 100px;
+        -ms-border-radius: 100px;
+        -o-border-radius: 100px;
+        background: -moz-linear-gradient(left, rgba(219, 25, 47, 1) 0%, rgba(208, 2, 27, 1) 100%);
+        background: -webkit-linear-gradient(left, rgba(219, 25, 47, 1) 0%, rgba(208, 2, 27, 1) 100%);
+        background: linear-gradient(to right, rgba(219, 25, 47, 1) 0%, rgba(208, 2, 27, 1) 100%);
+        border: none;
+        height: 41.08px;
+    }
+</style>
+
+@{
+    Model.PodeManterAssociacoes = Model.PreProposta != null &&
+                                    Model.PreProposta.Id > 0 &&
+                                    (SituacaoProposta.EmElaboracao == Model.PreProposta.SituacaoProposta ||
+                                    SituacaoProposta.DocsInsuficientesSimplificado == Model.PreProposta.SituacaoProposta ||
+                                    SituacaoProposta.Condicionada == Model.PreProposta.SituacaoProposta ||
+                                    SituacaoProposta.DocsInsuficientesCompleta == Model.PreProposta.SituacaoProposta ||
+                                    SituacaoProposta.AguardandoFluxo == Model.PreProposta.SituacaoProposta);
+}
+
+<div class="container-fluid p-4">
+    <div class="d-flex justify-content-end mb-3">
+        @if (Model.PreProposta.Id > 0 && Model.PreProposta.SituacaoProposta != SituacaoProposta.Cancelada)
+        {
+            <div class="div-btn-indique btn-group mx-2">
+                <button type='button' class='btn btn-flat dropdown-toggle' data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="padding: 0.5rem 1rem 0.5rem 1.5rem;">
+                    INDIQUE
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right dropdown-menu-right gray-menu">
+                    <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.Indicacao.AbrirModal()">Cadastre uma Indicação</a></li>
+                    <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.AbrirModalCompartilharLink()">Compartilhar Link de Indicação</a></li>
+                </ul>
+            </div>
+        }
+        @if ((SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir") && Model.PreProposta.Id.HasValue()) ||
+         (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar") && Model.PodeManterAssociacoes))
+        {
+            if (Model.PreProposta.Id > 0 && (Model.PreProposta.SituacaoProposta != SituacaoProposta.Integrada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.Cancelada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AguardandoAnaliseSimplificada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AguardandoAnaliseCompleta &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.EmAnaliseSimplificada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.EmAnaliseCompleta &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AnaliseSimplificadaAprovada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AnaliseCompletaAprovada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AguardandoAuditoria &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.Condicionada))
+            {
+            <div class="div-btn-matriz-oferta btn-group mx-2">
+                <button id="btn_matriz_oferta" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @GlobalMessages.MatrizOferta
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right gray-menu">
+                    <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.Simulador.AbrirMatrizOferta()">Matriz de Oferta</a></li>
+                    <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.Simulador.AbrirModalSimulador()">Simulador</a></li>
+                </ul>
+            </div>
+            }
+        }
+            <div class="div-btn-mais-opcoes btn-group mx-2">
+                <button id="btn_mais_opcoes" class="btn btn-flat dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    @GlobalMessages.MaisOpcoes
+                </button>
+                <ul class="dropdown-menu dropdown-menu-right gray-menu">
+                    @if (Model.PreProposta.Id > 0 &&
+Model.PreProposta.Codigo.HasValue() &&
+Model.PreProposta.SituacaoProposta == SituacaoProposta.AguardandoIntegracao)
+                    {
+                        <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.ReenviarAnaliseCompletaAprovada()"> @GlobalMessages.ReenviarParaAnalise</a></li>
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "BaixarTodosDocumentos") &&
+     Model.PreProposta.Id > 0 &&
+     Model.PossuiFormulario &&
+     Model.PreProposta.Codigo.HasValue() &&
+     (Model.PreProposta.SituacaoProposta == SituacaoProposta.AguardandoAnaliseSimplificada ||
+     Model.PreProposta.SituacaoProposta == SituacaoProposta.AguardandoAnaliseCompleta ||
+     Model.PreProposta.SituacaoProposta == SituacaoProposta.EmAnaliseCompleta ||
+     Model.PreProposta.SituacaoProposta == SituacaoProposta.EmAnaliseSimplificada ||
+     Model.PreProposta.SituacaoProposta != SituacaoProposta.Retorno))
+                    {
+                        <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.BaixarFormularios()">@GlobalMessages.BaixarFormularios</a></li>
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ReintegrarPrePropostaSUAT"))
+                    {
+                        if ((Model.PrePropostaReintegrada && Model.PreProposta.SituacaoProposta.Value == SituacaoProposta.AguardandoIntegracao) ||
+                            (Model.PreProposta.PassoAtualSuat == "Prop. Cancelada" && Model.PreProposta.SituacaoProposta.Value == SituacaoProposta.Integrada))
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.ReintegrarSuat()">@GlobalMessages.ReintegrarPreProposta</a></li>
+                        }
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "IntegrarPrePropostaSUAT") &&
+Model.PreProposta.BreveLancamento.HasValue() &&
+Model.PreProposta.BreveLancamento.Empreendimento.HasValue() &&
+Model.PreProposta.SituacaoProposta.HasValue() &&
+Model.PreProposta.SituacaoProposta.Value == SituacaoProposta.AguardandoIntegracao)
+                    {
+                        if (!Model.PrePropostaReintegrada)
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.IntegrarSuat()"> @GlobalMessages.IntegrarPreProposta</a></li>
+                        }
+                        if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarLogIntegracao"))
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Components.LogIntegracaoModal.AbrirModal()">@GlobalMessages.LogDeIntegracao</a></li>
+                        }
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar"))
+                    {
+                        if ((Model.PreProposta.Id > 0 &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.Integrada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.Cancelada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AguardandoAnaliseSimplificada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AguardandoAnaliseCompleta &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.EmAnaliseSimplificada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.EmAnaliseCompleta &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AnaliseSimplificadaAprovada &&
+                            Model.PreProposta.SituacaoProposta != SituacaoProposta.AnaliseCompletaAprovada &&
+                             Model.PreProposta.SituacaoProposta != SituacaoProposta.AguardandoAuditoria) ||
+                            ((Model.PrePropostaReintegrada &&
+                            Model.PreProposta.SituacaoProposta.Value == SituacaoProposta.AguardandoIntegracao) ||
+                           (Model.PreProposta.PassoAtualSuat == "Prop. Cancelada" &&
+                           Model.PreProposta.SituacaoProposta.Value == SituacaoProposta.Integrada)))
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="$('#fator_social_modal').show();">@GlobalMessages.Alterar @GlobalMessages.FatorSocial</a></li>
+                        }
+                    }
+                    @if (SessionAttributes.Current().HasPermission("EVS10", "RetornarSituacaoReprovada"))
+                    {
+                        if (Model.PreProposta.Id > 0 &&
+                                Model.PreProposta.Codigo.HasValue() && Model.SituacaoAnterior.HasValue() &&
+                                Model.SituacaoAnterior == (int)SituacaoProposta.AnaliseSimplificadaAprovada &&
+                                Model.PreProposta.SituacaoProposta == SituacaoProposta.Reprovada)
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.AnaliseSimplificadaAprovada()">Refazer Análise SICAQ</a></li>
+                        }
+                        else if (Model.PreProposta.Id > 0 &&
+      Model.PreProposta.Codigo.HasValue() &&
+      Model.SituacaoAnterior == (int)SituacaoProposta.AnaliseCompletaAprovada &&
+      Model.PreProposta.SituacaoProposta == SituacaoProposta.Reprovada)
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.AnaliseCompletaAprovada()">Refazer Análise SICAQ</a></li>
+                        }
+                    }
+                    @if (SessionAttributes.Current().HasPermission("EVS10", "RetornarSituacaoCondicionada"))
+                    {
+                        if (Model.PreProposta.Id > 0 &&
+                                Model.PreProposta.Codigo.HasValue() && Model.SituacaoAnterior.HasValue() &&
+                                Model.SituacaoAnterior == (int)SituacaoProposta.AnaliseSimplificadaAprovada &&
+                                Model.PreProposta.SituacaoProposta == SituacaoProposta.Condicionada)
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.ComissionadaParaAnaliseSimplificada()">Refazer Análise SICAQ</a></li>
+                        }
+                        else if (Model.PreProposta.Id > 0 &&
+       Model.PreProposta.Codigo.HasValue() &&
+       Model.SituacaoAnterior == (int)SituacaoProposta.AnaliseCompletaAprovada &&
+       Model.PreProposta.SituacaoProposta == SituacaoProposta.Condicionada)
+                        {
+                            <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.ComissionadaParaAnaliseCompleta()">Refazer Análise SICAQ</a></li>
+                        }
+
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarHistoricoPreProposta"))
+                    {
+                        <li><a href="#" class="dropdown-item red-item" onclick="Europa.Controllers.PreProposta.AbrirModalHistorico()">@GlobalMessages.HistoricoDaPreProposta</a></li>
+                    }
+                    </ul>
+
+            </div>
+        
+
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Cancelar") &&
+                     Model.PodeManterAssociacoes &&
+                     (SituacaoProposta.EmElaboracao == Model.PreProposta.SituacaoProposta ||
+                      SituacaoProposta.DocsInsuficientesSimplificado == Model.PreProposta.SituacaoProposta ||
+                      SituacaoProposta.DocsInsuficientesCompleta == Model.PreProposta.SituacaoProposta ||
+                      SituacaoProposta.Condicionada == Model.PreProposta.SituacaoProposta ||
+                      SituacaoProposta.AguardandoFluxo == Model.PreProposta.SituacaoProposta))
+        {
+            <button id="btn_cancelar_pre_proposta" class="button__white__background px-3 mx-2" type="button" onclick="Europa.Controllers.PreProposta.CancelarPreProposta()">
+                @GlobalMessages.CancelarPreProposta
+            </button>
+        }
+
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Enviar")
+                && Model.PodeManterAssociacoes &&
+                (SituacaoProposta.EmElaboracao == Model.PreProposta.SituacaoProposta ||
+                SituacaoProposta.AguardandoFluxo == Model.PreProposta.SituacaoProposta))
+        {
+            <button id="btn_enviar_proposta" class="button__white__background mx-2" type="submit" onclick="Europa.Controllers.PreProposta.PreEnviarPreProposta()">
+                @GlobalMessages.Enviar
+            </button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Enviar")
+                 && Model.PodeManterAssociacoes && SituacaoProposta.DocsInsuficientesSimplificado == Model.PreProposta.SituacaoProposta)
+        {
+            <button id="btn_enviar_proposta" class="button__white__background px-6 mx-2" type="submit" onclick="Europa.Controllers.PreProposta.RetornarPreProposta()">
+                @GlobalMessages.Enviar
+            </button>
+        }
+
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Enviar")
+                    && Model.PodeManterAssociacoes && SituacaoProposta.DocsInsuficientesCompleta == Model.PreProposta.SituacaoProposta)
+        {
+            <button id="btn_enviar_proposta" class="button__red__outline px-6 mx-2" type="submit" onclick="Europa.Controllers.PreProposta.AguardandoAnaliseCompleta()">
+                @GlobalMessages.Enviar
+            </button>
+        }
+
+        @if ((SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir") && Model.PreProposta.Id.IsEmpty()) ||
+                    (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar") && Model.PodeManterAssociacoes))
+        {
+            <button id="btn_salvar_proposta" class="button__red__outline px-6 ml-2" type="submit" onclick="Europa.Controllers.PreProposta.SalvarPreProposta()">
+                @GlobalMessages.Salvar
+            </button>
+        }
+    </div>
+    <div>
+        <form id="form_pre_proposta">
+            <div id="fieldset_pre_proposta">
+                <div id="area_geral" class="pt-2">
+                    @{
+                        Html.RenderPartial("_Geral", Model);
+                    }
+                </div>
+                <div class="@(Model.PreProposta.Id > 0 ? "" : "oculto") area" id="area_detalhamento_financeiro">
+                    @{
+                        Html.RenderPartial("_DetalhamentoFinanceiro", Model);
+                    }
+                </div>
+                <div class="@(Model.PreProposta.Id > 0 ? "" : "oculto") area" id="area_itbi_emolumento">
+                    @{
+                        Html.RenderPartial("_ItbiEmolumento", Model);
+                    }
+                </div>
+                <div class="@(Model.PreProposta.Id > 0 ? "" : "oculto") area" id="area_proponente">
+                    @{
+                        Html.RenderPartial("_Proponente", Model);
+                    }
+                </div>
+                <div class="@(Model.PreProposta.Id > 0 ? "" : "oculto") area" id="area_documento_proponente">
+                    @{
+                        Html.RenderPartial("_DocumentoProponente", Model);
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@Html.HiddenFor(x => x.SituacaoAnterior)
+
+<form id="Exportar"></form>
+
+@{
+    Html.RenderPartial("~/Views/Cliente/_ModalBuscaCliente.cshtml");
+    Html.RenderPartial("_ModalFatorSocial");
+    Html.RenderPartial("_ModalFatorSocialConfirma");
+    Html.RenderPartial("_ModalReenviarSuat");
+    Html.RenderPartial("_ModalLogIntegracao");
+    Html.RenderPartial("~/Views/PreProposta/_ModalHistoricoPreProposta.cshtml");
+    Html.RenderPartial("~/Views/Simulador/_ModalSimulacao.cshtml", Model);
+    if (Model.PreProposta.BreveLancamento.HasValue())
+    {
+        Html.RenderPartial("~/Views/Shared/Components/_ModalConsultaEstoqueEmpreendimento.cshtml", Model.PreProposta.BreveLancamento);
+    }
+    Html.RenderPartial("~/Views/Shared/Components/_ModalConsultaEstoqueUnidade.cshtml");
+    Html.RenderPartial("_ModalReenviarAnaliseCompletaAprovada");
+    Html.RenderPartial("_ModalIndicacao");
+    Html.RenderPartial("_ModalCompartilharLink");
+}

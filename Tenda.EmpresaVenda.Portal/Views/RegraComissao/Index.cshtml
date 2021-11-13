@@ -1,0 +1,46 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models
+@model RegraComissaoViewModel
+
+@{
+    ViewBag.Codigo = "EVSNN";
+    ViewBag.Title = "REGRA DE COMISSÃO VIGENTE";
+}
+
+<script src="~/Static/europa/js/pdf.js"></script>
+<script src="~/Static/europa/js/pdf.worker.js"></script>
+
+<script src="~/Static/projeto/regra-comissao/regra-comissao.js"></script>
+<script>
+    Europa.Controllers.RegraComissao.UrlDownloadRegraComissao ='@Url.Action("Download", "RegraComissao")';
+    Europa.Controllers.RegraComissao.UrlArquivo ='@Url.Action("DocumentoRegraComissao", "RegraComissao")';
+</script>
+
+<div class="menu-options" align='center'>
+    <div id="titlebar-name">@ViewBag.Title</div>
+    <div id="titlebar-buttons">
+        <div class="col-md-24" style="display: inline-flex">
+            <button id="btn_download" class="btn btn-white" type="button" style="margin-left: 10px;" onclick="Europa.Controllers.RegraComissao.Download()">
+                @GlobalMessages.Download
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-24">
+    @Html.DropDownListFor(model => model.IdRegraAceiteMaisRecente, Model.RegrasAceitas, new { @class = "form-control" })
+</div>
+<div class="col-md-24" style="margin-top:10px;">
+    <div id="div-pdf">
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        setTimeout(function () {
+            var currentHeigth = $("#corpo-conteudo-layout").height() - 125;
+            Europa.Controllers.RegraComissao.Url = '@Model.RegraComissao';
+            Europa.Controllers.RegraComissao.ExibirRegraComissao(currentHeigth);
+        }, 1000);
+    });
+</script>

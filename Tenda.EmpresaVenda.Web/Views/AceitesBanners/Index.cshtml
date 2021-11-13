@@ -1,0 +1,59 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "GEC16";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/aceites-banners/aceites-banners.js"></script>
+
+<script>
+    Europa.Controllers.AceitesBanners.UrlListar = '@Url.Action("Listar", "AceitesBanners")';
+    Europa.Controllers.AceitesBanners.UrlExportarPagina = '@Url.Action("ExportarPagina", "AceitesBanners")';
+    Europa.Controllers.AceitesBanners.UrlExportarTodos = '@Url.Action("ExportarTodos", "AceitesBanners")';
+</script>
+
+<div id="titlebar-name">@GlobalMessages.AceitesBanners</div>
+
+<div class="col-md-24">
+    <form class="form-filtro">
+        <div class="col-md-24">
+            <div class="col-md-5 form-group">
+                @Html.Label(GlobalMessages.Banner, new { @class = "control_label" })
+                <select id="autocomplete_titulo_banner" name="TituloBannerAuto" class="select2-container form-control" onchange="Europa.Controllers.AceitesBanners.Filtrar()"></select>
+            </div>
+            <div class="pull-right" style="margin-top:18px;">
+                <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.AceitesBanners.Filtrar();"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div ng-controller="AceitesBanners as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="col-md-5">
+            <h5 style="margin-top:6px;margin-bottom:0px;">@GlobalMessages.AceitesBanners</h5>
+        </div>
+        <div class="pull-right">
+            @{
+                if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.AceitesBanners.ExportarPagina()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina</button>
+
+                }
+                if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.AceitesBanners.ExportarTodos()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos</button>
+
+                }
+            }
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>
+
+<form id="Exportar"></form>

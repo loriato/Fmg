@@ -1,0 +1,60 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.EmpresaVenda.Domain.Repository.Models
+
+@{
+    ViewBag.Codigo = "GEC07";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/efetivar-solicitacao-resgate/index-efetivar-solicitacao-resgate.js"></script>
+<script type="text/javascript" src="~/Static/projeto/efetivar-solicitacao-resgate/datatable-efetivar-solicitacao-resgate.js"></script>
+<script type="text/javascript" src="~/Static/projeto/efetivar-solicitacao-resgate/modal-efetivar-solicitacao-resgate.js"></script>
+<script type="text/javascript" src="~/Static/projeto/efetivar-solicitacao-resgate/modal-anexo.js"></script>
+<script type="text/javascript" src="~/Static/projeto/efetivar-solicitacao-resgate/modal-status-importacao.js"></script>
+
+<script>
+    Europa.Controllers.EfetivarSolicitacaoResgate.Url = {
+        ListarResgate: '@Url.Action("ListarResgate", "ResgatePontuacaoFidelidade")',
+        AprovarResgate: '@Url.Action("AprovarResgate", "EfetivarSolicitacaoResgate")',
+        ReprovarResgate: '@Url.Action("ReprovarResgate", "EfetivarSolicitacaoResgate")',
+        ExportarPagina: '@Url.Action("ExportarPagina","EfetivarSolicitacaoResgate")',
+        ExportarTodos: '@Url.Action("ExportarTodos","EfetivarSolicitacaoResgate")',
+
+        ImportExcel: '@Url.Action("ImportExcel", "EfetivarSolicitacaoResgate")',
+        VerificarStatusImportacao: '@Url.Action("VerificarStatusImportacao", "EfetivarSolicitacaoResgate")',
+        DownloadArquivoAnexo: '@Url.Action("DownloadArquivoAnexo", "EfetivarSolicitacaoResgate")'
+    };
+
+    Europa.Controllers.StatusImportacao.UrlVerificarTask = '@Url.Action("VerificarStatusImportacao", "EfetivarSolicitacaoResgate")';
+    Europa.Controllers.StatusImportacao.UrlDownloadArquivo = '@Url.Action("DownloadArquivo", "EfetivarSolicitacaoResgate")';
+
+    Europa.Controllers.EfetivarSolicitacaoResgate.Permissao = {
+        Aprovar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "AprovarResgate")' == 'True',
+        Reprovar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ReprovarResgate")' == 'True'
+    };
+</script>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+
+<div id="titlebar-buttons">
+    @*@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarTabelas"))
+        {
+    <button type="button" class="btn btn-default" title="Faturar Proposta"
+            onclick="Europa.Controllers.EfetivarSolicitacaoResgate.AbrirModalAnexo()">
+        <i class="fa fa-cog"></i> @GlobalMessages.Importar
+    </button>
+    }*@
+</div>
+
+@{
+    Html.RenderPartial("_Filtro", new PontuacaoFidelidadeDTO());
+    Html.RenderPartial("_Datatable");
+    Html.RenderPartial("_ModalAprovavar", new PontuacaoFidelidadeDTO());
+    Html.RenderPartial("_ModalAnexo");
+    Html.RenderPartial("_ModalStatusImportacao");
+}
+
+<form id="Exportar"></form>

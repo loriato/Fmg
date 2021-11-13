@@ -1,0 +1,10 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+
+<script>
+</script>
+
+@Html.Label(GlobalMessages.Perfis + "*")
+<div class="col-md-24" name="Perfil">
+    <select id="autocomplete_perfil" name="Perfil" class="select2-container form-control" multiple onchange="Europa.Controllers.Corretor.ActionAutocompletePerfil()"></select>
+</div>

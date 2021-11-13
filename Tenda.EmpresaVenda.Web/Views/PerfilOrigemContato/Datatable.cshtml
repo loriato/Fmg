@@ -1,0 +1,32 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Title = "_ListarDataIndisponivel";
+}
+
+<div ng-controller="PerfilOrigemContatoDatatable as table">
+    <div id="PerfilOrigemContatoDatatable_barra">
+        <form>
+            <div class="col-md-18">
+                <div class="col-md-5">
+                    <select id="autocomplete_perfil" onchange="" class="select2-container form-control"></select>
+                </div>
+                <button type="submit" class="btn btn-default" title="@GlobalMessages.Filtrar" onclick="Europa.Controllers.PerfilOrigemContato.Datatable.FiltrarTabela()"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                <button class="btn btn-default" title="@GlobalMessages.Limpar" onclick="Europa.Controllers.PerfilOrigemContato.Datatable.LimparFiltro()"><i class="fa fa-eraser" aria-hidden="true"></i></button>
+            </div>
+            <div class="col-md-6 pull-right">
+                <div class="text-right">
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+                    {
+                        <button class="btn btn-default" title="@GlobalMessages.Novo" type="button" onclick="Europa.Controllers.PerfilOrigemContato.Datatable.Novo()"><i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Novo</button>
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

@@ -1,0 +1,69 @@
+﻿@using Europa.Resources
+@model Tenda.Domain.Security.Models.Error
+
+@{
+    ViewBag.Title = "_DetalhamentoModal";
+}
+
+<div class="modal" id="detalhamentoLogErro" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.LogErro.Modal.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.DetalhesLog</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_detalhar_log_erro">
+                    <div class="col-md-24">
+                        <div class="col-md-4">
+                            @Html.Label(GlobalMessages.Horario)
+                            @Html.TextBoxFor(x => x.CriadoEm, "{0:dd/MM/yyyy HH:mm:ss}", new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Tipo)
+                            @Html.TextBoxFor(x => x.Type, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Mensagem)
+                            @Html.TextBoxFor(x => x.Message, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Origem)
+                            @Html.TextBoxFor(x => x.Source, new { @class = "form-control", @readonly = true })
+                        </div>    
+                    </div>
+                    <div class="col-md-24">
+                        <div class="col-md-4">
+                            @Html.Label(GlobalMessages.Classe)
+                            @Html.TextBoxFor(x => x.OriginClass, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Metodo)
+                            @Html.TextBoxFor(x => x.Caller, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-6 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Linha)
+                            @Html.TextBoxFor(x => x.CodeLine, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-5 col-md-offset-1">
+                            @Html.Label(GlobalMessages.MetodoOrigem)
+                            @Html.TextBoxFor(x => x.Target, new { @class = "form-control", @readonly = true })
+                        </div>
+                    </div>
+                    <div class="col-md-24">
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Detalhes)
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-default" style="margin-bottom: -57px;" onclick="Europa.Controllers.LogErro.Modal.CopyToClipboard()"><i class="fa fa-copy" aria-hidden="true"></i> Copiar</button>
+                            </div>
+                        </div>
+                        <pre><code id="Stacktrace" name="Stacktrace"></code></pre>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.LogErro.Modal.CloseModal()"><i class="fa fa-close" aria-hidden="true"></i> @GlobalMessages.Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@model List<Tenda.EmpresaVenda.ApiService.Models.Conecta.LeadConectaResponseDto>
+@{
+    var widhtDiv = "0em";
+
+    var paddingTopo = "0em";
+    if (Model != null)
+    {
+        widhtDiv = (Model.Count == 1 ? 7 : (Model.Count == 2 ? 10 : (Model.Count == 3 ? 14 : Model.Count == 4 ? 16 : 20))) + "em";
+        paddingTopo = (Model.Count == 1 ? 0 : (Model.Count == 2 ? 4 : (Model.Count == 3 ? 7 : Model.Count == 4 ? 10 : 14))) + "em";
+    }
+}
+
+@if (Model != null && Model.Count > 0)
+{
+    <div id="result-pesquisa-lead" class="col-md-12 Clientes-leads" style="height: @widhtDiv;">
+
+        <h1>Resultados</h1>
+        <div class="div-button-leads" style="padding-top: @paddingTopo; ">
+            <button id="btn-integrar-cliente-conecta3" type="button" class="button__red__outline btn_red_integrar_conecta_lead btn-bloq" title="@GlobalMessages.Integrar" onclick="Europa.Controllers.Cliente.IntegrarClienteConecta()">
+                @GlobalMessages.Enviar
+                <img class="icon-circulo-seta-direita" src="~/Static/svg/icon-certo.svg" />
+            </button>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                @{
+                    var count = 1;
+                    foreach (var linha in Model)
+                    {
+                        var param = "'" + @linha.Uuid + "','" + linha.Nome + "','"+linha.Telefone + "'";
+                        <div class="custom-radio line-clientes-leads">
+                            <div class="row" onclick='Europa.Controllers.Cliente.OnSelectLeadTerceiro(@param)'>
+                                <div class="col-md-4">
+                                    <p>
+                                        @Html.RadioButton("grupo_lead_terceiro", true, new { @id = "Lead_selected_" + linha.Uuid + "-" + count, @class = "custom-control-input", name = "grupo_lead_terceiro", onclick = "Europa.Controllers.Cliente.OnSelectLeadTerceiro(" + param + ")" })
+                                        <label class="control-label" for='Lead_selected_@linha.Uuid-@count' style="display: flex; align-items: self-end;">
+                                            <img class="img-client-leads" src="~/Static/svg/icon-user-line.svg" /> @linha.Nome
+                                        </label>
+                                    </p>
+                                </div>
+                                <div class="col-md-4 line-clientes-leads-telefone">
+                                    <label class="control-label" for='Lead_selected_@linha.Uuid-@count'>
+                                        <img class="img-smartphone-leads" src="~/Static/svg/icon-smartphone.svg" />  @linha.Telefone
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        count = count + 1;
+                    }
+                }
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div id="result-pesquisa-lead" class="col-md-12 Clientes-leads" style="height:2em;">
+
+        <h1>Não há resultados</h1>
+     </div>
+}

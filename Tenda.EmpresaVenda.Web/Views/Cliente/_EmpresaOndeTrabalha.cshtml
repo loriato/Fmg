@@ -1,0 +1,86 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@model Tenda.EmpresaVenda.Web.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+
+<div class="col-md-24">
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.EmpresaTrabalha</h3>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-24">
+    <div class="col-md-24">
+        <div class="col-md-14">
+            @Html.Label(GlobalMessages.Empresa)
+            @Html.TextBoxFor(x => x.Cliente.Empresa, new { @class = "form-control", maxlength = 128 })
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            @Html.Label(GlobalMessages.TempoEmpresa)
+            @Html.TextBoxFor(x => x.Cliente.TempoDeEmpresa, new { @class = "form-control text-right", maxlength = 3 })
+        </div>
+        <div class="col-md-4 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.DataAdmissao, new { @class = "control-label" })
+            <div class="input-group">
+                @Html.TextBoxFor(x => x.Cliente.DataAdmissao, "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", parent = "#form_cliente" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default control-label" type="button" onclick="Europa.Components.DatePicker.Closest(this)">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-24">
+        @Html.HiddenFor(x => x.EnderecoEmpresa.Id)
+        <div class="col-md-4 form-group">
+            @Html.Label(GlobalMessages.CEP)
+            @Html.TextBoxFor(x => x.EnderecoEmpresa.Cep, new { @class = "form-control cep", maxlength = 9, onchange = "Europa.Controllers.Cliente.OnChangeCepEnderecoEmpresa(this)" })
+        </div>
+        <div class="col-md-9 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Endereco)
+            @Html.TextBoxFor(x => x.EnderecoEmpresa.Logradouro, new { @class = "form-control", maxlength = 60 })
+        </div>
+        <div class="col-md-4 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Numero)
+            @Html.TextBoxFor(x => x.EnderecoEmpresa.Numero, new { @class = "form-control text-right", maxlength = 10 })
+        </div>
+        <div class="col-md-4 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Complemento)
+            @Html.TextBoxFor(x => x.EnderecoEmpresa.Complemento, new { @class = "form-control", maxlength = 30 })
+        </div>
+    </div>
+
+    <div class="col-md-24">
+        <div class="col-md-4 form-group">
+            @Html.Label(GlobalMessages.Bairro)
+            @Html.TextBoxFor(x => x.EnderecoEmpresa.Bairro, new { @class = "form-control", maxlength = 40 })
+        </div>
+        <div class="col-md-9 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Cidade)
+            @Html.TextBoxFor(x => x.EnderecoEmpresa.Cidade, new { @class = "form-control", maxlength = 40 })
+        </div>
+        <div class="col-md-4 col-md-offset-1 form-group">
+            @Html.Label(GlobalMessages.Estado)
+            @{
+                if (Model.HasValue() && Model.EnderecoEmpresa.HasValue() && Model.EnderecoEmpresa.Estado.HasValue())
+                {
+                    Html.RenderPartial("_EstadosDropDownList", Tuple.Create("EnderecoEmpresa.Estado", Model.EnderecoEmpresa.Estado));
+                }
+                else
+                {
+                    Html.RenderPartial("_EstadosDropDownList", Tuple.Create("EnderecoEmpresa.Estado", "Estado"));
+                }
+            }
+        </div>
+    </div>
+</div>

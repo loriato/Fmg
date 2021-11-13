@@ -1,0 +1,30 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.ClienteDTO
+
+<script>
+    Europa.Controllers.Cliente.UrlCadastrarProposta = '@Url.Action("Index","PreProposta")';
+</script>
+<div class="modal col-md-10" id="modal_cadastrar_proposta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="col-md-24">
+                    <div class="col-md-4">
+                        <img src="~/Static/images/tenda-logo.png" width="52px" height="52px" style="margin: 10px;">
+                    </div>
+                    <div class="col-md-15" style="top: 29px; text-align: center;">
+                        <h4 class="modal-title" id="myModalLabel">@GlobalMessages.ClienteCadastrado</h4>
+                    </div>
+                </div>
+                <div class="col-md-20 col-md-offset-4">
+                    @GlobalMessages.DesejaCadastrarProposta
+                </div>
+
+            </div>
+            <div class="modal-footer" style="text-align: center;">
+                <button type="button" class="btn" data-dismiss="modal" title="@GlobalMessages.AgoraNao" style="width:191px;">@GlobalMessages.AgoraNao</button>
+                <button type="button" class="btn" title="@GlobalMessages.CadastrarProposta" style="width:191px;" onclick="Europa.Controllers.Cliente.CadastrarProposta()">@GlobalMessages.CadastrarProposta</button>
+            </div>
+        </div>
+    </div>
+</div>

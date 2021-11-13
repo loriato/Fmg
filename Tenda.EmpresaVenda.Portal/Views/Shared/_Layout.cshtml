@@ -1,0 +1,149 @@
+﻿@using Tenda.EmpresaVenda.Portal.Models.Application
+<!DOCTYPE html>
+<html ng-app="europaApp">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        @{
+            if (ViewBag.Title == null)
+            {
+                ViewBag.Title = ApplicationInfo.NomeSistema();
+            }
+            @ViewBag.Title;
+        }
+    </title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Static/images/favicon.ico" />
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/bootstrap-daterangepicker")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/select2")
+    @Styles.Render("~/css/jquery-ui")
+    @Styles.Render("~/css/fullcalendar")
+    @Styles.Render("~/css/notify")
+    @Styles.Render("~/css/tinymce")
+    @Styles.Render("~/css/bootstrap-treeview")
+    @Styles.Render("~/css/chartjs")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryNumeric")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/pdfjs")
+    @Scripts.Render("~/bundles/pdfobject")
+    @Scripts.Render("~/bundles/chartjs")
+
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-daterangepicker")
+    @Scripts.Render("~/bundles/bootstrap-validator")
+
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular-datatable")
+    @Styles.Render("~/css/angular-datatable")
+    @Scripts.Render("~/bundles/select2")
+    @Scripts.Render("~/bundles/fullcalendar")
+    @Scripts.Render("~/bundles/notify")
+
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/europa")
+    @Scripts.Render("~/bundles/bootstrap-treeview")
+
+
+    @* LINK PARA OS ARQUIVOS DO NOVO LAYOUT - TEMPORARIO *@
+    <link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-menu-icons.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-button.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-input.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-tabs.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-text.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-action-bar.css" rel="stylesheet" />
+
+    <script src="~/Static/europa/js/europa-menu.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+    <script src="~/Static/tinymce/tinymce.min.js"></script>
+
+    @*Simulador*@
+    <script type="text/javascript" src="~/Static/projeto/simulador/index-simulador.js"></script>
+    <script type="text/javascript" src="~/Static/projeto/simulador/dialogo-simulador.js"></script>
+    <link rel="stylesheet" type="text/css" href="~/Static/projeto/simulador/simulador.css" />
+    <script type="text/javascript" src="~/Static/projeto/simulador/modal-simulador.js"></script>
+
+
+    <script>
+        var basePath = "@Request.Url.OriginalString.Replace(Request.Url.PathAndQuery, "")" + "@Request.ApplicationPath";
+    </script>
+
+    <style>
+    </style>
+</head>
+<body>
+    @{
+        Html.RenderPartial("~/Views/Shared/_LayoutBackGroundLogin.cshtml");
+    }
+
+    <div class="conteudo-layout">
+        @{
+            Html.RenderPartial("~/Views/Shared/Menu.cshtml");
+            Html.RenderPartial("~/Views/Shared/_AutoCompleteAction.cshtml");
+            Html.RenderPartial("~/Views/Shared/_DetailAction.cshtml");
+            Html.RenderPartial("~/Views/Simulador/_DialogoSimulador.cshtml");
+            
+        }
+        @if (SessionAttributes.Current().NotificacoesNaoLidas > 0 && SessionAttributes.Current().ExibirModalNotificacao)
+        {
+            SessionAttributes.Current().ExibirModalNotificacao = false;
+            Html.RenderPartial("~/Views/Shared/_ModalNotificacao/_ModalNovasMensagens.cshtml");
+        }
+
+        @if (SessionAttributes.Current().ExibirModalBannerShow)
+        {
+            SessionAttributes.Current().ExibirModalBannerShow = false;
+            Html.RenderPartial("~/Views/Shared/_ModalNotificacao/_ModalBannerShow.cshtml");
+        }
+
+        @if (SessionAttributes.Current().ExibirModalBannerPortalEV)
+        {
+            Html.RenderPartial("~/Views/Shared/_ModalNotificacao/_ModalBannerPortalEV.cshtml");
+        }
+
+        <script src="~/Static/projeto/autocomplete-declaration.js"></script>
+        <div class="wrapper container-fluid">
+            @RenderBody()
+            <div class="col-md-24" style="color: transparent; font-size: smaller">
+                @{Html.RenderPartial("~/Views/Shared/Footer.cshtml");}
+            </div>
+        </div>
+        @{Html.RenderPartial("~/Views/Shared/Dialogo.cshtml");}
+        @{Html.RenderPartial("~/Views/RegraComissao/_ModalNovasRegras.cshtml");}
+        @RenderSection("scripts", required: false)
+    </div>
+    <script>
+        $.fn.select2.defaults.set("language", "pt-BR");
+        $.fn.select2.defaults.set("theme", "bootstrap");
+        $(document)
+            .ready(function () {
+                Europa.AjaxConfigure();
+                Europa.Ready();
+                $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+                $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function (event) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    $(this).parent().siblings().removeClass('open');
+                    $(this).parent().toggleClass('open');
+                });
+            });
+
+        Europa.UrlListarPerfisUsuarioLogado = '@Url.Action("ListarPerfisUsuarioLogado", "Perfil")';
+
+
+
+    </script>
+
+    <script src="~/Static/projeto/verificar-mensagens.js"></script>
+</body>
+</html>
+

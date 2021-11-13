@@ -1,0 +1,73 @@
+﻿.form-control {
+    border-radius: 3px;
+    border: solid 1px var(--gray-input);
+    font-size: 13px;
+    font-weight: 500;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: var(--dark);
+    padding: 8px 6px 6px 6px;
+}
+
+select.form-control {
+    padding: 6px;
+}
+
+select.form-control.input-sm {
+    padding: 4px;
+}
+
+.select2-container--bootstrap.select2-container--disabled .select2-selection {
+    border: solid 1px var(--gray-input);
+}
+
+.select2-container--bootstrap .select2-selection {
+    border: solid 1px var(--gray-input);
+}
+
+
+input[type="radio"] {
+    visibility: hidden;
+    position: absolute;
+    margin-top: 10px;
+}
+
+input[type=radio]:disabled + label:before {
+    opacity: 0.2;
+}
+
+input[type=radio] + label{
+    cursor: pointer;
+}
+
+input[type=radio]:disabled + label{
+    cursor: not-allowed;
+}
+
+
+input[type=radio] + label:before{
+    border-radius:50%;
+}
+
+input[type=radio] + label:before{
+    height: 28px;
+    width: 26px;
+    margin-right: 10px;
+    content: " ";
+    display:inline-block;
+    vertical-align: middle;
+    background: url("icons/radio-nao.svg") no-repeat;
+}
+
+input[type=radio]:checked + label:before{
+    width: 26px;
+    height: 28px;
+    background: url("icons/radio-sim.svg") no-repeat;
+}
+
+.input-group-btn > button > img {
+    height: 21px;
+    padding-top: 3px;
+}

@@ -1,0 +1,61 @@
+﻿input[type="radio"] {
+    visibility: hidden;
+    position: absolute;
+    margin-top: 10px;
+}
+
+input[type=radio]:disabled + label:before {
+    opacity: 0.2;
+}
+
+input[type=radio] + label {
+    cursor: pointer;
+}
+
+input[type=radio]:disabled + label {
+    cursor: not-allowed;
+}
+
+input[type=radio] + label:before {
+    border-radius: 50%;
+}
+
+input[type=radio] + label:before {
+    height: 28px;
+    width: 26px;
+    margin-right: 10px;
+    content: " ";
+    display: inline-block;
+    vertical-align: middle;
+    background: url("../svg/radio-nao.svg") no-repeat;
+}
+
+input[type=radio]:checked + label:before {
+    width: 26px;
+    height: 28px;
+    background: url("../svg/radio-sim.svg") no-repeat;
+}
+
+.form-control {
+    border-color: #979797 !important;
+}
+
+.form-control:disabled, .form-control[readonly], .select2-container--disabled .select2-selection {
+    background: transparent url('../svg/icon-lock.svg') calc(100% - 7px) center no-repeat border-box;
+}
+
+.form-control:disabled, .form-control[readonly] {
+    padding-right: 27px !important;
+}
+
+.form-control-sm + .select2-container .select2-selection--single {
+    height: 31px !important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__arrow b {
+    border-color: #003d62 transparent transparent transparent !important;
+}
+
+.select2-container .select2-search__field {
+    outline: 0;
+}

@@ -1,0 +1,107 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.Core.Enums
+@using Tenda.Domain.EmpresaVenda.Enums
+
+@{
+    ViewBag.Codigo = "GEC04";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+
+<script src="~/Static/projeto/carga-lead/lead.js"></script>
+
+<script>
+    Europa.Controllers.Lead.UrlListarEvs = '@Url.Action("ListarTreeEv", "EmpresaVenda")';
+</script>
+
+
+<style>
+    .empresa-venda-wrapper {
+        margin-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(133,166,176,0.42);
+    }
+
+    #empresa_venda_treeview {
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+        #empresa_venda_treeview .list-group {
+            margin: 0;
+            padding: 0;
+        }
+
+        #empresa_venda_treeview li {
+            padding: 8px 0 7px 0;
+        }
+
+            #empresa_venda_treeview li:nth-child(even) {
+                background-color: #FFFFFF;
+            }
+
+            #empresa_venda_treeview li:nth-child(odd) {
+                background-color: #F9F9F9;
+            }
+</style>
+
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarTabelas"))
+    {
+        <button type="button" class="btn btn-default"
+                onclick="Europa.Controllers.LeadEmMassaImportExcel.AbrirModal()">
+            <i class="fa fa-cog"></i> @GlobalMessages.Importar em Massa
+        </button>
+
+        <button type="button" class="btn btn-default"
+                onclick="Europa.Controllers.LeadImportExcel.AbrirModal()">
+            <i class="fa fa-cog"></i> @GlobalMessages.Importar
+        </button>
+
+    }
+</div>
+<div class="col-md-24">
+    <div class="col-md-4 form-group">
+        @Html.Label(GlobalMessages.UF)
+        @Html.DropDownList("Estado", new SelectList(EstadosSelectList.ValuesWithEmpty, "Value", "Text"), new { @class = "form-control"})
+    </div>
+</div>
+<div class="col-md-24" style="margin-top: 30px;">
+    <div class="col-md-4 form-group">
+        @Html.Label(GlobalMessages.EmpresaVendas)
+        @Html.TextBox("EmpresaVenda", null, new { @class = "form-control", maxlength = 50 })
+    </div>
+
+    <div class="col-md-2 form-group" style="margin-top: 19px; margin-left:5px;">
+        <button class="btn btn-default" onclick="Europa.Controllers.Lead.Filtrar()"><i class="fa fa-filter" aria-hidden="true"></i></button>
+        <button class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.LimparFiltro()"><i class="fa fa-eraser"></i></button>
+    </div>
+    <div class="pull-right" style="margin-top: 19px;">
+        <button type="button" class="btn btn-default" onclick="Europa.Controllers.Lead.MarcarTodos()">
+            @GlobalMessages.MarcarTodos
+        </button>
+        <button type="button" class="btn btn-default" onclick="Europa.Controllers.Lead.DesmarcarTodos()">
+            @GlobalMessages.DesmarcarTodos
+        </button>
+    </div>
+</div>
+
+<div class="col-md-24 empresa-venda-wrapper">
+    <div class="col-md-24" id="empresa_venda_treeview">
+
+    </div>
+</div>
+
+
+
+@{
+    Html.RenderPartial("_Anexo");
+    Html.RenderPartial("_StatusImportacao");
+    Html.RenderPartial("_AnexoEmMassa");
+}

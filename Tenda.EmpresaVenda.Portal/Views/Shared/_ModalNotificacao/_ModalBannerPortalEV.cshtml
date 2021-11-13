@@ -1,0 +1,46 @@
+﻿@using Europa.Resources
+
+@{
+    ViewBag.Title = "_ModalBannerPortalEV";
+}
+
+<script type="text/javascript" src="~/Static/europa/js/europa-banner.js"></script>
+
+<script>
+    Europa.Controllers.BannerPortalEV.Url = {
+        ShowBanners:'@Url.Action("ShowBanners","BannerPortalEV")',
+        VerificarBanner:'@Url.Action("VerificarBanner", "BannerPortalEV")',
+        FecharBanner:'@Url.Action("FecharBanner", "BannerPortalEV")'
+    };
+</script>
+@Html.Hidden("Tipo",0)
+<div id="modal-banner-portal-ev" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" style="overflow-y: hidden;">
+    <div class="modal-dialog" style="overflow-y: hidden;width: fit-content;height: fit-content;">
+        <div class="modal-content modal-alert-content">
+            <div class="modal-header" style="display: none;">
+            </div>
+            <div class="modal-body" style="padding: 0px 0px" id="modal-banner-body">
+                <div id="slide-banner" class="carousel slide" >
+                    <!-- Wrapper for slides -->
+                    <div class="carousel-inner" role="listbox" id="banners">                        
+                    </div>
+
+                    <!-- Controls -->
+                    <a class="left carousel-control hidden anterior" href="#slide-banner" role="button" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                        <span class="sr-only">Previous</span>
+                    </a>
+                    <a class="right carousel-control hidden proximo" href="#slide-banner" role="button" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                        <span class="sr-only">Next</span>
+                    </a>
+                    @*<a class="right" style="background-color:red" data-dismiss="modal-banner-portal-ev">FECHAR</a>*@
+                    </div>            
+            </div>
+            <div class="modal-footer" style="background-color:white">
+                <button class="btn hidden" type="button" id="btn-aceite" onclick="Europa.Controllers.BannerPortalEV.VerificarBanner()">@GlobalMessages.Aceitar</button>
+                <button class="btn hidden" type="button" id="btn-fechar" onclick="Europa.Controllers.BannerPortalEV.FecharModal()">@GlobalMessages.Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

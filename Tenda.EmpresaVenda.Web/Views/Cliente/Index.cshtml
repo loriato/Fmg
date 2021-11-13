@@ -1,0 +1,82 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@using Tenda.EmpresaVenda.Web.Models.Application
+@model Tenda.EmpresaVenda.Web.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<style>
+    #titlebar-name {
+        padding: 0px 0px 0px 5px !important;
+    }
+
+    #titlebar-name-target {
+        font-size: 13px;
+        font-weight: bolder;
+        text-transform: uppercase;
+    }
+</style>
+
+<script type="text/javascript" src="~/static/projeto/cliente/cliente.js"></script>
+<script>
+    // URLs
+    Europa.Controllers.Cliente.UrlIndex = '@Url.Action("Index", "Cliente")';
+    Europa.Controllers.Cliente.UrlValidarDadosIntegracao = '@Url.Action("ValidarDadosIntegracao", "Cliente")';
+    Europa.Controllers.Cliente.UrlIncluirClienteSUAT = '@Url.Action("IncluirClienteSUAT", "Cliente")';
+    Europa.Controllers.Cliente.UrlBuscarIdSapCliente = '@Url.Action("BuscarIdSapCliente", "Cliente")';
+    Europa.Controllers.Cliente.UrlExportar = '@Url.Action("Exportar", "Cliente")';
+</script>
+
+<div id="titlebar-name">
+    <div id="cliente_header_novo" class="pull-left" style="display: none;">@ViewBag.Title</div>
+    <div id="cliente_header_info" class="pull-left" style="display: none;width: 100%;">
+        <div class="col-md-24">
+            <div class="pull-left" id="cliente_header_nome"></div>
+        </div>
+        <div class="col-md-24" style="min-width: 300px;">
+            <div id="cliente_header_email" class="pull-left"></div>
+            <div id="cliente_header_telefone"></div>
+        </div>
+    </div>
+</div>
+<div id="titlebar-buttons">
+    <div class="col-md-24" style="display: inline-flex">
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+        {
+            <button id="btn_buscar" class="btn btn-default" type="button" onClick="Europa.Components.ClienteModal.AbrirModal(Europa.Controllers.Cliente.SelectCliente)">
+                <i class="fa fa-search"></i> @GlobalMessages.Buscar
+            </button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "BuscarIdSapCliente") && Model.Cliente?.Id > 0)
+        {
+            <button id="btn_buscar_id_sap" class="btn btn-default" style="margin-left: 5px;" type="button" onClick="Europa.Controllers.Cliente.BuscarIdSap()">
+                <i class="fa fa-search"></i> @GlobalMessages.BuscarIdSap
+            </button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ValidarDadosIntegracao") && Model.Cliente?.Id > 0)
+        {
+            <button id="btn_buscar" class="btn btn-default" style="margin-left: 5px;" type="button" onClick="Europa.Controllers.Cliente.ValidarDadosIntegracao()">
+                <i class="fa fa-check"></i> @GlobalMessages.ValidarDadosIntegracao
+            </button>
+            <button id="btn_buscar" class="btn btn-default" style="margin-left: 5px;" type="button" onClick="Europa.Controllers.Cliente.IncluirClienteSUAT()">
+                <i class="fa fa-check"></i> @GlobalMessages.IncluirClienteSUAT
+            </button>
+        }
+        <button id="btn_buscar" class="btn btn-default" style="margin-left: 5px;" type="button" onClick="Europa.Controllers.ClienteModalExportar.AbrirModal()">
+            <i class="fa fa-file-excel-o"></i> @GlobalMessages.Exportar
+        </button>
+    </div>
+</div>
+
+<div id="div_conteudo">
+    @{
+        Html.RenderPartial("_Conteudo", Model);
+    }
+</div>
+@{
+    Html.RenderPartial("_ModalBuscaCliente");
+    Html.RenderPartial("_ModalExportarCliente");
+}

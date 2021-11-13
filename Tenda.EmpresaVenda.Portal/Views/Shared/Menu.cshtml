@@ -1,0 +1,153 @@
+﻿@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+<script>
+
+	Menu.UrlUploadFoto = '@Url.Action("UploadFoto", "Menu")';
+	Menu.IdEmpresaVenda = @SessionAttributes.Current().EmpresaVenda.Id;
+	Menu.UrlVerificarNovasNotificacoes = '@Url.Action("VerificarNovasNotificacoes", "Menu")';
+	Sair = function () {
+		$('#logout').submit();
+	};
+	AlterarSenha = function () {
+		$('#alterarSenha').submit();
+	};
+
+	$(function () {
+		$(".infos .menu").popover();
+
+		$("#trocar_imagem").on('click', function () {
+			$("#trocar_imagem_input").click();
+		});
+
+		$("#trocar_imagem_input").change(function () {
+			Menu.UploadFoto()
+		});
+	});
+</script>
+<style>
+	.popover-content {
+		text-align: right;
+		font-family: AktivGrotesk;
+		font-size: 14px;
+		width: 324px;
+		color: var(--dark);
+		padding-right: 25px;
+	}
+	.popover{
+		max-width: 324px;
+		
+	}
+	.btn-popover {
+		width: 141px;
+		height: 29px;
+		letter-spacing: 0.13px;
+		text-align: center;
+	}
+ #style-1::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	border-radius: 0px;
+	background-color:var(--steel)
+}
+
+#style-1::-webkit-scrollbar
+{
+	width: 10px;
+	background-color:var(--steel);
+}
+
+#style-1::-webkit-scrollbar-thumb
+{
+	border-radius: 0px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	background-color: #FFFF;
+}
+</style>
+
+<div id="nav_bar">
+	<span class="expander">
+		<span class="icon"></span>
+		<div class="menu-expander" id="style-1" style="overflow-y: auto;">
+			<div class="user">
+				<span class="bg-img">
+					@if (@SessionAttributes.Current().FotoFachada.IsEmpty())
+					{
+						<img id="foto_fachada" class="sem-foto" src="~/Static/europa/css/icons/camera.svg" />
+					}
+					else
+					{
+						<img id="foto_fachada" src="@SessionAttributes.Current().FotoFachada" />
+					}
+					<div class="img-menu-fundo-img"></div>
+				</span>
+				<div>
+					<form id="form_upload_foto">
+						<button id="trocar_imagem" type="button">@GlobalMessages.TrocarImagem</button>
+						<input name="Arquivo" title="Trocar Imagem" id="trocar_imagem_input" type="file" accept="image/*" style="display: none;">
+					</form>
+				</div>
+				<span class="name">
+					<a href="@Url.Action("Index", "MeuCadastro", new { id = SessionAttributes.Current().EmpresaVendaId }).ToLower()" style="text-decoration: none; color: #ffffff;">@SessionAttributes.Current().EmpresaVenda.NomeFantasia</a>
+				</span>
+			</div>
+
+			<ul>
+				<li class="min"></li>
+				@Html.Raw(SessionAttributes.Current().MenuHtml)
+				<li class="min"></li>
+			</ul>
+		</div>
+	</span>
+
+    <div class="actions">
+        @if (SessionAttributes.Current().HasPermission("EVS02", "Visualizar"))
+        {
+            <a href="@Url.Action("Index", "PreProposta", new { id = UrlParameter.Optional }).ToLower()" class="btn">@GlobalMessages.CadastrarPreProposta</a>
+        }
+        @if (SessionAttributes.Current().HasPermission("EVS05", "Visualizar"))
+        {
+            <a href="@Url.Action("Index", "Cliente").ToLower()" class="btn">@GlobalMessages.CadastrarCliente</a>
+        }
+        @if (!SessionAttributes.Current().AcessoEVSuspensa)
+        {
+            <a href='#' onclick='Europa.Controllers.Simulador.MontarUrlSimuladorMenu()' class="btn">@GlobalMessages.SimuladorNovoCliente</a>
+        }
+
+        @if (false)
+        {
+            <a href='#' onclick='Europa.Controllers.Simulador.MontarUrlMatrizOfertaMenu()' class="btn">@GlobalMessages.MatrizOferta</a>
+        }
+
+    </div>
+
+	<div class="infos" style="display: flex">
+		<span style="float:left"><img id="img-mensagem" src="~/Static/images/triangulo-icon.png" /></span>
+		<div>
+			@if (SessionAttributes.Current().NotificacoesNaoLidas > 0)
+			{<span class="@(SessionAttributes.Current().NotificacoesNaoLidas == 0 ? "hide" : "")" id="quant_noti">@SessionAttributes.Current().NotificacoesNaoLidas</span>}
+			<span class="sino" id="exibir-msg"><img onclick="Europa.Controllers.ModalMensagens.AbrirModal()" src="~/Static/images/sino-icon.png" /></span>
+		</div>
+		<span class="user">@SessionAttributes.Current().EmpresaVenda.NomeFantasia (@SessionAttributes.Current().EmpresaVenda.Estado)</span>
+		<span class="corretora">@SessionAttributes.Current().Corretor.Funcao.AsString()</span>
+		<span class="separator">|</span>
+		<span class="nome">@SessionAttributes.Current().UsuarioPortal.Nome</span>
+		<span class="menu" data-toggle="popover" data-placement="bottom" data-content="@Html.Raw(SessionAttributes.Current().InfoHtml)" data-html="true"></span>
+	</div>
+</div>
+
+@{
+	Html.RenderPartial("~/Views/Shared/_ModalNotificacao/_ModalMensagens.cshtml");
+}
+
+@{
+	if (SessionAttributes.Current().IsValidSession())
+	{
+		using (Html.BeginForm("Logout", "Login", FormMethod.Post, new { role = "form", id = "logout" })) { }
+
+		using(Html.BeginForm("AlterarSenha", "Menu", FormMethod.Post, new { role = "form", id = "alterarSenha" }))
+		{
+			@Html.TextBox("idCorretor", SessionAttributes.Current().UsuarioPortal.Id, new { @style = "display:none" })
+		}
+	}    
+}

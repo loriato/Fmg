@@ -1,0 +1,35 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@model Tenda.EmpresaVenda.Portal.Models.PrePropostaDTO
+
+<script>
+    Europa.Controllers.PreProposta.Proponente.UrlListar = '@Url.Action("Proponente", "PreProposta")';
+    Europa.Controllers.PreProposta.Proponente.UrlIncluir = '@Url.Action("IncluirProponente", "PreProposta")';
+    Europa.Controllers.PreProposta.Proponente.UrlAlterar = '@Url.Action("AlterarProponente", "PreProposta")';
+    Europa.Controllers.PreProposta.Proponente.UrlExcluir = '@Url.Action("ExcluirProponente", "PreProposta")';
+    Europa.Controllers.PreProposta.Proponente.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarProponente").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "IncluirProponente").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExcluirProponente").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "AlterarProponente").ToString().ToLower()'
+    };
+</script>
+
+<div class="col-md-24">
+    <div ng-controller="proponentesTable as table">
+        <div id="proponente_datatable_header">
+            <div class="col-md-18 form-group">
+                <h5>@GlobalMessages.Proponentes</h5>
+            </div>
+            <div class="pull-right">
+                @if (Model.PodeManterAssociacoes)
+                {
+                    <button class="btn" type="button" title="@GlobalMessages.Novo" onClick="Europa.Controllers.PreProposta.Proponente.Novo()"><i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Novo</button>
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>

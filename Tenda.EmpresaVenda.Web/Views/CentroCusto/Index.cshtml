@@ -1,0 +1,39 @@
+﻿
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "CAD07";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<script src="~/Static/projeto/centro-custo/centro-custo.js"></script>
+<script>
+    Europa.Controllers.CentroCusto.UrlListar = '@Url.Action("Listar", "CentroCusto")';
+    Europa.Controllers.CentroCusto.UrlExcluir = '@Url.Action("Remover", "CentroCusto")';
+    Europa.Controllers.CentroCusto.UrlIncluir = '@Url.Action("Incluir", "CentroCusto")';
+    Europa.Controllers.CentroCusto.UrlAlterar = '@Url.Action("Alterar", "CentroCusto")';
+
+    Europa.Controllers.CentroCusto.Permissoes = {
+    Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+    Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+    Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+    Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar").ToString().ToLower()'
+    };
+
+</script>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+
+<div id="titlebar-buttons">
+    <button class="btn btn-default" type="button" onclick="Europa.Controllers.CentroCusto.Novo()"><i class="fa fa-plus"></i> @GlobalMessages.Novo</button>
+</div>
+
+<div ng-controller="CentroCusto as table">
+    <div id="datatable_header" class="col-md-24">
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

@@ -1,0 +1,96 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+
+@model Tenda.EmpresaVenda.Web.Models.PrePropostaDTO
+
+
+<script>
+    Europa.Controllers.PreProposta.DocumentoProponente.UrlListar = '@Url.Action("DocumentoProponente", "PreProposta")';
+    Europa.Controllers.PreProposta.DocumentoProponente.UrlUpload = '@Url.Action("UploadDocumento", "PreProposta")';
+    Europa.Controllers.PreProposta.DocumentoProponente.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar").ToString().ToLower()',
+        NaoAnexar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "NaoAnexar").ToString().ToLower()'
+    };
+
+</script>
+
+<div class="col-md-24">
+    <div ng-controller="documentoProponentesTable as table">
+        <div id="documento_proponente_datatable_header">
+            <div class="col-md-8 form-group">
+                <h5>@GlobalMessages.DocumentosProponente</h5>
+            </div>
+            <div class="col-md-15 pull-right" style="margin-top: 3px;">
+                @{
+                    var selectListSituacao = new List<SelectListItem>();
+                    selectListSituacao.Add(new SelectListItem() { Value = "0", Text = GlobalMessages.Situacao });
+                    foreach (var situacao in EnumHelper.GetSelectList(typeof(SituacaoAprovacaoDocumento)))
+                    {
+                        selectListSituacao.Add(situacao);
+                    };
+                }
+
+                @if (Model.PreProposta != null && Model.PreProposta.Id > 0)
+                {
+                    <div class="col-md-2 col-md-offset-1 pull-right text-right">
+                        <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.PreProposta.DocumentoProponente.FiltrarTabela()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+                    </div>
+                    <div class="col-md-6 col-md-offset-1 pull-right" id="dropdown_documento_proponente_cliente">
+                        @Html.DropDownList("DocumentoProponente_Cliente", Model.ListProponentes, new { @class = "form-control col-md-6" })
+                    </div>
+                    <div class="col-md-6 col-md-offset-1 pull-right">
+                        @Html.DropDownList("DocumentoProponente_Situacao", selectListSituacao, new { @class = "form-control" })
+                    </div>
+                }
+
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>
+
+<div class="col-md-24">
+    <div class="modal" id="documento_proponente_modal_upload" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@GlobalMessages.UploadDocumentoProponente</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="form_upload_documento_proponente">
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Motivo)
+                            @Html.TextBox("ArquivoDescricaoMotivo", null, new { @class = "form-control", @maxlength = "255" })
+                        </div>
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.EnvioDeArquivo + " *", new { @class = "control-label", style = "overflow: hidden;" })
+                            <input name="arquivo" id="arquivo" type="file" class="control-label" style="width: 100%;" accept="application/pdf">
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" title="@GlobalMessages.Enviar" onclick="Europa.Controllers.PreProposta.DocumentoProponente.Upload()">
+                        <i class="fa fa-upload" aria-hidden="true"></i> @GlobalMessages.Enviar
+                    </button>
+                    <button type="button" class="btn btn-default" title="@GlobalMessages.Fechar" onclick="Europa.Controllers.PreProposta.DocumentoProponente.Modal.Hide()">
+                        <i class="fa fa-close"></i> @GlobalMessages.Fechar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-24">
+    @Html.Label(GlobalMessages.Observacao, new { @class = "control-label" })
+    @Html.TextAreaFor(reg => reg.PreProposta.Observacao, new { @class = "form-control", style = "height: 150px;", maxlength = 700, @readonly = "readonly" })
+</div>
+@{ 
+    Html.RenderPartial("_MotivoModal");
+}

@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <table style="font-family: sans-serif;margin:auto">
+        <tr style="text-align: center;">
+            <th colspan="3"><img style="max-width: 800px;" src="{{imgHeader}}" /></th>
+        </tr>
+        <tr>
+            <td style="max-width: 300px;"><img style="max-width: 500px; max-height: 500px;" src="{{imgLeft}}" /></td>
+            <td valign="top" style="max-width: 500px;">
+                <span style="font-size:29px;color: #252529;font-weight: bold;">Olá {{nome}},</span>
+                <div style="line-height: 1.56;font-size:20px;color:#6b6c6f;margin-top: 20px;">
+                    <div style="margin-bottom: 20px;display: inline-grid;">
+                        <span>Para finalizar o seu termo de aceite, estamos enviando um código de validação.</span>
+                        <span>Basta digitá-lo na tela em que ele for solicitado:</span>
+                    </div>
+                    <span style="font-weight: bold;font-size: 32px;color:#ec1d24">{{token}}</span><p></p>
+                    <div style="margin-bottom: 20px;display: inline-grid;">
+                        <span>Este código é válido até {{dataExpiracao}}</span>
+                        <span>Qualquer dúvida, entre em contato com o viabilizador tenda responsável por sua região.</span>
+                    </div>
+                    <span style="font-weight: 600;">Esperamos por você!</span><p></p>
+                    <span style="color:#465662;font-weight:bold">Boas vendas!!!</span>
+                </div>
+                <div style="margin-top: 6vh;">
+                    <span style="font-size:15px;color:#6b6c6f;line-height: 1.97; letter-spacing: 0.14px;">
+                        Este documento pode conter informações confidenciais e/ou privilegiadas.
+                        Se você não for o destinatário ou a pessoa autorizada a receber este documento,
+                        não deve usar, copiar ou divulgar as informações nele contidas ou tomar qualquer ação baseada nessas informações,
+                        sob o conhecimento de que qualquer disseminação, distribuição ou cópia deste conteúdo é proibida.
+                    </span>
+                </div>
+            </td>
+            <td style="max-width:300px"><img style="max-width: 500px; max-height: 500px;" src="{{imgRight}}" /></td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="3"><img style="max-width: 800px;" src="{{imgFooter}}" /></td>
+        </tr>
+        <tr></tr>
+    </table>
+</body>
+</html>

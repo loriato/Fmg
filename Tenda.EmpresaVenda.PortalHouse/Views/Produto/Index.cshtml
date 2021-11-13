@@ -1,0 +1,73 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.PortalHouse.Models.Application
+
+@{
+    ViewBag.Codigo = "EVS07";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/static/projeto/produto/produto.js"></script>
+<link rel="stylesheet" type="text/css" href="~/static/projeto/produto/produto.css">
+
+<script>
+    Europa.Controllers.Produto.Url.Listar = '@Url.Action("ListarProdutos", "Produto")';
+    Europa.Controllers.Produto.Url.DetalharProduto = '@Url.Action("DetalharProduto", "Produto")';
+    Europa.Controllers.Produto.Url.DownloadBook = '@Url.Action("DownloadBook", "Produto")';
+</script>
+
+<div class="p-4">
+    <div class="py-4">
+        <div class="d-flex flex-end justify-content-end color-blue form-group">
+            <h5>@GlobalMessages.Filtrar.ToUpper():</h5>
+            <div class="form-check">
+                <input onclick="Europa.Controllers.Produto.Search()" class="form-check-input" type="radio" 
+                       name="filtroProduto" id="filtro_todos" value="" checked>
+                <label class="form-check-label" for="filtro_todos">
+                    @GlobalMessages.Todos
+                </label>
+            </div>
+            <div class="form-check">
+                <input onclick="Europa.Controllers.Produto.Search()" class="form-check-input" type="radio" 
+                       name="filtroProduto" id="filtro_empreendimentos" value="true">
+                <label class="form-check-label" for="filtro_empreendimentos">
+                    @GlobalMessages.Empreendimento
+                </label>
+            </div>
+            <div class="form-check">
+                <input onclick="Europa.Controllers.Produto.Search()" class="form-check-input" type="radio" 
+                       name="filtroProduto" id="filtro_lancamentos" value="false">
+                <label class="form-check-label" for="filtro_lancamentos">
+                    @GlobalMessages.BreveLancamento
+                </label>
+            </div>
+        </div>
+        <div class="form-group search-bar-container">
+            <input type="text" class="form-control rounded-pill" id="search" name="q" 
+                   placeholder="Pesquise por bairro, cidade ou estado" 
+                   onKeyDown="if (event.keyCode == 13) { Europa.Controllers.Produto.Search(this.value)}">
+            <i class="fas fa-search color-blue c-pointer" aria-hidden="true" onclick="Europa.Controllers.Produto.Search()"></i>
+        </div>
+    </div>
+</div>
+
+<div id="book-empreendimento-target" class="row"></div>
+
+<div id="book-empreendimento-spinner" class="col-md-23 col-md-offset-1">
+    <div style="margin-right:auto; margin-left:auto; margin-top: 50px; margin-bottom:50px; width:100px">
+        <b style="color:#f44336">Aguarde...</b>
+        <div class="lds-ring" style="margin-right:auto; margin-left:auto; margin-top: 20px;">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
+</div>
+
+<div id="div_breve_lancamento_info">
+   
+</div>
+
+@{
+    Html.RenderAction("RenderModalPlantasTresD");
+}

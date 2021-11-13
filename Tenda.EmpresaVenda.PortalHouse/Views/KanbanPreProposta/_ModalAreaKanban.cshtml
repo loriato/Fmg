@@ -1,0 +1,31 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.ApiService.Models.KanbanPreProposta
+
+@model AreaKanbanPrePropostaDto
+
+<script>
+    Europa.Controllers.KanbanPreProposta.UrlSalvarAreaKanbanPreProposta = '@Url.Action("SalvarAreaKanbanPreProposta","KanbanPreProposta")';
+    Europa.Controllers.KanbanPreProposta.UrlBuscarAreaKanbanPreProposta = '@Url.Action("BuscarAreaKanbanPreProposta", "KanbanPreProposta")';
+    Europa.Controllers.KanbanPreProposta.UrlFormularioAreaKanbanPreProposta = '@Url.Action("FormularioAreaKanbanPreProposta", "KanbanPreProposta")';
+    Europa.Controllers.KanbanPreProposta.UrlExcluirAreaKanbanPreProposta = '@Url.Action("ExcluirAreaKanbanPreProposta", "KanbanPreProposta")';
+</script>
+
+<div class="modal" id="modal_area_kanban" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" style="overflow: auto">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="Europa.Controllers.KanbanPreProposta.FecharModalAreaKanban()"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Cadastrar Área Kanban</h4>
+            </div>
+            <div class="modal-body">
+                <div id="div-area-kanban"></div>                
+            </div>
+            <div class="modal-footer">
+                <div class="pull-right">
+                    <button type="button" class="btn btn-primary" onclick="Europa.Controllers.KanbanPreProposta.SalvarAreaKanbanPreProposta()"><i class="fa fa-save" aria-hidden="true"></i> @GlobalMessages.Salvar</button>
+                    <button type="button" class="btn btn-default" onclick="Europa.Controllers.KanbanPreProposta.FecharModalAreaKanban()"><i class="fa fa-close" aria-hidden="true"></i> @GlobalMessages.Fechar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

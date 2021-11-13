@@ -1,0 +1,85 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+@using Tenda.Domain.EmpresaVenda.Enums
+
+@{
+    ViewBag.Codigo = "CAD09";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+
+}
+<script src="~/Static/projeto/modalidade-comissao/modalidade-comissao.js"></script>
+
+<script>
+    Europa.Controllers.ModalidadeComissao.UrlListar = '@Url.Action("Listar","ModalidadeComissao")';
+    Europa.Controllers.ModalidadeComissao.UrlFixa = '@Url.Action("Fixa","ModalidadeComissao")';
+    Europa.Controllers.ModalidadeComissao.UrlNominal = '@Url.Action("Nominal","ModalidadeComissao")';
+</script>
+
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div class="col-md-24">
+    <form>
+        <div class="col-md-4">
+            @Html.Label(GlobalMessages.Empreendimento)
+            @Html.TextBox("filtro_nome", "", new { @class = "form-control", maxlength = 128 })
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            @Html.Label(GlobalMessages.Estados)
+            @Html.DropDownList("filtro_estados", new SelectList(EstadosSelectList.Values, "Value", "Text"), new { @class = "form-control", multiple = "multiple" })
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.ModalidadeComissao)
+            @Html.DropDownList("filtro_modalidade_comissao",EnumHelper.GetSelectList(typeof(TipoModalidadeComissao)), "", new { @class = "form-control"})
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.DisponibilizarCatalogo)
+            <select class="form-control" id="filtro_disponibiliza_catalogo" name="filtro_disponibiliza_catalogo">
+                <option value="0" selected>@GlobalMessages.Selecione</option>
+                <option value="1" selected>@GlobalMessages.Sim</option>
+                <option value="2">@GlobalMessages.Nao</option>
+            </select>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.DisponivelParaVenda)
+            <select class="form-control" id="filtro_disponivel_venda" name="filtro_disponivel_venda">
+                <option value="0" selected>@GlobalMessages.Selecione</option>
+                <option value="1" selected>@GlobalMessages.Sim</option>
+                <option value="2">@GlobalMessages.Nao</option>
+            </select>
+        </div>
+        <div class="pull-right" style="margin-top: 19px">
+            <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.ModalidadeComissao.Filtrar()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+            <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.ModalidadeComissao.Limpar()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+        </div>
+    </form>
+   
+</div>
+<div ng-controller="Empreendimento as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="col-md-5">
+            <h5 style="margin-top:6px;margin-bottom:0px;">@GlobalMessages.Empreendimento</h5>
+        </div>
+            <div class="pull-right">
+                @if(SessionAttributes.Current().HasPermission("CAD09", "Atualizar"))
+                {
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default dropdown-toggle" title="@GlobalMessages.Alterar @GlobalMessages.ModalidadeComissao " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                            @GlobalMessages.Alterar @GlobalMessages.ModalidadeComissao <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu pull-right">
+                                <li><a href="#" title="@GlobalMessages.TipoModalidadeComissao_Fixa" onclick="Europa.Controllers.ModalidadeComissao.Fixa()">@GlobalMessages.TipoModalidadeComissao_Fixa</a></li>
+                                <li><a href="#" title="@GlobalMessages.TipoModalidadeComissao_Nominal" onclick="Europa.Controllers.ModalidadeComissao.Nominal()">@GlobalMessages.TipoModalidadeComissao_Nominal</a></li>
+                        </ul>
+                    </div>
+                }
+            </div>
+        </div>
+
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>

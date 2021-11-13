@@ -1,0 +1,40 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Integration.Zeus.Models
+@model ContabilizacaoRequisicaoDTO
+
+<div class="col-md-24">
+    <form id="form_designacao_conta_requisicao">
+        <div class="col-md-24">
+            <br />
+            <div class="geenFieldSet">
+                <div class="panel-heading">
+                    <div>
+                        <h3 class="panel-title pull-left"></h3>
+                        <div class="pull-right">
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-6 form-group">
+                @Html.Label(GlobalMessages.CentroLucro)
+                @Html.TextBoxFor(x => x.CentroDeLucro, "", new { @class = "form-control" ,@readOnly = true })
+            </div>
+            <div class="col-md-5 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.Divisao)
+                @Html.TextBoxFor(x => x.Divisao, "", new { @class = "form-control" ,@readOnly = true })
+            </div>
+            <div class="col-md-5 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.NumeroOrdem)
+                @Html.TextBoxFor(x => x.NumeroOrdem, "", new { @class = "form-control" ,@readOnly = true })
+            </div>
+            <div class="col-md-5 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.CentroCusto)
+                @Html.TextBoxFor(x => x.CentroCusto, "", new { @class = "form-control", @readOnly = true })
+            </div>
+        </div>
+
+    </form>
+</div>

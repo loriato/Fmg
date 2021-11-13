@@ -1,0 +1,95 @@
+﻿.bola-grd-menor-cima-logado {
+    display: none;
+}
+
+#bolas-no-blur-layout {
+    display: none;
+}
+
+#bola-blur-layout {
+    display: none;
+}
+
+.div-imgs-balls {
+    position: absolute;
+    z-index: 10;
+}
+
+    .div-imgs-balls img:nth-child(1) {
+        width: 110pt;
+        margin-left: 4vw;
+        margin-top: 2vw;
+    }
+
+    .div-imgs-balls img:nth-child(2) {
+        width: 14vw;
+        position: absolute;
+        margin-left: 40vw;
+    }
+
+    .div-imgs-balls img:nth-child(3) {
+        right: 0;
+        position: absolute;
+        margin-top: 1vw;
+        width: 5vw;
+    }
+
+.img-3-bolls {
+    position: absolute;
+    left: -8vw;
+    width: 18vw;
+    z-index: 2;
+    margin-top: 30vh;
+}
+
+
+.layoutIndex {
+    background-image:unset;
+}
+
+body {
+    background-image: url("../../images/login/background-login.png");
+    background-size: cover;
+    background-position: center;
+}
+
+.bola-rosa-menor-logado {
+    right: 0;
+    top: -0.5vw;
+}
+
+.div-imgs-balls img:nth-child(2) {
+    width: 16vw;
+    position: absolute;
+    margin-left: 40vw;
+    top: -1vw;
+}
+
+.bola-grd-menor-red-logado {
+    min-width: 150px;
+    max-width: 270px;
+    width: 18vw;
+    position: absolute;
+    right: 4vw;
+    top:unset;
+    bottom: -13% !important;
+}
+
+.bola-rosa-logado {
+    min-width: 240px;
+    max-width: 340px;
+    width: 24vw;
+    position: absolute;
+    margin-left: 11%;
+    bottom: -15%;
+}
+
+.bola-menor-logado {
+    min-width: 55px;
+    max-width: 80px;
+    width: 6vw;
+    top: 50%;
+    right: 7vw;
+    position: absolute;
+}
+

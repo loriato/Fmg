@@ -1,0 +1,385 @@
+@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.Domain.EmpresaVenda.Models
+@using Tenda.EmpresaVenda.Web.Models.Application
+@model Tenda.EmpresaVenda.Web.Models.DocumentacaoPrePropostaViewModel
+
+@{
+    ViewBag.Codigo = "EVS12";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+
+    var listaProponentes = new List<SelectListItem>();
+    foreach (var proponente in Model.Proponentes)
+    {
+        listaProponentes.Add(new SelectListItem
+        {
+            Value = proponente.Id.ToString(),
+            Text = proponente.Cliente.NomeCompleto
+        });
+    }
+
+    var listaDocumentos = new List<SelectListItem>();
+    foreach (var documento in Model.Documentos)
+    {
+        listaDocumentos.Add(new SelectListItem
+        {
+            Value = documento.Id.ToString(),
+            Text = documento.TipoDocumento.Nome
+        });
+    }
+}
+
+<script type="text/javascript" src="~/static/projeto/documentacao-pre-proposta/documentacao-pre-proposta.js"></script>
+<script type="text/javascript" src="~/static/projeto/pre-proposta-workflow/pre-proposta-workflow.js"></script>
+<script type="text/javascript" src="~/Static/projeto/documentacao-pre-proposta/alterar-sicaq.js"></script>
+<script type="text/javascript" src="~/Static/projeto/documentacao-pre-proposta/data-table-modal-trocar-cca.js"></script>
+
+<script>
+    // URLs
+    Europa.Controllers.DocumentacaoPreProposta.UrlAprovarDocumento = '@Url.Action("AprovarDocumento", "DocumentacaoPreProposta")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlPendenciarDocumento = '@Url.Action("PendenciarDocumento", "DocumentacaoPreProposta")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlBaixarTodosDocumentos = '@Url.Action("BaixarTodosDocumentos", "DocumentacaoPreProposta")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlAtualizarViewModel = '@Url.Action("AtualizarViewModel", "DocumentacaoPreProposta")';
+
+    //SICAQ
+    Europa.Controllers.DocumentacaoPreProposta.UrlBuscarPreProposta = '@Url.Action("BuscarPreProposta", "PrePropostaAguardandoAnalise")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlAlterarSicaq = '@Url.Action("AlterarSicaq", "PrePropostaAguardandoAnalise")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlAlterarSicaqPrevio = '@Url.Action("AlterarSicaqPrevio", "PrePropostaAguardandoAnalise")';
+
+    Europa.Controllers.PrePropostaWorkflow.UrlAnalisar = '@Url.Action("Analisar", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAprovar = '@Url.Action("Aprovar", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlPendenciar = '@Url.Action("Pendenciar", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlSalvar = '@Url.Action("SavlarPreProposta", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAnaliseAuditoria = '@Url.Action("AnaliseAuditoria", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlCancelar = '@Url.Action("Cancelar", "PrePropostaWorkflow")';
+
+    Europa.Controllers.PrePropostaWorkflow.UrlEmAnaliseCompleta = '@Url.Action("EmAnaliseCompleta", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlRetornoAuditoria = '@Url.Action("RetornoAuditoria", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAguardandoAuditoria = '@Url.Action("AguardandoAuditoria", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAguardandoIntegracao = '@Url.Action("AguardandoIntegracao", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlAnaliseCompletaAprovada = '@Url.Action("AnaliseCompletaAprovada", "PrePropostaWorkflow")';
+
+    Europa.Controllers.PrePropostaWorkflow.UrlDocsInsuficientesSimplificado = '@Url.Action("DocsInsuficientesSimplificado", "PrePropostaWorkflow")';
+    Europa.Controllers.PrePropostaWorkflow.UrlDocsInsuficientesCompleta = '@Url.Action("DocsInsuficientesCompleta", "PrePropostaWorkflow")';
+
+    Europa.Controllers.DocumentacaoPreProposta.UrlBaixarFormularios = '@Url.Action("BaixarFormularios", "DocumentoFormulario")';
+
+    //CCA
+    Europa.Controllers.DocumentacaoPreProposta.UrlAlterarCCA = '@Url.Action("AlterarCCA", "PrePropostaAguardandoAnalise")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlListarCCA = '@Url.Action("ListarDatatableGrupoCCA", "PrePropostaAguardandoAnalise")';
+    Europa.Controllers.DocumentacaoPreProposta.UrlListarCCAsPPR = '@Url.Action("ListarCCAsPPR", "PrePropostaAguardandoAnalise")';
+    Europa.Controllers.DocumentacaoPreProposta.Permissoes = {
+        TrocaCCA: '@SessionAttributes.Current().HasPermission("REL01", "TrocaCCA").ToString().ToLower()'
+    }
+
+    // Objetos/Listas
+    Europa.Controllers.DocumentacaoPreProposta.PropostaEmAnalise = '@Model.PrePropostaEmAnalise' == "True";
+    Europa.Controllers.DocumentacaoPreProposta.ListaProponentes = @Html.Raw(Json.Encode(Model.Proponentes));
+    Europa.Controllers.DocumentacaoPreProposta.ListaDocumentos = @Html.Raw(Json.Encode(Model.Documentos));
+    Europa.Controllers.DocumentacaoPreProposta.ListaArquivos = @Html.Raw(Json.Encode(Model.Arquivos));
+    Europa.Controllers.DocumentacaoPreProposta.ListaParecer = @Html.Raw(Json.Encode(Model.Pareceres));
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons">
+    <div class="col-md-18" style="display: inline-flex; margin-top: 2px">
+        @if (Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseCompleta || Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseSimplificada)
+        {
+            <button id="btn_formulario" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.AbrirModalFormulario()">
+                <i class="fa fa-archive"></i> @GlobalMessages.Formularios
+            </button>
+        }
+
+        @if (Model.SituacaoPreProposta == SituacaoProposta.AnaliseCompletaAprovada)
+        {
+            <button id="btn_alterar_sicaq" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.AbrirModalSicaq()">
+                <i class="fa fa-exchange"></i> @GlobalMessages.AlterarSicaq
+            </button>
+        }
+
+        @if (Model.SituacaoPreProposta == SituacaoProposta.AnaliseSimplificadaAprovada)
+        {
+            <button id="btn_alterar_sicaq" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.AbrirModalSicaqPrevio()">
+                <i class="fa fa-exchange"></i> @GlobalMessages.AlterarSicaqPrevio
+            </button>
+        }
+
+
+        @if (Model.SituacaoPreProposta == SituacaoProposta.AguardandoAnaliseCompleta)
+        {
+            <button id="btn_iniciar_analise" class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.EmAnaliseCompleta()">
+                <i class="fa fa-archive"></i> @GlobalMessages.IniciarAnaliseCompleta
+            </button>
+        }
+
+        @if (SessionAttributes.Current().HasPermission("REL01", "TrocaCCA") && (Model.SituacaoPreProposta == SituacaoProposta.AguardandoAnaliseSimplificada ||
+            Model.SituacaoPreProposta == SituacaoProposta.AguardandoAnaliseCompleta ||
+            Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseSimplificada ||
+            Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseCompleta))
+        {
+    <button d="btn_trocar_cca" class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.TrocarCCA()">
+        <i class="fa fa-table"></i> Trocar CCA
+    </button>
+        }
+
+        @if (Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseSimplificada ||
+            Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseCompleta)
+        {
+            if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "EnviarAuditoria"))
+            {
+                <button id="btn_enviar_auditoria" class="btn btn-default" type="button"
+                        onclick="Europa.Controllers.DocumentacaoPreProposta.AguardandoAuditoria()">
+                    <i class="fa fa-paper-plane"></i> @GlobalMessages.Auditoria
+                </button>
+            }
+        }
+        @if (Model.SituacaoPreProposta == SituacaoProposta.AguardandoAuditoria)
+        {
+            if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "RetornoAuditoria"))
+            {
+                <button id="btn_retorno_auditoria" class="btn btn-default" type="button"
+                        onclick="Europa.Controllers.DocumentacaoPreProposta.RetornoAuditoria()">
+                    <i class="fa fa-paper-plane"></i> @GlobalMessages.RetornoAuditoria
+                </button>
+            }
+        }
+
+        @if (Model.IdPreProposta > 0 &&
+            Model.Codigo.HasValue() &&
+            (Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseSimplificada ||
+            Model.SituacaoPreProposta == SituacaoProposta.AnaliseSimplificadaAprovada ||
+            Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseCompleta ||
+            Model.SituacaoPreProposta == SituacaoProposta.AnaliseCompletaAprovada) &&
+            SessionAttributes.Current().HasPermission(ViewBag.Codigo, "CancelarPreProposta"))
+        {
+            <button id="btn_cancelar_pre_proposta" class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.CancelarPreProposta()">
+                <i class="fa fa-ban"></i> @GlobalMessages.CancelarPreProposta
+            </button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "BaixarTodosDocumentos") &&
+             Model.IdPreProposta > 0 &&
+             Model.Codigo.HasValue() &&
+             Model.PossuiFormulario &&
+             Model.SituacaoPreProposta != SituacaoProposta.AguardandoAnaliseSimplificada &&
+             Model.SituacaoPreProposta != SituacaoProposta.Retorno &&
+             (Model.SituacaoPreProposta == SituacaoProposta.AguardandoFluxo ||
+             Model.SituacaoPreProposta == SituacaoProposta.FluxoEnviado ||
+             Model.SituacaoPreProposta == SituacaoProposta.AguardandoIntegracao ||
+             Model.SituacaoPreProposta == SituacaoProposta.AnaliseSimplificadaAprovada ||
+             Model.SituacaoPreProposta == SituacaoProposta.AnaliseCompletaAprovada))
+        {
+            <button id="btn_baixar_formularios" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.BaixarFormularios()">
+                <i class="fa fa-user"></i> @GlobalMessages.BaixarFormularios
+            </button>
+        }
+
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "BaixarTodosDocumentos") &&
+             Model.IdPreProposta > 0 &&
+             Model.Codigo.HasValue() &&
+             Model.SituacaoPreProposta != SituacaoProposta.AguardandoAnaliseSimplificada &&
+             Model.SituacaoPreProposta != SituacaoProposta.Retorno &&
+             (Model.SituacaoPreProposta == SituacaoProposta.AguardandoFluxo ||
+             Model.SituacaoPreProposta == SituacaoProposta.FluxoEnviado ||
+             Model.SituacaoPreProposta == SituacaoProposta.AguardandoIntegracao ||
+             Model.SituacaoPreProposta == SituacaoProposta.AnaliseSimplificadaAprovada ||
+             Model.SituacaoPreProposta == SituacaoProposta.AnaliseCompletaAprovada))
+        {
+            <button id="btn_baixar_todos_documentos" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.BaixarTodosDocumentos()">
+                <i class="fa fa-user"></i> @GlobalMessages.BaixarTodosDocumentos
+            </button>
+        }
+        @if (Model.IdPreProposta > 0 &&
+         (SituacaoProposta.AguardandoAnaliseSimplificada == Model.SituacaoPreProposta || SituacaoProposta.Retorno == Model.SituacaoPreProposta))
+        {
+            <button id="btn_iniciar_analise" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.IniciarAnalise()">
+                <i class="fa fa-folder-open-o"></i> @GlobalMessages.IniciarAnaliseSimplificada
+            </button>
+        }
+        @if (Model.IdPreProposta > 0 &&
+            (SituacaoProposta.EmAnaliseSimplificada == Model.SituacaoPreProposta))
+        {
+            <button id="btn_aprovar_documentacao" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.AprovarDocumentacao()">
+                <i class="fa fa-check"></i> @GlobalMessages.AprovarDocumentacao
+            </button>
+        }
+
+        @if (Model.IdPreProposta > 0 &&
+            (Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseCompleta))
+        {
+            <button id="btn_aprovar_documentacao" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.AnaliseCompletaAprovada()">
+                <i class="fa fa-check"></i> @GlobalMessages.AprovarDocumentacao
+            </button>
+        }
+
+        @*Colocar em Docs Insuficientes Simplificado*@
+        @if (Model.IdPreProposta > 0 && Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseSimplificada)
+        {
+            <button id="btn_pendenciar_documentacao" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.DocsInsuficientesSimplificado()">
+                <i class="fa fa-ban"></i> @GlobalMessages.PendenciarDocumentacao
+            </button>
+        }
+
+        @*Colocar em Docs Insuficientes Completa*@
+        @if (Model.IdPreProposta > 0 && Model.SituacaoPreProposta == SituacaoProposta.EmAnaliseCompleta)
+        {
+            <button id="btn_pendenciar_documentacao" class="btn btn-default" type="button"
+                    onclick="Europa.Controllers.DocumentacaoPreProposta.DocsInsuficientesCompleta()">
+                <i class="fa fa-ban"></i> @GlobalMessages.PendenciarDocumentacao
+            </button>
+        }
+
+        <button id="tbl_salvar_pre_proposta" class="btn btn-default" type="button"
+                onclick="Europa.Controllers.PrePropostaWorkflow.SalvarPreProposta()">
+            <i class="fa fa-save"></i> @GlobalMessages.Salvar
+        </button>
+    </div>
+</div>
+
+<form id="form_pre_proposta">
+    <div class="col-md-24">
+        <fieldset id="fieldset_pre_proposta">
+            <div class="col-md-24" id="area_geral">
+                @{
+                    Html.RenderPartial("_DadosPreProposta", Model);
+                }
+            </div>
+        </fieldset>
+    </div>
+</form>
+@if (Model.SituacaoPreProposta != SituacaoProposta.AguardandoAnaliseSimplificada &&
+     Model.SituacaoPreProposta != SituacaoProposta.Retorno)
+{
+    <div class="col-md-24">
+        <div class="col-md-6 pull-left">
+            <label>
+                <input id="somente_nao_analisados" type="checkbox" checked onchange="Europa.Controllers.DocumentacaoPreProposta.AtualizarViewModel(@Model.IdPreProposta)" style="vertical-align:sub;position: relative;bottom: 0.55px;" />
+                <span onclick="">@GlobalMessages.ExibirSomenteDocumentosSemAnalise</span>
+            </label>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            <label>
+                <a id="link-exibir-informacoes-auditoria" hidden onclick="Europa.Controllers.DocumentacaoPreProposta.ExibirInformacoesDeAuditoria()" style="cursor: pointer;text-decoration:none">@GlobalMessages.InformacoesDeAuditoria</a>
+            </label>
+        </div>
+    </div>
+    <div class="col-md-24">
+        <div class="col-md-24">
+            <div class="col-md-6 form-group">
+                @Html.Label(GlobalMessages.Proponente, new { @class = "control-label" })
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.CycleProponente(false)">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                    </span>
+                    @Html.DropDownList("lista_proponentes", listaProponentes, GlobalMessages.Selecione,
+                        new { @class = "form-control", onchange = "Europa.Controllers.DocumentacaoPreProposta.SelecionarProponente(this)" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.CycleProponente(true)">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1 form-group dadosDocumentos">
+                @Html.Label(GlobalMessages.SituacaoDocumento, new { @class = "control-label" })
+                @Html.TextBox("Situacao", "", new { @class = "form-control", @readonly = "readonly" })
+            </div>
+
+            <div class="col-md-9 col-md-offset-1 dadosDocumentos">
+                @Html.Label(GlobalMessages.Motivo, new { @class = "control-label" })
+                @Html.TextArea("Motivo", "", new { @class = "form-control", disabled = "disabled", style = "resize: none;" })
+            </div>
+
+            @{
+                if (Model.PrePropostaEmAnalise)
+                {
+                    <div class="col-md-3 col-md-offset-1 dadosDocumentos">
+                        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "AprovarDocumento"))
+                        {
+                            <button id="btn_aprovar_documento" class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.AprovarDocumento()"
+                                    disabled="disabled" style="margin-top: 19px; width: 100%">
+                                <i class="fa fa-check"></i> @GlobalMessages.Aprovar
+                            </button>
+                        }
+                    </div>
+                }
+            }
+        </div>
+        <div class="col-md-24 dadosDocumentos">
+            <div class="col-md-6 form-group">
+                @Html.Label(GlobalMessages.Documento, new { @class = "control-label" })
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-cycle-documentos" type="button" disabled="disabled" onclick="Europa.Controllers.DocumentacaoPreProposta.CycleDocumento(false)">
+                            <i class="fa fa-chevron-left"></i>
+                        </button>
+                    </span>
+                    <select id="lista_documentos" class="form-control" onchange="Europa.Controllers.DocumentacaoPreProposta.SelecionarDocumento(this)" disabled="disabled"></select>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-cycle-documentos" type="button" disabled="disabled" onclick="Europa.Controllers.DocumentacaoPreProposta.CycleDocumento(true)">
+                            <i class="fa fa-chevron-right"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-3 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.DataVencimento, new { @class = "control-label" })
+                @Html.TextBox("DataExpiracao", "", new { @class = "form-control", datepicker = "datepicker", disabled = "disabled" })
+            </div>
+            <div class="col-md-9 col-md-offset-1">
+                @Html.Label(GlobalMessages.Parecer, new { @class = "control-label" })
+                @Html.TextArea("Parecer", "", new { @class = "form-control", maxlength = 255, disabled = "disabled", style = "resize: none;" })
+            </div>
+            @{
+                if (Model.PrePropostaEmAnalise)
+                {
+                    <div class="col-md-3 col-md-offset-1">
+                        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "PendenciarDocumento"))
+                        {
+                            <button id="btn_pendenciar_documento" class="btn btn-default" type="button" onclick="Europa.Controllers.DocumentacaoPreProposta.PendenciarDocumento()"
+                                    disabled="disabled" style="margin-top: 19px; width: 100%">
+                                <i class="fa fa-warning"></i> @GlobalMessages.Pendenciar
+                            </button>
+                        }
+                    </div>
+                }
+            }
+
+            </div>
+        <div class="col-md-24 dadosDocumentos" style="padding-top: 20px">
+            <div id="DocumentoContainer" class="col-md-24" style="height: 550px;">
+                <input type="text" id="ExisteDocumento" style="visibility:hidden" />
+                <div id="ViewerContainer" class="col-md-16 col-md-offset-4" style="height: 100%;">
+                </div>
+            </div>
+        </div>
+        <div id="todos_documentos_aprovados" class="col-md-24 hidden" style="margin-top:25px;">
+            <div class="col-md-6"></div>
+            <div class="col-md-18">
+                <h2><i class="fa fa-check"></i> @GlobalMessages.DocumentosAnalisadosSucesso </h2>
+            </div>
+        </div>
+    </div>
+}
+<form id="Exportar"></form>
+
+@Html.Partial("_ModalInformacoesAuditoria")
+
+@{ 
+    Html.RenderPartial("_ModalAlterarSicaq",Model.PreProposta);
+    Html.RenderPartial("_ModalAlterarCCA");
+    Html.RenderPartial("~/Views/DocumentoFormulario/_ModalFormulario.cshtml");
+}
+

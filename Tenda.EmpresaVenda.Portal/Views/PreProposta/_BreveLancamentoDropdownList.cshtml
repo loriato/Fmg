@@ -1,0 +1,12 @@
+﻿@using Europa.Resources
+
+@model IEnumerable<SelectListItem>
+
+<div class="col-md-24 form-group">
+    <div>
+        @Html.Label(GlobalMessages.EmpresasVendas_Produto, new { @class = "control-label" })
+    </div>
+    <div id="BreveLancamento" name="BreveLancamento">
+        @Html.DropDownList("PreProposta.BreveLancamento.Id", Model, GlobalMessages.Selecione, new { @class = "form-control select2-container", id = "autocomplete_breve_lancamento" })
+    </div>
+</div>

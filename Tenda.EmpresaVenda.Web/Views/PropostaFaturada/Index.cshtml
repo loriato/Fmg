@@ -1,0 +1,84 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Extensions
+
+@{
+    ViewBag.Codigo = "GEC15";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/proposta-faturada/index-proposta-faturada.js"></script>
+<script type="text/javascript" src="~/Static/projeto/proposta-faturada/datatable-proposta-faturada.js"></script>
+<script type="text/javascript" src="~/Static/projeto/proposta-faturada/modal-anexo-proposta-faturada.js"></script>
+<script type="text/javascript" src="~/Static/projeto/proposta-faturada/modal-status-importacao-proposta-faturada.js"></script>
+
+<script>
+    Europa.Controllers.PropostaFaturada.UrlListar = '@Url.Action("Listar","PropostaFaturada")';
+    Europa.Controllers.PropostaFaturada.UrlExportarTodos = '@Url.Action("ExportarTodos", "PropostaFaturada")';
+    Europa.Controllers.PropostaFaturada.UrlExportarPagina = '@Url.Action("ExportarPagina", "PropostaFaturada")';
+    Europa.Controllers.PropostaFaturada.UrlImportExcel = '@Url.Action("ImportExcel", "PropostaFaturada")';
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarExcel"))
+    {
+        <button type="button" class="btn btn-default" title="Faturar Proposta"
+                onclick="Europa.Controllers.PropostaFaturada.AbrirModalAnexo()">
+            <i class="fa fa-cog"></i> @GlobalMessages.Importar
+        </button>
+    }
+</div>
+
+<form id="filtro-proposta-faturada">
+    <div class="col-md-24">
+        <div class="col-md-3">
+            @Html.Label(GlobalMessages.UF)
+            @Html.DropDownList("filtro_estados", new SelectList(EstadosSelectList.ValuesWithEmpty, "Value", "Text"), new { @class = "form-control"})
+        </div>
+
+
+        <div class="col-md-4 form-group col-md-offset-1">
+            @Html.Label(GlobalMessages.CodigoProposta)
+            @Html.TextBox("filtro_codigo_proposta", "", new { @class = "form-control", maxlength = 128 })
+        </div>
+
+        <div class="col-md-4 col-md-offset-1  form-group">
+            @Html.Label(GlobalMessages.DataFaturamento)
+            <div class="input-group">
+                <span class="input-group-addon">@GlobalMessages.De</span>
+                @Html.TextBox("filtro_data_faturamento_de", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            @Html.Label(GlobalMessages.Data, new { style = "visibility:hidden" })
+            <div class="input-group">
+                <span class="input-group-addon">@GlobalMessages.Ate</span>
+                @Html.TextBox("filtro_data_faturamento_ate", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                        <i class="fa fa-calendar"></i>
+                    </button>
+                </span>
+            </div>
+        </div>
+        <div class="pull-right" style="margin-top:18px;">
+            <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.PropostaFaturada.Filtrar();"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+            <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.PropostaFaturada.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+        </div>
+    </div>
+</form>
+
+@{ 
+    Html.RenderPartial("_Datatable");
+    Html.RenderPartial("_ModalAnexo");
+    Html.RenderPartial("_ModalStatusImportacao");
+}

@@ -1,0 +1,68 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.PrePropostaDTO
+
+<script>
+    Europa.Controllers.PreProposta.DocumentoProponente.ListaDocumentos = @Html.Raw(Json.Encode(Model.Documentos));
+    Europa.Controllers.PreProposta.DocumentoProponente.ListaArquivos = @Html.Raw(Json.Encode(Model.Arquivos));
+</script>
+@{
+    var listaDocumentos = new List<SelectListItem>();
+    foreach (var documento in Model.Documentos)
+    {
+        listaDocumentos.Add(new SelectListItem
+        {
+            Value = documento.Id.ToString(),
+            Text = documento.TipoDocumento.Nome
+        });
+    }
+}
+
+<div class="col-md-24">
+    <div class="modal" id="modal_visualizar_docs" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="height: 1000px; width:1200px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Documento</h4>
+                </div>
+
+                <div class="modal-body">
+                    <div class="col-md-24 dadosDocumentos">
+                        <div class="input-group">
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-cycle-documentos" type="button" onclick="Europa.Controllers.PreProposta.DocumentoProponente.CycleDocumento(false)">
+                                    <i class="fa fa-chevron-left"></i>
+                                </button>
+                            </span>
+                            @Html.DropDownListFor(x => x.Arquivos, @listaDocumentos, "", new { @class = "form-control", @id = "lista_documentos", @Onchange = "Europa.Controllers.PreProposta.DocumentoProponente.SelecionarDocumento(this)" })
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-cycle-documentos" type="button" onclick="Europa.Controllers.PreProposta.DocumentoProponente.CycleDocumento(true)">
+                                    <i class="fa fa-chevron-right"></i>
+                                </button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-24 dadosDocumentos" style="padding-top: 20px">
+                        <div id="DocumentoContainer" class="col-md-24" style="height: 550px;">
+                            <input type="text" id="ExisteDocumento" style="visibility:hidden" />
+                            <div id="ViewerContainer" class="col-md-16 col-md-offset-4" style="height: 100%;">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="todos_documentos_aprovados" class="col-md-24 hidden" style="margin-top:25px;">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-18">
+                            <h2><i class="fa fa-check"></i> @GlobalMessages.DocumentosAnalisadosSucesso </h2>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" data-dismiss="modal" title="@GlobalMessages.Fechar">
+                        <i class="fa fa-ban"></i> @GlobalMessages.Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

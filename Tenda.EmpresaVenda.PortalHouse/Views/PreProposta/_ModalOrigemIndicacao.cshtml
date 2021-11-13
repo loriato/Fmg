@@ -1,0 +1,56 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.ApiService.Models.PreProposta.PrePropostaCreateDto
+@using Tenda.Domain.Shared
+@using Europa.Extensions
+@{
+    var validar = ProjectProperties.ValidarCamposOrigemIndicacao;
+}
+@Html.Hidden("validarOrigemIndicacao", validar)
+<div class="modal" id="modal_origem_indicacao" role="dialog" data-backdrop="static">
+    <div class="modal-dialog" role="document" style="width: 800px; max-width:800px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"> @GlobalMessages.Origem  @GlobalMessages.TipoOrigemCliente_Indicacao</h4>
+                @if (Model.PreProposta.Id.IsEmpty())
+                {
+                    <button type="button" class="close" aria-label="Close" onclick="Europa.Controllers.PreProposta.CancelarModalOrigemIndicacao()"><span aria-hidden="true">&times;</span></button>
+                }
+                else
+                {
+                    <button type="button" class="close" aria-label="Close" onclick="Europa.Controllers.PreProposta.FecharModalOrigemIndicacao()"><span aria-hidden="true">&times;</span></button>
+
+                }
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        @Html.Label(GlobalMessages.NomeIndicador, new { @class = "control-label" })
+                        @Html.TextBoxFor(reg => reg.PreProposta.NomeIndicador, new { @class = "form-control", @maxlength = 128 })
+                    </div>
+                    <div class="col-md-6 form-group">
+                        @Html.Label(GlobalMessages.CpfIndicador, new { @class = "control-label" })
+                        @Html.TextBoxFor(reg => reg.PreProposta.CpfIndicador, new { @class = "form-control", @maxlength = 14 })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                @if (Model.PreProposta.Id.IsEmpty())
+                {
+                    <button type="button" class="button__red__outline px-3 mx-2" title="@GlobalMessages.Salvar" onclick="Europa.Controllers.PreProposta.ValidarOrigemIndicacao()">
+                        <i class="fa fa-save" aria-hidden="true"></i>  @GlobalMessages.Salvar
+                    </button>
+                    <button type="button" class="button__red__outline px-3 mx-2" onclick="Europa.Controllers.PreProposta.CancelarModalOrigemIndicacao()" title="@GlobalMessages.Cancelar">
+                        <i class="fa fa-ban"></i> @GlobalMessages.Cancelar
+                    </button>
+                }
+                else
+                {
+                    <button type="button" class="button__red__outline px-3 mx-2" data-dismiss="modal" title="@GlobalMessages.Fechar">
+                        <i class="fa fa-ban"></i> @GlobalMessages.Fechar
+                    </button>
+                }
+
+            </div>
+        </div>
+    </div>
+</div>

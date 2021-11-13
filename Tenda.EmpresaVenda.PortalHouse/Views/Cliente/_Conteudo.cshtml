@@ -1,0 +1,15 @@
+﻿@model Tenda.EmpresaVenda.ApiService.Models.Cliente.ClienteDto
+
+<link rel="stylesheet" href="~/Static/europa/css/europa-bootstrap-nav-vertical.css">
+
+<div class="col-md-24" id="scrollable_div" style="padding-bottom: 25px">
+    <div class="tab-content">
+        <div class="tab-pane active">
+            <div id="tabsContent">
+                @{
+                    Html.RenderPartial("_Formulario", Model);
+                }
+            </div>
+        </div>
+    </div>
+</div>

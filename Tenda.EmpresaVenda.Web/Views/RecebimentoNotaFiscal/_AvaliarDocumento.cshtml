@@ -1,0 +1,77 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Extensions
+
+<div class="col-md-24">
+    <div class="modal" id="avaliar_nota_fiscal" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 500px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Avaliar @GlobalMessages.NotaFiscal</h4>
+                </div>
+                <div class="modal-body">
+                    <div id="form_upload_nota_fiscal">
+                        <div class="col-md-24 ">
+                            <div class="col-md-11">
+                                @{
+                                    var situacoesParaVisualizacao = new List<SituacaoNotaFiscal>() {
+                                        SituacaoNotaFiscal.AguardandoEnvioMidas,
+                                        SituacaoNotaFiscal.AguardandoAvaliacao,
+                                        SituacaoNotaFiscal.Reprovado
+
+                                    };
+
+                                    var situacoesSelectList = new List<SelectListItem>();
+                                    foreach (var situacao in situacoesParaVisualizacao)
+                                    {
+                                        if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Receber") && situacao == SituacaoNotaFiscal.AguardandoProcessamento)
+                                        {
+                                            situacoesSelectList.Add(new SelectListItem { Text = "Recebido", Value = situacao.GetHashCode().ToString() });
+
+                                        }
+                                        if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Aprovar") && situacao == SituacaoNotaFiscal.AguardandoEnvioMidas)
+                                        {
+                                            situacoesSelectList.Add(new SelectListItem { Text = "Pré Aprovar", Value = situacao.GetHashCode().ToString() });
+
+                                        }
+                                        if (situacao == SituacaoNotaFiscal.Reprovado)
+                                        {
+                                            situacoesSelectList.Add(new SelectListItem { Text = situacao.AsString(), Value = situacao.GetHashCode().ToString() });
+
+                                        }
+
+                                    }
+                                    situacoesSelectList = situacoesSelectList.AsQueryable().ToList();
+                                    }
+                                    @Html.Label(GlobalMessages.Situacao)
+                                    @Html.DropDownList("situacao", EnumHelper.GetSelectList(typeof(SituacaoNotaFiscal)), new { @class = "form-control", @disabled = true})
+                            </div>
+                            <div class="col-md-11 col-md-offset-2">
+                                @Html.Label(GlobalMessages.Nova + ' ' +GlobalMessages.Situacao)
+                                @Html.DropDownList("nova_situacao", situacoesSelectList, new { @class = "form-control ", onchange = "Europa.Controllers.RecebimentoNF.OnChangeNovaSituacao(this.value)" })
+                            </div>
+                        </div>
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Motivo)
+                            @Html.TextBox("motivo", "", new { @class="form-control", @disabled="disabled",@maxlength= 255})
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" title="@GlobalMessages.DownloadAnexo" onclick="Europa.Controllers.RecebimentoNF.Download()">
+                        <i class="fa fa-download" aria-hidden="true"></i> @GlobalMessages.DownloadAnexo
+                    </button>
+                    <button type="button" id="btn_avaliar_nf" class="btn btn-default" title="@GlobalMessages.Salvar" onclick="Europa.Controllers.RecebimentoNF.MudarSituacao()" disabled>
+                        <i class="fa fa-save" aria-hidden="true"></i> @GlobalMessages.Salvar
+                    </button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" title="@GlobalMessages.Fechar" onclick="">
+                        <i class="fa fa-close"></i> @GlobalMessages.Fechar
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

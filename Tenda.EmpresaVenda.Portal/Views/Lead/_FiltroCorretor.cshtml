@@ -1,0 +1,26 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+
+<div class="col-md-24">
+    <div class="col-md-4 form-group">
+        @Html.Label(GlobalMessages.Pacote, new { @class = "control-label" })
+        @*<select id="autocomplete_pacote_corretor" name="autocomplete_pacote_corretor" class="select2-container form-control"></select>*@
+        <select id="pacote_corretor" class="form-control"></select>
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Situacao, new { @class = "control-label" })
+        @Html.DropDownList("filtro_situacoes_corretor", EnumHelper.GetSelectList(typeof(SituacaoLead)), "Todos", new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Lead, new { @class = "control-label" })
+        @Html.TextBox("filtro_lead_corretor", "", new { @class = "form-control" })
+    </div>
+    <div class="col-md-3 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Telefone, new { @class = "control-label" })
+        @Html.TextBox("filtro_telefone_corretor", "", new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 pull-right">
+        <button class="btn pull-right" type="button" onclick="Europa.Controllers.Leads.LimparFiltroCorretor()" style="margin: 22px 0px 0px 4px;">@GlobalMessages.Limpar</button>
+        <button class="btn pull-right" type="button" onclick="Europa.Controllers.Leads.FiltrarDatatableCorretor()" style="margin: 22px 0px 0px 4px;">@GlobalMessages.Filtrar</button>
+    </div>
+</div>

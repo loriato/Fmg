@@ -1,0 +1,67 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Web.Models.PrePropostaDTO
+
+<div class="col-md-24">
+    <div class="modal" id="fator_social_confirma_modal" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 600px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@GlobalMessages.FatorSocial</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form_fator_social">
+                        <div class="col-md-24">
+                            <div class="col-md-12">
+                                @Html.Label(GlobalMessages.FatorSocial, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.PreProposta.FatorSocial, new {@id= "fator-social-confirma-modal", @class = "form-control", @readonly = "readonly" })
+                            </div>
+                            <div class="col-md-13">
+                                @Html.Label(GlobalMessages.DadosSicaq, new { @class = "control-label" })
+                            </div>
+                            <div class="col-md-24" style="border: 1px solid lightgray; padding: 8px;">
+                                <div class="col-md-24">
+                                    <div class="col-md-12">
+                                        @Html.Label(GlobalMessages.Codigo, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.PreProposta.Codigo, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                    <div class="col-md-11 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.Cliente, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.PreProposta.Cliente.NomeCompleto, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-6">
+                                        @Html.Label(GlobalMessages.StatusSicaq, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.PreProposta.StatusSicaq, new { @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                    <div class="col-md-5 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ParcelaAprovada, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.PreProposta.ParcelaAprovada, new { @class = "form-control", @readonly = "readonly" , Value = Model.PreProposta.ParcelaAprovada.ToString("F") })
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.DataSicaq, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.PreProposta.DataSicaq, new { @class = "form-control", @readonly = "readonly", @datepicker = "datepicker" })
+                                    </div>
+                                    <div class="col-md-3 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.FaixaUmMeio, new { @class = "control-label" })
+                                        @Html.TextBoxFor(x => x.PreProposta.FaixaUmMeio , new {@id="faixa-um-meio-confirma", @class = "form-control", @readonly = "readonly" })
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" title="@GlobalMessages.Continuar" onclick="Europa.Controllers.PreProposta.AbrirModalReenviarSuat()">
+                        <i class="fa fa-check" aria-hidden="true"></i> @GlobalMessages.Continuar
+                    </button>
+                    <button type="button" class="btn" title="@GlobalMessages.Fechar" data-dismiss="modal">
+                        <i class="fa fa-close"></i> @GlobalMessages.Fechar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+@using Europa.Resources
+
+<div class="modal" id="modal-import" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.EnderecoFornecedor.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Importar</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-24">
+                    @using (Html.BeginForm("UploadImportFile", "EnderecoFornecedor", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline", id = "formularioUploadArquivoAnexo" }))
+                    {
+                        @Html.AntiForgeryToken()
+                        <label>@GlobalMessages.EnvioArquivo</label>
+                        <input type="file" style="margin-top: 5px" id="file" name="file">
+                    }
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" onclick="Europa.Controllers.EnderecoFornecedor.UploadEnderecoFornecedor()"><i class="fa fa-upload" aria-hidden="true"></i> @GlobalMessages.Importar</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.EnderecoFornecedor.CloseModal()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

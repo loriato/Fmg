@@ -1,0 +1,34 @@
+﻿@using Europa.Resources
+
+<script src="~/Static/projeto/financeiro/dados-nf-modal.js"></script>
+<script src="~/Static/europa/js/pdf.js"></script>
+<script src="~/Static/europa/js/pdf.worker.js"></script>
+<script>
+    Europa.Controllers.Financeiro.UrlExibirDadosNotaFiscal = '@Url.Action("ExibirDadosNotaFiscal", "Financeiro")';
+</script>
+
+<div class="col-md-24">
+    <div class="modal" id="dados_nota_fiscal" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 1000px">
+            <div class="modal-content" style="opacity: 1;">
+                <div class="modal-header">
+                    <div class="pull-right">
+                        <button type="button" class="btn btn-md btn-blue" title="@GlobalMessages.Download" onclick="Europa.Controllers.Financeiro.DownloadNFEspelho()">
+                             @GlobalMessages.Download
+                        </button>
+                        <button type="button" class="btn btn-md btn-blue" data-dismiss="modal" title="@GlobalMessages.Fechar" onclick="Europa.Controllers.Financeiro.FecharModal()">
+                            @GlobalMessages.Fechar
+                        </button>
+                    </div>
+                </div>
+                <div class="modal-body">
+                    <div id="div-pdf" style="overflow-x: hidden; margin: auto; overflow-y: auto;">
+                    </div>
+
+                    <div id="nota_fiscal"></div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>

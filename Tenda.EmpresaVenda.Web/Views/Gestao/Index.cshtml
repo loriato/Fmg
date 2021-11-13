@@ -1,0 +1,113 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "EVS18";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<script src="~/Static/projeto/gestao/gestao.js"></script>
+<script src="~/Static/projeto/gestao/gestao-filtro.js"></script>
+<script>
+    Europa.Controllers.Gestao.UrlListar = '@Url.Action("Listar", "Gestao")';
+    Europa.Controllers.Gestao.UrlExcluir = '@Url.Action("Remover", "Gestao")';
+    Europa.Controllers.Gestao.UrlIncluir = '@Url.Action("Incluir", "Gestao")';
+    Europa.Controllers.Gestao.UrlAlterar = '@Url.Action("Alterar", "Gestao")';
+    Europa.Controllers.Gestao.UrlExportarPagina = '@Url.Action("ExportarPagina", "Gestao")';
+    Europa.Controllers.Gestao.UrlExportarTodos = '@Url.Action("ExportarTodos", "Gestao")';
+
+    Europa.Controllers.Gestao.Permissoes = {
+    Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+    Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+    Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+    Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar").ToString().ToLower()'
+    };
+
+</script>
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+    <button class="btn btn-default" type="button" onclick="Europa.Controllers.Gestao.Novo()"><i class="fa fa-plus"></i> @GlobalMessages.Novo</button>
+</div>
+<div class="col-md-24">
+    <div class="col-md-4">
+        @Html.Label(GlobalMessages.DataReferencia)
+        <div class="input-group">
+            <span class="input-group-addon">@GlobalMessages.De</span>
+            @Html.TextBox("ReferenciaDe", "", new { @class = "form-control", datepicker = "datepicker", @style = "height:30px" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.DataElaboracao, new { style = "visibility:hidden" })
+        <div class="input-group">
+            <span class="input-group-addon">@GlobalMessages.Ate</span>
+            @Html.TextBox("ReferenciaAte", "", new { @class = "form-control", datepicker = "datepicker", @style = "height:30px" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.Custo)
+        <select id="autocomplete_filtro_tipo_custo" class="form-control"></select>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.Fornecedor)
+        <select id="autocomplete_filtro_fornecedor" class="form-control"></select>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.Classificacao)
+        <select id="autocomplete_filtro_classificacao" class="form-control"></select>
+    </div>
+</div>
+    
+<div class="col-md-24">
+    <div class="col-md-4">
+        @Html.Label(GlobalMessages.EmpresaVenda)
+        <select id="autocomplete_filtro_empresa_venda" class="form-control"></select>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.PontoVenda)
+        <select id="autocomplete_filtro_ponto_venda" class="form-control"></select>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.CentroCusto)
+        <select id="autocomplete_filtro_centro_custo" class="form-control"></select>
+    </div>
+
+    <div class="pull-right"style="margin-top:16px;">
+            <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.Gestao.Filtrar()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+            <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.Gestao.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+    </div>
+</div>
+
+<div ng-controller="Gestao as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="pull-right">
+            <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.Gestao.ExportarPagina()">
+                <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+            </button>
+            <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.Gestao.ExportarTodos()">
+                <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+            </button>
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>
+
+<form id="Exportar"></form>

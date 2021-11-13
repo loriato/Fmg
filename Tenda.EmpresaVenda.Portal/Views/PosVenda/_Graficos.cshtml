@@ -1,0 +1,130 @@
+@using Europa.Resources
+<link href="~/Static/projeto/pos-venda/pos-venda-charts.css" rel="stylesheet"/>
+
+<div class="col-md-24 pos-venda-titlebar">
+    <div class="col-md-12" style="padding-top:10px">
+        @(GlobalMessages.InformacoesPosVenda.ToUpper())
+    </div>
+
+    <div class="col-md-4 col-md-offset-1  " style="padding-right: 10px">
+        <div id="filtroDataInicio" class="input-group filtro-data">
+            @*onclick="Europa.Components.DatePicker.ClosestInput(this)">*@
+            <span class="input-group-addon date-filter-label">@GlobalMessages.De</span>
+            @{
+                var mesInicio = DateTime.Now.Month;
+                var ano = DateTime.Now.Year;
+
+                var dataInicio = new DateTime(ano, mesInicio, 1);
+            }
+            @Html.TextBox("DataInicioBusca", dataInicio.ToString("dd/MM/yyyy"), new { @class = "form-control date-filter-input", datepicker = "datepicker",onchange="Europa.Controllers.PosVenda.OnChangeData('DataInicioBusca', 'DataInicio')" })
+            <span class="input-group-btn date-filter-input-btn-wrapper">
+                <button class="btn btn-default btn-date-filter-input" type="button">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-4 " style="padding-left: 10px;padding-right: 10px">
+        <div id="filtroDataTermino" class="input-group filtro-data">
+            @*onclick="Europa.Components.DatePicker.ClosestInput(this)">*@
+            <span class="input-group-addon date-filter-label">@GlobalMessages.Ate</span>
+            @{ 
+                var mes = DateTime.Now.Month;
+                var dia = DateTime.DaysInMonth(ano, mes);
+
+                var data = new DateTime(ano, mes, dia);
+            }
+            @Html.TextBox("DataTerminoBusca", data.ToString("dd/MM/yyyy"), new { @class = "form-control date-filter-input", datepicker = "datepicker", onchange = "Europa.Controllers.PosVenda.OnChangeData('DataTerminoBusca', 'DataTermino')" })
+            <span class="input-group-btn date-filter-input-btn-wrapper">
+                <button class="btn btn-default btn-date-filter-input" type="button">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-2" style="padding-left: 10px">
+        <button class="btn btn-red btn-confirmar"
+                onclick="Europa.Controllers.PosVenda.OnDateFilterSelected()">
+            @GlobalMessages.Filtrar
+        </button>
+    </div>
+</div>
+
+<div class="col-md-24" style="padding: 40px 50px;">
+    <div class="col-md-9" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); border-radius: 4px;">
+        <div class="col-md-24 chart-card-title" style="border-bottom: 2px solid #ECECEC;">
+            @(GlobalMessages.ContratosGerados.ToUpper())
+        </div>
+        <div class="col-md-24" style="padding: 19px 0 24px;">
+            <canvas id="progress_posVendaPieChart" height="208"></canvas>
+        </div>
+        <div class="col-md-24" style="align-content: center; text-align: center; padding: 8px; border-top: 2px solid #ECECEC;">
+            <button type="button" class="btn-sem-docs-avalista"
+                    onclick="Europa.Controllers.PosVenda.OnSemDocsAvalistaClicked()">
+                @GlobalMessages.SemDocsAvalista
+            </button>
+            <button type="button" class="btn-docs-avalista-enviados"
+                    onclick="Europa.Controllers.PosVenda.OnDocsAvalistaEnviadosClicked()">
+                @GlobalMessages.DocsAvalistaEnviados
+            </button>
+            <button type="button" class="btn-tcd-assinado"
+                    onclick="Europa.Controllers.PosVenda.OnTCDAssinadoClicked()">
+                @GlobalMessages.AvalistaPreAprovadoB
+            </button>
+        </div>
+    </div>
+    <div class="col-md-14 pull-right" style="border-radius: 4px; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); margin-left: 2%;">
+        <div class="col-md-13 hidden" style="border-right: 2px solid #ECECEC;">
+            <div class="col-md-22 col-md-offset-1 chart-card-title" style="border-bottom: 2px solid #ECECEC;">
+                @(GlobalMessages.PosVendasConformidade.ToUpper())
+            </div>
+            <div class="col-md-24">
+                <div class="col-md-24 pos-vendas-chart-description">
+                    @GlobalMessages.NumeroAbsolutoUmaSemana
+                </div>
+                <div id="areaChartWrapper" class="col-md-24 ">
+                    <div class="col-md-24 ">
+                        <canvas id="posVendasAreaChart" height="249"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-24 chart-card-title" style="border-bottom: 2px solid #ECECEC;">
+                @(GlobalMessages.PosVendas.ToUpper())
+            </div>
+
+            <div class="col-md-24 chart-card-sub-title">
+                @GlobalMessages.SubTituloPainelPosVenda
+            </div>
+
+            <div class="col-md-24" style="padding-top: 25px">
+                <div class="col-md-8 title-item">@GlobalMessages.KitCompleto</div>
+                <div class="col-md-8 title-item">@GlobalMessages.Repasse</div>
+                <div class="col-md-8 title-item">@GlobalMessages.Conformidade</div>
+            </div>
+
+            <div class="col-md-24 painel">
+                <div class="col-md-8" style="border-right: 2px solid #e9e9e9;">
+                    <div class="oval-kit-completo">
+                        <div id="totalKitCompleto" class="text-item-chart"> 0 </div>
+                    </div>
+                </div>
+                <div class="col-md-8" style="border-right: 2px solid #e9e9e9;">
+                    <div class="oval-repasse">
+                        <div id="totalRepasse" class="text-item-chart"> 0 </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="oval-conformidade">
+                        <div id="totalConformidade" class="text-item-chart"> 0 </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>

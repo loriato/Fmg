@@ -1,0 +1,21 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Europa.Extensions
+@model Tenda.EmpresaVenda.Web.Models.SistemaDTO
+
+@{
+    ViewBag.Codigo = "SEG04";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons">
+    <div class="pull-left" style="width:300px; margin-right:5px; margin-top:3px">
+        @Html.DropDownListFor(x => x.Sistema.Id, Model.Sistemas.Select(x => new SelectListItem { Text = x.Nome, Value = x.Id.ToString() }), new { @class = "form-control", @id = "IdSistema" })
+    </div>
+</div>
+<div class="col-md-6">
+    @{ Html.RenderPartial("~/Views/PermissoesPerfil/_DatatablePerfil.cshtml"); }
+</div>
+<div class="col-md-17 col-md-offset-1">
+    @{ Html.RenderPartial("~/Views/PermissoesPerfil/_DatatableFuncionalidades.cshtml"); }
+</div>

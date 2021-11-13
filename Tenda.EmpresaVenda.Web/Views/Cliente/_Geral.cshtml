@@ -1,0 +1,43 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Web.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+<script>
+    Europa.Mascaras.AplicarMascaraCpfCnpj();
+</script>
+
+@Html.HiddenFor(reg => reg.Cliente.Id)
+<div class="col-md-24">
+    <div class="col-md-11 form-group">
+        @Html.Label(GlobalMessages.Nome + " *", new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Cliente.NomeCompleto, new { @class = "form-control", @maxlength = 128 })
+    </div>
+    <div class="col-md-6 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.CpfCnpj, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Cliente.CpfCnpj, new { @class = "form-control mascaraCpfCnpj", @maxlength = 20 })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Sexo + " *", new { @class = "control-label" })
+        @Html.EnumDropDownListFor(x => x.Cliente.TipoSexo, GlobalMessages.Selecione, new { @class = "form-control" })
+    </div>
+</div>
+<div class="col-md-24">
+    <div class="col-md-5 form-group">
+        @Html.Label(GlobalMessages.TelefonePrincipal, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Cliente.TelefoneResidencial, new { @class = "form-control" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.TelefoneComercial, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Cliente.TelefoneComercial, new { @class = "form-control" })
+    </div>
+    <div class="col-md-6 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.EmailPrincipal, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Cliente.Email, new { @class = "form-control", @maxlength = 128 })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.IdSap, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Cliente.IdSap, new { @class = "form-control", @maxlength = 20 })
+    </div>
+</div>

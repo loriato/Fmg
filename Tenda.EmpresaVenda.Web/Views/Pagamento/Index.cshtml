@@ -1,0 +1,78 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.EmpresaVenda.Domain.Integration.Zeus.Models
+@{
+    ViewBag.Codigo = "PAG05";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/pagamento/index-pagamento.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pagamento/datatable-pagamento.js"></script>
+
+<script>
+    Europa.Controllers.Pagamento.UrlDesenharTabelas = '@Url.Action("DesenharTabelas","Pagamento")';
+    Europa.Controllers.Pagamento.UrlListarTabela = '@Url.Action("ListarTabela","Pagamento")';
+
+    Europa.Controllers.Pagamento.UrlListarPagamentos = '@Url.Action("ListarPagamentos","Pagamento")';
+    Europa.Controllers.Pagamento.UrlSalvarPagamento = '@Url.Action("SalvarPagamento","Pagamento")';
+    Europa.Controllers.Pagamento.UrlRemoverPagamento = '@Url.Action("RemoverPagamento","Pagamento")';
+    Europa.Controllers.Pagamento.UrlExportarPagina = '@Url.Action("ExportarPagina","Pagamento")';
+    Europa.Controllers.Pagamento.UrlExportarTodos = '@Url.Action("ExportarTodos","Pagamento")';
+    Europa.Controllers.Pagamento.UrlExportarTodasEvs = '@Url.Action("ExportarTodasEvs","Pagamento")';
+    Europa.Controllers.Pagamento.UrlValidarFiltro = '@Url.Action("ValidarFiltro","Pagamento")';
+
+    Europa.Controllers.Pagamento.UrlRegraComissao = '@Url.Action("Index", "MatrizPagadoria")';
+
+    Europa.Controllers.Pagamento.UrlGerarRequisicaoCompra = '@Url.Action("GerarRequisicaoCompra","Pagamento")';
+
+    Europa.Controllers.Pagamento.Permissoes = {
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "IncluirPagamento").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "IncluirPagamento").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo,"RemoverPagamento").ToString().ToLower()',
+        GerarRequisicaoCompra: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo,"GerarRequisicaoCompra").ToString().ToLower()',
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarPagamento").ToString().ToLower()'
+    };
+</script>
+
+<style>
+    .acoes {
+        font-weight: bold;
+        text-align: center;
+    }
+
+    .cabecalho {
+        font-weight: bold;
+        text-align: center;
+        width: 150px;
+    }
+</style>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarTabelas"))
+    {
+        <button type="button" class="btn btn-default"
+                onclick="Europa.Controllers.PagamentoImportExcel.AbrirModal()">
+            <i class="fa fa-cog"></i> @GlobalMessages.Importar
+        </button>
+    }
+</div>
+
+@Html.Partial("_Filtro")
+
+<div id="pagamentos" style="min-height:1000px"></div>
+
+<form id="form_exportar" hidden></form>
+
+@{
+    Html.RenderPartial("_Anexo");
+
+    Html.RenderPartial("_StatusImportacao");
+
+    Html.RenderPartial("_GerarRequisicaoCompraModal",new ItemRequisicaoDTO());
+
+    Html.RenderPartial("_ModalRequisicaoCompraSap");
+}

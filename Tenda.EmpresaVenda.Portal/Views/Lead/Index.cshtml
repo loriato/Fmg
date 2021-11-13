@@ -1,0 +1,65 @@
+﻿@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.Domain.EmpresaVenda.Models
+@using Tenda.Domain.EmpresaVenda.Enums
+@model Tenda.EmpresaVenda.Domain.Services.Models.LeadDTO
+
+@{
+    ViewBag.Codigo = "EVS17";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/leads/index-lead.js"></script>
+
+<script type="text/javascript" src="~/Static/projeto/leads/filtro-diretor-lead.js"></script>
+<script type="text/javascript" src="~/Static/projeto/leads/datatable-diretor-lead.js"></script>
+
+<script type="text/javascript" src="~/Static/projeto/leads/filtro-corretor-lead.js"></script>
+<script type="text/javascript" src="~/Static/projeto/leads/datatable-corretor-lead.js"></script>
+
+<script type="text/javascript" src="~/Static/projeto/leads/modal-detalhar-lead.js"></script>
+
+<script>
+    Europa.Controllers.Leads.UrlListarDatatable = '@Url.Action("ListarDatatable","Lead")';
+    Europa.Controllers.Leads.UrlAtribuirCorretorLeadsLote = '@Url.Action("AtribuirCorretorLeadsLote","Lead")';
+    Europa.Controllers.Leads.UrlAtribuirCorretorLeadsLoteTodos = '@Url.Action("AtribuirCorretorLeadsLoteTodos","Lead")';
+    Europa.Controllers.Leads.UrlAtualizarLeadEmpresaVenda = '@Url.Action("AtualizarLeadEmpresaVenda","Lead")';
+    Europa.Controllers.Leads.UrlAtribuirCorretorLead = '@Url.Action("AtribuirCorretorLead","Lead")';
+    Europa.Controllers.Leads.UrlRemoverAtribuicao = '@Url.Action("RemoverAtribuicao","Lead")';
+    Europa.Controllers.Leads.UrlExportarPaginaDiretor = '@Url.Action("ExportarPaginaDiretor","Lead")';
+    Europa.Controllers.Leads.UrlExportarTodosDiretor = '@Url.Action("ExportarTodosDiretor","Lead")';
+    Europa.Controllers.Leads.UrlExportarPaginaCorretor = '@Url.Action("ExportarPaginaCorretor","Lead")';
+    Europa.Controllers.Leads.UrlExportarTodosCorretor = '@Url.Action("ExportarTodosCorretor","Lead")';
+
+    Europa.Controllers.Leads.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar")',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar")',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir")',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir")'
+    };
+
+    Europa.Controllers.Leads.IdCorretor = @Model.Id;
+    Europa.Controllers.Leads.NomeCorretor = '@Model.NomeCorretor';
+    Europa.Controllers.Leads.Funcao = '@Model.Funcao';
+    Europa.Controllers.Leads.Pacote = '@Model.Pacote';
+
+</script>
+
+<div id="titlebar-name">
+    <h3 id="title-listagem">@ViewBag.Title</h3>
+</div>
+
+@if (Model.Funcao == TipoFuncao.Diretor)
+{
+    Html.RenderPartial("_FiltroDiretor");
+    Html.RenderPartial("_DatatableDiretor");
+
+}
+else
+{
+    Html.RenderPartial("_FiltroCorretor");
+    Html.RenderPartial("_DatatableCorretor");
+}
+
+@Html.Partial("_ModalDetalharLead", new LeadEmpresaVenda())
+
+<form id="form_exportar" hidden></form>

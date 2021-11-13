@@ -1,0 +1,1259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C0615C67-A849-43C0-9DDC-9FC64FB0D041}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tenda.EmpresaVenda.Domain</RootNamespace>
+    <AssemblyName>Tenda.EmpresaVenda.Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>
+    </CodeAnalysisRuleSet>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=6.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.2.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Core.NonPublicProperty, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Core.NonPublicProperty.2.0.0\lib\netstandard2.0\Autofac.Core.NonPublicProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.6.0.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.6.0.1\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentNHibernate, Version=3.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentNHibernate.3.1.0\lib\net461\FluentNHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.10.3.3\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.3.0.2\lib\net472\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.3.2.0\lib\net472\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.3.2.10, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.3.2\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="iTextSharp, Version=4.1.6.0, Culture=neutral, PublicKeyToken=8354ae6d2174ddca">
+      <HintPath>..\packages\iTextSharp-LGPL.4.1.6\lib\iTextSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\packages\ExcelPackage.1.0.0\lib\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.3.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.3.9\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=5.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.5.0.7\lib\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.5.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.5.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks" />
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppStart\AutofacConfig.cs" />
+    <Compile Include="Cache\Models\BaseCacheModel.cs" />
+    <Compile Include="Commons\RegionalHelper.cs" />
+    <Compile Include="Commons\TemplateEmailFactory.cs" />
+    <Compile Include="Commons\TipoParcelaWrapper.cs" />
+    <Compile Include="Commons\TokenGenerator.cs" />
+    <Compile Include="Data\NHibernateSession.cs" />
+    <Compile Include="Dto\Column.cs" />
+    <Compile Include="Dto\ColumnType.cs" />
+    <Compile Include="Dto\Header.cs" />
+    <Compile Include="Integration\Conecta\ConectaApiService.cs" />
+    <Compile Include="Integration\Conecta\Models\AtributosDinamicosLeadDto.cs" />
+    <Compile Include="Integration\Conecta\Models\FiltroLeadConectaDto.cs" />
+    <Compile Include="Integration\Conecta\Models\GerarTokenAcessoConectaResponseDto.cs" />
+    <Compile Include="Integration\Conecta\Models\LeadConectaDto.cs" />
+    <Compile Include="Integration\Conecta\Models\LeadConectaResponseDto.cs" />
+    <Compile Include="Integration\Indique\BaseIndiqueRestClient.cs" />
+    <Compile Include="Integration\Indique\BaseIndiqueService.cs" />
+    <Compile Include="Integration\Indique\IndiqueService.cs" />
+    <Compile Include="Integration\Indique\Models\ClienteDetailDto.cs" />
+    <Compile Include="Maps\ViewNotasCockpitMidasMap.cs" />
+    <Compile Include="Maps\ViewOcorrenciasCockpitMidasMap.cs" />
+    <Compile Include="Repository\ViewNotasCockpitMidasRepository.cs" />
+    <Compile Include="Repository\ViewOcorrenciasMidasRepository.cs" />
+    <Compile Include="Services\CockpitMidasService.cs" />
+    <Compile Include="Maps\ResponsavelAceiteRegraComissaoMap.cs" />
+    <Compile Include="Maps\ViewResponsavelAceiteRegraComissaoMap.cs" />
+    <Compile Include="Repository\ResponsavelAceiteRegraComissaoRepository.cs" />
+    <Compile Include="Repository\ViewResponsavelAceiteRegraComissaoRepository.cs" />
+    <Compile Include="Services\Models\Indique\DestinatarioIndicadoDto.cs" />
+    <Compile Include="Services\Models\Indique\DestinatarioIndicadorDto.cs" />
+    <Compile Include="Integration\Indique\Models\IndicadoDto.cs" />
+    <Compile Include="Integration\Simulador\Models\ApiSimuladorResponseDto.cs" />
+    <Compile Include="Integration\Simulador\SimuladorApiService.cs" />
+    <Compile Include="Integration\Zeus\Midas\MidasApiService.cs" />
+    <Compile Include="Integration\Zeus\Midas\Models\AprovarIntegracaoRequestDto.cs" />
+    <Compile Include="Integration\Zeus\Midas\Models\AprovarIntegracaoResponseDto.cs" />
+    <Compile Include="Integration\Zeus\Midas\Models\MidasApiResponseDto.cs" />
+    <Compile Include="Integration\Zeus\Models\CancelarPagamentoResponseDTO.cs" />
+    <Compile Include="Integration\Zeus\ZeusApiService.cs" />
+    <Compile Include="Maps\AgenteVendaHouseMap.cs" />
+    <Compile Include="Maps\AgrupamentoProcessoPrePropostaMap.cs" />
+    <Compile Include="Maps\AgrupamentoSituacaoProcessoPrePropostaMap.cs" />
+    <Compile Include="Maps\AreaKanbanPrePropostaMap.cs" />
+    <Compile Include="Maps\CardKanbanSituacaoPrePropostaMap.cs" />
+    <Compile Include="Maps\ConsultaAceitesContratosCorretagemMap.cs" />
+    <Compile Include="Maps\CoordenadorSupervisorHouseMap.cs" />
+    <Compile Include="Maps\DocumentoJuridicoMap.cs" />
+    <Compile Include="Maps\DocumentoMidasMap.cs" />
+    <Compile Include="Maps\EstadoKanbanPrePropostaMap.cs" />
+    <Compile Include="Maps\GrupoCCAPrePropostaMap.cs" />
+    <Compile Include="Maps\HierarquiaHouseMap.cs" />
+    <Compile Include="Maps\HistoricoRecusaIndicacaoMap.cs" />
+    <Compile Include="Maps\NotaFiscalPagamentoOcorrenciaMap.cs" />
+    <Compile Include="Maps\OcorrenciasMidasMap.cs" />
+    <Compile Include="Maps\RegionaisMap.cs" />
+    <Compile Include="Maps\RegionalEmpresaMap.cs" />
+    <Compile Include="Maps\SupervisorAgenteVendaHouseMap.cs" />
+    <Compile Include="Maps\TranslateStatusPrePropostaMap.cs" />
+    <Compile Include="Maps\ViewAgrupamentoSituacaoProcessoPrePropostaDtoMap.cs" />
+    <Compile Include="Maps\ViewAgrupamentoProcessoPrePropostaDtoMap.cs" />
+    <Compile Include="Maps\ViewCardKanbanSituacaoPrePropostaMap.cs" />
+    <Compile Include="Maps\ViewCCAPrePropostaMap.cs" />
+    <Compile Include="Maps\ViewCoordenadorHouseMap.cs" />
+    <Compile Include="Maps\ViewCoordenadorSupervisorHouseMap.cs" />
+    <Compile Include="Maps\ViewHierarquiaHouseMap.cs" />
+    <Compile Include="Maps\ViewProdutoMap.cs" />
+    <Compile Include="Maps\ViewPontoEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewSupervisorAgenteVendaHouseMap.cs" />
+    <Compile Include="Repository\AgenteVendaHouseRepository.cs" />
+    <Compile Include="Repository\AgrupamentoProcessoPrePropostaRepository.cs" />
+    <Compile Include="Repository\AgrupamentoSituacaoProcessoPrePropostaRepository.cs" />
+    <Compile Include="Repository\AreaKanbanPrePropostaRepository.cs" />
+    <Compile Include="Repository\CardKanbanSituacaoPrePropostaRepository.cs" />
+    <Compile Include="Maps\ViewTiposDocumentoProponenteMap.cs" />
+    <Compile Include="Repository\ConsultaAceitesContratosCorretagemRepository.cs" />
+    <Compile Include="Repository\CoordenadorSupervisorHouseRepository.cs" />
+    <Compile Include="Repository\DocumentoJuridicoRepository.cs" />
+    <Compile Include="Repository\DocumentoMidasRepository.cs" />
+    <Compile Include="Repository\CardKanbanPrePropostaRepository.cs" />
+    <Compile Include="Repository\GrupoCCAPrePropostaRepository.cs" />
+    <Compile Include="Repository\HistoricoRecusaIndicacaoRepository.cs" />
+    <Compile Include="Repository\HierarquiaHouseRepository.cs" />
+    <Compile Include="Repository\HistoricoRecusaIndicacaoRepository.cs" />
+    <Compile Include="Repository\Models\BreveLancamentoListarDTO.cs" />
+    <Compile Include="Repository\HistoricoRecusaIndicacaoRepository.cs" />
+    <Compile Include="Repository\Models\BreveLancamentoListarDTO.cs" />
+    <Compile Include="Repository\Models\ClienteExportarDTO.cs" />
+    <Compile Include="Repository\Models\GrupoCCAEmpresaDTO.cs" />
+    <Compile Include="Repository\Models\MudarCorretorDTO.cs" />
+    <Compile Include="Repository\NotaFiscalPagamentoOcorrenciaRepository.cs" />
+    <Compile Include="Repository\OcorrenciasMidasRepository.cs" />
+    <Compile Include="Repository\RegionaisRepository.cs" />
+    <Compile Include="Repository\RegionalEmpresaRepository.cs" />
+    <Compile Include="Repository\SupervisorAgenteVendaHouseRepository.cs" />
+    <Compile Include="Repository\TransferenciaPontoVendaRepository.cs" />
+    <Compile Include="Repository\StatusPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewAgrupamentoProcessoPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewAgrupamentoSituacaoProcessoPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewCardKanbanSituacaoPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewCoordenadorHouseRepository.cs" />
+    <Compile Include="Repository\ViewCoordenadorHouseRepsository.cs" />
+    <Compile Include="Repository\ViewCoordenadorSupervisorHouseRepository.cs" />
+    <Compile Include="Repository\ViewHierarquiaHouseRepository.cs" />
+    <Compile Include="Repository\ViewProdutoRepository.cs" />
+    <Compile Include="Repository\ViewCCAPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewPontoEmpresaVendaRepository.cs" />
+    <Compile Include="Services\AgrupamentoProcessoPrePropostaService.cs" />
+    <Compile Include="Services\AgrupamentoSituacaoProcessoPrePropostaService.cs" />
+    <Compile Include="Services\ConsultaAceiteContratoCorretagemService.cs" />
+    <Compile Include="Repository\ViewSupervisorAgenteVendaHouseRepository.cs" />
+    <Compile Include="Services\HierarquiaHouseService.cs" />
+    <Compile Include="Services\HistoricoRecusaIndicacaoService.cs" />
+    <Compile Include="Repository\ViewTiposDocumentoProponenteRepository.cs" />
+    <Compile Include="Services\IndiqueService.cs" />
+    <Compile Include="Services\JuridicoService.cs" />
+    <Compile Include="Services\KanbanPrePropostaService.cs" />
+    <Compile Include="Services\Models\EmpresaVendaTendaDTO.cs" />
+    <Compile Include="Services\Models\FiltroConsultaAceitesContratosCorretagemDTO.cs" />
+    <Compile Include="Services\Models\GrupoCCAPrePropostaDTO.cs" />
+    <Compile Include="Services\Models\Indique\CarteiraDto.cs" />
+    <Compile Include="Services\Models\Indique\ClienteDto.cs" />
+    <Compile Include="Dto\JExcelOptions.cs" />
+    <Compile Include="Dto\PrePropostaDTO.cs" />
+    <Compile Include="Dto\SetupRegraComissaoDTO.cs" />
+    <Compile Include="Imports\EmpreendimentoImportService.cs" />
+    <Compile Include="Imports\LeadEmMassaImportService.cs" />
+    <Compile Include="Imports\LeadImportService.cs" />
+    <Compile Include="Imports\LojaImportService.cs" />
+    <Compile Include="Imports\PagamentoImportService.cs" />
+    <Compile Include="Imports\PagamentoUnificadoImportService.cs" />
+    <Compile Include="Imports\PontuacaoFidelidadeImportService.cs" />
+    <Compile Include="Imports\ValorNominalEmpreendimentoImportService.cs" />
+    <Compile Include="Integration\AtualizacaoIdSapClienteDTO.cs" />
+    <Compile Include="Integration\AtualizacaoPropostaDTO.cs" />
+    <Compile Include="Imports\PropostaSuatImportService.cs" />
+    <Compile Include="Integration\BaseRestClient.cs" />
+    <Compile Include="Integration\ClienteSuatDTO.cs" />
+    <Compile Include="Integration\DownloadDTO.cs" />
+    <Compile Include="Integration\MensagemRetornoDTO.cs" />
+    <Compile Include="Integration\MensagemRetornoDownloadDTO.cs" />
+    <Compile Include="Integration\RestSharpExtensions.cs" />
+    <Compile Include="Integration\Simulador\BaseSimuladorRestClient.cs" />
+    <Compile Include="Integration\Simulador\BaseSimuladorService.cs" />
+    <Compile Include="Integration\Simulador\JsonNetSerializer.cs" />
+    <Compile Include="Integration\Simulador\Models\LoginResponse.cs" />
+    <Compile Include="Integration\Simulador\SimuladorService.cs" />
+    <Compile Include="Integration\SuatError.cs" />
+    <Compile Include="Integration\SuatErrorList.cs" />
+    <Compile Include="Integration\Suat\BaseSuatRestClient.cs" />
+    <Compile Include="Integration\Suat\ConsultaEstoqueService.cs" />
+    <Compile Include="Integration\Suat\EmpreendimentoDTO.cs" />
+    <Compile Include="Integration\Suat\Models\CorretorDTO.cs" />
+    <Compile Include="Integration\Suat\Models\EstoqueEmpreendimentoDTO.cs" />
+    <Compile Include="Integration\Suat\Models\EstoqueUnidadeDTO.cs" />
+    <Compile Include="Integration\Suat\Models\LogIntegracaoPrePropostaDTO.cs" />
+    <Compile Include="Integration\Suat\Models\LojaDTO.cs" />
+    <Compile Include="Integration\Suat\Models\MensagemRetornoPropostaDTO.cs" />
+    <Compile Include="Integration\Suat\Models\PlanoPagamentoDTO.cs" />
+    <Compile Include="Integration\Suat\Models\ProfissaoDTO.cs" />
+    <Compile Include="Integration\Suat\Models\ProponenteDTO.cs" />
+    <Compile Include="Integration\Suat\Models\PropostaBoletoContratoDTO.cs" />
+    <Compile Include="Integration\Suat\Models\PropostaDTO.cs" />
+    <Compile Include="Integration\Suat\Models\TorreDTO.cs" />
+    <Compile Include="Integration\Suat\SuatService.cs" />
+    <Compile Include="Integration\Suat\BaseSuatService.cs" />
+    <Compile Include="Integration\Zeus\Models\DadosAuditoriaDTO.cs" />
+    <Compile Include="Integration\Zeus\Models\PedidoDTO.cs" />
+    <Compile Include="Integration\Zeus\Models\RequisicaoCompraDTO.cs" />
+    <Compile Include="Integration\Zeus\Models\ItemRequisicaoDTO.cs" />
+    <Compile Include="Integration\Zeus\Models\ContabilizacaoRequisicaoDTO.cs" />
+    <Compile Include="Integration\Zeus\Models\RequisicaoCompraResponseItemDTO.cs" />
+    <Compile Include="Integration\Zeus\ZeusService.cs" />
+    <Compile Include="Layers.cs" />
+    <Compile Include="Maps\AceiteContratoCorretagemMap.cs" />
+    <Compile Include="Maps\AceiteRegraComissaoEvsMap.cs" />
+    <Compile Include="Maps\AceiteRegraComissaoMap.cs" />
+    <Compile Include="Maps\AceiteTermoAceiteProgramaFidelidadeMap.cs" />
+    <Compile Include="Maps\ArquivoBreveLancamentoMap.cs" />
+    <Compile Include="Maps\ArquivoEmpreendimentoMap.cs" />
+    <Compile Include="Maps\AvalistaMap.cs" />
+    <Compile Include="Maps\CoordenadorSupervisorMap.cs" />
+    <Compile Include="Maps\CoordenadorViabilizadorMap.cs" />
+    <Compile Include="Maps\DocumentoEmpresaVendaMap.cs" />
+    <Compile Include="Maps\DocumentoProponenteRuleMachinePrePropostaMap.cs" />
+    <Compile Include="Maps\DocumentoFormularioMap.cs" />
+    <Compile Include="Maps\EnderecoFornecedorMap.cs" />
+    <Compile Include="Maps\EnvioNotaFiscalMap.cs" />
+    <Compile Include="Maps\LogConectaMap.cs" />
+    <Compile Include="Maps\LogSimuladorMap.cs" />
+    <Compile Include="Maps\ViewAvalistaMap.cs" />
+    <Compile Include="Maps\EstadoCidadeMap.cs" />
+    <Compile Include="Maps\FechamentoContabilMap.cs" />
+    <Compile Include="Maps\FilaEmailMap.cs" />
+    <Compile Include="Maps\EstadoAvalistaMap.cs" />
+    <Compile Include="Maps\SupervisorViabilizadorMap.cs" />
+    <Compile Include="Maps\ViewClienteDuplicadoMap.cs" />
+    <Compile Include="Maps\ViewCoordenadorMap.cs" />
+    <Compile Include="Maps\ViewCoordenadorSupervisorMap.cs" />
+    <Compile Include="Maps\ViewCoordenadorViabilizadorMap.cs" />
+    <Compile Include="Maps\ViewDocumentoFormularioMap.cs" />
+    <Compile Include="Maps\ViewLojaPortalMap.cs" />
+    <Compile Include="Maps\ViewLojaPortalUsuarioMap.cs" />
+    <Compile Include="Maps\ViewPontoVendaMap.cs" />
+    <Compile Include="Maps\ViewPropostaFaturadaMap.cs" />
+    <Compile Include="Maps\ViewRelatorioVendaUnificadoMap.cs" />
+    <Compile Include="Maps\ViewSupervisorMap.cs" />
+    <Compile Include="Maps\LeadBackupMap.cs" />
+    <Compile Include="Maps\NumeroPedidoSapMap.cs" />
+    <Compile Include="Maps\OrigemLeadMap.cs" />
+    <Compile Include="Maps\EnderecoEstabelecimentoMap.cs" />
+    <Compile Include="Maps\ParametroRequisicaoCompraMap.cs" />
+    <Compile Include="Maps\ParecerDocumentoEmpresaVendaMap.cs" />
+    <Compile Include="Maps\RequisicaoCompraSapMap.cs" />
+    <Compile Include="Maps\RuleMachinePrePropostaMap.cs" />
+    <Compile Include="Maps\StandVendaEmpresaVendaMap.cs" />
+    <Compile Include="Maps\StandVendaMap.cs" />
+    <Compile Include="Maps\TermoAceiteProgramaFidelidadeMap.cs" />
+    <Compile Include="Maps\TipoDocumentoEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ValorNominalMap.cs" />
+    <Compile Include="Maps\ViewBannerPortalEvMap.cs" />
+    <Compile Include="Maps\ViewDocumentoEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewDocumentoProponenteRuleMachinePrePropostaMap.cs" />
+    <Compile Include="Maps\ViewFilaEmailMap.cs" />
+    <Compile Include="Maps\ViewRequisicaoCompraSapMap.cs" />
+    <Compile Include="Maps\ViewStandVendaEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewStandVendaMap.cs" />
+    <Compile Include="Maps\ViewTermoAceiteProgramaFidelidadeMap.cs" />
+    <Compile Include="Maps\ViewValorNominalEmpreendimentoMap.cs" />
+    <Compile Include="Maps\ViewAceitesBannerMap.cs" />
+    <Compile Include="Maps\ViewViabilizadorMap.cs" />
+    <Compile Include="Maps\VisualizacaoBannerMap.cs" />
+    <Compile Include="Maps\BoletoPrePropostaMap.cs" />
+    <Compile Include="Maps\CentroCustoMap.cs" />
+    <Compile Include="Maps\ClassificacaoMap.cs" />
+    <Compile Include="Maps\BannerPortalEvMap.cs" />
+    <Compile Include="Maps\ConsolidadoPontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\ConsolidadoRelatorioComissaoMap.cs" />
+    <Compile Include="Maps\ContratoCorretagemMap.cs" />
+    <Compile Include="Maps\ContratoPrePropostaMap.cs" />
+    <Compile Include="Maps\DocumentoAvalistaMap.cs" />
+    <Compile Include="Maps\EnderecoAvalistaMap.cs" />
+    <Compile Include="Maps\FamiliarMap.cs" />
+    <Compile Include="Maps\ArquivoMap.cs" />
+    <Compile Include="Maps\BancoMap.cs" />
+    <Compile Include="Maps\BreveLancamentoMap.cs" />
+    <Compile Include="Maps\ClienteMap.cs" />
+    <Compile Include="Maps\ConsolidadoPrePropostaMap.cs" />
+    <Compile Include="Maps\FaseStatusContratoJunixMap.cs" />
+    <Compile Include="Maps\FornecedorMap.cs" />
+    <Compile Include="Maps\GestaoMap.cs" />
+    <Compile Include="Maps\ItemPontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\LayoutProgramaFidelidadeMap.cs" />
+    <Compile Include="Maps\NotaFiscalPagamentoMap.cs" />
+    <Compile Include="Maps\PagamentoMap.cs" />
+    <Compile Include="Maps\LeadEmpresaVendaMap.cs" />
+    <Compile Include="Maps\LeadMap.cs" />
+    <Compile Include="Maps\PontuacaoFidelidadeEmpresaVendaMap.cs" />
+    <Compile Include="Maps\PontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\PrePropostaReintegradaMap.cs" />
+    <Compile Include="Maps\PropostaFilaSUATMap.cs" />
+    <Compile Include="Maps\GrupoCCAEmpresaVendaMap.cs" />
+    <Compile Include="Maps\GrupoCCAMap.cs" />
+    <Compile Include="Maps\HistoricoRegraComissaoMap.cs" />
+    <Compile Include="Maps\ImportacaoJunixMap.cs" />
+    <Compile Include="Maps\ItemRegraComissaoMap.cs" />
+    <Compile Include="Maps\ItemRegraComissaoPadraoMap.cs" />
+    <Compile Include="Maps\LojaMap.cs" />
+    <Compile Include="Maps\ContatoClienteMap.cs" />
+    <Compile Include="Maps\CorretorMap.cs" />
+    <Compile Include="Maps\DocumentoProponenteMap.cs" />
+    <Compile Include="Maps\EmpreendimentoMap.cs" />
+    <Compile Include="Maps\EmpresaVendaMap.cs" />
+    <Compile Include="Maps\EnderecoClienteMap.cs" />
+    <Compile Include="Maps\EnderecoCorretorMap.cs" />
+    <Compile Include="Maps\EnderecoEmpreendimentoMap.cs" />
+    <Compile Include="Maps\EnderecoEmpresaMap.cs" />
+    <Compile Include="Maps\HistoricoPrePropostaMap.cs" />
+    <Compile Include="Maps\MotivoMap.cs" />
+    <Compile Include="Maps\NotificacaoMap.cs" />
+    <Compile Include="Maps\ParecerDocumentoAvalistaMap.cs" />
+    <Compile Include="Maps\ParecerDocumentoProponenteMap.cs" />
+    <Compile Include="Maps\PlanoPagamentoMap.cs" />
+    <Compile Include="Maps\PontoVendaMap.cs" />
+    <Compile Include="Maps\PrePropostaMap.cs" />
+    <Compile Include="Maps\ProfissaoMap.cs" />
+    <Compile Include="Maps\ProponenteMap.cs" />
+    <Compile Include="Maps\PropostaSuatMap.cs" />
+    <Compile Include="Maps\RateioComissaoMap.cs" />
+    <Compile Include="Maps\RegraComissaoMap.cs" />
+    <Compile Include="Maps\RegraComissaoEvsMap.cs" />
+    <Compile Include="Maps\RegraComissaoPadraoMap.cs" />
+    <Compile Include="Maps\ResgatePontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\SinteseStatusContratoJunixMap.cs" />
+    <Compile Include="Maps\StatusConformidadeMap.cs" />
+    <Compile Include="Maps\StatusSuatStatusEvsMap.cs" />
+    <Compile Include="Maps\TipoCustoMap.cs" />
+    <Compile Include="Maps\TipoDocumentoAvalistaMap.cs" />
+    <Compile Include="Maps\TipoDocumentoMap.cs" />
+    <Compile Include="Maps\TransferenciaCarteiraMap.cs" />
+    <Compile Include="Maps\UsuarioGrupoCCAMap.cs" />
+    <Compile Include="Maps\ViewAceiteRegraComissaoMap.cs" />
+    <Compile Include="Maps\TokenAceiteMap.cs" />
+    <Compile Include="Maps\ViewArquivoBreveLancamentoMap.cs" />
+    <Compile Include="Maps\ViewArquivoEmpreendimentoMap.cs" />
+    <Compile Include="Maps\ViewCargarelatorioRepasseJunixMap.cs" />
+    <Compile Include="Maps\ViewConsolidadoPontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\ViewConsultaPosVendaMap.cs" />
+    <Compile Include="Maps\ViewCorretorMap.cs" />
+    <Compile Include="Maps\ViewDocumentoAvalistaMap.cs" />
+    <Compile Include="Maps\ViewDocumentoProponenteMap.cs" />
+    <Compile Include="Maps\ViewEmpreendimentoEnderecoMap.cs" />
+    <Compile Include="Maps\ViewEmpreendimentoExportacaoMap.cs" />
+    <Compile Include="Maps\ViewEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewFilaUnificadaMap.cs" />
+    <Compile Include="Maps\ViewGrupoCCAEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewGrupoCCAUsuarioMap.cs" />
+    <Compile Include="Maps\ViewHistoricoPrePropostaMap.cs" />
+    <Compile Include="Maps\ViewHistoricoRegraComissaoMap.cs" />
+    <Compile Include="Maps\ViewLeadEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewNotaFiscalPagamentoMap.cs" />
+    <Compile Include="Maps\ViewPagamentoMap.cs" />
+    <Compile Include="Maps\ViewPerfilSistemaGrupoActiveDirectoryMap.cs" />
+    <Compile Include="Maps\ViewPontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\ViewRateioComissaoMap.cs" />
+    <Compile Include="Maps\ViewResgatePontuacaoFidelidadeMap.cs" />
+    <Compile Include="Maps\ViewUsuarioEmpresaVendaMap.cs" />
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="Repository\AceitesBannersRepository.cs" />
+    <Compile Include="Repository\AceiteTermoAceiteProgramaFidelidadeRepository.cs" />
+    <Compile Include="Repository\CentroCustoRepository.cs" />
+    <Compile Include="Repository\ClassificacaoRepository.cs" />
+    <Compile Include="Repository\ConsolidadoPontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\ConsolidadoRelatorioComissaoRepository.cs" />
+    <Compile Include="Repository\BannerPortalEvRepository.cs" />
+    <Compile Include="Repository\CoordenadorSupervisorRepository.cs" />
+    <Compile Include="Repository\CoordenadorViabilizadorRepository.cs" />
+    <Compile Include="Repository\DocumentoEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\DocumentoRuleMachinePrePropostaRepository.cs" />
+    <Compile Include="Repository\DocumentoFormularioRepository.cs" />
+    <Compile Include="Repository\EnderecoEstabelecimentoRepository.cs" />
+    <Compile Include="Repository\EnderecoFornecedorRepository.cs" />
+    <Compile Include="Repository\EnvioNotaFiscalRepository.cs" />
+    <Compile Include="Repository\EstadoAvalistaRepository.cs" />
+    <Compile Include="Repository\EstadoCidadeRepository.cs" />
+    <Compile Include="Repository\FechamentoContabilRepository.cs" />
+    <Compile Include="Repository\LogConectaRepository.cs" />
+    <Compile Include="Repository\LogSimuladorRepository.cs" />
+    <Compile Include="Repository\Models\DocumentoFormularioDTO.cs" />
+    <Compile Include="Repository\Models\EstadoAvalistaDTO.cs" />
+    <Compile Include="Repository\Models\EstadoCidadeDTO.cs" />
+    <Compile Include="Repository\Models\FiltroPropostaDTO.cs" />
+    <Compile Include="Repository\Models\HierarquiaCicloFinanceiroDTO.cs" />
+    <Compile Include="Repository\SupervisorViabilizadorRepository.cs" />
+    <Compile Include="Repository\Models\SupervisorViabilizadorDTO .cs" />
+    <Compile Include="Repository\ViewClienteDuplicadoRepository.cs" />
+    <Compile Include="Repository\ViewCoordenadorRepository.cs" />
+    <Compile Include="Repository\ViewCoordenadorSupervisorRepository.cs" />
+    <Compile Include="Repository\ViewCoordenadorViabilizadorRepository.cs" />
+    <Compile Include="Repository\ViewDocumentoFormularioRepository.cs" />
+    <Compile Include="Repository\ViewLojaPortalUsuarioRepository.cs" />
+    <Compile Include="Repository\ViewLojasPortalRepository.cs" />
+    <Compile Include="Repository\ViewPontoVendaRepository.cs" />
+    <Compile Include="Repository\ViewPropostaFaturadaRepository.cs" />
+    <Compile Include="Repository\ViewRelatorioVendaUnificadoRepository.cs" />
+    <Compile Include="Repository\ViewAvalistaRepository.cs" />
+    <Compile Include="Repository\ViewViabilizadorRepository.cs" />
+    <Compile Include="Repository\ViewSupervisorRepository.cs" />
+    <Compile Include="Repository\FilaEmailRepository.cs" />
+    <Compile Include="Repository\FornecedorRepository.cs" />
+    <Compile Include="Repository\GestaoRepository.cs" />
+    <Compile Include="Repository\ItemPontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\LayoutProgramaFidelidadeRepository.cs" />
+    <Compile Include="Repository\LeadBackupRepository.cs" />
+    <Compile Include="Repository\LeadEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\LeadRepository.cs" />
+    <Compile Include="Repository\Models\DocumentoEmpresaVendaDto.cs" />
+    <Compile Include="Repository\Models\FiltroCorretorDTO.cs" />
+    <Compile Include="Repository\Models\FiltroDocumentoEmpresaVendaDto.cs" />
+    <Compile Include="Repository\Models\FiltroEmailDTO.cs" />
+    <Compile Include="Repository\Models\FiltroEmpreendimentoDTO.cs" />
+    <Compile Include="Repository\Models\FiltroFechementoContabil.cs" />
+    <Compile Include="Repository\Models\FiltroFilaUnificadaDTO.cs" />
+    <Compile Include="Repository\Models\FiltroUsuariosDTO.cs" />
+    <Compile Include="Repository\Models\FiltroLeadDTO.cs" />
+    <Compile Include="Repository\Models\BannerPortalEvDTO.cs" />
+    <Compile Include="Repository\Models\FiltroPagamentoDTO.cs" />
+    <Compile Include="Repository\Models\FiltroRateioComissaoDTO.cs" />
+    <Compile Include="Repository\Models\FiltroRequisicaoCompraSapDTO.cs" />
+    <Compile Include="Repository\Models\FiltroRuleMachineDTO.cs" />
+    <Compile Include="Repository\Models\FiltroValorNominalEmpreendimentoDTO.cs" />
+    <Compile Include="Repository\Models\FinanceiroGrupoDTO.cs" />
+    <Compile Include="Repository\Models\PontuacaoFidelidadeDTO.cs" />
+    <Compile Include="Repository\NotaFiscalPagamentoRepository.cs" />
+    <Compile Include="Repository\NumeroPedidoSapRepository.cs" />
+    <Compile Include="Repository\OrigemLeadRepository.cs" />
+    <Compile Include="Repository\PagamentoRepository.cs" />
+    <Compile Include="Repository\ParametroRequisicaoCompraRepository.cs" />
+    <Compile Include="Repository\ParecerDocumentoEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\PontuacaoFidelidadeEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\PontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\PrePropostaReintegradaRepository.cs" />
+    <Compile Include="Repository\PropostaFilaSUATRepository.cs" />
+    <Compile Include="Repository\GrupoCCAEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\GrupoCCARepository.cs" />
+    <Compile Include="Repository\Models\GrupoCCADTO.cs" />
+    <Compile Include="Repository\RateioComissaoRepository.cs" />
+    <Compile Include="Repository\RequisicaoCompraSapRepository.cs" />
+    <Compile Include="Repository\ResgatePontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\RuleMachinePrePropostaRepository.cs" />
+    <Compile Include="Repository\StandVendaEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\StandVendaRepository.cs" />
+    <Compile Include="Repository\TermoAceiteProgramaFidelidadeRepository.cs" />
+    <Compile Include="Repository\TipoCustoRepository.cs" />
+    <Compile Include="Repository\TipoDocumentoEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\TransferenciaCarteiraRepository.cs" />
+    <Compile Include="Repository\UsuarioGrupoCCARepository.cs" />
+    <Compile Include="Repository\ValorNominalRepository.cs" />
+    <Compile Include="Repository\ViewBannerPortalEVRepository.cs" />
+    <Compile Include="Repository\ViewConsolidadoPontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\ViewDocumentoEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewDocumentoProponenteRuleMachinePrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewFilaEmailRepository.cs" />
+    <Compile Include="Repository\ViewFilaUnificadaRepository.cs" />
+    <Compile Include="Repository\ViewGrupoCCAEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewGrupoCCAUsuarioRepository.cs" />
+    <Compile Include="Repository\ViewHistoricoRegraComissaoRepository.cs" />
+    <Compile Include="Maps\ViewPlanoPagamentoMap.cs" />
+    <Compile Include="Maps\ViewPreEmpresaVendaMap.cs" />
+    <Compile Include="Maps\ViewPrePropostaAguardandoAnaliseMap.cs" />
+    <Compile Include="Maps\ViewPrePropostaMap.cs" />
+    <Compile Include="Maps\ViewProponenteMap.cs" />
+    <Compile Include="Maps\ViewBreveLancamentoEnderecoMap.cs" />
+    <Compile Include="Maps\EnderecoBreveLancamentoMap.cs" />
+    <Compile Include="Maps\ViewRegraComissaoEvsMap.cs" />
+    <Compile Include="Maps\ViewRegraComissaoMap.cs" />
+    <Compile Include="Maps\ViewRegraComissaoPadraoMap.cs" />
+    <Compile Include="Maps\ViewRelatorioComissaoAuxMap.cs" />
+    <Compile Include="Maps\ViewRelatorioComissaoMap.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\AceiteContratoCorretagemRepository.cs" />
+    <Compile Include="Repository\AceiteRegraComissaoEvsRepository.cs" />
+    <Compile Include="Repository\AceiteRegraComissaoRepository.cs" />
+    <Compile Include="Repository\ArquivoBreveLancamentoRepository.cs" />
+    <Compile Include="Repository\ArquivoEmpreendimentoRepository.cs" />
+    <Compile Include="Repository\AvalistaRepository.cs" />
+    <Compile Include="Repository\BoletoPrePropostaRepository.cs" />
+    <Compile Include="Repository\ContratoCorretagemRepository.cs" />
+    <Compile Include="Repository\ContratoPrePropostaRepository.cs" />
+    <Compile Include="Repository\DocumentoAvalistaRepository.cs" />
+    <Compile Include="Repository\EnderecoAvalistaRepository.cs" />
+    <Compile Include="Repository\FamiliarRepository.cs" />
+    <Compile Include="Repository\BancoRepository.cs" />
+    <Compile Include="Repository\ConsolidadoPrePropostaRepository.cs" />
+    <Compile Include="Repository\DocumentoProponenteRepository.cs" />
+    <Compile Include="Repository\FaseStatusContratoRepository.cs" />
+    <Compile Include="Repository\HistoricoRegraComissaoRepository.cs" />
+    <Compile Include="Repository\ImportacaoJunixRepository.cs" />
+    <Compile Include="Repository\ItemRegraComissaoPadraoRepository.cs" />
+    <Compile Include="Repository\ItemRegraComissaoRepository.cs" />
+    <Compile Include="Repository\LojaRepository.cs" />
+    <Compile Include="Repository\EnderecoBreveLancamentoRepository.cs" />
+    <Compile Include="Repository\HistoricoPrePropostaRepository.cs" />
+    <Compile Include="Repository\Models\RegraComissaoDTO.cs" />
+    <Compile Include="Repository\MotivoRepository.cs" />
+    <Compile Include="Repository\NotificacaoRepository.cs" />
+    <Compile Include="Repository\ParecerDocumentoAvalistaRepository.cs" />
+    <Compile Include="Repository\ParecerDocumentoProponenteRepository.cs" />
+    <Compile Include="Repository\PropostaSuatRepository.cs" />
+    <Compile Include="Repository\RegraComissaoEvsRepository.cs" />
+    <Compile Include="Repository\RegraComissaoPadraoRepository.cs" />
+    <Compile Include="Repository\RegraComissaoRepository.cs" />
+    <Compile Include="Repository\SinteseStatusContratoJunixRepository.cs" />
+    <Compile Include="Repository\StatusConformidadeRepository.cs" />
+    <Compile Include="Repository\StatusSuatStatusEvsRepository.cs" />
+    <Compile Include="Repository\TipoDocumentoAvalistaRepository.cs" />
+    <Compile Include="Repository\ViewAceiteRegraComissaoRepository.cs" />
+    <Compile Include="Repository\TokenAceiteRepository.cs" />
+    <Compile Include="Repository\ViewArquivoBreveLancamentoRepository.cs" />
+    <Compile Include="Repository\ViewBreveLancamentoEnderecoRepository.cs" />
+    <Compile Include="Repository\ArquivoRepository.cs" />
+    <Compile Include="Repository\BreveLancamentoRepository.cs" />
+    <Compile Include="Repository\ClienteRepository.cs" />
+    <Compile Include="Repository\CorretorRepository.cs" />
+    <Compile Include="Repository\EmpreendimentoRepository.cs" />
+    <Compile Include="Repository\EmpresaVendaRepository.cs" />
+    <Compile Include="Repository\EnderecoClienteRepository.cs" />
+    <Compile Include="Repository\EnderecoCorretorRepository.cs" />
+    <Compile Include="Repository\EnderecoEmpreendimentoRepository.cs" />
+    <Compile Include="Repository\EnderecoEmpresaRepository.cs" />
+    <Compile Include="Repository\PlanoPagamentoRepository.cs" />
+    <Compile Include="Repository\PontoVendaRepository.cs" />
+    <Compile Include="Repository\PrePropostaRepository.cs" />
+    <Compile Include="Repository\ProfissaoRepository.cs" />
+    <Compile Include="Repository\ProponenteRepository.cs" />
+    <Compile Include="Repository\TipoDocumentoRepository.cs" />
+    <Compile Include="Repository\ViewArquivoEmpreendimentoRepository.cs" />
+    <Compile Include="Repository\ViewCargarelatorioRepasseJunixRepository.cs" />
+    <Compile Include="Repository\ViewConsultaPosVendaRepository.cs" />
+    <Compile Include="Repository\ViewCorretorRepository.cs" />
+    <Compile Include="Repository\ViewDocumentoAvalistaRepository.cs" />
+    <Compile Include="Repository\ViewDocumentoProponenteRepository.cs" />
+    <Compile Include="Repository\ViewEmpreendimentoEnderecoRepository.cs" />
+    <Compile Include="Repository\ViewEmpreendimentoExportacaoRepository.cs" />
+    <Compile Include="Repository\ViewEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewHistoricoPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewLeadEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewNotaFiscalPagamentoRepository.cs" />
+    <Compile Include="Repository\ViewPagamentoRepository.cs" />
+    <Compile Include="Repository\ViewPerfilSistemaGrupoActiveDirectoryRepository.cs" />
+    <Compile Include="Repository\ViewPlanoPagamentoRepository.cs" />
+    <Compile Include="Repository\ViewPontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\ViewPreEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewPrePropostaAguardandoAnaliseRepository.cs" />
+    <Compile Include="Repository\ViewPrePropostaRepository.cs" />
+    <Compile Include="Repository\ViewProponenteRepository.cs" />
+    <Compile Include="Repository\ViewRateioComissaoRepository.cs" />
+    <Compile Include="Repository\ViewRegraComissaoPadraoRepository.cs" />
+    <Compile Include="Repository\ViewRegraComissaoEvsRepository.cs" />
+    <Compile Include="Repository\ViewRegraComissaoRepository.cs" />
+    <Compile Include="Repository\ViewRelatorioComissaoAuxRepository.cs" />
+    <Compile Include="Repository\ViewRelatorioComissaoRepository.cs" />
+    <Compile Include="Repository\ViewRequisicaoCompraSapRepository.cs" />
+    <Compile Include="Repository\ViewResgatePontuacaoFidelidadeRepository.cs" />
+    <Compile Include="Repository\ViewStandVendaEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewStandVendaRepository.cs" />
+    <Compile Include="Repository\ViewTermoAceiteProgramaFidelidadeRepository.cs" />
+    <Compile Include="Repository\ViewUsuarioEmpresaVendaRepository.cs" />
+    <Compile Include="Repository\ViewValorNominalEmpreendimentoRepository.cs" />
+    <Compile Include="Repository\VizualizacaoBannerRepository.cs" />
+    <Compile Include="Services\AgenteVendaService.cs" />
+    <Compile Include="Services\ArquivoService.cs" />
+    <Compile Include="Services\AvalistaService.cs" />
+    <Compile Include="Services\AceiteBannerService.cs" />
+    <Compile Include="Services\CentroCustoService.cs" />
+    <Compile Include="Services\ClassificacaoService.cs" />
+    <Compile Include="Services\BannerPortalEvService.cs" />
+    <Compile Include="Services\ClienteService.cs" />
+    <Compile Include="Services\ConectaService.cs" />
+    <Compile Include="Services\ConsolidadoPontuacaoFidelidadeService.cs" />
+    <Compile Include="Services\ConsolidadoPrePropostaService.cs" />
+    <Compile Include="Services\ConsolidadoRelatorioComissaoService.cs" />
+    <Compile Include="Services\ContratoCorretagemService.cs" />
+    <Compile Include="Services\DocumentoAvalistaService.cs" />
+    <Compile Include="Services\DocumentoEmpresaVendaService.cs" />
+    <Compile Include="Services\DocumentoFormularioService.cs" />
+    <Compile Include="Services\EmailService.cs" />
+    <Compile Include="Services\CorretorService.cs" />
+    <Compile Include="Services\DocumentoProponenteService.cs" />
+    <Compile Include="Services\EmpreendimentoService.cs" />
+    <Compile Include="Services\EnderecoAvalistaService.cs" />
+    <Compile Include="Services\EnderecoClienteService.cs" />
+    <Compile Include="Services\EmpresaVendaService.cs" />
+    <Compile Include="Services\EnderecoCorretorService.cs" />
+    <Compile Include="Services\EnderecoEmpreendimentoService.cs" />
+    <Compile Include="Services\EnderecoEmpresaService.cs" />
+    <Compile Include="Services\BreveLancamentoService.cs" />
+    <Compile Include="Services\EnderecoBreveLancamentoService.cs" />
+    <Compile Include="Services\EnderecoEstabelecimentoService.cs" />
+    <Compile Include="Services\EnderecoFornecedorService.cs" />
+    <Compile Include="Services\EstadoCidadeService.cs" />
+    <Compile Include="Services\FaseStatusContratoJunixService.cs" />
+    <Compile Include="Services\FechamentoContabilService.cs" />
+    <Compile Include="Services\HierarquiaCoordenadorService.cs" />
+    <Compile Include="Services\Models\Indique\ContatoClienteDto.cs" />
+    <Compile Include="Services\Models\Indique\EmpreendimentoDto.cs" />
+    <Compile Include="Services\Models\Indique\LojaDto.cs" />
+    <Compile Include="Services\Models\Indique\PropostaDto.cs" />
+    <Compile Include="Services\Models\Indique\ProfissaoDto.cs" />
+    <Compile Include="Services\Models\Indique\ProponenteDto.cs" />
+    <Compile Include="Services\Models\Indique\UsuarioDto.cs" />
+    <Compile Include="Services\LojaPortalService.cs" />
+    <Compile Include="Services\MidasService.cs" />
+    <Compile Include="Services\RegionalEmpresaService.cs" />
+    <Compile Include="Services\ResponsavelAceiteRegraComissaoService .cs" />
+    <Compile Include="Services\RelatorioVendaUnificadoService.cs" />
+    <Compile Include="Services\SetupRegraComissaoService.cs" />
+    <Compile Include="Services\SimuladorServiceNovo.cs" />
+    <Compile Include="Services\SupervisorViabilizadorService.cs" />
+    <Compile Include="Services\FilaEmailService.cs" />
+    <Compile Include="Services\FornecedorService.cs" />
+    <Compile Include="Services\GestaoService.cs" />
+    <Compile Include="Services\GrupoCCAEmpresaVendaService.cs" />
+    <Compile Include="Services\GrupoCCAService.cs" />
+    <Compile Include="Services\HistoricoPrePropostaService.cs" />
+    <Compile Include="Services\HistoricoRegraComissaoService.cs" />
+    <Compile Include="Services\ImportacaoJunixService.cs" />
+    <Compile Include="Services\LayoutProgramaFidelidadeService.cs" />
+    <Compile Include="Services\LeadEmpresaVendaService.cs" />
+    <Compile Include="Services\Models\AcessoCorretorEvDTO.cs" />
+    <Compile Include="Services\Models\AcessoDiarioDTO.cs" />
+    <Compile Include="Services\Models\AcessoDiarioEvDTO.cs" />
+    <Compile Include="Services\Models\AcessoDiarioRegionalDTO.cs" />
+    <Compile Include="Services\Models\AcessoDiarioRegionalEvDTO.cs" />
+    <Compile Include="Services\Models\FechamentoContabilDto.cs" />
+    <Compile Include="Services\Models\FiltroFornecedorDTO.cs" />
+    <Compile Include="Services\Models\FiltroPeriodoDTO.cs" />
+    <Compile Include="Services\Models\FiltroStandVendaDTO.cs" />
+    <Compile Include="Services\Models\LayoutProgramaFidelidadeDTO.cs" />
+    <Compile Include="Services\Models\NotaFiscalDTO.cs" />
+    <Compile Include="Services\Models\NotaFiscalPagamentoPdfDTO.cs" />
+    <Compile Include="Services\Models\PerfilSistemaGrupoAdDTO.cs" />
+    <Compile Include="Services\Models\RuleMachineDTO.cs" />
+    <Compile Include="Services\Models\StandVendaDTO.cs" />
+    <Compile Include="Services\Models\TempoMedioAcessoDiarioCorretorEvDTO.cs" />
+    <Compile Include="Services\Models\TempoMedioAcessoDiarioEvDTO.cs" />
+    <Compile Include="Services\NotaFiscalPagamentoPdfService.cs" />
+    <Compile Include="Services\NotaFiscalPagamentoService.cs" />
+    <Compile Include="Services\NumeroPedidoSapService.cs" />
+    <Compile Include="Services\ParametroRequisicaoCompraService.cs" />
+    <Compile Include="Services\PerfilSistemaGrupoActiveDiretoryService.cs" />
+    <Compile Include="Services\PontuacaoFidelidadeEmpresaVendaService.cs" />
+    <Compile Include="Services\PontuacaoFidelidadePdfService.cs" />
+    <Compile Include="Services\PontuacaoFidelidadeService.cs" />
+    <Compile Include="Services\PropostaSuatService.cs" />
+    <Compile Include="Services\RateioComissaoService.cs" />
+    <Compile Include="Services\RelatorioAcessoService.cs" />
+    <Compile Include="Services\RequisicaoCompraSapService.cs" />
+    <Compile Include="Services\RequisicaoCompraService.cs" />
+    <Compile Include="Services\StandVendaEmpresaVendaService.cs" />
+    <Compile Include="Services\StandVendaService.cs" />
+    <Compile Include="Services\StateMachinePrePropostaService.cs" />
+    <Compile Include="Services\TermoAceiteProgramaFidelidadeService.cs" />
+    <Compile Include="Services\EstadoAvalistaService.cs" />
+    <Compile Include="Services\NotaFiscalPagamentoOcorrenciaService.cs" />
+    <Compile Include="Services\TiposDocumentoService.cs" />
+    <Compile Include="Services\StatusPrePropostaService.cs" />
+    <Compile Include="Services\ValorNominalService.cs" />
+    <Compile Include="Validators\AgenteVendaValidator.cs" />
+    <Compile Include="Validators\AgrupamentoProcessoPrePropostaValidator.cs" />
+    <Compile Include="Validators\AgrupamentoSituacaoProcessoPrePropostaValidator.cs" />
+    <Compile Include="Validators\AlteracaoSicaqPrevioPrePropostaValidator.cs" />
+    <Compile Include="Validators\AreaKanbanPrePropostaValidator.cs" />
+    <Compile Include="Validators\CardKanbanSituacaoPrePropostaValidator.cs" />
+    <Compile Include="Validators\ClienteLeadConectaValidator.cs" />
+    <Compile Include="Validators\CoordenadorSupervisorHouseValidator.cs" />
+    <Compile Include="Validators\CoordenadorSupervisorValidator.cs" />
+    <Compile Include="Validators\CoordenadorViabilizadorValidator.cs" />
+    <Compile Include="Validators\DocumentoFormularioDTOValidator.cs" />
+    <Compile Include="Validators\EnderecoFornecedorValidator.cs" />
+    <Compile Include="Validators\EstadoCidadeValidator.cs" />
+    <Compile Include="Validators\CardKanbanPrePropostaValidator.cs" />
+    <Compile Include="Validators\FechamentoContabilValidator.cs" />
+    <Compile Include="Validators\LeadConectaDtoValidator.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoAnaliseCompletaEmAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoAnaliseSimplificadaEmAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoAuditoriaEmAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoAuditoriaEmAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoFluxoAguardandoIntegracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoFluxoAguardandoAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoFluxoCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoFluxoFluxoEnviadoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoIntegracaoAnaliseCompletaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AguardandoIntegracaoIntegradaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseCompletaAprovadaAguardandoIntegracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseCompletaAprovadaCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseCompletaAprovadaCondicionadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseCompletaAprovadaEmAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseCompletaAprovadaReprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseCompletaAprovadaSICAQComErroRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaAguardandoFluxoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaAguardandoIntegracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaCondicionadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaDocsInsuficientesSimplificadoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaEmAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaReprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\AnaliseSimplificadaAprovadaSICAQComErroRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\CondicionadaCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\DocsInsuficientesCompletaAguardandoAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\DocsInsuficientesCompletaCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\DocsInsuficientesSimplificadoAguardandoAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\DocsInsuficientesSimplificadoCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseCompletaAguardandoAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseCompletaAguardandoAuditoriaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseCompletaAguardandoIntegracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseCompletaAnaliseCompletaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseCompletaCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseCompletaDocsInsuficientesCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseSimplificadaAguardandoAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseSimplificadaAguardandoAuditoriaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseSimplificadaAnaliseSimplificadaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseSimplificadaCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmAnaliseSimplificadaDocsInsuficientesSimplificadoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmElaboracaoAguardandoAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmElaboracaoCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\EmElaboracaoEmElaboracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\FluxoEnviadoAguardandoFluxoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\FluxoEnviadoCanceladaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\FluxoEnvidadoAguardandoIntegracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\FluxoEnvidadoAguardandoAnaliseCompletaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\IntegradaAguardandoIntegracaoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\PendenciaRetornoRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\PrePropostaWorkflowBase.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\CondicionadaAnaliseCompletaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\ReprovadaAnaliseCompletaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\CondicionadaAnaliseSimplificadaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\SICAQComErroAnaliseCompletaAprovadaRule.cs" />
+    <Compile Include="Validators\LojaPortalValidator.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\ReprovadaAnaliseSimplificadaAprovadaRule.cs" />
+    <Compile Include="Validators\RequisicaoCompraDTOValidator.cs" />
+    <Compile Include="Validators\NotaFiscalRequestValidator.cs" />
+    <Compile Include="Validators\SupervisorAgenteVendaHouseValidator.cs" />
+    <Compile Include="Validators\SupervisorViabilizadorValidator.cs" />
+    <Compile Include="Validators\FilaEmailValidator.cs" />
+    <Compile Include="Validators\ItemPontuacaoFidelidadeValidator.cs" />
+    <Compile Include="Validators\ItemRegraComissaoValidator.cs" />
+    <Compile Include="Validators\LayoutProgramaFidelidadeValidator.cs" />
+    <Compile Include="Validators\LeadEmpresaVendaValidator.cs" />
+    <Compile Include="Services\LeadService.cs" />
+    <Compile Include="Services\LojaService.cs" />
+    <Compile Include="Services\Models\CargaRelatorioRepasseDTO.cs" />
+    <Compile Include="Services\Models\ConsultaPrePropostaDto.cs" />
+    <Compile Include="Services\Models\DocumentoProponenteDTO.cs" />
+    <Compile Include="Services\Models\FilaUnificadaDTO.cs" />
+    <Compile Include="Services\Models\FiltroPrePropostaAguardandoAnaliseDTO.cs" />
+    <Compile Include="Services\Models\FiltroRegraComissaoDTO.cs" />
+    <Compile Include="Services\Models\GestaoDTO.cs" />
+    <Compile Include="Services\Models\ImportLeadDTO.cs" />
+    <Compile Include="Services\Models\ItemRegraComissaoDTO.cs" />
+    <Compile Include="Services\Models\JunixDTO.cs" />
+    <Compile Include="Services\Models\KeyValueDTO.cs" />
+    <Compile Include="Services\Models\LeadDTO.cs" />
+    <Compile Include="Services\Models\LojaDto.cs" />
+    <Compile Include="Services\Models\ImportTaskDTO.cs" />
+    <Compile Include="Services\Models\Metadado.cs" />
+    <Compile Include="Services\Models\PagamentoDTO.cs" />
+    <Compile Include="Services\Models\PontoVendaDto.cs" />
+    <Compile Include="Services\Models\PosVendaDTO.cs" />
+    <Compile Include="Services\Models\PosVendaGraficoFiltro.cs" />
+    <Compile Include="Services\Models\PropostaSuatDTO.cs" />
+    <Compile Include="Services\Models\RegraComissaoDTO.cs" />
+    <Compile Include="Services\Models\RelatorioComissaoDTO.cs" />
+    <Compile Include="Services\Models\StatusConformidadeDTO.cs" />
+    <Compile Include="Services\Models\StatusSuatStatusEvsDTO.cs" />
+    <Compile Include="Services\Models\TipoDocumentoAvalistaDTO.cs" />
+    <Compile Include="Services\NotificacaoService.cs" />
+    <Compile Include="Services\PagamentoService.cs" />
+    <Compile Include="Services\PlanoPagamentoService.cs" />
+    <Compile Include="Services\PontoVendaService.cs" />
+    <Compile Include="Services\PrePropostaReintegradaService.cs" />
+    <Compile Include="Services\PrePropostaService.cs" />
+    <Compile Include="Services\ProponenteService.cs" />
+    <Compile Include="Services\PropostaFilaSUATService.cs" />
+    <Compile Include="Services\RegraAtivaSemAceiteService.cs" />
+    <Compile Include="Services\RegraComissaoEvsService.cs" />
+    <Compile Include="Services\RegraComissaoPadraoPdfService.cs" />
+    <Compile Include="Services\RegraComissaoPadraoService.cs" />
+    <Compile Include="Services\RegraComissaoPdfService.cs" />
+    <Compile Include="Services\RegraComissaoService.cs" />
+    <Compile Include="Services\SinteseStatusContratoJunixService.cs" />
+    <Compile Include="Services\StaticResourceService.cs" />
+    <Compile Include="Services\StatusConformidadeService.cs" />
+    <Compile Include="Services\StatusSuatStatusEvsService.cs" />
+    <Compile Include="Services\TipoCustoService.cs" />
+    <Compile Include="Services\TokenAceiteService.cs" />
+    <Compile Include="Services\TransferenciaCarteiraService.cs" />
+    <Compile Include="Services\UsuarioGrupoCCAService.cs" />
+    <Compile Include="Services\ViewRegraComissaoEvsService.cs" />
+    <Compile Include="Validators\AlteracaoSicaqPrePropostaValidator.cs" />
+    <Compile Include="Validators\AnaliseProponenteValidator.cs" />
+    <Compile Include="Validators\AprovarDocumentacaoAvalistaValidator.cs" />
+    <Compile Include="Validators\AprovarDocumentoAvalistaValidator.cs" />
+    <Compile Include="Validators\AvalistaValidator.cs" />
+    <Compile Include="Validators\CentroCustoValidator.cs" />
+    <Compile Include="Validators\ClassificacaoValidator.cs" />
+    <Compile Include="Validators\ClienteDadosVendaValidator.cs" />
+    <Compile Include="Validators\ClienteValidator.cs" />
+    <Compile Include="Validators\CorretorValidator.cs" />
+    <Compile Include="Validators\FornecedorValidator.cs" />
+    <Compile Include="Validators\GestaoValidator.cs" />
+    <Compile Include="Validators\GrupoCCAEmpresaVendaValidator.cs" />
+    <Compile Include="Validators\GrupoCCAValidator.cs" />
+    <Compile Include="Validators\LeadLoteValidator.cs" />
+    <Compile Include="Validators\LeadValidator.cs" />
+    <Compile Include="Validators\NotaFiscalPagamentoValidator.cs" />
+    <Compile Include="Validators\BannerPortalEvValidator.cs" />
+    <Compile Include="Validators\PagamentoValidator.cs" />
+    <Compile Include="Validators\ParametroRequisicaoCompraValidator.cs" />
+    <Compile Include="Validators\PendenciarDocumentacaoAvalistaValidator.cs" />
+    <Compile Include="Validators\DocumentoProponente\AprovacaoDocumentoProponenteValidator.cs" />
+    <Compile Include="Validators\DocumentoProponente\PendenciaDocumentoProponenteValidator.cs" />
+    <Compile Include="Validators\EmpreendimentoValidator.cs" />
+    <Compile Include="Validators\EmpresaVendaValidator.cs" />
+    <Compile Include="Validators\EnderecoAvalistaValidator.cs" />
+    <Compile Include="Validators\EnderecoClienteValidator.cs" />
+    <Compile Include="Validators\EnderecoCorretorValidator.cs" />
+    <Compile Include="Validators\EnderecoEmpreendimentoValidator.cs" />
+    <Compile Include="Validators\EnderecoEmpresaValidator.cs" />
+    <Compile Include="Validators\EnvioPreProposta\PrePropostaValidator.cs" />
+    <Compile Include="Validators\EnvioPreProposta\ProponenteValidator.cs" />
+    <Compile Include="Validators\FaseStatusContratoJunixValidator.cs" />
+    <Compile Include="Validators\FinalizacaoPrePropostaValidator.cs" />
+    <Compile Include="Validators\ImportacaoJunixValidator.cs" />
+    <Compile Include="Validators\IntegracaoPrePropostaValidator.cs" />
+    <Compile Include="Validators\PasswordValidator.cs" />
+    <Compile Include="Validators\PendenciaDocumentoAvalistaValidator.cs" />
+    <Compile Include="Validators\PerfilSistemaGrupoAdValidator.cs" />
+    <Compile Include="Validators\PlanoPagamentoValidator.cs" />
+    <Compile Include="Validators\PontoVendaValidator.cs" />
+    <Compile Include="Validators\PontuacaoFidelidadeValidator.cs" />
+    <Compile Include="Validators\PreCadastroCorretorValidator.cs" />
+    <Compile Include="Validators\PreCadastroValidator.cs" />
+    <Compile Include="Validators\PrePropostaValidator.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\RetornoEmAnaliseSimplificadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\SICAQComErroAnaliseSimplificadaAprovadaRule.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\SicaqComErroCanceladaRule.cs" />
+    <Compile Include="Validators\ProponenteValidator.cs" />
+    <Compile Include="Validators\RateioComissaoValidator.cs" />
+    <Compile Include="Validators\RegraComissaoValidator.cs" />
+    <Compile Include="Validators\SinteseStatusContratoJunixValidator.cs" />
+    <Compile Include="Validators\StandVendaValidator.cs" />
+    <Compile Include="Validators\RuleMachinePrePropostaValidator.cs" />
+    <Compile Include="Validators\StatusConformidadeValidator.cs" />
+    <Compile Include="Validators\StatusSuatStatusEvsValidator.cs" />
+    <Compile Include="Validators\TipoCustoValidator.cs" />
+    <Compile Include="Validators\StatusPrePropostaValidator.cs" />
+    <Compile Include="Validators\TiposDocumentoValidator.cs" />
+    <Compile Include="Validators\UploadDocumentoEmpresaVendaValidator.cs" />
+    <Compile Include="Validators\EstadoAvalistaValidator.cs" />
+    <Compile Include="Validators\UsuarioGrupoCCAValidator.cs" />
+    <Compile Include="Validators\UsuarioPortalValidator.cs" />
+    <Compile Include="Validators\BreveLancamentoValidator.cs" />
+    <Compile Include="Validators\EnderecoBreveLancamentoValidator.cs" />
+    <Compile Include="Validators\PrePropostaWorkflow\PrePropostaWorkflowDeclaration.cs" />
+    <Compile Include="Web References\ConsultarNumeroPedidoZeus\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\GerarRequisicaoDeCompraZeus\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ConsultarNumeroPedidoZeus\ConsultarNumeroDePedido.wsdl" />
+    <None Include="Web References\ConsultarNumeroPedidoZeus\GerarRequisicaoCompra.wsdl" />
+    <None Include="Web References\ConsultarNumeroPedidoZeus\pedido.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ConsultarNumeroPedidoZeus\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\GerarRequisicaoDeCompraZeus\GerarRequisicaoCompra.wsdl" />
+    <None Include="Web References\GerarRequisicaoDeCompraZeus\GerarRequisicaoCompra0.wsdl" />
+    <None Include="Web References\GerarRequisicaoDeCompraZeus\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\GerarRequisicaoDeCompraZeus\requisicaoCompraResponseItem.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Europa\Europa.csproj">
+      <Project>{cd8ed417-3217-4342-8c55-66055f630fcd}</Project>
+      <Name>Europa</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tenda.Domain\Tenda.Domain.csproj">
+      <Project>{7CAE0A72-FCF9-4302-90C4-74DCFDDEA11F}</Project>
+      <Name>Tenda.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tenda.EmpresaVenda.ApiService\Tenda.EmpresaVenda.ApiService.csproj">
+      <Project>{5bb20eec-39c6-437f-a667-dc6807419248}</Project>
+      <Name>Tenda.EmpresaVenda.ApiService</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://zeusqa.tenda.com/consultarnumerodepedido/service/process%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ConsultarNumeroPedidoZeus\</RelPath>
+      <UpdateFromURL>http://zeusqa.tenda.com/consultarnumerodepedido/service/process%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Tenda_EmpresaVenda_Domain_ConsultarNumeroPedidoZeus_ConsultarNumeroDePedido</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process%3fwsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\GerarRequisicaoDeCompraZeus\</RelPath>
+      <UpdateFromURL>http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process%3fwsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>Tenda_EmpresaVenda_Domain_GerarRequisicaoDeCompraZeus_GerarRequisicaoCompra</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+</Project>

@@ -1,0 +1,144 @@
+@using Europa.Resources
+@model Tenda.EmpresaVenda.Web.Models.DocumentacaoPrePropostaViewModel
+
+@{
+    ViewBag.Codigo = "EVS12";
+}
+
+@Html.HiddenFor(reg => reg.IdPreProposta)
+@Html.HiddenFor(reg => reg.IdCliente)
+<div class="col-md-24">
+    <div class="col-md-4 form-group">
+        @Html.Label(GlobalMessages.Codigo, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Codigo, new { @class = "form-control", maxlength = 30, @readonly = "readonly", data_entity = "PreProposta", data_id = Model.IdPreProposta })
+    </div>
+    <div class="col-md-7 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Cliente + " *", new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente, new { @class = "form-control", @readonly = "readonly", data_entity = "Cliente", data_id = Model.IdCliente })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.DataElaboracao, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.DataElaboracao, "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Status, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Status, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="col-md-24 info-proposta">
+    <div class="col-md-4 form-group">
+        @Html.Label(GlobalMessages.EmpresaVenda, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.EmpresaDeVenda, new { @class = "form-control", maxlength = 30, @readonly = "readonly" })
+    </div>
+    <div class="col-md-7 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.PontoVenda + " *", new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.PontoDeVenda, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Viabilizador, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.Viabilizador, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.UltimoCCAResponsavel, new { @class = "control-label" })
+        @Html.TextBoxFor(reg => reg.NomeCCA, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+<div class="col-md-24 info-proposta">
+    <div class="col-md-12 form-group">
+        @Html.Label(GlobalMessages.Produto, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.BreveLancamento, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Corretor, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Corretor, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Elaborador, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.AgenteViabilizador, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="col-md-24 info-proposta">
+    <div class="col-md-5 form-group">
+        @Html.Label(GlobalMessages.Torre, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.NomeTorre, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-6 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.ObservacaoTorre, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.ObservacaoTorre, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Email, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.EmailCorretor, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Telefone, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.TelefoneCorretor, new { @class = "form-control", @readonly = "readonly" })
+    </div>
+</div>
+
+<div class="col-md-24 info-proposta">
+    <div id="area_totais">
+        <div class="col-md-12 form-group">
+            @Html.Label(GlobalMessages.Observacao, new { @class = "control-label" })
+            @Html.TextAreaFor(x => x.Observacao, new { @class = "form-control", style = "height: 76px;", maxlength = 700 })
+        </div>
+        <div class="col-md-8 col-md-offset-1" style="margin-right: 2.1%;">
+            @Html.Label(GlobalMessages.Endereco, new { @class = "control-label" })
+            @Html.TextBoxFor(reg => reg.Endereco, new { @class = "form-control", maxlength = 128, @readonly = "readonly" })
+        </div>
+        <div class="col-md-3" style="width: 10.4%;">
+
+            @{
+                var list = new List<SelectListItem>()
+                                                        {
+                                   new SelectListItem() { Text = GlobalMessages.Sim, Value = "true" },
+                                   new SelectListItem() { Text = GlobalMessages.Nao, Value = "false"}
+                                };
+            }
+            @Html.Label(GlobalMessages.Faixa + "1,5 EV", new { @class = "control-label" })
+            @Html.DropDownListFor(x => x.FaixaEv, list, new { @class = "form-control", disabled = "disabled" })
+        </div>
+        <div class="col-md-12 pull-right">
+            <div class="col-md-4 col-md-offset-2">
+                @Html.Label(GlobalMessages.ParcelaSolicitada, new { @class = "control-label" })
+                @Html.TextBoxFor(reg => reg.ParcelaSolicitada, new { @class = "form-control dinheiro", maxlength = 13, Value = Model.ParcelaSolicitada.ToString("F"), @readonly = "readonly", style = "text-align:right" })
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+                @Html.Label(GlobalMessages.TotalDetalhamentoFinanceiro, new { @class = "control-label" })
+                @Html.TextBoxFor(reg => reg.TotalDetalhamento, new { @class = "form-control dinheiro", maxlength = 13, Value = Model.TotalDetalhamento.ToString("F"), @readonly = "readonly", style = "text-align:right" })
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+                @Html.Label(GlobalMessages.TotalItbiEmolumento, new { @class = "control-label " })
+                @Html.TextBoxFor(reg => reg.TotalITBI, new { @class = "form-control dinheiro", maxlength = 13, Value = Model.TotalITBI.ToString("F"), @readonly = "readonly", style = "text-align:right" })
+            </div>
+            <div class="col-md-5 col-md-offset-1">
+                @Html.Label(GlobalMessages.Total, new { @class = "control-label " })
+                @Html.TextBoxFor(reg => reg.Total, new { @class = "form-control dinheiro", maxlength = 13, Value = Model.Total.ToString("F"), @readonly = "readonly", style = "text-align:right" })
+            </div>
+        </div>
+
+    </div>
+</div>
+@{ if (!Model.PreProposta.JustificativaReenvio.IsEmpty()) {
+<div class="col-md-24 info-proposta">
+    <div>
+        <div class="col-md-24 form-group">
+            @Html.Label(GlobalMessages.MotivoReenvioAnalise, new { @class = "control-label" })
+            @Html.TextAreaFor(x => x.PreProposta.JustificativaReenvio, new { @class = "form-control", @readonly = "readonly", style = "height: 76px;", maxlength = 700 })
+        </div>
+    </div>
+</div>
+        } }
+<div class="col-md-24 teste-aparecer" style="text-align: center;margin-top: 7px;"><hr class="hr-info-proposta" /><a id="btn-show-hide-info" style="cursor: pointer;text-decoration:none" onclick="Europa.Controllers.DocumentacaoPreProposta.AlternarExibicaoInformacoes()">Ver mais informações</a></div>
+<script>
+    Europa.Mask.ApplyByClass("dinheiro", Europa.Mask.FORMAT_MONEY, undefined, true);
+</script>
+<style>
+    .info-proposta { display: none; }
+    .hr-info-proposta {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-top: 2px solid #eee;
+    }
+</style>

@@ -1,0 +1,46 @@
+﻿@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.EmpresaVenda.ApiService.Models.Util
+@using Tenda.EmpresaVenda.PortalHouse.Models.Application
+@model Tenda.EmpresaVenda.ApiService.Models.PreProposta.PrePropostaCreateDto
+
+@{
+    var listaTipoParcelas = TipoParcelaWrapper.TipoParcelaDetalhamentoFinanceiro().Select(x => new SelectListItem
+    {
+        Text = x.AsString(),
+        Value = "" + (int)x
+    });
+}
+
+<script>
+    Europa.Controllers.PreProposta.DetalhamentoFinanceiro.UrlListar = '@Url.Action("DetalhamentoFinanceiro", "PreProposta")';
+    Europa.Controllers.PreProposta.DetalhamentoFinanceiro.UrlIncluir = '@Url.Action("IncluirDetalhamentoFinanceiro", "PreProposta")';
+    Europa.Controllers.PreProposta.DetalhamentoFinanceiro.UrlAlterar = '@Url.Action("AlterarDetalhamentoFinanceiro", "PreProposta")';
+    Europa.Controllers.PreProposta.DetalhamentoFinanceiro.UrlExcluir = '@Url.Action("ExcluirDetalhamentoFinanceiro", "PreProposta")';
+    Europa.Controllers.PreProposta.DetalhamentoFinanceiro.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarDetalhamentoFinanceiro").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "IncluirDetalhamentoFinanceiro").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExcluirDetalhamentoFinanceiro").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "AlterarDetalhamentoFinanceiro").ToString().ToLower()'
+    };
+    Europa.Controllers.PreProposta.DetalhamentoFinanceiro.DropDownTipoParcela =
+        '@Html.Raw(Ajax.JavaScriptStringEncode(Html.DropDownList("TipoParcela", listaTipoParcelas,
+        new { @class = "form-control form-control-sm" }).ToHtmlString()))';
+</script>
+
+<div ng-controller="detalhamentoFinanceiroTable as table">
+    <div id="detalhamento_financeiro_datatable_header">
+        <div class="d-flex justify-content-between">
+            <h4 class="color-blue">@GlobalMessages.DetalhamentoFinanceiro</h4>
+            @if (Model.PodeManterAssociacoes && SessionAttributes.Current().HasPermission(ViewBag.Codigo, "DetalhamentoFinanceiroManual"))
+            {
+            <button id="btn-novo-detalhamento"  class="button__red__outline px-5" type="button" title="@GlobalMessages.Adicionar" onClick="Europa.Controllers.PreProposta.DetalhamentoFinanceiro.Novo()"> 
+                @GlobalMessages.Adicionar
+            </button>
+            }
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+            dt-instance="table.dtInstance" class="table"
+            dt-column-defs="table.dtColumnDefs"></table>
+</div>

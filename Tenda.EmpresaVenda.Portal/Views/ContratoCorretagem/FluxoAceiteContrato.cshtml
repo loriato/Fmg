@@ -1,0 +1,50 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models
+@model ContratoCorretagemViewModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutContratoCorretagem.cshtml";
+}
+
+<style>
+    .conteudo-layout {
+        overflow-y: hidden;
+    }
+</style>
+
+<link href="~/Static/projeto/contrato-corretagem/contrato-corretagem.css" rel="stylesheet" />
+<script src="~/Static/projeto/contrato-corretagem/contrato-corretagem.js"></script>
+
+<div style="width:100%">
+    <div style="width:100%; text-align:center">
+        <img style="height:97px;width:92px" src="~/Static/images/layout-contrato/tenda-vermelho.png" />
+    </div>
+    <div id="div-pdf" onscroll="Europa.Controllers.ContratoCorretagem.FimPdf(this)" style="overflow-x: hidden;width: max-content; margin: auto;height: 45vh; overflow-y: auto;margin-top:25px">
+    </div>
+    <div class="div_inputs">
+        <div>
+            <img id="check_false" style="position:relative;top: 20px;height:31px;width:29px;opacity:0.5" src="~/Static/images/inputCheckBox/icon-checkmark.png" />
+            <div style="top: 20px;position:relative;" id="check_true">
+                <img style="cursor:pointer;height:31px;width:29px" onclick="Europa.Controllers.ContratoCorretagem.HabilitarBtn()" src="~/Static/images/inputCheckBox/icon-checkmark_red.png" />
+                <img style="cursor:pointer;height:15px;width:20px;position: absolute;left: 5px;top:-12px" onclick="Europa.Controllers.ContratoCorretagem.HabilitarBtn()" src="~/Static/images/inputCheckBox/tick.png" />
+            </div>
+            <input onclick="Europa.Controllers.ContratoCorretagem.HabilitarBtn()" type="checkbox" id="aceite_flag" disabled name="aceite_flag">
+            <span for="aceite_flag" id="text-aceite-termos">@GlobalMessages.AceiteTermos</span>
+        </div>
+        <button disabled id="btn_aceitar">@GlobalMessages.Aceitar</button>
+
+        <div style="margin-top: 75px;">
+            <span style="font-size: 13px;letter-spacing: 0.13px;color: #6b6c6f;">
+                *@GlobalMessages.LeiaContrato
+            </span>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Europa.Controllers.ContratoCorretagem.Url = '@Model.Contrato';
+    Europa.Controllers.ContratoCorretagem.CarregarContrato();
+</script>
+@using (Html.BeginForm("AceitarContrato", "ContratoCorretagem", FormMethod.Post, new { Id = "form_aceitar" })) { }

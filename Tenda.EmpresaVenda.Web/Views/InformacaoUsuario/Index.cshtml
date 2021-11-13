@@ -1,0 +1,79 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "SEG12";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/portal-pos-venda/informacao-usuario/informacao-usuario.js"></script>
+<script>
+    Europa.Controllers.InformacaoUsuario.UrlListar = '@Url.Action("Listar", "InformacaoUsuario")';
+    Europa.Controllers.InformacaoUsuario.UrlGetAutocompleteLoja = '@Url.Action("GetLojaDropdownList", "InformacaoUsuario")';
+    Europa.Controllers.InformacaoUsuario.UrlAlterar = '@Url.Action("Salvar", "InformacaoUsuario")';
+    Europa.Controllers.InformacaoUsuario.UrlExportarTodos = '@Url.Action("ExportarTodos", "InformacaoUsuario")';
+    Europa.Controllers.InformacaoUsuario.UrlExportarPagina = '@Url.Action("ExportarPagina", "InformacaoUsuario")';
+    Europa.Controllers.InformacaoUsuario.Permissoes = {
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar").ToString().ToLower()'
+    }
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    <div ng-controller="tabelaInformacaoUsuario as table">
+        <div id="datatable_src_header">
+            <form class="form-inline">
+                <div class="col-md-24 form-group">
+                    <div class="col-md-6">
+                        <input type="text" id="filtro_nome" class="form-control" placeholder="Nome, Login ou E-mail" maxlength="128" />
+                    </div>
+                    <div class="col-md-4" style="padding-left: 5px">
+                        @{ 
+                            Html.RenderAction("RenderLojaFiltroDropdownList");
+                        }
+                    </div>
+                    <div class="col-md-6" style="padding-left: 5px">
+                        <select id="filtro_situacao" multiple="multiple" class="select2-container form-control">
+                            <option value="1" selected="selected">Ativo</option>
+                            <option value="2">Suspenso</option>
+                            <option value="3">Cancelado</option>
+                        </select>
+                    </div>
+                    <div class="col-md-2" style="padding-left: 5px">
+                        <button type="submit" title="@GlobalMessages.Filtrar" class="btn btn-default" onclick="Europa.Controllers.InformacaoUsuario.Filtrar()">
+                            <i class="fa fa-filter"></i>
+                        </button>
+                        <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onclick="Europa.Controllers.InformacaoUsuario.Limpar()">
+                            <i class="fa fa-eraser"></i>
+                        </button>
+                    </div>
+                    <div class="col-md-6" style="padding-right: 10px">
+                        <div class="pull-right">
+                            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                            {
+                                <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.InformacaoUsuario.ExportarPagina()">
+                                    <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                                </button>
+                            }
+                            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                            {
+                                <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.InformacaoUsuario.ExportarTodos()">
+                                    <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                                </button>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+}
+<form id="Exportar"></form>
+
+@{
+    Html.RenderPartial("~/Views/InformacaoUsuario/_ModalGerenciarAssociacoes.cshtml", null );
+}

@@ -1,0 +1,54 @@
+#titlebar-buttons-target {
+    width: 50%;
+}
+
+#titlebar-name-target{
+    width: 50%;
+}
+
+#dados_regra_comissao {
+    overflow: hidden;
+}
+#filtro_matriz {
+    padding-top: 25px;
+}
+
+#matriz_pagadoria, #matriz_pagadoria_nominal {
+    position: relative;
+    height: 60vh;
+    width: 100%;
+    min-width: 100%;
+    margin-top: 10px;
+}
+
+.jexcel_content {
+    width: 100%;
+    height: 100%;
+    overflow-x: auto;
+    overflow-y: visible;
+}
+
+.jexcel_content>.jexcel>thead tr:first-child td:first-child {
+    color: rgba(0,0,0,0);
+}
+
+.jexcel_content>.jexcel>thead td:first-child {
+    position: sticky !important;
+}
+
+.jexcel_content>.jexcel>thead td {
+    color: #000000;
+    font-weight: bold;
+    background: #f0f0f0 !important;
+}
+
+.jexcel_content>.jexcel td {
+    z-index: 2;
+}
+
+.jexcel_content>.jexcel>tbody td:first-child {
+    color: #000000;
+    background: #f0f0f0 !important;
+    font-weight: bold;
+    position: unset;
+}

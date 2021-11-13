@@ -1,0 +1,90 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@model Tenda.Domain.EmpresaVenda.Models.PreProposta
+
+@{ 
+    var enums = new List<StatusSicaq>
+    {
+        StatusSicaq.Aprovado,
+        StatusSicaq.Condicionado,
+        StatusSicaq.Reprovado,
+        StatusSicaq.SICAQComErro
+    }.Select(x => new SelectListItem { Value = x.GetHashCode().ToString(), Text = x.ToString() })
+    .ToList();
+}
+
+<div class="modal" id="alterar_sicaq_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document" style="width: 600px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.PrePropostaAguardandoAnalise.Modal.AlterarSicaq.FecharModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.AlterarSicaq</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_alterar_sicaq">
+                    @Html.HiddenFor(x => x.Id)
+                    <div class="col-md-24">
+                        <div class="col-md-9">
+                            @Html.Label(GlobalMessages.Codigo)
+                            @Html.TextBoxFor(x => x.Codigo, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-9 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Cliente)
+                            @Html.TextBoxFor(x => x.Cliente.NomeCompleto, new { @class = "form-control", @readonly = true })
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
+
+                            @{
+                                var list = new List<SelectListItem>()
+                                                    {
+                                   new SelectListItem() { Text = GlobalMessages.Sim, Value = "true" },
+                                   new SelectListItem() { Text = GlobalMessages.Nao, Value = "false"}
+                                };
+                            }
+                            @Html.Label(GlobalMessages.Faixa + "1,5 EV", new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.FaixaEv, list, new { @class = "form-control", disabled = "disabled" })
+                        </div>
+                    </div>
+                    <div class="col-md-24">
+                        <div class="col-md-6 form-group">
+                            @Html.Label(GlobalMessages.StatusSicaq, new { @class = "control-label" })
+                            @Html.DropDownList("StatusSicaq", enums, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4 col-md-offset-1 form-group">
+                            @Html.Label(GlobalMessages.ParcelaAprovada, new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.ParcelaAprovada, new { @class = "form-control text-right dinheiro", @maxlength = 13, Value = $"{Model.ParcelaAprovada:n2}" })
+                        </div>
+                        <div class="col-md-6  col-md-offset-1 form-group">
+                            @Html.Label(GlobalMessages.DataSicaq, new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(x => x.DataSicaq, new { @class = "form-control", @datepicker = "datepicker" })
+                                <span class="input-group-btn control-label">
+                                    <button class="btn btn-default control-label" type="button" onclick="Europa.Components.DatePicker.Closest(this)">
+                                        <i class="fa fa-calendar"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="col-md-5 col-md-offset-1">
+                            @Html.Label(GlobalMessages.FaixaUmMeio, new { @class = "control-label" })
+                            @Html.DropDownListFor(x => x.FaixaUmMeio, new List<SelectListItem>()
+                            {
+                               new SelectListItem() { Text = GlobalMessages.Sim, Value = "true" },
+                               new SelectListItem() { Text = GlobalMessages.Nao, Value = "false"}
+                            }, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_salvar" class="btn btn-default" type="button" onclick="Europa.Controllers.PrePropostaAguardandoAnalise.Modal.AlterarSicaq.Alterar()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Salvar
+                </button>
+                <button id="btn_desistir" class="btn btn-default" type="button" onclick="Europa.Controllers.PrePropostaAguardandoAnalise.Modal.AlterarSicaq.FecharModal()">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Desistir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

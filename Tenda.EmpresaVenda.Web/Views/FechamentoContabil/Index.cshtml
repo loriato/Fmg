@@ -1,0 +1,75 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "PAG11";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/fechamento-contabil/index-fechamento-contabil.js"></script>
+<script type="text/javascript" src="~/Static/projeto/fechamento-contabil/datatable-fechamento-contabil.js"></script>
+
+<script>
+    Europa.Controllers.FechamentoContabil.UrlListarFechamentoContabil = '@Url.Action("ListarFechamentoContabil","FechamentoContabil")';
+    Europa.Controllers.FechamentoContabil.UrlExcluirFechamentoContabil = '@Url.Action("ExcluirFechamentoContabil", "FechamentoContabil")';
+    Europa.Controllers.FechamentoContabil.UrlInserirFechamentoContabil = '@Url.Action("Inserir", "FechamentoContabil")';
+    Europa.Controllers.FechamentoContabil.UrlEnviarNotificacaoEmail = '@Url.Action("ComunicarFechamentoContabil", "FechamentoContabil")';
+
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div class="col-md-24">
+    <div class="col-md-4">
+        @Html.Label(GlobalMessages.Periodo)
+        <div class="input-group">
+            <span class="input-group-addon">@GlobalMessages.De</span>
+            @Html.TextBox("InicioFechamentoFiltro", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px", onchange = "Europa.Controllers.FechamentoContabil.OnChangePeriodo('InicioFechamentoFiltro','TerminoFechamentoFitlro')" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-md-offset-1">
+        @Html.Label(GlobalMessages.Periodo, new { style = "visibility:hidden" })
+        <div class="input-group">
+            <span class="input-group-addon">@GlobalMessages.Ate</span>
+            @Html.TextBox("TerminoFechamentoFitlro", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                    <i class="fa fa-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+
+    <div class="col-md-4 pull-right" style=" padding-top: 21px;padding-left: 40px;text-align: end;">
+        <button class="btn btn-default text-right" onclick="Europa.Controllers.FechamentoContabil.FiltrarTabela()">
+            <i class="fa fa-filter"></i>
+            @GlobalMessages.Filtrar
+        </button>
+        <button class="btn btn-default text-right" onclick="Europa.Controllers.FechamentoContabil.LimparFiltro()">
+            <i class="fa fa-eraser"></i>
+            @GlobalMessages.Limpar
+        </button>
+    </div>
+</div>
+<div class="col-md-24">
+    <div ng-controller="fechamentoContabilTable as table">
+        <div id="fechamento_contabil_datatable_header">
+            <div class="col-md-24">
+                @*@Html.Label(GlobalMessages.FechamentoContabil)*@
+                <button class="btn btn-default pull-right" onclick="Europa.Controllers.FechamentoContabil.Adicionar()">
+                    <i class="fa fa-plus"></i>
+                    @GlobalMessages.Adicionar
+                </button>
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>

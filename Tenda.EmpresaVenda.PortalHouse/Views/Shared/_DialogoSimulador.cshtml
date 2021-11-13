@@ -1,0 +1,37 @@
+﻿@using Europa.Resources
+
+<script type="text/javascript" src="~/Static/projeto/simulador/simulador.js"></script>
+<link rel="stylesheet" type="text/css" href="~/Static/projeto/simulador/simulador.css" />
+
+<script>
+    Europa.Controllers.Simulador.UrlBuscarUrlMatrizOferta = '@Url.Action("BuscarUrlMatrizOferta","Simulador")';
+    Europa.Controllers.Simulador.UrlBuscarUrlSimulador = '@Url.Action("BuscarUrlSimulador", "Simulador")';
+    Europa.Controllers.Simulador.UrlAplicarSimulacaoAtual = '@Url.Action("AplicarSimulacaoAtual","Simulador")';
+</script>
+
+<div class="modal fade modal-fullscreen" id="dialogo_simulador" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" style="margin-top:4%;overflow-y:auto !important;min-width:100%;z-index:1000;">
+    <div class="modal-dialog dialogo-simulador">
+        <div class="modal-content content-simulador">
+
+            @*<div class="modal-header" style="cursor: unset !important; height:64px !important;">
+                <img id="btn_close" data-dismiss="modal" onclick="Europa.Controllers.Simulador.FecharDialogo()"
+                     style="cursor: pointer; width: 35px; margin-top: 16px; float: right; margin-right: 74.5px;" src="~/Static/images/dialogo-conecta/fechar-dialogo.png">
+                <label style="margin-top:19.5%;">Fechar</label>
+            </div>*@
+            <div class="modal-header" style="cursor: unset !important; height: 64px !important; background-image: linear-gradient(to bottom, #ed1c24, #d0021b 250%)">
+                <div onclick="Europa.Controllers.Simulador.FecharDialogo();" style="margin-left: 96.5%;width: 4%;display: flex;flex-direction: column;">
+                    <img id="btn_close" data-dismiss="modal"
+                         style="cursor: pointer; width: 35px; margin-left: 3px;" src="~/Static/images/dialogo-conecta/fechar-dialogo.png">
+                    <br />
+                    <label style="color: white; margin-top: -20px">Fechar</label>
+                </div>
+            </div>
+            <div class="modal-footer" onmouseover="Europa.Components.SideMenu.CloseNav()" id="modal_simulador" style="height:1200px;padding:0;border-top:0;">
+                <div id="div-frame-simulador" name="div_frame" class="div-frame">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+

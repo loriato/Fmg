@@ -1,0 +1,41 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Web.Models.PrePropostaDTO
+
+<div class="col-md-24">
+    <div class="modal" id="modal-reenviar" tabindex="-1" role="dialog" data-backdrop="static">
+        <div class="modal-dialog" role="document" style="width: 700px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Reenviar</h4>
+                </div>
+                <div class="modal-body">
+                    <form id="form_reenviar">
+                        <div class="col-md-24">
+                            <div class="col-md-12 form-group">
+                                @Html.Label(GlobalMessages.Produto, new { @class = "control-label" })
+                                @Html.TextBoxFor(reg => reg.PreProposta.BreveLancamento.Nome, new { @class = "form-control", @readonly = "readonly" })
+                            </div>
+                        
+                            <div class="col-md-11 col-md-offset-1">
+                                @Html.Label("Novo " + GlobalMessages.Produto, new { @class = "control-label" })
+                                @{
+                                    Html.RenderAction("RenderBrevesLancamentosReenviar",new { idEmpresavenda = Model.PreProposta.EmpresaVenda.Id});
+                                }
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn" title="@GlobalMessages.Reenviar" onclick="Europa.Controllers.PreProposta.ReenviarSuat()">
+                        <i class="fa fa-check" aria-hidden="true"></i> @GlobalMessages.Reenviar
+                    </button>
+                    <button type="button" class="btn" title="@GlobalMessages.Desistir" onclick="Europa.Controllers.PreProposta.FecharModalReenviarSuat()">
+                        <i class="fa fa-close"></i> @GlobalMessages.Desistir
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

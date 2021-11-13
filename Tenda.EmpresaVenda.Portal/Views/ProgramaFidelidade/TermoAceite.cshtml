@@ -1,0 +1,37 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models
+@model TermoAceiteDTO
+@{
+    ViewBag.Title = "Termo de Aceite";
+}
+
+<link href="~/Static/projeto/programa-fidelidade/programa-fidelidade.css" rel="stylesheet" />
+<script src="~/Static/projeto/programa-fidelidade/como-funciona.js"></script>
+
+<script src="~/Static/europa/js/pdf.js"></script>
+<script src="~/Static/europa/js/pdf.worker.js"></script>
+
+<script src="~/Static/projeto/programa-fidelidade/termo-aceite.js"></script>
+<script>
+    Europa.Controllers.TermoAceite.UrlDownloadTermoAceite = '@Url.Action("DownloadTermoAceite", "ProgramaFidelidade")';
+</script>
+
+@Html.HiddenFor(x => x.TermoAceite)
+
+ <div id="titlebar-name"><span class="Programa-de-fidelida">@ViewBag.Title.ToUpper()</span></div>
+ <div id="titlebar-buttons">
+         <button  class="btn  btn-fidelidade" type="button" style="margin-left: 10px;" onclick="Europa.Controllers.TermoAceite.Download()">
+             <i class="fa fa-download"></i> @GlobalMessages.Download
+         </button>
+     <button class="btn  btn-fidelidade"
+             type="button"
+             onClick="location.href='@Url.Action("ComoFunciona", "ProgramaFidelidade")'">
+         @GlobalMessages.Voltar
+     </button>
+ </div>
+
+<div class="col-md-24">
+    <div id="div-pdf">
+    </div>
+</div>
+

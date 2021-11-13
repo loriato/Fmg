@@ -1,0 +1,53 @@
+﻿@using Europa.Resources
+<script src="~/Static/administrativo/parametro-sistema/usuario-modal.js"></script>
+<script>
+    Europa.Components.UsuarioModal.listAction = '@Url.Action("ListaUsuarioDataTable", "Usuario")';
+</script>
+
+<div class="modal" id="buscaUsuario" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.BuscarUsuario</h4>
+            </div>
+            <div class="modal-body" ng-controller="listUsuarios as table">
+                <div class="col-md-16">
+                    <label>@GlobalMessages.Nome</label>
+                    <input type="text" id="usuarioFiltroNome" class="form-control" aria-describedby="basic-addon2">
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-7">
+                    <label for=""> </label>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="checkboxSuspensos" id="BuscaUsuariosSuspensos" value="true"> Considerar Suspensos
+                        </label>
+                    </div>
+                </div>
+                <div>
+                    <div id="barra_datatable_modal_usuario">
+                        <form class="form-inline">
+                            <div class="form-group">
+                                <label>@GlobalMessages.UsuariosEncontrados</label>
+                            </div>
+                            <div class="pull-right">
+                                <button id="modal_usuario_filtrar" class="btn" type="button" ng-click="reloadData()"><i class="fa fa-filter" aria-hidden="true"></i>  @GlobalMessages.Filtrar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                            dt-instance="table.dtInstance" class="table"
+                            dt-column-defs="table.dtColumnDefs">
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn" onclick="Europa.Components.UsuarioModal.Selecionar()"><i class="fa fa-check" aria-hidden="true"></i>  @GlobalMessages.Selecionar</button>
+                <button type="button" class="btn pull-left" onclick="Europa.Components.UsuarioModal.LimparBusca()"><i class="fa fa-eraser" aria-hidden="true"></i> @GlobalMessages.LimparFiltro</button>
+                <button type="button" class="btn" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>
+

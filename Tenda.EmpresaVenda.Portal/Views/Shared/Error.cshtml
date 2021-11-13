@@ -1,0 +1,35 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="col-md-24" style="padding-left: 15px; padding-right:15px;">
+    <h4>Ocorreu um erro ao processar a requisição</h4>
+    <h6>@ViewBag.Message</h6>
+    <a id="mostrarDetalhes" href="#" style="font-size:small">Mostrar detalhes técnicos</a>
+    <div id="stacktrace" style="margin-top: -15px; margin-left: 10px;font-size:smaller">
+        @Html.Raw(ViewBag.StackTrace.Replace(@"at ", "<br/>at ").Replace(@"em ", "<br/>em "));
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        var divStackTrace = $('#stacktrace');
+        var linkMostrar = $('#mostrarDetalhes');
+        divStackTrace.hide();
+
+        linkMostrar.click(function (e) {
+            e.preventDefault();
+
+            if (divStackTrace.css('display') == 'none') {
+                divStackTrace.show();
+                linkMostrar.html('Ocultar detalhes técnicos');
+            } else {
+                divStackTrace.hide();
+                linkMostrar.html('Mostrar detalhes técnicos');
+            }
+
+        });
+    })
+</script>

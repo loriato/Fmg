@@ -1,0 +1,63 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "CAD17";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+
+<script type="text/javascript" src="~/Static/projeto/statuspreproposta/StatusPreProposta.js"></script>
+<script>
+    //URLs Datatable Loja Portal
+    Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.UrlListar= '@Url.Action("Listar", "AgrupamentoSituacaoProcessoPreProposta")';
+    Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.UrlIncluir= '@Url.Action("Incluir", "AgrupamentoSituacaoProcessoPreProposta")';
+    Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.UrlAlterar= '@Url.Action("Alterar", "AgrupamentoSituacaoProcessoPreProposta")';
+    Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.UrlRemover= '@Url.Action("Remover", "AgrupamentoSituacaoProcessoPreProposta")';
+
+
+
+    Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+        Alterar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar").ToString().ToLower()'
+    };
+</script>
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div class="col-md-24">
+    <form id="form_filtro_TransalteStatus">
+        <div class="col-md-24">
+            <div class="col-md-20">
+                @Html.Label(GlobalMessages.Nome)
+                @Html.TextBox("filtro_Nome", "", new { @class = "form-control", maxlength = 50 })
+            </div>
+            <div class="pull-right col-md-3 col-md-offset-1" style="margin-top: 22px">
+                <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.Filtrar()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+                <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.AgrupamentoSituacaoProcessoPreProposta.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+            </div>
+        </div>
+    </form>
+    <div ng-controller="AgrupamentoSituacaoProcessoDatatable as table">
+        <div id="AgrupamentoSituacaoProcesso_datatable_header" class="col-md-24 container-fluid">
+            <div class="col-md-24 form-group">
+                <form>
+                    @*<div class="col-md-18" style="margin-right:5px">
+                            <input type="text" id="filtroLoja" placeholder="@GlobalMessages.Nome" class="form-control">
+                        </div>
+                        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+                        {
+                            <div class="col-md-5" style="margin-left: 5px">
+                                <button class="btn btn-default" onclick="Europa.Controllers.LojaPortal.FiltrarLojaPortal()"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                                <button class="btn btn-default" type="button" onclick="Europa.Controllers.LojaPortal.LimparFiltroLojaPortal()"><i class="fa fa-eraser"></i></button>
+                            </div>
+                        }*@
+                </form>
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>

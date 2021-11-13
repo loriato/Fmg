@@ -1,0 +1,68 @@
+﻿@using Europa.Resources
+@model Tenda.Domain.EmpresaVenda.Models.EmpresaVenda
+
+<script src="~/Static/projeto/nova-ev/formulario-nova-ev.js"></script>
+
+<div class="col-md-24">
+    @Html.HiddenFor(x => x.Loja.Id)
+    <form id="form_empresa_venda">
+        @Html.HiddenFor(x => x.Id)
+        @Html.HiddenFor(x => x.Loja.Nome)
+        <div class="col-md-24" id="div_dados_empresa">
+            <div class="col-md-24">
+                <div class="col-md-4 form-group">
+                    @Html.Label(GlobalMessages.Cnpj + " *", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.CNPJ, new { @class = "form-control", @maxlength = 20 })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.RazaoSocial + " *", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.RazaoSocial, new { @class = "form-control", @maxlength = 256 })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.NomeFantasia + " *", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.NomeFantasia, new { @class = "form-control", @maxlength = 128 })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.DataEntrada, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.CriadoEm, new { @class = "form-control", @datepicker = "datepicker", @disabled = "disabled" })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.Situacao + " *", new { @class = "control-label" })
+                    @Html.EnumDropDownListFor(x => x.Situacao, GlobalMessages.Selecione, new { @class = "form-control", @disabled = "disabled" })
+                </div>
+            </div>
+            <div class="col-md-24">
+                <div class="col-md-4 form-group">
+                    @Html.Label(GlobalMessages.CodigoFornecedorSap + " *", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.CodigoFornecedor, new { @class = "form-control", @maxlength = 50 })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.CentralVendas + " *", new { @class = "control-label" })
+                    <select id="autocomplete_lojas_disponiveis" name="Loja.Id" class="select2-container form-control"></select>
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.CreciJuridico + " *", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.CreciJuridico, new { @class = "form-control", @maxlength = 50 })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.InscricaoMunicipal, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.InscricaoMunicipal, new { @class = "form-control", @maxlength = 30 })
+                </div>
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.InscricaoEstadual, new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.InscricaoEstadual, new { @class = "form-control", @maxlength = 30 })
+                </div>
+            </div>
+            <div class="col-md-24">
+                <div class="col-md-14">
+                    @Html.Label(GlobalMessages.Regionais)
+                    <select id="autocomplete_regional_empresa" name="autocomplete_regional_empresa" style="width: 100%;" class="select2-container form-control" multiple="multiple"></select>
+                </div>
+                <div class="col-md-9 col-md-offset-1">
+                    @Html.Label(GlobalMessages.ConsiderarUf + " *", new { @class = "control-label" })
+                    @Html.EnumDropDownListFor(x => x.ConsiderarUF, GlobalMessages.Selecione, new { @class = "form-control" })
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

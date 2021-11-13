@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WL5G3N0:definitions xmlns:WL5G3N2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:WL5G3N1="http://buscacep.tenda.br.com/" name="BuscaCEPService" targetNamespace="http://buscacep.tenda.br.com/" xmlns:WL5G3N0="http://schemas.xmlsoap.org/wsdl/">
+  <WL5G3N0:types>
+    <xsd:schema xmlns:wsp="http://www.w3.org/ns/ws-policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:tns="http://buscacep.tenda.br.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsp1_2="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+      <xsd:import schemaLocation="http://osbdev.tenda.local:80/Utilitarios/BuscaCEPBSv1/BuscaCEPPSv1?SCHEMA%2FUtilitarios%2FBuscaCEPBSv1%2Fxsd%2Fbuscacep" namespace="http://buscacep.tenda.br.com/" />
+    </xsd:schema>
+  </WL5G3N0:types>
+  <WL5G3N0:message name="pesquisarEnderecoPorCEP">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:pesquisarEnderecoPorCEP" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="pesquisarEnderecoPorCEPResponse">
+    <WL5G3N0:part name="parameters" element="WL5G3N1:pesquisarEnderecoPorCEPResponse" />
+  </WL5G3N0:message>
+  <WL5G3N0:message name="PesquisaCEPException">
+    <WL5G3N0:part name="fault" element="WL5G3N1:PesquisaCEPFault" />
+  </WL5G3N0:message>
+  <WL5G3N0:portType name="BuscaCEP">
+    <WL5G3N0:operation name="pesquisarEnderecoPorCEP">
+      <WL5G3N0:input message="WL5G3N1:pesquisarEnderecoPorCEP" />
+      <WL5G3N0:output message="WL5G3N1:pesquisarEnderecoPorCEPResponse" />
+      <WL5G3N0:fault name="PesquisaCEPException" message="WL5G3N1:PesquisaCEPException" />
+    </WL5G3N0:operation>
+  </WL5G3N0:portType>
+  <WL5G3N0:binding name="BuscaCEPPortBinding" type="WL5G3N1:BuscaCEP">
+    <WL5G3N2:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <WL5G3N0:operation name="pesquisarEnderecoPorCEP">
+      <WL5G3N2:operation soapAction="" />
+      <WL5G3N0:input>
+        <WL5G3N2:body use="literal" />
+      </WL5G3N0:input>
+      <WL5G3N0:output>
+        <WL5G3N2:body use="literal" />
+      </WL5G3N0:output>
+      <WL5G3N0:fault name="PesquisaCEPException">
+        <WL5G3N2:fault use="literal" name="PesquisaCEPException" namespace="" />
+      </WL5G3N0:fault>
+    </WL5G3N0:operation>
+  </WL5G3N0:binding>
+  <WL5G3N0:service name="BuscaCEPPortBindingQSService">
+    <WL5G3N0:port name="BuscaCEPPortBindingQSPort" binding="WL5G3N1:BuscaCEPPortBinding">
+      <WL5G3N2:address location="http://osbdev.tenda.local:80/Utilitarios/BuscaCEPBSv1/BuscaCEPPSv1" />
+    </WL5G3N0:port>
+  </WL5G3N0:service>
+</WL5G3N0:definitions>

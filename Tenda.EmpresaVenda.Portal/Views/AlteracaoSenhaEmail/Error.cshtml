@@ -1,0 +1,83 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.EmpresaVenda.Portal.Models
+@model ErroDTO
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ApplicationInfo.NomeSistema()</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Static/images/favicon.ico" />
+
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/europa")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-validator")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/Static/scripts/jquery-placeholder.js")
+
+
+    <link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-menu-icons.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-button.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-input.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-tabs.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-text.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-action-bar.css" rel="stylesheet" />
+
+
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+    <script src="~/Static/tinymce/tinymce.min.js"></script>
+    <script src="~/Static/europa/js/europa-dialogo.js"></script>
+
+    <script src="~/Static/projeto/alteracao-senha/alteracao-senha.js"></script>
+    <link href="~/Static/europa/css/login.css" rel="stylesheet" />
+
+    <script>
+        Europa.Controllers.DefinirSenha.UrlDefinirSenha = '@Url.Action("AlterarSenha", "AlteracaoSenhaEmail")';
+    </script>
+</head>
+
+<body>
+    <div class="col-md-24 div-imgs-balls">
+        <img src="~/Static/images/logo-credenciada.png" />
+        <img src="~/Static/images/login/bola-gde-menor-red-cima.png" />
+        <img src="~/Static/images/login/bola-rosa-menor-alto.png" />
+    </div>
+
+    @{Html.RenderPartial("~/Views/Shared/Dialogo.cshtml");}
+
+    <div id="titlebar-name">@ViewBag.Title</div>
+
+    <div class="col-md-24 wrapper container-fluid" style="float: left;margin: 0;margin-top: 8%;height:100%">
+        <div class="col-md-24" style="text-align:center">
+            @Model.Mensagem
+        </div>
+        <div class="div-img-footer">
+            <img src="~/Static/images/login/bola-rosa.png" />
+            <img src="~/Static/images/login/bola-gde-menor-red-baixo.png" />
+        </div>
+        <div class="col-md-24 msg-footer-tenda">
+            <div class="col-md-23 col-md-offset-1">
+                <img src="~/Static/images/tenda-logo.png" />
+                <p>@string.Format(GlobalMessages.TodosDireitosReservadosTenda, DateTime.Now.Year)</p>
+            </div>
+        </div>
+        <div class="col-md-24" style="color: transparent; font-size: smaller">
+            @{Html.RenderPartial("~/Views/Shared/Footer.cshtml");}
+        </div>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,22 @@
+/***
+    ACTION BAR
+ */
+.title-bar{
+    height: 93px;
+    background-color: var(--chery-red);
+    padding: 0;
+    margin: 25px 0 0 0;
+}
+
+.campos-obrigatrio {
+    height: 18px;
+    opacity: 0.55;
+    font-family: AktivGrotesk;
+    font-size: 12px;
+    font-weight: normal;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.11px;
+    color: #b3b3b3;
+}

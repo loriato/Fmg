@@ -1,0 +1,1702 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{0959FD65-E9A6-4ED0-8CE2-6A4CBB214C1A}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tenda.EmpresaVenda.Web</RootNamespace>
+    <AssemblyName>Tenda.EmpresaVenda.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+    <Use64BitIISExpress />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>0</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <LangVersion>7.1</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime, Version=3.5.0.2, Culture=neutral, PublicKeyToken=eb42632606e9261f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Antlr3.Runtime.3.5.1\lib\net40-client\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac, Version=6.2.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.6.2.0\lib\netstandard2.0\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Core.NonPublicProperty, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Core.NonPublicProperty.2.0.0\lib\netstandard2.0\Autofac.Core.NonPublicProperty.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=6.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.6.0.0\lib\net472\Autofac.Integration.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="Autofac.Integration.WebApi, Version=6.0.1.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.WebApi2.6.0.1\lib\net472\Autofac.Integration.WebApi.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.3.4.1\lib\net40\Common.Logging.dll</HintPath>
+    </Reference>
+    <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentValidation, Version=9.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.10.3.3\lib\netstandard2.0\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl, Version=3.0.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.3.0.2\lib\net472\Flurl.dll</HintPath>
+    </Reference>
+    <Reference Include="Flurl.Http, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Flurl.Http.3.2.0\lib\net472\Flurl.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections, Version=4.0.0.4000, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Iesi.Collections.4.0.4\lib\net461\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.5.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=3.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Extensions.Logging.Abstractions, Version=5.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Extensions.Logging.Abstractions.5.0.0\lib\net461\Microsoft.Extensions.Logging.Abstractions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=12.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c">
+      <HintPath>..\packages\ExcelPackage.1.0.0\lib\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Microsoft.Owin, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.2.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.2.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security, Version=4.2.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.2.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Win32.Primitives.4.3.0\lib\net46\Microsoft.Win32.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate, Version=5.3.0.0, Culture=neutral, PublicKeyToken=aa95f207798dfdb4, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.5.3.9\lib\net461\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Linq, Version=1.1.0.1001, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NHibernate.Linq.1.0\lib\NHibernate.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=5.0.7.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.5.0.7\lib\netstandard2.0\Npgsql.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="Quartz, Version=3.3.3.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Quartz.3.3.3\lib\net472\Quartz.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.2.2.0\lib\net45\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq.EagerFetching, Version=2.2.0.0, Culture=neutral, PublicKeyToken=fee00910d6e5f53b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Remotion.Linq.EagerFetching.2.2.0\lib\net45\Remotion.Linq.EagerFetching.dll</HintPath>
+    </Reference>
+    <Reference Include="RestSharp, Version=106.12.0.0, Culture=neutral, PublicKeyToken=598062e77f915f75, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.106.12.0\lib\net452\RestSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System.AppContext, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.AppContext.4.3.0\lib\net463\System.AppContext.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.Primitives, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Primitives.4.3.0\lib\net45\System.ComponentModel.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Console, Version=4.0.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Console.4.3.1\lib\net46\System.Console.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Diagnostics.DiagnosticSource, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.DiagnosticSource.5.0.1\lib\net46\System.Diagnostics.DiagnosticSource.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Diagnostics.Tracing, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Diagnostics.Tracing.4.3.0\lib\net462\System.Diagnostics.Tracing.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Globalization.Calendars, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Globalization.Calendars.4.3.0\lib\net46\System.Globalization.Calendars.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IdentityModel" />
+    <Reference Include="System.IO, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.4.3.0\lib\net462\System.IO.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression, Version=4.1.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Compression.FileSystem" />
+    <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.ZipFile.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.4.3.0\lib\net46\System.IO.FileSystem.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.FileSystem.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.FileSystem.Primitives.4.3.0\lib\net46\System.IO.FileSystem.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.IO.Packaging, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.IO.Packaging.5.0.0\lib\net46\System.IO.Packaging.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Linq, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.4.3.0\lib\net463\System.Linq.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Expressions, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Linq.Expressions.4.3.0\lib\net463\System.Linq.Expressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.4\lib\net461\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http, Version=4.1.1.3, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Http.4.3.4\lib\net46\System.Net.Http.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.7\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Sockets, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Net.Sockets.4.3.0\lib\net46\System.Net.Sockets.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reflection, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Reflection.4.3.0\lib\net462\System.Reflection.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.4.3.1\lib\net462\System.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.5.0.0\lib\net45\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Extensions, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.Extensions.4.3.1\lib\net462\System.Runtime.Extensions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.4.3.0\lib\net463\System.Runtime.InteropServices.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.InteropServices.RuntimeInformation, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.InteropServices.RuntimeInformation.4.3.0\lib\net45\System.Runtime.InteropServices.RuntimeInformation.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Security.Cryptography.Algorithms, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Algorithms.4.3.1\lib\net463\System.Security.Cryptography.Algorithms.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Encoding, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Encoding.4.3.0\lib\net46\System.Security.Cryptography.Encoding.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.Primitives, Version=4.0.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.Primitives.4.3.0\lib\net46\System.Security.Cryptography.Primitives.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Security.Cryptography.X509Certificates, Version=4.1.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Security.Cryptography.X509Certificates.4.3.2\lib\net461\System.Security.Cryptography.X509Certificates.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Text.Encodings.Web, Version=5.0.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.5.0.1\lib\net461\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=5.0.0.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.5.0.2\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.RegularExpressions, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.RegularExpressions.4.3.1\lib\net463\System.Text.RegularExpressions.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Threading.Channels, Version=5.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Channels.5.0.0\lib\net461\System.Threading.Channels.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Thread" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.7\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.7\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.7.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.7\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.7\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.7\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Xml.ReaderWriter, Version=4.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Xml.ReaderWriter.4.3.1\lib\net46\System.Xml.ReaderWriter.dll</HintPath>
+      <Private>True</Private>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Global.asax" />
+    <Compile Include="Controllers\AdiantamentoEmergencialController.cs" />
+    <Compile Include="Controllers\AceitesBannersController.cs" />
+    <Compile Include="Controllers\AgenteVendaController.cs" />
+    <Compile Include="Controllers\AgrupamentoProcessoPrePropostaController.cs" />
+    <Compile Include="Controllers\AgrupamentoSituacaoProcessoPrePropostaController.cs" />
+    <Compile Include="Controllers\AprovarAdiantamentoEmergencialController.cs" />
+    <Compile Include="Controllers\AuthenticateUserByTokenAttribute.cs" />
+    <Compile Include="Controllers\BancoController.cs" />
+    <Compile Include="Controllers\BookBreveLancamentoController.cs" />
+    <Compile Include="Controllers\BookEmpreendimentoController.cs" />
+    <Compile Include="Controllers\CockpitMidasController.cs" />
+    <Compile Include="Controllers\ConsultaAceitesContratosCorretagemController.cs" />
+    <Compile Include="Controllers\EstadoAvalistaController.cs" />
+    <Compile Include="Controllers\HierarquiaHouseController.cs" />
+    <Compile Include="Controllers\JuridicoController.cs" />
+    <Compile Include="Controllers\KanbanPrePropostaController.cs" />
+    <Compile Include="Controllers\NovaRegraComissaoController.cs" />
+    <Compile Include="Controllers\LojaPortalController.cs" />
+    <Compile Include="Controllers\PagamentoUnificadoController.cs" />
+    <Compile Include="Controllers\EstadoCidadeController.cs" />
+    <Compile Include="Controllers\PoliticaPrivacidadeController.cs" />
+    <Compile Include="Controllers\CadastroBannersController.cs" />
+    <Compile Include="Controllers\CargaRelatorioRepasseController.cs" />
+    <Compile Include="Controllers\CargaValorNominalReferenciaController.cs" />
+    <Compile Include="Controllers\CentroCustoController.cs" />
+    <Compile Include="Controllers\ClassificacaoController.cs" />
+    <Compile Include="Controllers\ClienteController.cs" />
+    <Compile Include="Controllers\ClienteDuplicadoController.cs" />
+    <Compile Include="Controllers\ConsultaEstoqueController.cs" />
+    <Compile Include="Controllers\DocumentoEmpresaVendaController.cs" />
+    <Compile Include="Controllers\DocumentoFormularioController.cs" />
+    <Compile Include="Controllers\EfetivarSolicitacaoResgateController.cs" />
+    <Compile Include="Controllers\HierarquiaCoordenadorController.cs" />
+    <Compile Include="Controllers\HierarquiaSupervisorViabilizadorController.cs" />
+    <Compile Include="Controllers\FilaEmailController.cs" />
+    <Compile Include="Controllers\EnderecoFornecedorController.cs" />
+    <Compile Include="Controllers\FechamentoContabilController.cs" />
+    <Compile Include="Controllers\LayoutProgramaFidelidadeController.cs" />
+    <Compile Include="Controllers\LeadController.cs" />
+    <Compile Include="Controllers\ConsultaPrePropostaController.cs" />
+    <Compile Include="Controllers\CorretorController.cs" />
+    <Compile Include="Controllers\DocumentacaoAvalistaController.cs" />
+    <Compile Include="Controllers\DocumentacaoPrePropostaController.cs" />
+    <Compile Include="Controllers\FilaUnificadaController.cs" />
+    <Compile Include="Controllers\FornecedorController.cs" />
+    <Compile Include="Controllers\GestaoController.cs" />
+    <Compile Include="Controllers\GrupoCCAController.cs" />
+    <Compile Include="Controllers\HistoricoRegraComissaoController.cs" />
+    <Compile Include="Controllers\CargaLeadController.cs" />
+    <Compile Include="Controllers\LojaController.cs" />
+    <Compile Include="Controllers\EmpreendimentoController.cs" />
+    <Compile Include="Controllers\EmpresaVendaController.cs" />
+    <Compile Include="Controllers\MatrizPagadoriaController.cs" />
+    <Compile Include="Controllers\MeuCadastroController.cs" />
+    <Compile Include="Controllers\ModalidadeComissaoController.cs" />
+    <Compile Include="Controllers\ModalidadeProgramaFidelidadeController.cs" />
+    <Compile Include="Controllers\NotificacaoController.cs" />
+    <Compile Include="Controllers\NovaEvController.cs" />
+    <Compile Include="Controllers\PagamentoController.cs" />
+    <Compile Include="Controllers\ParametroRequisicaoCompraController.cs" />
+    <Compile Include="Controllers\PerfilSistemaGrupoADController.cs" />
+    <Compile Include="Controllers\PontuacaoFidelidadeController.cs" />
+    <Compile Include="Controllers\PrePropostaAvalistaAguardandoAnaliseController.cs" />
+    <Compile Include="Controllers\PropostaFaturadaController.cs" />
+    <Compile Include="Controllers\RateioComissaoController.cs" />
+    <Compile Include="Controllers\RecebimentoNotaFiscalController.cs" />
+    <Compile Include="Controllers\RegionaisController.cs" />
+    <Compile Include="Controllers\RegionalEmpresaController.cs" />
+    <Compile Include="Controllers\RegraComissaoPadraoController.cs" />
+    <Compile Include="Controllers\RelatorioAcessoController.cs" />
+    <Compile Include="Controllers\RelatorioComissaoController.cs" />
+    <Compile Include="Controllers\PontoVendaController.cs" />
+    <Compile Include="Controllers\PrePropostaAguardandoAnaliseController.cs" />
+    <Compile Include="Controllers\PrePropostaController.cs" />
+    <Compile Include="Controllers\ProfissaoController.cs" />
+    <Compile Include="Controllers\RegraComissaoController.cs" />
+    <Compile Include="Controllers\RegraComissaoEvsController.cs" />
+    <Compile Include="Controllers\ResgatePontuacaoFidelidadeController.cs" />
+    <Compile Include="Controllers\SimuladorController.cs" />
+    <Compile Include="Controllers\SistemasController.cs" />
+    <Compile Include="Controllers\StandVendaController.cs" />
+    <Compile Include="Controllers\StateMachinePrePropostaController.cs" />
+    <Compile Include="Controllers\StaticResourceController.cs" />
+    <Compile Include="Controllers\PrePropostaWorkflowController.cs" />
+    <Compile Include="Controllers\StatusConformidadeController.cs" />
+    <Compile Include="Controllers\StatusContratoJunixController.cs" />
+    <Compile Include="Controllers\StatusSuatStatusEvsController.cs" />
+    <Compile Include="Controllers\TermoAceiteProgramaFidelidadeController.cs" />
+    <Compile Include="Controllers\TipoCustoController.cs" />
+    <Compile Include="Controllers\TiposDocumentoController.cs" />
+    <Compile Include="Controllers\TransferenciaPontoVendaController.cs" />
+    <Compile Include="Controllers\TransferenciaCarteiraController.cs" />
+    <Compile Include="Controllers\StatusPrePropostaController.cs" />
+    <Compile Include="Controllers\ViabilizadorController.cs" />
+    <Compile Include="Jobs\AtualizacaoBoletoContratoPrePropostaJob.cs" />
+    <Compile Include="Jobs\AtualizacaoDisponibilidadeEmpreendimentoJob.cs" />
+    <Compile Include="Jobs\AtualizacaoIdSapClienteJob.cs" />
+    <Compile Include="Jobs\AtualizacaoSapNumeroPedidoJob.cs" />
+    <Compile Include="Jobs\AtualizacaoSituacaoPrePropostaSuatJob.cs" />
+    <Compile Include="Jobs\AtualizarFilaUnificadaJob.cs" />
+    <Compile Include="Jobs\FechamentoContabilNotificaJob.cs" />
+    <Compile Include="Jobs\ConsolidadoPontuacaoFidelidadeJob.cs" />
+    <Compile Include="Jobs\ConsolidadoRelatorioComissaoJob.cs" />
+    <Compile Include="Jobs\FilaEmailJob.cs" />
+    <Compile Include="Jobs\IntegrarEmpreendimentoSuatJob.cs" />
+    <Compile Include="Jobs\IntegrarLojaSuat.cs" />
+    <Compile Include="Jobs\InvalidacaoTokenUsuarioJob.cs" />
+    <Compile Include="Jobs\ConsolidadoPrePropostaJob.cs" />
+    <Compile Include="Jobs\AvaliacaoValidadeDocumentoJob.cs" />
+    <Compile Include="Jobs\LiberarCampanhaJob.cs" />
+    <Compile Include="Jobs\LiberarPontuacaoFidelidadeJob.cs" />
+    <Compile Include="Jobs\MidasCruzamentoJob.cs" />
+    <Compile Include="Jobs\MidasEnvioJob.cs" />
+    <Compile Include="Jobs\CancelarPagamentosDistratadosJob.cs" />
+    <Compile Include="Jobs\RegraAtivaSemAceiteJob.cs" />
+    <Compile Include="Jobs\RegraComissaoPadraoJob.cs" />
+    <Compile Include="Jobs\RepasseJunixJob.cs" />
+    <Compile Include="Jobs\SalvaArquivoRepasseJunixJob.cs" />
+    <Compile Include="Models\ArquivoDTO.cs" />
+    <Compile Include="Models\ArquivoUrlDTO.cs" />
+    <Compile Include="Models\ClienteDTO.cs" />
+    <Compile Include="Models\CorretorEnderecoCorretorViewModel.cs" />
+    <Compile Include="Models\DadosClienteDTO.cs" />
+    <Compile Include="Models\DocumentacaoAvalistaViewModel.cs" />
+    <Compile Include="Models\DocumentacaoPrePropostaViewModel.cs" />
+    <Compile Include="Models\EmpresaVendaDTO.cs" />
+    <Compile Include="Models\ExtensaoEmpreendimentoViewModel.cs" />
+    <Content Include="libman.json" />
+    <None Include="packages.config" />
+    <None Include="Properties\PublishProfiles\CustomProfile.pubxml">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <Content Include="Static\projeto\AgrupamentoProcessoPreProposta\datatable-agrupamento.js" />
+    <Content Include="Static\projeto\AgrupamentoProcessoPreProposta\datatable-cruzamento.js" />
+    <Content Include="Static\projeto\AgrupamentoSituacaoProcessoPreProposta\AgrupamentoSituacaoProcessoPreProposta.js" />
+    <Content Include="Static\projeto\cockpit-midas\cockpit-midas.js" />
+    <Content Include="Static\projeto\cockpit-midas\datatable-notas.js" />
+    <Content Include="Static\projeto\cockpit-midas\datatable-ocorrencias.js" />
+    <Content Include="Static\projeto\empresa-venda\responsavel-aceite-regra-comissao.js" />
+    <Content Include="Static\projeto\hierarquia-house\datatable-agente-venda-house.js" />
+    <Content Include="Static\projeto\hierarquia-house\datatable-hierarquia-house.js" />
+    <Content Include="Static\projeto\hierarquia-house\datatable-supervisor-house.js" />
+    <Content Include="Static\projeto\hierarquia-house\hierarquia-house.css" />
+    <Content Include="Static\projeto\hierarquia-house\index-hierarquia-house.js" />
+    <Content Include="Static\images\caret-up.png" />
+    <Content Include="Static\images\caret-down.png" />
+    <Content Include="Static\images\fechar-dialogo.png" />
+    <Content Include="Static\projeto\aceites-banners\aceites-banners.js" />
+    <Content Include="Static\projeto\AgenteVenda\agente-venda.js" />
+    <Content Include="Static\projeto\AgenteVenda\datatable-loja-portal.js" />
+    <Content Include="Static\projeto\AgenteVenda\datatable-usuario.js" />
+    <Content Include="Static\projeto\cliente-duplicado\cliente-duplicado.css" />
+    <Content Include="Static\projeto\cliente-duplicado\datatable-cliente-duplicado.js" />
+    <Content Include="Static\projeto\cliente-duplicado\datatable-pre-proposta.js" />
+    <Content Include="Static\projeto\cliente-duplicado\index-cliente-duplicado.js" />
+    <Content Include="Static\projeto\cliente\modal-exportar-cliente.js" />
+    <Content Include="Static\projeto\consulta-aceites-contratos\datatable-consulta-aceites-contratos.js" />
+    <Content Include="Static\projeto\consulta-aceites-contratos\filtro-consulta-aceites-contratos.js" />
+    <Content Include="Static\projeto\consulta-aceites-contratos\index-consulta-aceites-contratos.js" />
+    <Content Include="Static\projeto\documentacao-pre-proposta\data-table-modal-trocar-cca.js" />
+    <Content Include="Static\projeto\tipos-documento\documentos-datatable.js" />
+    <Content Include="Static\projeto\tipos-documento\documentos.js" />
+    <Content Include="Static\projeto\estado-avalista\datatable-avalista.js" />
+    <Content Include="Static\projeto\estado-avalista\datatable-estado.js" />
+    <Content Include="Static\projeto\estado-avalista\estado-avalista.css" />
+    <Content Include="Static\projeto\estado-avalista\index-estado-avalista.js" />
+    <Content Include="Static\projeto\estado-cidade\datatable-cidade.js" />
+    <Content Include="Static\projeto\estado-cidade\datatable-estado.js" />
+    <Content Include="Static\projeto\estado-cidade\estado-cidade.css" />
+    <Content Include="Static\projeto\estado-cidade\index-estado-cidade.js" />
+    <Content Include="Static\projeto\hierarquia-coordenador\datatable-coordenador.js" />
+    <Content Include="Static\projeto\hierarquia-coordenador\datatable-supervisor.js" />
+    <Content Include="Static\projeto\hierarquia-coordenador\datatable-viabilizador.js" />
+    <Content Include="Static\projeto\hierarquia-coordenador\hierarquia-coordenador.css" />
+    <Content Include="Static\projeto\hierarquia-coordenador\index-hierarquia-coordenador.js" />
+    <Content Include="Static\images\CabecalhoNF.png" />
+    <Content Include="Static\images\logo-tenda-tagline-rgb-vermelho.png" />
+    <Content Include="Static\images\sino.png" />
+    <Content Include="Static\images\template-email\logo.png" />
+    <Content Include="Static\projeto\cadastro-banner\cadastro-banner-datatable.js" />
+    <Content Include="Static\administrativo\log-erro\datatable-log-erro.js" />
+    <Content Include="Static\administrativo\log-erro\log-erro.js" />
+    <Content Include="Static\administrativo\log-webservice\log-webservice-datatable.js" />
+    <Content Include="Static\administrativo\log-webservice\log-webservice.js" />
+    <Content Include="Static\administrativo\log-acao\log-acao.js" />
+    <Content Include="Static\administrativo\log-acao\log-acao-datatable.js" />
+    <Content Include="Static\administrativo\log-entidade\log-entidade-datatable.js" />
+    <Content Include="Static\administrativo\log-entidade\log-entidade.js" />
+    <Content Include="Static\administrativo\parametro-robo\modal-log-excluir.js" />
+    <Content Include="Static\administrativo\parametro-robo\modal-log-execucao.js" />
+    <Content Include="Static\administrativo\parametro-robo\parametro-robo.js" />
+    <Content Include="Static\administrativo\parametro-sistema\parametro-sistema.js" />
+    <Content Include="Static\administrativo\parametro-sistema\usuario-modal.js" />
+    <Content Include="Static\administrativo\parametro\parametro-datatable.js" />
+    <Content Include="Static\administrativo\perfil-sistema-active-directory\datatable-perfil-sistema-ad.js" />
+    <Content Include="Static\administrativo\perfil-sistema-active-directory\perfil-sistema-ad.js" />
+    <Content Include="Static\administrativo\perfil\perfil-datatable.js" />
+    <Content Include="Static\administrativo\perfil\perfil.js" />
+    <Content Include="Static\administrativo\permissao-perfil\funcionalidade-datatable.js" />
+    <Content Include="Static\administrativo\permissao-perfil\modal-perfil.js" />
+    <Content Include="Static\administrativo\permissao-perfil\perfil-datatable.js" />
+    <Content Include="Static\administrativo\usuario\modal-formulario-usuario.js" />
+    <Content Include="Static\administrativo\usuario\perfil-modal.js" />
+    <Content Include="Static\administrativo\usuario\usuario-datatable.js" />
+    <Content Include="Static\administrativo\usuario\usuario-filtro-modal.js" />
+    <Content Include="Static\angular-datatable\css\angular-datatables.css" />
+    <Content Include="Static\angular-datatable\css\datatables.bootstrap.min.css" />
+    <Content Include="Static\angular-datatable\css\jquery.dataTables.css" />
+    <Content Include="Static\angular-datatable\css\jquery.dataTables.min.css" />
+    <Content Include="Static\angular-datatable\css\select.dataTables.min.css" />
+    <Content Include="Static\angular-datatable\images\sort_asc.png" />
+    <Content Include="Static\angular-datatable\images\sort_both.png" />
+    <Content Include="Static\angular-datatable\images\sort_desc.png" />
+    <Content Include="Static\angular-datatable\js\angular-datatables.bootstrap.min.js" />
+    <Content Include="Static\angular-datatable\js\angular-datatables.columnfilter.js" />
+    <Content Include="Static\angular-datatable\js\angular-datatables.js" />
+    <Content Include="Static\angular-datatable\js\angular-datatables.select.js" />
+    <Content Include="Static\angular-datatable\js\dataTables.columnFilter.js" />
+    <Content Include="Static\angular-datatable\js\dataTables.rowReorder.min.js" />
+    <Content Include="Static\angular-datatable\js\dataTables.select.min.js" />
+    <Content Include="Static\angular-datatable\js\jquery.dataTables.js" />
+    <Content Include="Static\angular-datatable\css\rowReorder.dataTables.min.css" />
+    <Content Include="Static\angular\angular-locale_pt-br.js" />
+    <Content Include="Static\angular\angular.min.js" />
+    <Content Include="Static\bootstrap-daterangepicker\css\daterangepicker.css" />
+    <Content Include="Static\bootstrap-daterangepicker\js\daterangepicker.js" />
+    <Content Include="Static\bootstrap-notify\css\animate.css" />
+    <Content Include="Static\bootstrap-notify\js\bootstrap-notify.js" />
+    <Content Include="Static\bootstrap-notify\js\bootstrap-notify.min.js" />
+    <Content Include="Static\bootstrap-treeview\css\bootstrap-treeview.min.css" />
+    <Content Include="Static\bootstrap-treeview\js\bootstrap-treeview.min.js" />
+    <Content Include="Static\bootstrap-validator\validator.min.js" />
+    <Content Include="Static\bootstrap\css\bootstrap-switch.min.css" />
+    <Content Include="Static\bootstrap\css\bootstrap-theme.min.css" />
+    <Content Include="Static\bootstrap\css\bootstrap.min.css" />
+    <Content Include="Static\europa\css\europa-angular-datatable.css" />
+    <Content Include="Static\europa\css\europa-bootstrap-nav-vertical.css" />
+    <Content Include="Static\europa\css\europa-bootstrap.css" />
+    <Content Include="Static\europa\css\europa-icons.css" />
+    <Content Include="Static\europa\css\europa-main.css" />
+    <Content Include="Static\europa\css\europa-select2.css" />
+    <Content Include="Static\europa\css\icons\all.css" />
+    <Content Include="Static\europa\css\icons\Fonte-Empresas-Brasileiros.svg" />
+    <Content Include="Static\europa\css\icons\icones-empresas-brasileiros.css" />
+    <Content Include="Static\europa\css\spinner.css" />
+    <Content Include="Static\europa\dynamic\init.js" />
+    <Content Include="Static\europa\js\europa-datepicker.js" />
+    <Content Include="Static\europa\js\europa-autocomplete.js" />
+    <Content Include="Static\europa\js\europa-angular-app.js" />
+    <Content Include="Static\europa\js\europa-pdfjs-wrapper.js" />
+    <Content Include="Static\europa\js\europa-tree-view.js" />
+    <Content Include="Static\europa\js\europa-angular-datatable.js" />
+    <Content Include="Static\europa\js\europa-mask.js" />
+    <Content Include="Static\europa\js\europa-app.js" />
+    <Content Include="Static\europa\js\europa-commons.js" />
+    <Content Include="Static\europa\js\europa-date.js" />
+    <Content Include="Static\europa\js\europa-dialogo.js" />
+    <Content Include="Static\europa\js\europa-exception-handler.js" />
+    <Content Include="Static\europa\js\europa-form.js" />
+    <Content Include="Static\europa\js\europa-order-list.js" />
+    <Content Include="Static\europa\js\europa-scheduler.js" />
+    <Content Include="Static\europa\js\europa-signalr-wrapper.js" />
+    <Content Include="Static\europa\js\europa-validator.js" />
+    <Content Include="Static\europa\js\europa-modal.js" />
+    <Content Include="Static\files\Index.html" />
+    <Content Include="Static\font-awesome\css\font-awesome-animation.min.css" />
+    <Content Include="Static\font-awesome\css\font-awesome.min.css" />
+    <Content Include="Static\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="Static\fullcalendar\css\bootstrap-fullcalendar.css" />
+    <Content Include="Static\fullcalendar\css\fullcalendar.min.css" />
+    <Content Include="Static\fullcalendar\js\fullcalendar.min.js" />
+    <Content Include="Static\fullcalendar\js\locale-all.js" />
+    <Content Include="Static\images\doc.png" />
+    <Content Include="Static\images\docx.png" />
+    <Content Include="Static\images\excel.png" />
+    <Content Include="Static\images\favicon.ico" />
+    <Content Include="Static\images\image.png" />
+    <Content Include="Static\images\logo-vermelho-fundo-branco.jpg" />
+    <Content Include="Static\images\logo.png" />
+    <Content Include="Static\images\LogoTendaPdf.png" />
+    <Content Include="Static\images\logo_icone.png" />
+    <Content Include="Static\europa\css\icons\logo_tenda_icone_preto_branco.png" />
+    <Content Include="Static\images\pdf.png" />
+    <Content Include="Static\images\pptx.png" />
+    <Content Include="Static\images\ppt.png" />
+    <Content Include="Static\images\tendinha_315x357.png" />
+    <Content Include="Static\images\text.png" />
+    <Content Include="Static\images\word.png" />
+    <Content Include="Static\images\xls.png" />
+    <Content Include="Static\images\xlsx.png" />
+    <Content Include="Static\jexcel\css\jexcel.css" />
+    <Content Include="Static\jexcel\css\jexcel.datatables.css" />
+    <Content Include="Static\jexcel\css\jexcel.min.css" />
+    <Content Include="Static\jexcel\js\jexcel.extensions.js" />
+    <Content Include="Static\jexcel\js\jexcel.formulas.js" />
+    <Content Include="Static\jexcel\js\jexcel.js" />
+    <Content Include="Static\jexcel\js\xlsx.js" />
+    <Content Include="Static\jquery-ui\css\jquery-ui.min.css" />
+    <Content Include="Static\jquery-ui\js\jquery-ui.min.js" />
+    <Content Include="Static\jsuites\css\jsuites.css" />
+    <Content Include="Static\jsuites\js\jsuites.js" />
+    <Content Include="Static\pdfjs\build\pdf.js" />
+    <Content Include="Static\pdfjs\build\pdf.worker.js" />
+    <Content Include="Static\pdfjs\web\debugger.js" />
+    <Content Include="Static\pdfjs\web\images\annotation-check.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-comment.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-help.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-insert.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-key.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-newparagraph.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-noicon.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-note.svg" />
+    <Content Include="Static\pdfjs\web\images\annotation-paragraph.svg" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-next%402x.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-next-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-next-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-next.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-previous%402x.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-previous-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-previous-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\findbarButton-previous.png" />
+    <Content Include="Static\pdfjs\web\images\grab.cur" />
+    <Content Include="Static\pdfjs\web\images\grabbing.cur" />
+    <Content Include="Static\pdfjs\web\images\loading-icon.gif" />
+    <Content Include="Static\pdfjs\web\images\loading-small%402x.png" />
+    <Content Include="Static\pdfjs\web\images\loading-small.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-documentProperties%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-documentProperties.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-firstPage%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-firstPage.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-handTool%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-handTool.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-lastPage%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-lastPage.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-rotateCcw%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-rotateCcw.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-rotateCw%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-rotateCw.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-selectTool%402x.png" />
+    <Content Include="Static\pdfjs\web\images\secondaryToolbarButton-selectTool.png" />
+    <Content Include="Static\pdfjs\web\images\shadow.png" />
+    <Content Include="Static\pdfjs\web\images\texture.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-bookmark%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-bookmark.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-download%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-download.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-menuArrows%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-menuArrows.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-openFile%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-openFile.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageDown%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageDown-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageDown-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageDown.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageUp%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageUp-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageUp-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-pageUp.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-presentationMode%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-presentationMode.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-print%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-print.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-search%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-search.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-secondaryToolbarToggle%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-secondaryToolbarToggle-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-secondaryToolbarToggle-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-secondaryToolbarToggle.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-sidebarToggle%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-sidebarToggle-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-sidebarToggle-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-sidebarToggle.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewAttachments%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewAttachments.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewOutline%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewOutline-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewOutline-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewOutline.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewThumbnail%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-viewThumbnail.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-zoomIn%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-zoomIn.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-zoomOut%402x.png" />
+    <Content Include="Static\pdfjs\web\images\toolbarButton-zoomOut.png" />
+    <Content Include="Static\pdfjs\web\images\treeitem-collapsed%402x.png" />
+    <Content Include="Static\pdfjs\web\images\treeitem-collapsed-rtl%402x.png" />
+    <Content Include="Static\pdfjs\web\images\treeitem-collapsed-rtl.png" />
+    <Content Include="Static\pdfjs\web\images\treeitem-collapsed.png" />
+    <Content Include="Static\pdfjs\web\images\treeitem-expanded%402x.png" />
+    <Content Include="Static\pdfjs\web\images\treeitem-expanded.png" />
+    <Content Include="Static\pdfjs\web\viewer.css" />
+    <Content Include="Static\pdfjs\web\viewer.html" />
+    <Content Include="Static\pdfjs\web\viewer.js" />
+    <Content Include="Static\projeto\adiantamento-emergencial\adiantamento-emergencial.js" />
+    <Content Include="Static\projeto\aprovar-adiantamento-emergencial\aprovar-adiantamento-emergencial.js" />
+    <Content Include="Static\projeto\autocomplete-declaration.js" />
+    <Content Include="Static\projeto\book-breve-lancamento\book-breve-lancamento.js" />
+    <Content Include="Static\projeto\book-empreendimento\book-empreendimento.js" />
+    <Content Include="Static\projeto\breve-lancamento\breve-lancamento-datatable.js" />
+    <Content Include="Static\projeto\breve-lancamento\breve-lancamento.js" />
+    <Content Include="Static\projeto\breve-lancamento\modal-breve-lancamento.js" />
+    <Content Include="Static\projeto\cadastro-banner\cadastro-banner.js" />
+    <Content Include="Static\projeto\cadastro-banner\modal-preview-banner.js" />
+    <Content Include="Static\projeto\carga-lead\modal-anexo-em-massa.js" />
+    <Content Include="Static\projeto\carga-rel-repasse\modal-anexo.js" />
+    <Content Include="Static\projeto\carga-rel-repasse\modal-status-importacao.js" />
+    <Content Include="Static\projeto\carga-rel-repasse\relatorio-importacao.js" />
+    <Content Include="Static\projeto\carga-valor-nominal-referencia\carga-valor-nominal-referencia.js" />
+    <Content Include="Static\projeto\carga-valor-nominal-referencia\modal-anexo.js" />
+    <Content Include="Static\projeto\carga-valor-nominal-referencia\modal-status-importacao.js" />
+    <Content Include="Static\projeto\centro-custo\centro-custo.js" />
+    <Content Include="Static\projeto\classificacao\classificacao.js" />
+    <Content Include="Static\projeto\cliente\cliente.js" />
+    <Content Include="Static\projeto\cliente\modal-cliente.js" />
+    <Content Include="Static\projeto\consulta-estoque\consulta-estoque.js" />
+    <Content Include="Static\projeto\consulta-estoque\empreendimento-datatable.js" />
+    <Content Include="Static\projeto\consulta-estoque\modal-empreendimento.js" />
+    <Content Include="Static\projeto\consulta-estoque\modal-unidade.js" />
+    <Content Include="Static\projeto\consulta-estoque\unidade-datatable.js" />
+    <Content Include="Static\projeto\documento-formulario\index-documento-formulario.js" />
+    <Content Include="Static\projeto\efetivar-solicitacao-resgate\datatable-efetivar-solicitacao-resgate.js" />
+    <Content Include="Static\projeto\efetivar-solicitacao-resgate\index-efetivar-solicitacao-resgate.js" />
+    <Content Include="Static\projeto\efetivar-solicitacao-resgate\modal-anexo.js" />
+    <Content Include="Static\projeto\efetivar-solicitacao-resgate\modal-efetivar-solicitacao-resgate.js" />
+    <Content Include="Static\projeto\efetivar-solicitacao-resgate\modal-status-importacao.js" />
+    <Content Include="Static\projeto\empresa-venda\documento-empresa-venda.js" />
+    <Content Include="Static\projeto\endereco-fornecedor\import-endereco-fornecedor.js" />
+    <Content Include="Static\projeto\endereco-fornecedor\index-endereco-fornecedor.js" />
+    <Content Include="Static\projeto\fechamento-contabil\datatable-fechamento-contabil.js" />
+    <Content Include="Static\projeto\fechamento-contabil\index-fechamento-contabil.js" />
+    <Content Include="Static\projeto\fila-email\index-fila-email.js" />
+    <Content Include="Static\projeto\fila-unificada\datatable-operador.js" />
+    <Content Include="Static\projeto\hierarquia-house\modal-selecionar-supervisor.js" />
+    <Content Include="Static\projeto\hierarquia-supervisor-viabilizador\datatable-viabilizador.js" />
+    <Content Include="Static\projeto\hierarquia-supervisor-viabilizador\datatable-supervisor.js" />
+    <Content Include="Static\projeto\hierarquia-supervisor-viabilizador\index-hierarquia-supervisor-viabilizador.js" />
+    <Content Include="Static\projeto\hierarquia-supervisor-viabilizador\hierarquia-supervisor.css" />
+    <Content Include="Static\projeto\juridico\index-juridico.js" />
+    <Content Include="Static\projeto\kanban-pre-proposta\index-kanban-pre-proposta.js" />
+    <Content Include="Static\projeto\kanban-pre-proposta\kanban-pre-proposta.css" />
+    <Content Include="Static\projeto\kanban-pre-proposta\modal-area-kanban-pre-proposta.js" />
+    <Content Include="Static\projeto\kanban-pre-proposta\modal-card-kanban-pre-proposta.js" />
+    <Content Include="Static\projeto\layout-programa-fidelidade\index-layout-programa-fidelidade.js" />
+    <Content Include="Static\projeto\layout-programa-fidelidade\modal-visualizar-imagem.js" />
+    <Content Include="Static\projeto\lead\lead.js" />
+    <Content Include="Static\projeto\consulta-pre-proposta\consulta-pre-proposta.js" />
+    <Content Include="Static\projeto\corretor\corretor-datatable.js" />
+    <Content Include="Static\projeto\corretor\corretor-perfil.js" />
+    <Content Include="Static\projeto\corretor\corretor.js" />
+    <Content Include="Static\projeto\documentacao-avalista\documentacao-avalista.js" />
+    <Content Include="Static\projeto\documentacao-pre-proposta\alterar-sicaq.js" />
+    <Content Include="Static\projeto\documentacao-pre-proposta\documentacao-pre-proposta.js" />
+    <Content Include="Static\projeto\empreendimento\_formulario-endereco.js" />
+    <Content Include="Static\projeto\empresa-venda\formulario-empresa-venda.js" />
+    <Content Include="Static\projeto\fila-unificada\datatable.js" />
+    <Content Include="Static\projeto\fila-unificada\filtro.js" />
+    <Content Include="Static\projeto\fila-unificada\index.js" />
+    <Content Include="Static\projeto\fornecedor\fornecedor.js" />
+    <Content Include="Static\projeto\gestao\gestao-filtro.js" />
+    <Content Include="Static\projeto\gestao\gestao.js" />
+    <Content Include="Static\projeto\grupo-cca\datatable-empresa-venda.js" />
+    <Content Include="Static\projeto\grupo-cca\datatable-grupo-cca.js" />
+    <Content Include="Static\projeto\grupo-cca\datatable-usuario.js" />
+    <Content Include="Static\projeto\grupo-cca\grupo-cca.css" />
+    <Content Include="Static\projeto\grupo-cca\index-grupo-cca.js" />
+    <Content Include="Static\projeto\historico-regra-comissao\datatable-historico.js" />
+    <Content Include="Static\projeto\historico-regra-comissao\index-historico.js" />
+    <Content Include="Static\projeto\carga-lead\modal-anexo.js" />
+    <Content Include="Static\projeto\carga-lead\lead.js" />
+    <Content Include="Static\projeto\carga-lead\modal-status-importacao.js" />
+    <Content Include="Static\projeto\lead\modal-detalhar-lead.js" />
+    <Content Include="Static\projeto\loja-portal\formulario-loja-portal.js" />
+    <Content Include="Static\projeto\loja-portal\loja-portal.js" />
+    <Content Include="Static\projeto\loja\loja-datatable.js" />
+    <Content Include="Static\projeto\loja\loja.js" />
+    <Content Include="Static\projeto\empreendimento\empreendimento-datatable.js" />
+    <Content Include="Static\projeto\empreendimento\empreendimento.js" />
+    <Content Include="Static\projeto\empreendimento\modal-anexo.js" />
+    <Content Include="Static\projeto\empreendimento\modal-status-importacao.js" />
+    <Content Include="Static\projeto\empresa-venda\empresa-venda.js" />
+    <Content Include="Static\projeto\loja\modal-anexo.js" />
+    <Content Include="Static\projeto\loja\modal-status-importacao.js" />
+    <Content Include="Static\projeto\matriz-pagadoria\matriz-pagadoria-nominal.js" />
+    <Content Include="Static\projeto\matriz-pagadoria\matriz-pagadoria.css" />
+    <Content Include="Static\projeto\matriz-pagadoria\matriz-pagadoria.js" />
+    <Content Include="Static\projeto\meu-cadastro\meu-cadastro.js" />
+    <Content Include="Static\projeto\modalidade-comissao\modalidade-comissao.js" />
+    <Content Include="Static\projeto\modalidade-programa-fidelidade\modalidade-programa-fidelidade.js" />
+    <Content Include="Static\projeto\notificacoes\modal-banner-show.js" />
+    <Content Include="Static\projeto\notificacoes\modal-mensagens.js" />
+    <Content Include="Static\projeto\notificacoes\modal-novas-mensagens.js" />
+    <Content Include="Static\projeto\nova-ev\documento-empresa-venda.js" />
+    <Content Include="Static\projeto\nova-ev\formulario-nova-ev.js" />
+    <Content Include="Static\projeto\nova-ev\nova-ev.js" />
+    <Content Include="Static\projeto\nova-regra-comissao\index-nova-regra-comissao.js" />
+    <Content Include="Static\projeto\nova-regra-comissao\setup-nova-regra-comissao.js" />
+    <Content Include="Static\projeto\nova-regra-comissao\setup.css" />
+    <Content Include="Static\projeto\pagamento-unificado\datatable-pagamento-unificado.js" />
+    <Content Include="Static\projeto\pagamento-unificado\filtro-pagamento-unificado.js" />
+    <Content Include="Static\projeto\pagamento-unificado\index-pagamento-unificado.js" />
+    <Content Include="Static\projeto\pagamento-unificado\modal-anexo.js" />
+    <Content Include="Static\projeto\pagamento-unificado\modal-historico-requisicao-compra.js" />
+    <Content Include="Static\projeto\pagamento-unificado\modal-status-requisicao-compra.js" />
+    <Content Include="Static\projeto\pagamento-unificado\modal-visualizar-requisicao-compra.js" />
+    <Content Include="Static\projeto\pagamento\datatable-pagamento.js" />
+    <Content Include="Static\projeto\pagamento\filtro-pagamento.js" />
+    <Content Include="Static\projeto\pagamento\modal-requisicao-compra-sap.js" />
+    <Content Include="Static\projeto\pagamento\modal-gerar-requisicao-compra.js" />
+    <Content Include="Static\projeto\pagamento\index-pagamento.js" />
+    <Content Include="Static\projeto\parametro-requisicao-compra\parametro-requisicao-compra.js" />
+    <Content Include="Static\projeto\politica-privacidade\index-politica-privacidade.js" />
+    <Content Include="Static\projeto\pontuacao-fidelidade\datatable-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\pontuacao-fidelidade\index-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\pontuacao-fidelidade\matriz-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\pontuacao-fidelidade\modal-download-pdf.js" />
+    <Content Include="Static\projeto\pontuacao-fidelidade\modal-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\pagamento\modal-anexo.js" />
+    <Content Include="Static\projeto\pagamento\modal-status-importacao.js" />
+    <Content Include="Static\projeto\pre-proposta-aguardando-analise\data-table-modal-trocar-cca.js" />
+    <Content Include="Static\projeto\pre-proposta-avalista-aguardando-analise\datatable-pre-proposta-avalista-aguardando-analise.js" />
+    <Content Include="Static\projeto\pre-proposta-avalista-aguardando-analise\index-pre-proposta-avalista-aguardando-analise.js" />
+    <Content Include="Static\projeto\pre-proposta\modal-avalista.js" />
+    <Content Include="Static\projeto\pre-proposta\modal-simulacao.js" />
+    <Content Include="Static\projeto\proposta-faturada\modal-anexo-proposta-faturada.js" />
+    <Content Include="Static\projeto\proposta-faturada\modal-status-importacao-proposta-faturada.js" />
+    <Content Include="Static\projeto\rateio-comissao\rateio-comissao.js" />
+    <Content Include="Static\projeto\recebimento-nota-fiscal\historico-nota-fiscal.css" />
+    <Content Include="Static\projeto\recebimento-nota-fiscal\historico-nota-fiscal.js" />
+    <Content Include="Static\projeto\recebimento-nota-fiscal\recebimento-nota-fiscal.js" />
+    <Content Include="Static\projeto\regra-comissao-padrao\datatable-regra-comissao-padrao.js" />
+    <Content Include="Static\projeto\regra-comissao-padrao\download-pdf-regra-comissao-padrao-modal.js" />
+    <Content Include="Static\projeto\regra-comissao-padrao\matriz-regra-comissao-padrao-nominal.js" />
+    <Content Include="Static\projeto\regra-comissao-padrao\nova-regra-comissao-padrao-modal.js" />
+    <Content Include="Static\projeto\regra-comissao-padrao\matriz-regra-comissao-padrao.css" />
+    <Content Include="Static\projeto\regra-comissao-padrao\matriz-regra-comissao-padrao.js" />
+    <Content Include="Static\projeto\regra-comissao-padrao\regra-comissao-padrao.js" />
+    <Content Include="Static\projeto\relatorio-acessos\relatorio-acessos.js" />
+    <Content Include="Static\projeto\relatorio-comissao\datatable-relatorio-comissao.js" />
+    <Content Include="Static\projeto\ponto-venda\ponto-venda-datatable.js" />
+    <Content Include="Static\projeto\ponto-venda\ponto-venda.js" />
+    <Content Include="Static\projeto\pre-proposta-aguardando-analise\datatable-pre-proposta-aguardando-analise.js" />
+    <Content Include="Static\projeto\pre-proposta-aguardando-analise\index-pre-proposta-aguardando-analise.js" />
+    <Content Include="Static\projeto\pre-proposta-workflow\disponibilidade-empreendimento-modal.js" />
+    <Content Include="Static\projeto\pre-proposta-workflow\pre-proposta.js" />
+    <Content Include="Static\projeto\pre-proposta\detalhamento-financeiro.js" />
+    <Content Include="Static\projeto\pre-proposta\documento-proponente.js" />
+    <Content Include="Static\projeto\pre-proposta\historico-pre-proposta.js" />
+    <Content Include="Static\projeto\pre-proposta\itbi-emolumento.js" />
+    <Content Include="Static\projeto\pre-proposta\log-integracao-modal.js" />
+    <Content Include="Static\projeto\pre-proposta\pre-proposta.js" />
+    <Content Include="Static\projeto\pre-proposta\proponente.js" />
+    <Content Include="Static\projeto\regra-comissao\aceite.js" />
+    <Content Include="Static\projeto\regra-comissao\datatable-regra-comissao.js" />
+    <Content Include="Static\projeto\regra-comissao\download-pdf-regra-comissao-modal.js" />
+    <Content Include="Static\projeto\regra-comissao\nova-regra-comissao-modal.js" />
+    <Content Include="Static\projeto\regra-comissao\regra-comissao.js" />
+    <Content Include="Static\projeto\regra-comissao\upload-contrato-modal.js" />
+    <Content Include="Static\projeto\resgate-pontuacao-fidelidade\datatable-resgate-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\resgate-pontuacao-fidelidade\extrato-resgate-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\resgate-pontuacao-fidelidade\filtro-resgate-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\resgate-pontuacao-fidelidade\index-resgate-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\resgate-pontuacao-fidelidade\modal-resgate-pontuacao-fidelidade.js" />
+    <Content Include="Static\projeto\resgate-pontuacao-fidelidade\resgate-pontuacao-fidelidade.css" />
+    <Content Include="Static\projeto\resources\thumbs\init.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Static\projeto\pre-proposta-workflow\pre-proposta-workflow.js" />
+    <Content Include="Static\projeto\simulador\dialogo-simulador.js" />
+    <Content Include="Static\projeto\simulador\index-simulador.js" />
+    <Content Include="Static\projeto\simulador\modal-simulador.js" />
+    <Content Include="Static\projeto\stand-venda\datatable-stand-empresa-venda.js" />
+    <Content Include="Static\projeto\stand-venda\datatable-stand-venda.js" />
+    <Content Include="Static\projeto\stand-venda\index-stand-venda.js" />
+    <Content Include="Static\projeto\state-machine-pre-proposta\datatable-documento-proponente.js" />
+    <Content Include="Static\projeto\state-machine-pre-proposta\datatable-rule-machine.js" />
+    <Content Include="Static\projeto\state-machine-pre-proposta\index.js" />
+    <Content Include="Static\projeto\state-machine-pre-proposta\state-machine.css" />
+    <Content Include="Static\projeto\status-contrato-junix\fase-datatable.js" />
+    <Content Include="Static\projeto\status-contrato-junix\index-status-contrato-junix.js" />
+    <Content Include="Static\projeto\status-contrato-junix\sintese-datatable.js" />
+    <Content Include="Static\projeto\status-suat-status-evs\status-suat-status-evs.js" />
+    <Content Include="Static\projeto\status-conformidade\status-conformidade.js" />
+    <Content Include="Static\projeto\AgrupamentoProcessoPreProposta\AgrupamentoProcessoPreProposta.js" />
+    <Content Include="Static\projeto\termo-aceite-programa-fidelidade\termo-aceite-programa-fidelidade.js" />
+    <Content Include="Static\projeto\tipo-custo\tipo-custo.js" />
+    <Content Include="Static\projeto\transferencia-ponto-venda\transferencia-ponto-venda.js" />
+    <Content Include="Static\projeto\transferir-carteira\transferir-carteira.js" />
+    <Content Include="Static\projeto\proposta-faturada\datatable-proposta-faturada.js" />
+    <Content Include="Static\projeto\proposta-faturada\index-proposta-faturada.js" />
+    <Content Include="Static\projeto\statuspreproposta\StatusPreProposta.js" />
+    <Content Include="Static\scripts\ai.0.22.9-build00167.js" />
+    <Content Include="Static\scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Static\scripts\bootstrap.js" />
+    <Content Include="Static\scripts\bootstrap.min.js" />
+    <Content Include="Static\scripts\cytoscape-dagre.js" />
+    <Content Include="Static\scripts\cytoscape.min.js" />
+    <Content Include="Static\scripts\dagre.min.js" />
+    <None Include="Properties\PublishProfiles\ToQA.pubxml" />
+    <Content Include="Static\europa\css\icons\Fonte-Empresas-Brasileiros.eot" />
+    <Content Include="Static\europa\css\icons\Fonte-Empresas-Brasileiros.ttf" />
+    <Content Include="Static\europa\css\icons\Fonte-Empresas-Brasileiros.woff" />
+    <Content Include="Static\pdfjs\build\pdf.js.map" />
+    <Content Include="Static\pdfjs\build\pdf.worker.js.map" />
+    <Content Include="Static\pdfjs\web\cmaps\78-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78ms-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\78ms-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\83pv-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\90ms-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\90ms-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\90msp-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\90msp-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\90pv-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\90pv-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Add-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Add-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Add-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Add-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-0.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-1.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-3.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-4.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-5.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-6.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-CNS1-UCS2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-0.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-1.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-3.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-4.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-5.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-GB1-UCS2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-0.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-1.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-3.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-4.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-5.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-6.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Japan1-UCS2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Korea1-0.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Korea1-1.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Korea1-2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Adobe-Korea1-UCS2.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\B5pc-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\B5pc-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\CNS-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\CNS-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\CNS1-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\CNS1-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\CNS2-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\CNS2-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\ETen-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\ETen-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\ETenms-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\ETenms-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\ETHK-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\ETHK-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Ext-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Ext-RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Ext-RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Ext-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GB-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GB-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GB-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GB-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBK-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBK-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBK2K-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBK2K-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBKp-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBKp-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBpc-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBpc-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBT-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBT-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBT-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBT-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBTpc-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\GBTpc-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Hankaku.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Hiragana.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKdla-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKdla-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKdlb-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKdlb-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKgccs-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKgccs-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKm314-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKm314-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKm471-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKm471-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKscs-B5-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\HKscs-B5-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Katakana.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSC-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSC-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSC-Johab-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSC-Johab-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSCms-UHC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSCms-UHC-HW-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSCms-UHC-HW-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSCms-UHC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSCpc-EUC-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\KSCpc-EUC-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\LICENSE" />
+    <Content Include="Static\pdfjs\web\cmaps\NWP-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\NWP-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\RKSJ-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\RKSJ-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\Roman.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UCS2-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UCS2-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UTF16-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UTF16-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UTF8-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniCNS-UTF8-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UCS2-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UCS2-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UTF16-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UTF16-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UTF8-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniGB-UTF8-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UCS2-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UCS2-HW-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UCS2-HW-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UCS2-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UTF16-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UTF16-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UTF8-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS-UTF8-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS2004-UTF16-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS2004-UTF16-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS2004-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS2004-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS2004-UTF8-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJIS2004-UTF8-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISPro-UCS2-HW-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISPro-UCS2-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISPro-UTF8-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISX0213-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISX0213-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISX02132004-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniJISX02132004-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UCS2-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UCS2-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UTF16-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UTF16-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UTF32-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UTF32-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UTF8-H.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\UniKS-UTF8-V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\V.bcmap" />
+    <Content Include="Static\pdfjs\web\cmaps\WP-Symbol.bcmap" />
+    <Content Include="Static\pdfjs\web\compressed.tracemonkey-pldi-09.pdf" />
+    <Content Include="Static\pdfjs\web\locale\en-US\viewer.properties" />
+    <Content Include="Static\pdfjs\web\locale\locale.properties" />
+    <Content Include="Static\pdfjs\web\locale\pt-BR\viewer.properties" />
+    <Content Include="Static\pdfjs\web\viewer.js.map" />
+    <None Include="Static\scripts\jquery-3.1.1.intellisense.js" />
+    <Content Include="Static\scripts\jquery-3.1.1.js" />
+    <Content Include="Static\scripts\jquery-3.1.1.min.js" />
+    <Content Include="Static\scripts\jquery-3.1.1.slim.js" />
+    <Content Include="Static\scripts\jquery-3.1.1.slim.min.js" />
+    <Content Include="Static\scripts\jquery-placeholder.js" />
+    <Content Include="Static\scripts\jquery.form.min.js" />
+    <Content Include="Static\scripts\jquery.mask.min.js" />
+    <Content Include="Static\scripts\jquery.numeric.min.js" />
+    <None Include="Static\scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Static\scripts\jquery.validate.js" />
+    <Content Include="Static\scripts\jquery.validate.min.js" />
+    <Content Include="Static\scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Static\scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Static\scripts\modernizr-2.8.3.js" />
+    <Content Include="Static\scripts\moment-with-locates.js" />
+    <Content Include="Static\scripts\respond.js" />
+    <Content Include="Static\scripts\respond.matchmedia.addListener.js" />
+    <Content Include="Static\scripts\respond.matchmedia.addListener.min.js" />
+    <Content Include="Static\scripts\respond.min.js" />
+    <None Include="Static\scripts\_references.js" />
+    <Content Include="Static\select2\css\select2-bootstrap.css" />
+    <Content Include="Static\select2\css\select2.min.css" />
+    <Content Include="Static\select2\js\i18n\pt-BR.js" />
+    <Content Include="Static\select2\js\select2.full.min.js" />
+    <Content Include="Static\template-email\comunicado-coordenador-cliente-duplicado.html" />
+    <Content Include="Static\template-email\comunicado-fechamento-contabil.html" />
+    <Content Include="Static\template-email\esquecimento-senha.html" />
+    <Content Include="Static\template-email\regra-comissao-ativa.html" />
+    <Content Include="Static\template-email\voucher-disponivel.html" />
+    <Content Include="Static\template-email\reprovacao-ev.html" />
+    <Content Include="Static\tinymce\jquery.tinymce.min.js" />
+    <Content Include="Static\tinymce\langs\pt_BR.js" />
+    <Content Include="Static\tinymce\plugins\advlist\plugin.js" />
+    <Content Include="Static\tinymce\plugins\advlist\plugin.min.js" />
+    <Content Include="Static\tinymce\plugins\image\plugin.js" />
+    <Content Include="Static\tinymce\plugins\image\plugin.min.js" />
+    <Content Include="Static\tinymce\plugins\link\plugin.js" />
+    <Content Include="Static\tinymce\plugins\link\plugin.min.js" />
+    <Content Include="Static\tinymce\plugins\lists\plugin.js" />
+    <Content Include="Static\tinymce\plugins\lists\plugin.min.js" />
+    <Content Include="Static\tinymce\skins\lightgray\content.inline.min.css" />
+    <Content Include="Static\tinymce\skins\lightgray\content.min.css" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce-small.svg" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce.svg" />
+    <Content Include="Static\tinymce\skins\lightgray\img\anchor.gif" />
+    <Content Include="Static\tinymce\skins\lightgray\img\loader.gif" />
+    <Content Include="Static\tinymce\skins\lightgray\img\object.gif" />
+    <Content Include="Static\tinymce\skins\lightgray\img\trans.gif" />
+    <Content Include="Static\tinymce\skins\lightgray\skin.ie7.min.css" />
+    <Content Include="Static\tinymce\skins\lightgray\skin.min.css" />
+    <Content Include="Static\tinymce\themes\inlite\theme.min.js" />
+    <Content Include="Static\tinymce\themes\modern\theme.min.js" />
+    <Content Include="Static\tinymce\tinymce.min.js" />
+    <Content Include="Views\BookBreveLancamento\Index.cshtml" />
+    <Content Include="Views\BookBreveLancamento\_BookBreveLancamento.cshtml" />
+    <Content Include="Views\Cliente\Index.cshtml" />
+    <Content Include="Views\Cliente\_BancoDropdownList.cshtml" />
+    <Content Include="Views\Cliente\_Conteudo.cshtml" />
+    <Content Include="Views\Cliente\_DadosFinanceiros.cshtml" />
+    <Content Include="Views\Cliente\_DadosPessoais.cshtml" />
+    <Content Include="Views\Cliente\_EmpresaOndeTrabalha.cshtml" />
+    <Content Include="Views\Cliente\_Endereco.cshtml" />
+    <Content Include="Views\Cliente\_Formulario.cshtml" />
+    <Content Include="Views\Cliente\_Geral.cshtml" />
+    <Content Include="Views\Cliente\_InformacoesComplementares.cshtml" />
+    <Content Include="Views\Cliente\_ModalBuscaCliente.cshtml" />
+    <Content Include="Views\Cliente\_Referencias.cshtml" />
+    <Content Include="Views\ConsultaEstoque\_EmpreendimentoDatatable.cshtml" />
+    <Content Include="Views\ConsultaEstoque\_UnidadeDatatable.cshtml" />
+    <Content Include="Views\DocumentacaoPreProposta\Index.cshtml" />
+    <Content Include="Views\DocumentacaoPreProposta\_DadosPreProposta.cshtml" />
+    <Content Include="Views\Empreendimento\_Anexo.cshtml" />
+    <Content Include="Views\Empreendimento\_EmpreendimentoDataTable.cshtml" />
+    <Content Include="Views\Empreendimento\_FormularioCompleto.cshtml" />
+    <Content Include="Views\Empreendimento\_FormularioEmpreendimento.cshtml" />
+    <Content Include="Views\Empreendimento\_FormularioEndereco.cshtml" />
+    <Content Include="Views\BreveLancamento\_DataTable.cshtml" />
+    <Content Include="Views\BreveLancamento\_FormularioCompleto.cshtml" />
+    <Content Include="Views\BreveLancamento\_Formulario.cshtml" />
+    <Content Include="Views\BreveLancamento\_FormularioEndereco.cshtml" />
+    <Content Include="Views\Empreendimento\_StatusImportacao.cshtml" />
+    <Content Include="Views\EstadoAvalista\_DatatableAvalista.cshtml" />
+    <Content Include="Views\MatrizPagadoria\Index.cshtml" />
+    <Content Include="Views\PreProposta\Index.cshtml" />
+    <Content Include="Views\PreProposta\_BreveLancamentoDropdownList.cshtml" />
+    <Content Include="Views\PreProposta\_DetalhamentoFinanceiro.cshtml" />
+    <Content Include="Views\PreProposta\_DocumentoProponente.cshtml" />
+    <Content Include="Views\PreProposta\_Geral.cshtml" />
+    <Content Include="Views\PreProposta\_ItbiEmolumento.cshtml" />
+    <Content Include="Views\PreProposta\_MotivoDropDownList.cshtml" />
+    <Content Include="Views\PreProposta\_MotivoModal.cshtml" />
+    <Content Include="Views\PreProposta\_Proponente.cshtml" />
+    <Content Include="Views\PreProposta\_ProponenteDropDownList.cshtml" />
+    <Content Include="Views\PreProposta\_TotalFinanceiro.cshtml" />
+    <Content Include="Views\RegraComissaoPadrao\Index.cshtml" />
+    <Content Include="Views\RegraComissaoPadrao\Matriz.cshtml" />
+    <Content Include="Views\RegraComissaoPadrao\_Datatable.cshtml" />
+    <Content Include="Views\RegraComissaoPadrao\_ModalInclusao.cshtml" />
+    <Content Include="Views\RegraComissaoPadrao\_ModalNovaRegraComissaoPadrao.cshtml" />
+    <Content Include="Views\RegraComissao\_ModalDownloadPdfRegraComissao.cshtml" />
+    <Content Include="Views\Shared\Componentes\_ModalConsultaEstoqueEmpreendimento.cshtml" />
+    <Content Include="Views\Shared\Componentes\_ModalConsultaEstoqueUnidade.cshtml" />
+    <Content Include="Views\Shared\Componentes\_ModalNovaRegraComissao.cshtml" />
+    <Content Include="Views\EstadoCidade\Index.cshtml" />
+    <Content Include="Views\EstadoCidade\_DatatableEstado.cshtml" />
+    <Content Include="Views\EstadoCidade\_DatatableCidade.cshtml" />
+    <Content Include="Views\PagamentoUnificado\Index.cshtml" />
+    <Content Include="Views\PagamentoUnificado\_Filtro.cshtml" />
+    <Content Include="Views\PagamentoUnificado\_Datatable.cshtml" />
+    <Content Include="Views\PagamentoUnificado\_StatusRequisicaoCompra.cshtml" />
+    <Content Include="Views\PagamentoUnificado\_VisualizarRequisicaoCompra.cshtml" />
+    <Content Include="Views\PagamentoUnificado\_HistoricoRequisicaoCompra.cshtml" />
+    <Content Include="Views\PagamentoUnificado\_Anexo.cshtml" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Commons\SessionControllerFactory.cs" />
+    <Compile Include="Models\DropDownViewModel.cs" />
+    <Compile Include="Models\FotoEmpresaVendaDTO.cs" />
+    <Compile Include="Models\ItemRegraComissaoDto.cs" />
+    <Compile Include="Models\ItemRegraComissaoPadraoDto.cs" />
+    <Compile Include="Models\ListaRegionaisDTO.cs" />
+    <Compile Include="Models\MeuCadastroDTO.cs" />
+    <Compile Include="Models\ParametroDto.cs" />
+    <Compile Include="Models\AvalistaDTO.cs" />
+    <Compile Include="Models\PrePropostaDTO.cs" />
+    <Compile Include="Models\ReenviarAnaliseCompletaDTO.cs" />
+    <Compile Include="Models\RegraComissaoDTO.cs" />
+    <Compile Include="Models\SistemaDTO.cs" />
+    <Compile Include="Models\TreeViewModel.cs" />
+    <Compile Include="Models\TreeViewState.cs" />
+    <Compile Include="Models\PerfilUsuarioViewModel.cs" />
+    <Compile Include="Rest\EmpresaVendaApi.cs" />
+    <Compile Include="Security\ActionSessionStateAttribute.cs" />
+    <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\MessagesPublisher.cs" />
+    <Compile Include="App_Start\QuartzConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\CepController.cs" />
+    <Compile Include="Controllers\CommonsController.cs" />
+    <Compile Include="Controllers\LogAcaoController.cs" />
+    <Compile Include="Controllers\LogErroController.cs" />
+    <Compile Include="Controllers\LogsExecucaoController.cs" />
+    <Compile Include="Controllers\LogWebServiceController.cs" />
+    <Compile Include="Controllers\ParametroController.cs" />
+    <Compile Include="Controllers\BreveLancamentoController.cs" />
+    <Compile Include="Controllers\ParametroRoboController.cs" />
+    <Compile Include="Controllers\ParametroSistemaController.cs" />
+    <Compile Include="Controllers\PerfilController.cs" />
+    <Compile Include="Controllers\PermissoesPerfilController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
+    <Compile Include="Controllers\UsuarioController.cs" />
+    <Compile Include="Controllers\LogEntidadeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Jobs\BaseJob.cs" />
+    <Compile Include="Models\Application\ApplicationInfo.cs" />
+    <Compile Include="Models\Application\SessionAttributes.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\ParametroRoboViewModel.cs" />
+    <Compile Include="Models\PreferenciasUsuarioViewModel\PreferenciasUsuarioViewModel.cs" />
+    <Compile Include="Models\RoboPushFilter.cs" />
+    <Compile Include="Models\UsuarioViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Security\BaseAuthorizeAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Static\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="Static\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="Static\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="Static\font-awesome\fonts\fontawesome-webfont.woff2" />
+    <Content Include="Static\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="Static\scripts\jquery-3.1.1.min.map" />
+    <Content Include="Static\scripts\jquery-3.1.1.slim.min.map" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Shared\_Layout_Pages.cshtml" />
+    <Content Include="Views\Shared\Dialogo.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\Footer.cshtml" />
+    <Content Include="Views\Shared\Menu.cshtml" />
+    <Content Include="Views\Shared\Message.cshtml" />
+    <Content Include="Views\Shared\_AutoCompleteAction.cshtml" />
+    <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\LogExecucao\_DialogLogExecucao.cshtml" />
+    <Content Include="Views\Home\SemAcesso.cshtml" />
+    <Content Include="Views\ParametroSistema\Index.cshtml" />
+    <Content Include="Views\PermissoesPerfil\_DatatableFuncionalidades.cshtml" />
+    <Content Include="Views\PermissoesPerfil\_DatatablePerfil.cshtml" />
+    <Content Include="Views\PermissoesPerfil\Index.cshtml" />
+    <Content Include="Views\Shared\Componentes\_PerfilModal.cshtml" />
+    <Content Include="Views\Shared\Componentes\_DropDownList.cshtml" />
+    <Content Include="Views\Shared\Componentes\_ModalFormularioUsuario.cshtml" />
+    <Content Include="Views\Shared\Componentes\_AreaNegocioModal.cshtml" />
+    <Content Include="Views\Usuario\_DatatableUsuario.cshtml" />
+    <Content Include="Views\Usuario\_FiltroUsuarioModal.cshtml" />
+    <Content Include="Views\Usuario\Index.cshtml" />
+    <Content Include="Views\Shared\Componentes\Usuario\_ModalFormularioUsuario.cshtml" />
+    <Content Include="Views\LogAcao\Index.cshtml" />
+    <Content Include="Views\LogAcao\_DetalhamentoModal.cshtml" />
+    <Content Include="Views\Home\AcessoNegado.cshtml" />
+    <Content Include="Views\LogWebService\Index.cshtml" />
+    <Content Include="Views\LogWebService\_DetalhamentoModal.cshtml" />
+    <Content Include="Views\PermissoesPerfil\_ModalEdicaoPerfil.cshtml" />
+    <Content Include="Views\LogErro\Index.cshtml" />
+    <Content Include="Views\LogErro\_DetalhamentoModal.cshtml" />
+    <Content Include="Views\Shared\_EstadosDropDownList.cshtml" />
+    <Content Include="Views\LogExecucao\_DialogExcluirLog.cshtml" />
+    <Content Include="Views\ParametroRobo\Index.cshtml" />
+    <Content Include="Views\Perfil\Index.cshtml" />
+    <Content Include="Views\Perfil\_Datatable.cshtml" />
+    <Content Include="Views\Parametro\_Datatable.cshtml" />
+    <Content Include="Views\Parametro\_SistemaDropDownList.cshtml" />
+    <Content Include="Views\Parametro\Index.cshtml" />
+    <Content Include="Static\tinymce\langs\readme.md" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce-small.eot" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce-small.ttf" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce-small.woff" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce.eot" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce.ttf" />
+    <Content Include="Static\tinymce\skins\lightgray\fonts\tinymce.woff" />
+    <Content Include="Views\Shared\Componentes\_PreClienteModal.cshtml" />
+    <Content Include="Views\InformacaoUsuario\Index.cshtml" />
+    <Content Include="Views\InformacaoUsuario\_LojaDropdownList.cshtml" />
+    <Content Include="Views\InformacaoUsuario\_LojaFiltroDropdownList.cshtml" />
+    <Content Include="Views\Shared\_DetailAction.cshtml" />
+    <Content Include="Views\InformacaoUsuario\_ModalGerenciarAssociacoes.cshtml" />
+    <Content Include="Views\Shared\Componentes\_UsuarioModal.cshtml" />
+    <Content Include="Views\LogEntidade\Index.cshtml" />
+    <Content Include="Views\LogEntidade\_DetalhamentoModal.cshtml" />
+    <Content Include="Views\PerfilOrigemContato\Index.cshtml" />
+    <Content Include="Views\PerfilOrigemContato\Datatable.cshtml" />
+    <Content Include="Views\EmpresaVenda\Index.cshtml" />
+    <Content Include="Views\EmpresaVenda\_DataTableEmpresaVenda.cshtml" />
+    <Content Include="Views\EmpresaVenda\_FormularioEmpresaVenda.cshtml" />
+    <Content Include="Views\EmpresaVenda\_FormularioCompleto.cshtml" />
+    <Content Include="Views\EmpresaVenda\_FormularioEndereco.cshtml" />
+    <Content Include="Views\EmpresaVenda\_FormularioDadosTributarios.cshtml" />
+    <Content Include="Views\EmpresaVenda\_FormularioDadosRepresentanteLegal.cshtml" />
+    <Content Include="Views\EmpresaVenda\_ModalUploadArquivo.cshtml" />
+    <Content Include="Views\Corretor\Index.cshtml" />
+    <Content Include="Views\Corretor\_CorretorDataTable.cshtml" />
+    <Content Include="Views\Corretor\_FormularioCorretor.cshtml" />
+    <Content Include="Views\Corretor\_FormularioCompleto.cshtml" />
+    <Content Include="Views\MeuCadastro\Index.cshtml" />
+    <Content Include="Views\Empreendimento\Index.cshtml" />
+    <Content Include="Views\BreveLancamento\Index.cshtml" />
+    <Content Include="Views\BookEmpreendimento\_BookEmpreendimento.cshtml" />
+    <Content Include="Views\BookEmpreendimento\Index.cshtml" />
+    <Content Include="Views\PontoVenda\Index.cshtml" />
+    <Content Include="Views\PontoVenda\_PontoVendaDataTable.cshtml" />
+    <Content Include="Views\ConsultaPreProposta\Index.cshtml" />
+    <Content Include="Views\PrePropostaWorkflow\Index.cshtml" />
+    <Content Include="Views\PrePropostaAguardandoAnalise\Index.cshtml" />
+    <Content Include="Views\PrePropostaAguardandoAnalise\_Datatable.cshtml" />
+    <Content Include="Views\PrePropostaAguardandoAnalise\_ModalAlterarSicaq.cshtml" />
+    <Content Include="Views\Loja\_LojaDataTable.cshtml" />
+    <Content Include="Views\Loja\Index.cshtml" />
+    <Content Include="Views\Loja\_StatusImportacao.cshtml" />
+    <Content Include="Views\Loja\_Anexo.cshtml" />
+    <Content Include="Views\StatusSuatStatusEvs\Index.cshtml" />
+    <Content Include="Views\StatusSuatStatusEvs\_DataTable.cshtml" />
+    <Content Include="Views\ConsultaEstoque\Index.cshtml" />
+    <Content Include="Views\PreProposta\_ModalLogIntegracao.cshtml" />
+    <Content Include="Views\RegraComissao\Index.cshtml" />
+    <Content Include="Views\RegraComissao\_Datatable.cshtml" />
+    <Content Include="Views\RegraComissao\_AnexoContratoCorretagem.cshtml" />
+    <Content Include="Views\RegraComissao\_ModalInclusao.cshtml" />
+    <Content Include="Views\RegraComissao\_ContratoCorretagem.cshtml" />
+    <Content Include="Views\PrePropostaWorkflow\_DisponibilidadeEmpreendimentoModal.cshtml" />
+    <Content Include="Views\RegraComissao\AceiteRegraComissao.cshtml" />
+    <Content Include="Views\DocumentacaoPreProposta\_ModalInformacoesAuditoria.cshtml" />
+    <Content Include="Views\PreProposta\_ModalHistoricoPreProposta.cshtml" />
+    <Content Include="Views\Corretor\_CorretorPerfil.cshtml" />
+    <Content Include="Views\RelatorioComissao\Index.cshtml" />
+    <Content Include="Views\RelatorioComissao\_DataTable.cshtml" />
+    <Content Include="Views\CargaRelatorioRepasse\Index.cshtml" />
+    <Content Include="Views\CargaRelatorioRepasse\_Anexo.cshtml" />
+    <Content Include="Views\CargaRelatorioRepasse\_StatusImportacao.cshtml" />
+    <Content Include="Views\StatusContratoJunix\Index.cshtml" />
+    <Content Include="Views\StatusContratoJunix\_DatatableFase.cshtml" />
+    <Content Include="Views\StatusContratoJunix\_DatatableSintese.cshtml" />
+    <Content Include="Views\CargaRelatorioRepasse\_RelatorioImportacao.cshtml" />
+    <Content Include="Views\StatusConformidade\Index.cshtml" />
+    <Content Include="Views\StatusConformidade\_DataTable.cshtml" />
+    <Content Include="Views\DocumentacaoAvalista\Index.cshtml" />
+    <Content Include="Views\DocumentacaoAvalista\_DadosAvalista.cshtml" />
+    <Content Include="Views\EmpresaVenda\_FormularioResponsavelTecnico.cshtml" />
+    <Content Include="Views\NovaEv\Index.cshtml" />
+    <Content Include="Views\NovaEv\_DataTableEmpresaVenda.cshtml" />
+    <Content Include="Views\NovaEv\_FormularioEmpresaVenda.cshtml" />
+    <Content Include="Views\NovaEv\_FormularioDadosTributarios.cshtml" />
+    <Content Include="Views\NovaEv\_FormularioDadosRepresentanteLegal.cshtml" />
+    <Content Include="Views\NovaEv\_FormularioResponsavelTecnico.cshtml" />
+    <Content Include="Views\NovaEv\_FormularioCompleto.cshtml" />
+    <Content Include="Views\NovaEv\_FormularioEndereco.cshtml" />
+    <Content Include="Views\NovaEv\_ModalReprovacao.cshtml" />
+    <Content Include="Views\HistoricoRegraComissao\Index.cshtml" />
+    <Content Include="Views\HistoricoRegraComissao\_Datatable.cshtml" />
+    <Content Include="Views\GrupoCCA\Index.cshtml" />
+    <Content Include="Views\GrupoCCA\_DatatableGrupoCCA.cshtml" />
+    <Content Include="Views\GrupoCCA\_DatatableEmpresaVenda.cshtml" />
+    <Content Include="Views\GrupoCCA\_DatatableUsuario.cshtml" />
+    <Content Include="Views\FilaUnificada\Index.cshtml" />
+    <Content Include="Views\FilaUnificada\_Filtro.cshtml" />
+    <Content Include="Views\FilaUnificada\_Datatable.cshtml" />
+    <Content Include="Views\BreveLancamento\_ModalPrioridade.cshtml" />
+    <Content Include="Views\PreProposta\_ModalReenviarSuat.cshtml" />
+    <Content Include="Views\PreProposta\_BreveLancamentoReenviarDropDownList.cshtml" />
+    <Content Include="Views\DocumentacaoPreProposta\_ModalAlterarSicaq.cshtml" />
+    <Content Include="Views\TipoCusto\Index.cshtml" />
+    <Content Include="Views\Classificacao\Index.cshtml" />
+    <Content Include="Views\Fornecedor\Index.cshtml" />
+    <Content Include="Views\CentroCusto\Index.cshtml" />
+    <Content Include="Views\Pagamento\Index.cshtml" />
+    <Content Include="Views\Pagamento\_Datatable.cshtml" />
+    <Content Include="Views\Pagamento\_Filtro.cshtml" />
+    <Content Include="Views\Gestao\Index.cshtml" />
+    <Content Include="Views\TransferenciaCarteira\Index.cshtml" />
+    <Content Include="Views\CargaLead\Index.cshtml" />
+    <Content Include="Views\CargaLead\_Anexo.cshtml" />
+    <Content Include="Views\CargaLead\_StatusImportacao.cshtml" />
+    <Content Include="Views\Lead\Index.cshtml" />
+    <Content Include="Views\Lead\_ModalDetalharLead.cshtml" />
+    <Content Include="Views\PontuacaoFidelidade\Index.cshtml" />
+    <Content Include="Views\PontuacaoFidelidade\_DatatablePontuacaoFidelidade.cshtml" />
+    <Content Include="Views\PontuacaoFidelidade\_ModalNovaPontuacaoFidelidade.cshtml" />
+    <Content Include="Views\PontuacaoFidelidade\MatrizPontuacaoFidelidade.cshtml" />
+    <Content Include="Views\PerfilSistemaGrupoAD\Index.cshtml" />
+    <Content Include="Views\PerfilSistemaGrupoAD\_Datatable.cshtml" />
+    <Content Include="Views\Pagamento\_Anexo.cshtml" />
+    <Content Include="Views\Pagamento\_StatusImportacao.cshtml" />
+    <Content Include="Views\PontuacaoFidelidade\_Filtro.cshtml" />
+    <Content Include="Views\ResgatePontuacaoFidelidade\Index.cshtml" />
+    <Content Include="Views\ResgatePontuacaoFidelidade\_Filtro.cshtml" />
+    <Content Include="Views\ResgatePontuacaoFidelidade\_Datatable.cshtml" />
+    <Content Include="Views\ResgatePontuacaoFidelidade\_Extrato.cshtml" />
+    <Content Include="Views\ResgatePontuacaoFidelidade\_ModalResgate.cshtml" />
+    <Content Include="Views\ResgatePontuacaoFidelidade\_Rodape.cshtml" />
+    <Content Include="Views\EfetivarSolicitacaoResgate\Index.cshtml" />
+    <Content Include="Views\TiposDocumento\_Filtro.cshtml" />
+    <Content Include="Views\TiposDocumento\_Datatable.cshtml" />
+    <Content Include="Views\EfetivarSolicitacaoResgate\_ModalAprovavar.cshtml" />
+    <Content Include="Views\RecebimentoNotaFiscal\Index.cshtml" />
+    <Content Include="Views\RecebimentoNotaFiscal\_AvaliarDocumento.cshtml" />
+    <Content Include="Views\EfetivarSolicitacaoResgate\_ModalAnexo.cshtml" />
+    <Content Include="Views\EfetivarSolicitacaoResgate\_ModalStatusImportacao.cshtml" />
+    <Content Include="Views\PreProposta\_FatorSocialModal.cshtml" />
+    <Content Include="Views\LayoutProgramaFidelidade\Index.cshtml" />
+    <Content Include="Views\Lead\_ModalLiberarPacote.cshtml" />
+    <Content Include="Views\Lead\_ModalExcluirPacote.cshtml" />
+    <Content Include="Views\CargaLead\_AnexoEmMassa.cshtml" />
+    <Content Include="Views\LayoutProgramaFidelidade\_ModalVisualizarImagem.cshtml" />
+    <Content Include="Views\PreProposta\_FatorSocialConfirmaModal.cshtml" />
+    <Content Include="Views\CadastroBanners\Index.cshtml" />
+    <Content Include="Views\CadastroBanners\_ModalCadastrarImagem.cshtml" />
+    <Content Include="Views\CadastroBanners\_ModalVisualizarImagem.cshtml" />
+    <Content Include="Views\RateioComissao\Index.cshtml" />
+    <Content Include="Views\RateioComissao\_ModalRateioComissao.cshtml" />
+    <Content Include="Views\FilaUnificada\_DatatableOperador.cshtml" />
+    <Content Include="Views\AdiantamentoEmergencial\Index.cshtml" />
+    <Content Include="Views\AprovarAdiantamentoEmergencial\Index.cshtml" />
+    <Content Include="Views\CadastroBanners\_ModalPreviewBanner.cshtml" />
+    <Content Include="Views\ModalidadeComissao\Index.cshtml" />
+    <Content Include="Views\CargaValorNominalReferencia\Index.cshtml" />
+    <Content Include="Views\CargaValorNominalReferencia\_Anexo.cshtml" />
+    <Content Include="Views\CargaValorNominalReferencia\_StatusImportacao.cshtml" />
+    <Content Include="Views\ModalidadeProgramaFidelidade\Index.cshtml" />
+    <Content Include="Views\TermoAceiteProgramaFidelidade\Index.cshtml" />
+    <Content Include="Views\TermoAceiteProgramaFidelidade\_TermoAceiteProgramaFidelidade.cshtml" />
+    <Content Include="Views\TermoAceiteProgramaFidelidade\_AnexoTermoAceite.cshtml" />
+    <Content Include="Views\RecebimentoNotaFiscal\_HistoricoNotaFiscal.cshtml" />
+    <Content Include="Views\PontuacaoFidelidade\_ModalDownloadPdf.cshtml" />
+    <Content Include="Views\RelatorioAcesso\Index.cshtml" />
+    <Content Include="Views\ParametroRequisicaoCompra\Index.cshtml" />
+    <Content Include="Views\Pagamento\_GerarRequisicaoCompraModal.cshtml" />
+    <Content Include="Views\Pagamento\_ItemRequisicao.cshtml" />
+    <Content Include="Views\Pagamento\_DesignacaoContaRequisicao.cshtml" />
+    <Content Include="Views\Pagamento\_ModalRequisicaoCompraSap.cshtml" />
+    <Content Include="Views\PreProposta\_ModalSimulacao.cshtml" />
+    <Content Include="Views\NovaEv\_DocumentosEmpresaVenda.cshtml" />
+    <Content Include="Views\EmpresaVenda\_DocumentosEmpresaVenda.cshtml" />
+    <Content Include="Views\FechamentoContabil\Index.cshtml" />
+    <Content Include="Views\FechamentoContabil\TemplateEmail.cshtml" />
+    <Content Include="Views\EnderecoFornecedor\Index.cshtml" />
+    <Content Include="Views\EnderecoFornecedor\_ModalImport.cshtml" />
+    <Content Include="Views\RecebimentoNotaFiscal\_ModalNotaFiscal.cshtml" />
+    <Content Include="Views\RecebimentoNotaFiscal\_NotaFiscal.cshtml" />
+    <Content Include="Views\StandVenda\Index.cshtml" />
+    <Content Include="Views\StandVenda\_DatatableStandVenda.cshtml" />
+    <Content Include="Views\StandVenda\_DatatableStandVendaEmpresaVenda.cshtml" />
+    <Content Include="Views\StateMachinePreProposta\Index.cshtml" />
+    <Content Include="Views\StateMachinePreProposta\_DatatableRuleMachine.cshtml" />
+    <Content Include="Views\StateMachinePreProposta\_DatatableDocumentoProponente.cshtml" />
+    <Content Include="Views\StateMachinePreProposta\_TipoDocumentoDropdownList.cshtml" />
+    <Content Include="Views\FilaEmail\Index.cshtml" />
+    <Content Include="Views\HierarquiaSupervisorViabilizador\Index.cshtml" />
+    <Content Include="Views\HierarquiaSupervisorViabilizador\_DatatableSupervisor.cshtml" />
+    <Content Include="Views\HierarquiaSupervisorViabilizador\_DatatableViabilizador.cshtml" />
+    <Content Include="Views\EmpresaVenda\_ModalConfiguracoes.cshtml" />
+    <Content Include="Views\DocumentoFormulario\_ModalFormulario.cshtml" />
+    <Content Include="Views\Lead\_ModalExportarTodos.cshtml" />
+    <Content Include="Views\HierarquiaCoordenador\Index.cshtml" />
+    <Content Include="Views\HierarquiaCoordenador\_DatatableCoordenador.cshtml" />
+    <Content Include="Views\HierarquiaCoordenador\_DatatableSupervisor.cshtml" />
+    <Content Include="Views\HierarquiaCoordenador\_DatatableViabilizador.cshtml" />
+    <Content Include="Views\Shared\_ModalNotificacao\_ListaNotificacoes.cshtml" />
+    <Content Include="Views\Shared\_ModalNotificacao\_ModalMensagens.cshtml" />
+    <Content Include="Views\Shared\_ModalNotificacao\_ModalNovasMensagens.cshtml" />
+    <Content Include="Views\ClienteDuplicado\Index.cshtml" />
+    <Content Include="Views\ClienteDuplicado\_DatatableClienteDuplicado.cshtml" />
+    <Content Include="Views\ClienteDuplicado\_DatatablePreProposta.cshtml" />
+    <Content Include="Views\PropostaFaturada\Index.cshtml" />
+    <Content Include="Views\PropostaFaturada\_Datatable.cshtml" />
+    <Content Include="Views\PropostaFaturada\_ModalAnexo.cshtml" />
+    <Content Include="Views\PropostaFaturada\_ModalStatusImportacao.cshtml" />
+    <Content Include="Views\AceitesBanners\Index.cshtml" />
+    <Content Include="Views\PoliticaPrivacidade\Index.cshtml" />
+    <Content Include="Views\EstadoAvalista\Index.cshtml" />
+    <Content Include="Views\EstadoAvalista\_DatatableEstado.cshtml" />
+    <Content Include="Views\PrePropostaAvalistaAguardandoAnalise\_Datatable.cshtml" />
+    <Content Include="Views\PrePropostaAvalistaAguardandoAnalise\_ModalAlterarSicaq.cshtml" />
+    <Content Include="Views\PrePropostaAvalistaAguardandoAnalise\Index.cshtml" />
+    <Content Include="Views\Simulador\Index.cshtml" />
+    <Content Include="Views\Simulador\_ModalSimulacao.cshtml" />
+    <Content Include="Views\NovaRegraComissao\Index.cshtml" />
+    <Content Include="Views\NovaRegraComissao\_ModalSetup.cshtml" />
+    <Content Include="Views\Cliente\_ModalExportarCliente.cshtml" />
+    <Content Include="Views\LojaPortal\Index.cshtml" />
+    <Content Include="Views\LojaPortal\_DataTableLojaPortal.cshtml" />
+    <Content Include="Views\LojaPortal\_FormularioCompleto.cshtml" />
+    <Content Include="Views\LojaPortal\_FormularioLojaPortal.cshtml" />
+    <Content Include="Views\LojaPortal\_FormularioEndereco.cshtml" />
+    <Content Include="Views\AgenteVenda\Index.cshtml" />
+    <Content Include="Views\AgenteVenda\_DatatableLojaPortal.cshtml" />
+    <Content Include="Views\AgenteVenda\_DatatableUsuario.cshtml" />
+    <Content Include="Views\PreProposta\_ModalAvalistaPreProposta.cshtml" />
+    <Content Include="Views\ConsultaAceitesContratosCorretagem\Index.cshtml" />
+    <Content Include="Views\ConsultaAceitesContratosCorretagem\_Datatable.cshtml" />
+    <Content Include="Views\ConsultaAceitesContratosCorretagem\_Filtro.cshtml" />
+    <Content Include="Views\Simulador\_DialogoSimulador.cshtml" />
+    <Content Include="Views\TransferenciaPontoVenda\Index.cshtml" />
+    <Content Include="Views\PrePropostaAguardandoAnalise\_ModalAlterarCCA.cshtml" />
+    <Content Include="Views\DocumentacaoPreProposta\_ModalAlterarCCA.cshtml" />
+    <Content Include="Views\TiposDocumento\Index.cshtml" />
+    <Content Include="Views\Cliente\_Proprietario.cshtml" />
+    <Content Include="Views\BreveLancamento\_Scripts.cshtml" />
+    <Content Include="Views\HierarquiaHouse\Index.cshtml" />
+    <Content Include="Views\HierarquiaHouse\_DatatableSupervisorHouse.cshtml" />
+    <Content Include="Views\HierarquiaHouse\_DatatableAgenteVendaHouse.cshtml" />
+    <Content Include="Views\HierarquiaHouse\_DatatableHierarquiaHouse.cshtml" />
+    <Content Include="Views\StatusPreProposta\Index.cshtml" />
+    <Content Include="Views\RecebimentoNotaFiscal\_ModalNumeroNotaFiscal.cshtml" />
+    <Content Include="Views\Juridico\Index.cshtml" />
+    <Content Include="Views\AgrupamentoSituacaoProcessoPreProposta\Index.cshtml" />
+    <Content Include="Views\AgrupamentoProcessoPreProposta\Index.cshtml" />
+    <Content Include="Views\AgrupamentoProcessoPreProposta\_DetalheAgrupamentoSituacao.cshtml" />
+    <Content Include="Views\AgrupamentoProcessoPreProposta\_DataTableAgrupamento.cshtml" />
+    <Content Include="Views\KanbanPreProposta\Index.cshtml" />
+    <Content Include="Views\KanbanPreProposta\_ModalAreaKanban.cshtml" />
+    <Content Include="Views\KanbanPreProposta\_ModalCardKanban.cshtml" />
+    <Content Include="Views\KanbanPreProposta\_FormularioAreaKanbanPreProposta.cshtml" />
+    <Content Include="Views\KanbanPreProposta\_CardsKanbanPreProposta.cshtml" />
+    <Content Include="Views\KanbanPreProposta\_FormularioCardKanbanPreProposta.cshtml" />
+    <Content Include="Views\TiposDocumento\Index.cshtml" />
+    <Content Include="Views\CockpitMidas\Index.cshtml" />
+    <Content Include="Views\CockpitMidas\_OcorrenciasDatatable.cshtml" />
+    <Content Include="Views\CockpitMidas\_NotasDataTable.cshtml" />
+    <Content Include="Views\CockpitMidas\_Filtro.cshtml" />
+    <Content Include="Views\EmpresaVenda\_ResponsavelAceiteEmpresaVenda.cshtml" />
+    <Content Include="Views\PreProposta\_ModalOrigemIndicacao.cshtml" />
+    <None Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+    <None Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Jobs\Models\" />
+    <Folder Include="Views\DocumentoEmpresaVenda\" />
+    <Folder Include="Views\Regionais\" />
+    <Folder Include="Views\RegionalEmpresa\" />
+    <Folder Include="Views\Sistemas\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Europa\Europa.csproj">
+      <Project>{CD8ED417-3217-4342-8C55-66055F630FCD}</Project>
+      <Name>Europa</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tenda.Domain\Tenda.Domain.csproj">
+      <Project>{7cae0a72-fcf9-4302-90c4-74dcfddea11f}</Project>
+      <Name>Tenda.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tenda.EmpresaVenda.ApiService\Tenda.EmpresaVenda.ApiService.csproj">
+      <Project>{5BB20EEC-39C6-437F-A667-DC6807419248}</Project>
+      <Name>Tenda.EmpresaVenda.ApiService</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tenda.EmpresaVenda.Domain\Tenda.EmpresaVenda.Domain.csproj">
+      <Project>{C0615C67-A849-43C0-9DDC-9FC64FB0D041}</Project>
+      <Name>Tenda.EmpresaVenda.Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>50703</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>https://localhost/empresa-venda-web</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost/empresa-venda-web</IISAppRootUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them. For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets'))" />
+    <Error Condition="!Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.3.6.0\build\net472\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.targets')" />
+  <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+           Other similar extension points exist, see Microsoft.Common.targets.
+      <Target Name="BeforeBuild">
+      </Target>
+      <Target Name="AfterBuild">
+      </Target>
+      -->
+</Project>

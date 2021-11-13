@@ -1,0 +1,34 @@
+﻿@using Europa.Resources
+
+<script src="~/Static/projeto/regra-comissao/upload-contrato-modal.js"></script>
+
+<script>
+    Europa.Controllers.RegraComissao.Import.UrlSalvarArquivo = '@Url.Action("SalvarContratoCorretagem", "RegraComissao")';
+</script>
+
+<div ng-controller="AnexoContratoCorretagemController" class="modal" id="modal_contrato_corretagem" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.RegraComissao.Import.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.IncluirContratoCorretagem</h4>
+            </div>
+            <div class="modal-body" >
+                <div class="col-md-24">
+                    <div class="col-md-24">
+                        @using (Html.BeginForm("SalvarContratoCorretagem", "RegraComissao", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-inline", id = "form_salvar_contrato_corretagem" }))
+                        {
+                            @Html.AntiForgeryToken()
+                                <label>@GlobalMessages.EnvioArquivo</label>
+                                <input type="file" style="margin-top: 5px" id="file" name="file" accept="application/pdf">
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" ng-click="EnviarArquivoContrato()"><i class="fa fa-upload" aria-hidden="true"></i> @GlobalMessages.Enviar</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.RegraComissao.Import.CloseModal()"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+#nav_bar .expander .menu-expander .arrow-menu{
+    -webkit-mask: url(icons/triangle.svg) bottom no-repeat;
+    mask: url(icons/triangle.svg) bottom no-repeat;
+    width: 40px;
+    height: 20px;
+    float: left;
+    background-color: white;
+}
+
+#nav_bar .expander .menu-expander li.active .arrow-menu{
+    background-color: var(--steel);
+}
+
+#nav_bar .expander .menu-expander li span.evs02{
+    -webkit-mask:  url("icons/usuarios.svg") no-repeat 50% 50%;
+    mask: url("icons/usuarios.svg") no-repeat 50% 50%;
+    margin-top: 2px;
+    width: 38px;
+    height: 20px;
+}
+#nav_bar .expander .menu-expander li span.politicas-de-vendas{
+    -webkit-mask:  url("icons/politica-de-vendas.svg") no-repeat 50% 50%;
+    mask: url("icons/politica-de-vendas.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 28px;
+}
+#nav_bar .expander .menu-expander li span.evs05{
+    -webkit-mask:  url("icons/clientes.svg") no-repeat 50% 50%;
+    mask: url("icons/clientes.svg") no-repeat 50% 50%;
+    margin-top: 2px;
+    width: 38px;
+    height: 20px;
+}
+#nav_bar .expander .menu-expander li span.evs07{
+    -webkit-mask:  url("icons/predinho.svg") no-repeat 50% 50%;
+    mask: url("icons/predinho.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 31px;
+}
+
+#nav_bar .expander .menu-expander li span.evs10{
+    background: url("icons/pre-proposta.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 26px;
+}
+#nav_bar .expander .menu-expander li.white span.evs10{
+    background: url("icons/pre-proposta-hover.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 26px;
+}
+
+#nav_bar .expander .menu-expander li.white span.evs11{
+    background: url("icons/consultar-pre-proposta-hover.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 26px;
+}
+#nav_bar .expander .menu-expander li span.evs11{
+    background: url("icons/consultar-pre-proposta.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 26px;
+}
+
+#nav_bar .expander .menu-expander li span.key{
+    -webkit-mask:  url("icons/key.svg") no-repeat 50% 50%;
+    mask: url("icons/logout.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 30px;
+}
+
+#nav_bar .expander .menu-expander li span.logout{
+    -webkit-mask:  url("icons/logout.svg") no-repeat 50% 50%;
+    mask: url("icons/logout.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 30px;
+}
+
+#nav_bar .expander .menu-expander li span.evs16{
+    -webkit-mask:  url("icons/signal.svg") no-repeat 50% 50%;
+    mask: url("icons/signal.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 39px;
+}
+
+#nav_bar .expander .menu-expander li span.evs17 {
+    -webkit-mask: url("icons/gift.svg") no-repeat 50% 50%;
+    mask: url("icons/gift.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 39px;
+    margin-top: -5px;
+}
+
+#nav_bar .expander .menu-expander li span.evs19 {
+    -webkit-mask: url("icons/money.svg") no-repeat 50% 50%;
+    mask: url("icons/money.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 39px;
+    margin-top: -5px;
+}
+
+#nav_bar .expander .menu-expander li span.evs20 {
+    -webkit-mask: url("icons/icon-EVS20.svg") no-repeat 50% 50%;
+    mask: url("icons/money.svg") no-repeat 50% 50%;
+    width: 41px;
+    height: 45px;
+    margin-top: -5px;
+    padding-top: 10px;
+}
+
+#nav_bar .expander .menu-expander li span.evs23 {
+    -webkit-mask: url("icons/add-user.svg") no-repeat 50% 50%;
+    mask: url("icons/add-user.svg") no-repeat 50% 50%;
+    width: 38px;
+    height: 20px;
+}

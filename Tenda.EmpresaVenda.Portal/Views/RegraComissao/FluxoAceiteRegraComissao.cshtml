@@ -1,0 +1,98 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models
+@using Europa.Extensions;
+@model RegraComissaoViewModel
+
+@{
+    ViewBag.Codigo = "EVSNN";
+    ViewBag.Title = "NOVA REGRA DE COMISSÃO";
+
+    var text = "";
+
+    if (Model.RegraComissaoEvsSuspensa.IsEmpty())
+    {
+        text = string.Format(GlobalMessages.AceiteTermosCampanha, Model.RegraComissaoEvs.Descricao, Model.RegraComissaoEvs.TerminoVigencia);
+    }
+    else
+    {
+        text = string.Format(GlobalMessages.AceiteTermosCampanhaComRegraSuspensa, Model.RegraComissaoEvs.Descricao, Model.RegraComissaoEvs.TerminoVigencia, Model.RegraComissaoEvsSuspensa.Descricao);
+    }
+
+}
+
+<style>
+    .block-content {
+        padding-top: 0px;
+    }
+
+    .aling-content {
+        margin-top: -15px;
+    }
+</style>
+
+<script src="~/Static/europa/js/pdf.js"></script>
+<script src="~/Static/europa/js/pdf.worker.js"></script>
+
+<link href="~/Static/projeto/regra-comissao/regra-comissao.css" rel="stylesheet" />
+<script src="~/Static/projeto/regra-comissao/regra-comissao.js"></script>
+
+<script>
+    Europa.Controllers.RegraComissao.UrlRegraEvSuspensa = '@Url.Action("RegraComissaoEvSuspensa", "RegraComissao")';
+</script>
+
+<div class="menu-options" align='center'>
+    <div id="titlebar-name">@ViewBag.Title</div>
+    <div id="titlebar-buttons">
+
+    </div>
+</div>
+
+@Html.HiddenFor(x => x.RegraComissaoEvs.Id);
+@Html.HiddenFor(x => x.RegraComissaoEvs.Tipo);
+@Html.HiddenFor(x => x.RegraComissaoEvs.Descricao);
+@Html.HiddenFor(x => x.RegraComissaoEvs.TerminoVigencia);
+
+<div style="width:100%">
+    <div id="div-pdf" onscroll="Europa.Controllers.RegraComissao.FimPdf(this)" style="overflow-x: hidden;width: max-content; margin: auto;height: 45vh; overflow-y: auto;margin-top:25px">
+    </div>
+    <div class="div_inputs" style="min-height: 150px;">
+        <div class="col-md-24">
+            <img id="check_false" style="position:relative;top: 20px;height:31px;width:29px;opacity:0.5" src="~/Static/images/inputCheckBox/icon-checkmark.png" />
+            <div style="top: 20px;position:relative;display:none" id="check_true">
+                <img style="cursor:pointer;height:31px;width:29px" onclick="Europa.Controllers.RegraComissao.HabilitarBtn()" src="~/Static/images/inputCheckBox/icon-checkmark_red.png" />
+                <img style="cursor:pointer;height:15px;width:20px;position: absolute;left: 5px;top:-12px" onclick="Europa.Controllers.RegraComissao.HabilitarBtn()" src="~/Static/images/inputCheckBox/tick.png" />
+            </div>
+            <input onclick="Europa.Controllers.RegraComissao.HabilitarBtn()" type="checkbox" id="aceite_flag" disabled name="aceite_flag">
+            <span for="aceite_flag" id="text-aceite-termos">@GlobalMessages.AceiteTermos</span>
+        </div>
+
+        <div id="camp_check" class="hidden col-md-24">
+            <img id="camp_check_false" style="position:relative;top: 20px;height:31px;width:29px;opacity:0.5" src="~/Static/images/inputCheckBox/icon-checkmark.png" />
+            <div style="top: 20px;position:relative;display:none" id="camp_check_true">
+                <img style="cursor:pointer;height:31px;width:29px" onclick="Europa.Controllers.RegraComissao.HabilitarAceite()" src="~/Static/images/inputCheckBox/icon-checkmark_red.png" />
+                <img style="cursor:pointer;height:15px;width:20px;position: absolute;left: 5px;top:-12px" onclick="Europa.Controllers.RegraComissao.HabilitarAceite()" src="~/Static/images/inputCheckBox/tick.png" />
+            </div>
+            <div style="width:70%;display: inline-flex;">
+                <input onclick="Europa.Controllers.RegraComissao.HabilitarAceite()" type="checkbox" id="camp_aceite_flag" disabled name="camp_aceite_flag">
+                <span for="camp_aceite_flag" id="camp-text-aceite-termos">@text </span>
+            </div>
+        </div>
+
+
+        <div style="margin-top: 75px;">
+            <span style="font-size: 13px;letter-spacing: 0.13px;color: #6b6c6f;position:relative;top:35px">
+                *@GlobalMessages.LeiaDocumento
+            </span>
+        </div>
+        <div>
+            <button disabled id="btn_aceitar" style="margin-bottom: 20px !important;">@GlobalMessages.Aceitar</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    Europa.Controllers.RegraComissao.Url = '@Model.RegraComissao';
+    Europa.Controllers.RegraComissao.CarregarRegraComissao();
+</script>
+@using (Html.BeginForm("AceitarRegraComissao", "RegraComissao", FormMethod.Post, new { Id = "form_aceitar" })) { }

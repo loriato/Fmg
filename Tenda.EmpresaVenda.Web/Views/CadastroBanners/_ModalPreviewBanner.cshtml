@@ -1,0 +1,53 @@
+﻿@using Europa.Resources
+
+<style>
+    /*.btn-preview {
+        border-radius: 40px;
+        font-weight: bold;
+        font-size: 14px;
+        border-width: 2px;
+        border-style: solid;
+        padding: 4px 20px 0 20px;
+        color: #ec1d24;
+        background-color: transparent;
+        border-color: #ec1d24;
+    }
+*/
+    .btn-preview,
+    .btn-preview:active,
+    .btn-preview:focus {
+        border-radius: 40px;
+        font-weight: bold;
+        font-size: 14px;
+        border-width: 2px;
+        border-style: solid;
+        padding: 4px 20px 0 20px;
+
+        color: #EC1D1F;
+        background-color: transparent;
+        border-color: #EC1D1F;
+    }
+
+    .btn-preview:hover {
+        color: white;
+        background-color: #EC1D1F;
+        border-color: #EC1D1F;
+    }
+</style>
+
+<div id="modal-banner-portal-ev" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static" style="overflow-y: hidden;">
+    <div class="modal-dialog" style="padding: 30px;overflow-y: hidden;width: fit-content;height: fit-content;">
+        <div class="modal-content modal-alert-content">
+            <div class="modal-header" style="display: none;">
+            </div>
+            <div class="modal-body" style="padding: 0px 0px">
+                <img id="banner" style="max-width:1300px"/>
+                             
+            </div>
+            <div class="modal-footer" style="background-color:white">
+                <button class="btn btn-preview hidden" type="button" id="btn-aceitar" onclick="Europa.Controllers.CadastroBanner.FecharModal()">@GlobalMessages.Aceitar</button>
+                <button class="btn btn-preview hidden" type="button" id="btn-fechar" data-dismiss="modal" onclick="Europa.Controllers.CadastroBanner.FecharModal()">@GlobalMessages.Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

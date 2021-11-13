@@ -1,0 +1,43 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+@using Tenda.EmpresaVenda.Domain.Commons
+
+<script type="text/javascript" src="~/Static/projeto/stand-venda/datatable-stand-venda.js"></script>
+
+<div ng-controller="StandVendaDatatable as table">
+    <div id="standVenda_datatable_barra" class="col-md-24 container-fluid">
+        <div class="col-md-24 form-group">
+            <form>
+                <div class="col-md-24">
+                    <b>Stands</b>
+                </div>
+                <div class="col-md-6" style="margin-right:5px">
+                    <input type="text" id="filtro_nome" maxlength="50" placeholder="@GlobalMessages.Nome" class="form-control">
+                </div>
+                <div class="col-md-6 form-group col-md-offset-1">
+                    <select id="autocomplete_regional" name="autocomplete_regional" class="select2-container form-control"></select>
+                </div>
+                <div class="col-md-3 form-group col-md-offset-1">
+                    @Html.DropDownList("filtro_estados", new SelectList(EstadosSelectList.Values, "Value", "Text"), new { @class = "form-control", @placeholder = "UF" })
+                </div>
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+                {
+                    <div class="col-md-4" style="margin-left: 5px">
+                        <button class="btn btn-default" onclick="Europa.Controllers.StandVenda.FiltrarStandVenda()"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                        <button class="btn btn-default" type="button" onclick="Europa.Controllers.StandVenda.LimparFiltroStandVenda()"><i class="fa fa-eraser"></i></button>
+                    </div>
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+                {
+                    <div class="pull-right" style="margin-right: 5px">
+                        <button class="btn btn-default" onclick="Europa.Controllers.StandVenda.NovoStandVenda()"><i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Incluir</button>
+                    </div>
+                }
+            </form>
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

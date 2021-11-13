@@ -1,0 +1,89 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+
+<div class="col-md-24">
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.DadosFinanceiros</h3>
+                <div class="pull-right">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-5 form-group">
+    @Html.Label(GlobalMessages.TipoRenda, new { @class = "control-label" })
+    @Html.EnumDropDownListFor(x => x.Cliente.TipoRenda, GlobalMessages.Selecione, new { @class = "form-control", onchange = "Europa.Controllers.Cliente.TipoRendaOnChange()" })
+</div>
+<div class="col-md-3 col-md-offset-1">
+    @Html.Label(GlobalMessages.RendaFormal)
+    @Html.TextBoxFor(x => x.Cliente.RendaFormal, new { @class = "form-control text-right dinheiro", maxlength = 13, Value = $"{Model.Cliente?.RendaFormal:n2}", onchange = "Europa.Controllers.Cliente.RendaOnchange()" })
+</div>
+<div class="col-md-5 col-md-offset-1">
+    @Html.Label(GlobalMessages.OrigemRendaFormal)
+    @Html.TextBoxFor(x => x.Cliente.OrigemRendaFormal, new { @class = "form-control", maxlength = 128 })
+</div>
+<div class="col-md-3 col-md-offset-1">
+    @Html.Label(GlobalMessages.RendaInformal)
+    @Html.TextBoxFor(x => x.Cliente.RendaInformal, new { @class = "form-control text-right dinheiro", maxlength = 13, Value = $"{Model.Cliente?.RendaInformal:n2}", onchange = "Europa.Controllers.Cliente.RendaOnchange()" })
+</div>
+<div class="col-md-4 col-md-offset-1">
+    @Html.Label(GlobalMessages.OrigemRendaInformal)
+    @Html.TextBoxFor(x => x.Cliente.OrigemRendaInformal, new { @class = "form-control", maxlength = 128 })
+</div>
+<div class="col-md-24">
+    <div class="col-md-5">
+        @Html.Label(GlobalMessages.RendaMensal)
+        @Html.TextBoxFor(x => x.Cliente.RendaMensal, new { @class = "form-control text-right dinheiro", maxlength = 13, Value = $"{Model.Cliente?.RendaMensal:n2}", @readonly = "readonly" })
+    </div>
+    <div class="col-md-3 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.ValorFgts, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.FGTS, new { @class = "form-control text-right dinheiro", maxlength = 13, Value = $"{Model.Cliente?.FGTS:n2}" })
+    </div>
+    <div class="col-md-5 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.MesesFgts, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.MesesFGTS, new { @class = "form-control text-right inteiro" })
+    </div>
+</div>
+
+<div class="col-md-5">
+    @Html.Label(GlobalMessages.PossuiFinanciamento, new { @class = "control-label" })
+    <div class="col-md-24">
+        <div class="col-md-12">
+            @Html.RadioButtonFor(reg => reg.Cliente.PossuiFinanciamento, true, new { id = "Cliente_PossuiFinanciamento_Sim" }) <label class="control-label" for="Cliente_PossuiFinanciamento_Sim">@GlobalMessages.Sim</label>
+        </div>
+        <div class="col-md-12">
+            @Html.RadioButtonFor(reg => reg.Cliente.PossuiFinanciamento, false, new { id = "Cliente_PossuiFinanciamento_Nao" }) <label class="control-label" for="Cliente_PossuiFinanciamento_Nao">@GlobalMessages.Nao</label>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-3 col-md-offset-1">
+    @Html.Label(GlobalMessages.ValorFinanciamento)
+    @Html.TextBoxFor(x => x.Cliente.ValorFinanciamento, new { @class = "form-control text-right dinheiro", maxlength = 13, Value = $"{Model.Cliente?.ValorFinanciamento:n2}" })
+</div>
+
+<div class="col-md-5 col-md-offset-1">
+    @Html.Label(GlobalMessages.TipoFinanciamento)
+    @Html.TextBoxFor(x => x.Cliente.TipoFinanciamento, new { @class = "form-control", maxlength = 128 })
+</div>
+
+<div class="col-md-3 col-md-offset-1">
+    @Html.Label(GlobalMessages.UltimaParcela)
+    <div class="input-group">
+        @Html.TextBoxFor(x => x.Cliente.UltimaParcelaFinanciamento, new { @class = "form-control", datepicker = "datepicker", parent = "#form_cliente" })
+        <span class="input-group-btn">
+            <button class="btn" type="button" onclick="Europa.Components.DatePicker.Closest(this)">
+                <img src="~/Static/europa/css/icons/calendar.svg" />
+            </button>
+        </span>
+    </div>
+</div>

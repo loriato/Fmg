@@ -1,0 +1,61 @@
+﻿@using Europa.Resources
+@model Tenda.Domain.EmpresaVenda.Models.Views.ViewProduto
+
+<div class="col-md-4 py-4">
+    <div id="@Model.Id" class="book-empreendimento-card mx-4 h-100"
+         data-nome="@Model.Nome" data-cidade="@Model.Cidade"
+         data-bairro="@Model.Bairro" data-verificado="@Model.EmpreendimentoVerificado">
+        <div class="header px-3 pt-3 pb-4">
+            <div class="city-name mb-2">@Model.Cidade</div>
+            <div>@Model.Bairro</div>
+        </div>
+        <div class="images d-flex align-items-center justify-content-center">
+            @if (Model.UrlImagemPrincipal.IsEmpty())
+            {
+                <img class="img-fluid img-card" src="~/Static/images/img-predio-padrao.jpg" alt="">
+            }
+            else
+            {
+                <img class="img-fluid img-card" onclick="" src="@Model.UrlImagemPrincipal" alt="">
+            }
+        </div>
+        <div class="name @(Model.EmpreendimentoVerificado ? "empreendimento " : "breve-lancamento") px-3 py-2">
+            <div>@Model.Nome</div>
+            @if (Model.EmpreendimentoVerificado)
+            {
+                <div class="label-tipo empreendimento">
+                    @GlobalMessages.Lancamento
+                </div>
+            }
+            else
+            {
+                <div class="label-tipo breve-lancamento">
+                    <i class="fas fa-star mr-1" aria-hidden="true"></i> @GlobalMessages.BreveLancamento
+                </div>
+            }
+        </div>
+        <div class="address px-3 py-2">
+            <img style="margin-right:16px; width:18px" src="~/Static/images/map-gps.png"/>
+            <span>@Model.FormatarEnderecoCard()</span>
+        </div>
+        <div class="info px-3 py-4">
+            <div class="informacoes-container">
+                <p style="white-space: initial;font-size:14px;padding-top: 1px;">@Model.Informacoes</p>
+            </div>
+            <div class="mt-4 d-flex">
+
+                <button onclick="Europa.Controllers.Produto.AbrirModal(@Model.Id, @Model.EmpreendimentoVerificado.ToString().ToLower())"
+                        class="button__red__outline font-14">
+                    @GlobalMessages.BtnInfoSingular
+                </button>
+
+
+                @using (Html.BeginForm("Index", "PreProposta", FormMethod.Post))
+                {
+                    <input style="display:none" name="idEmpre" value="@Model.Id"/>
+                    <button type="submit" class="button__gradient px-3 ml-3">@GlobalMessages.BtnPreProposta</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

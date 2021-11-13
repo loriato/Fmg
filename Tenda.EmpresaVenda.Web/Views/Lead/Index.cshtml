@@ -1,0 +1,135 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+
+
+@{
+    ViewBag.Codigo = "GEC05";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/lead/lead.js"></script>
+<script>
+    Europa.Controllers.Lead.UrlListarDatatable = '@Url.Action("Listar","Lead")';
+    Europa.Controllers.Lead.UrlExportarPagina = '@Url.Action("ExportarPagina","Lead")';
+    Europa.Controllers.Lead.UrlExportarTodos = '@Url.Action("ExportarTodos","Lead")';
+    Europa.Controllers.Lead.UrlLiberarPacote = '@Url.Action("LiberarPacote","Lead")';
+    Europa.Controllers.Lead.UrlExcluirPacote = '@Url.Action("ExcluirPacote","Lead")';
+    Europa.Controllers.Lead.UrlAtualizarLeadEmpresaVenda = '@Url.Action("SalvarLeadEmpresaVenda","Lead")';
+    Europa.Controllers.Lead.UrlListarPacote = '@Url.Action("ListarTreePacote", "Lead")';
+
+    Europa.Controllers.Lead.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()'
+    };
+    Europa.Controllers.Lead.QuantidadeDiasExportarTodos = "@ViewBag.QuantidadeDiasExportarTodos";
+</script>
+<style>
+    #pacote_treeview {
+        max-height: 45vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        margin-top: 10px;
+    }
+</style>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+    @if (@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar"))
+    {
+        <button class="btn btn-default" onclick="Europa.Controllers.Lead.AbriModalLiberar()"><i class="fa fa-exchange"></i> @GlobalMessages.Liberar @GlobalMessages.Pacote</button>
+
+    }
+    @if (@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir"))
+    {
+        <button class="btn btn-default" onclick="Europa.Controllers.Lead.AbriModalExcluir()"><i class="fa fa-trash"></i> @GlobalMessages.Excluir @GlobalMessages.Pacote</button>
+
+    }
+</div>
+
+
+<div class="col-md-24">
+    <div class="col-md-6 form-group">
+        @Html.Label(GlobalMessages.EmpresaVenda, new { @class = "control-label" })
+        <select id="autocomplete_empresa_venda" multiple="multiple" name="autocomplete_empresa_venda" class="select2-container form-control"></select>
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Pacote, new { @class = "control-label" })
+        <select id="autocomplete_pacote" multiple="multiple" name="autocomplete_pacote" class="select2-container form-control"></select>
+
+    </div>
+    <div class="col-md-3 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.SituacaoPacote, new { @class = "control-label" })
+        <select class="form-control" id="filtro_situacao_pacote">
+            <option value=""></option>
+            <option value=true>Liberado</option>
+            <option value=false>Não Liberado</option>
+        </select>
+    </div>
+    <div class="col-md-3 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.SituacaoLead, new { @class = "control-label" })
+        @Html.DropDownList("filtro_situacoes", EnumHelper.GetSelectList(typeof(SituacaoLead)), "Todos", new { @class = "form-control" })
+    </div>
+
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Corretor, new { @class = "control-label" })
+        <select id="autocomplete_corretor" multiple="multiple" name="autocomplete_corretor" class="select2-container form-control"></select>
+    </div>
+
+</div>
+<div class="col-md-24">
+    <div class="col-md-6 form-group">
+        @Html.Label(GlobalMessages.PreProposta, new { @class = "control-label" })
+        @Html.TextBox("filtro_pre_proposta", "", new { @class = "form-control" })
+    </div>
+    <div class="col-md-4 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Lead, new { @class = "control-label" })
+        @Html.TextBox("filtro_lead", "", new { @class = "form-control" })
+    </div>
+    <div class="col-md-3 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.Telefone, new { @class = "control-label" })
+        @Html.TextBox("filtro_telefone", "", new { @class = "form-control" })
+    </div>
+
+    <div class="pull-right">
+        <button class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.Filtrar()" style="margin-top: 22px;"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+        <button class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.LimparFiltro()" style="margin-top: 22px;"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+    </div>
+</div>
+
+<div class="col-md-24">
+    <div ng-controller="Lead as table">
+        <div id="lead_datatable_header">
+            <div class="col-md-12 form-group">
+                <h5 style="margin-top:6px;margin-bottom:0px;">@GlobalMessages.Lead</h5>
+            </div>
+            <div class="pull-right">
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.ExportarPagina()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina</button>
+
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.Lead.AbriModalExportarTodos()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos</button>
+
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs">
+        </table>
+    </div>
+</div>
+
+<form id="Exportar"></form>
+
+@{
+    Html.RenderPartial("_ModalDetalharLead");
+    Html.RenderPartial("_ModalLiberarPacote");
+    Html.RenderPartial("_ModalExcluirPacote");
+    Html.RenderPartial("_ModalExportarTodos");
+}

@@ -1,0 +1,47 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{
+    ViewBag.Codigo = "GEC14";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script type="text/javascript" src="~/Static/projeto/cliente-duplicado/index-cliente-duplicado.js"></script>
+<script type="text/javascript" src="~/Static/projeto/pre-proposta-workflow/pre-proposta-workflow.js"></script>
+<link href="~/Static/projeto/cliente-duplicado/cliente-duplicado.css" rel="stylesheet" />
+
+<script>
+    Europa.Controllers.ClienteDuplicado.UrlListarClientes = '@Url.Action("ListarClientes","ClienteDuplicado")';
+    Europa.Controllers.ClienteDuplicado.UrlListarPreProposta = '@Url.Action("ListarPreProposta", "ClienteDuplicado")';
+
+    Europa.Controllers.PrePropostaWorkflow.UrlCancelar = '@Url.Action("Cancelar", "PrePropostaWorkflow")';
+
+    Europa.Controllers.ClienteDuplicado.Permissoes = {
+        Cancelar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Remover")' == 'True',
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar")' == 'True'
+    };
+
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div class="col-md-7">
+    @{
+        Html.RenderPartial("_DatatableClienteDuplicado");
+    }
+</div>
+
+<div class="tabs-container col-md-16 col-md-offset-1">
+    <input type="radio" name="tabs" class="tabs" id="tab1" checked>
+    <label for="tab1">@GlobalMessages.PreProposta</label>
+    <div style="
+    padding-top: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    ">
+        @{
+            Html.RenderPartial("_DatatablePreProposta");
+        }
+    </div>
+</div>

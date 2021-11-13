@@ -1,0 +1,197 @@
+﻿@using Europa.Extensions;
+@using Europa.Resources
+@using Tenda.EmpresaVenda.PortalHouse.Models.Application
+@using Tenda.EmpresaVenda.ApiService.Models.KanbanPreProposta
+
+@model KanbanPrePropostaDto
+@{
+    ViewBag.Codigo = "EVS11";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+
+<script type="text/javascript" src="~/Static/projeto/kanban-pre-proposta/index-kanban-pre-proposta.js"></script>
+<script type="text/javascript" src="~/Static/projeto/kanban-pre-proposta/modal-area-kanban-pre-proposta.js"></script>
+<script type="text/javascript" src="~/Static/projeto/kanban-pre-proposta/modal-card-kanban-pre-proposta.js"></script>
+
+<link href="~/Static/projeto/kanban-pre-proposta/kanban-pre-proposta.css" rel="stylesheet" />
+
+<script>
+    Europa.Controllers.KanbanPreProposta.UrlCarregaNivel2Kanban = '@Url.Action("CarregaNivel2Kanban", "KanbanPreProposta")';
+    Europa.Controllers.KanbanPreProposta.UrlCarregaCardsPrePropostaKanban = '@Url.Action("ListarCardsKanbanPreProposta", "KanbanPreProposta")';
+
+    Europa.Controllers.KanbanPreProposta.Permissao = {
+        Excluir:true
+    }
+</script>
+
+<script type="text/javascript" src="~/static/projeto/consulta-pre-proposta/consulta-pre-proposta.js"></script>
+<script>
+    Europa.Controllers.ConsultaPreProposta.UrlListar = '@Url.Action("Listar", "ConsultaPreProposta")';
+    Europa.Controllers.ConsultaPreProposta.UrlExportarPagina = '@Url.Action("ExportarPagina", "ConsultaPreProposta")';
+    Europa.Controllers.ConsultaPreProposta.UrlExportarTodos = '@Url.Action("ExportarTodos", "ConsultaPreProposta")';
+</script>
+<form class="Kanban-filtro">
+    <div class="container-fluid p-4">
+        <div id="accordionExample">
+            <div id="headingOne">
+                <div class="row Kanban-Recolhe-Expande">
+                    <div class=" col-md-24 ">
+                        <p><span id="spanSeta" onclick="Europa.Controllers.KanbanPreProposta.MudaSeta()" class="fa fa-chevron-up" data-toggle="collapse" data-target="#collapseOne"> Recolher filtro</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.Label(GlobalMessages.CodigoProposta)
+                    @Html.TextBox("filtro_codigo_proposta", "", new { @class = "form-control form-control-sm", maxlength = 128 })
+                </div>
+
+                <div class="col-md-4 form-group col-md-offset-1">
+                    @Html.Label(GlobalMessages.Cliente)
+                    @Html.TextBox("filtro_cliente", "", new { @class = "form-control form-control-sm", maxlength = 128 })
+                </div>
+                <div class="col-md-4 form-group col-md-offset-1">
+                    @Html.Label(GlobalMessages.AgenteVenda)
+                    <select id="autocomplete_agente_venda" name="autocomplete_corretor" class="select2-container form-control form-control-sm"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-4 form-group">
+                    @Html.Label(GlobalMessages.Status)
+                    <select id="autocomplete_agrupamento_processo_pre_proposta" name="autocomplete_agrupamento_processo_pre_proposta" class="select2-container form-control form-control-sm"></select>
+                </div>
+
+                <div class="col-md-4 col-md-offset-1 form-group">
+                    @Html.Label(GlobalMessages.Loja)
+                    <select id="autocomplete_loja" name="autocomplete_loja" class="select2-container form-control form-control-sm"></select>
+                </div>
+                <div class="col-md-4 form-group col-md-offset-1">
+                    @Html.Label(GlobalMessages.Produto)
+                    <select id="autocomplete_breve_lancamento" name="autocomplete_breve_lancamento" class="select2-container form-control form-control-sm"></select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2 form-group">
+                    @Html.Label(GlobalMessages.DataElaboracao)
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@GlobalMessages.De</span>
+                        </div>
+                        @Html.TextBox("ElaboracaoDe", "", new { @class = "form-control form-control-sm", datepicker = "datepicker", parent = "#form_filtro" })
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm py-0" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                                <img class="icon-calendar" src="~/Static/europa/css/icons/calendar.png" />
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-2 form-group">
+                    @Html.Label(GlobalMessages.DataElaboracao, new { style = "visibility:hidden" })
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@GlobalMessages.Ate</span>
+                        </div>
+                        @Html.TextBox("ElaboracaoAte", "", new { @class = "form-control form-control-sm", datepicker = "datepicker", parent = "#form_filtro" })
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm py-0" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                                <img class="icon-calendar" src="~/Static/europa/css/icons/calendar.png" />
+                            </button>
+                        </span>
+                    </div>
+                </div>
+
+                <div class="col-md-2 form-group">
+                    @Html.Label(GlobalMessages.DataUltimoEnvio)
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@GlobalMessages.De</span>
+                        </div>
+                        @Html.TextBox("DataEnvioDe", "", new { @class = "form-control form-control-sm", datepicker = "datepicker", parent = "#form_filtro" })
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm py-0" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                                <img class="icon-calendar" src="~/Static/europa/css/icons/calendar.png" />
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-2 form-group">
+                    @Html.Label(GlobalMessages.DataUltimoEnvio, new { style = "visibility:hidden" })
+                    <div class="input-group input-group-sm">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@GlobalMessages.Ate</span>
+                        </div>
+                        @Html.TextBox("DataEnvioAte", "", new { @class = "form-control form-control-sm", datepicker = "datepicker", parent = "#form_filtro" })
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm py-0" type="button" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                                <img class="icon-calendar" src="~/Static/europa/css/icons/calendar.png" />
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-4 pull-right">
+                    <div class="col-md-24">
+                        @Html.Label(GlobalMessages.Filtrar, new { style = "visibility:hidden" })
+                    </div>
+                    <div class="col-md-24 text-right" style="float: right;">
+                        <button class="button__red__outline button__filtrar" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.KanbanPreProposta.CarregaCardPrePropostaKanban()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+                        <button type="button" title="@GlobalMessages.Limpar" class="button__yellow__outline button__filtrar ml-3" onClick="Europa.Controllers.ConsultaPreProposta.LimparFiltro()"> <i class="fa fa-times" style="width: 20px;"></i>@GlobalMessages.Limpar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+<div class="break"></div>
+<div class="col-md-11 ">
+    <div class="container-fluid kanban-container ">
+        <h4>Clique no card ativo para mais informações:</h4>
+        <div id="kanbanRowPainel" class="row ">
+            @{
+                var wa = 12 / (Model.ColumnsKanbanPrePropostaDto.IsEmpty() ? 1 : Model.ColumnsKanbanPrePropostaDto.Count());
+            }
+
+            @foreach (var column in Model.ColumnsKanbanPrePropostaDto)
+            {
+                var desativa = (column.AreaKanbanPrePropostaDto.Ativo ? "" : "CardDisabled");
+                <div class="col-md-@wa @desativa">
+                    <div class="col-md-24 Kanban-Button trocacor" style="background-color: @column.AreaKanbanPrePropostaDto.Cor;" id="area_@column.AreaKanbanPrePropostaDto.Id" onclick="Europa.Controllers.KanbanPreProposta.CarregaNivel2Kanban(@column.AreaKanbanPrePropostaDto.Id)">
+                        @Html.Label(column.AreaKanbanPrePropostaDto.Descricao, new { @class = "control-label" })
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="row" style="display: block;">
+            <div id="Nivel2Kanban"></div>
+        </div>
+        <div id="Filtro_Card_Kanban" class="row  invisible">
+            <div class="col-md-12 Kanban-filtro-icone ">
+                <p id="qtdPropostas">0 propostas</p>             
+                <div class="dropdown">
+                    <span id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" class="dropdown-toggle"><img id="OlhoLiberado" src="~/Static/svg/Filtro.svg" /></span>                    
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <p>Filtrar por:</p>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="RadioCliente" onclick="Europa.Controllers.KanbanPreProposta.CarregaCardPrePropostaKanban(0)" checked>
+                            <label class="form-check-label" for="RadioCliente">
+                                Cliente (ordem alfabética)
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="RadioData" onclick="Europa.Controllers.KanbanPreProposta.CarregaCardPrePropostaKanban(0)" >
+                            <label class="form-check-label" for="RadioData">
+                                Data da elaboração (mais recente)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="Body_Card_Kanban"class="row Div_Card_Kanban invisible">
+            <div id="CardsPreProposta"></div>
+        </div>
+    </div>
+</div>

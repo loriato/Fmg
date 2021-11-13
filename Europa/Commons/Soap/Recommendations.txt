@@ -1,0 +1,40 @@
+﻿--------------------------------------------------------------------------------------------------------------
+As classes TraceExcension e TraceExtensionAttribute
+Os logs são feitos na pasta C:\tmp\europa\logs\soaplog e C:\tmp\europa\logs\<NomeServico>.log
+<system.web>
+	<webServices>
+		<soapExtensionTypes>
+		<add type="Europa.Commons.Soap.TraceExtension, Europa" priority="1" />
+		</soapExtensionTypes>
+	</webServices>
+</system.web>
+O TraceExtensionAttribute deve ser colocado sobre o método que é chamado. Ele só vai duplicar o log e jogar o conteúdo para soaplog.
+--------------------------------------------------------------------------------------------------------------
+Pode-se também adicionar as informações abaixo no app.config ou web.config do projeto que está fazendo as chamadas.
+O arquivo de log vai ser gerado em <Diretório Projeto>\bin\Debug\trace.log
+Achei esse arquivo extremamente verboso e ruim de trabalhar.
+<system.diagnostics>
+	<trace autoflush="true"/>
+	<sources>
+	  <source name="System.Net">
+		<listeners>
+		  <add name="TraceFile"/>
+		</listeners>
+	  </source>
+	  <source name="System.Net.Sockets" >
+		<listeners>
+		  <add name="TraceFile"/>
+		</listeners>
+	  </source>
+	</sources>
+	<sharedListeners>
+	  <add name="TraceFile" type="System.Diagnostics.TextWriterTraceListener"
+		initializeData="trace.log"/>
+	</sharedListeners>
+	<switches>
+	  <add name="System.Net" value="Verbose"/>
+	  <add name="System.Net.Sockets" value="Verbose"/>
+	</switches>
+</system.diagnostics>
+--------------------------------------------------------------------------------------------------------------
+

@@ -1,0 +1,30 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+<div class="col-md-24">
+    <div ng-controller="TabelaPropostaFaturada as propostaFaturada">
+        <div id="datatable_header" class="col-md-24">
+            <div class="col-md-6">
+                @Html.Label(GlobalMessages.PropostasFaturadas)
+            </div>
+            <div class="pull-right">
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.PropostaFaturada.ExportarPagina()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                    </button>
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.PropostaFaturada.ExportarTodos()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                    </button>
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="propostaFaturada.dtOptions" dt-columns="propostaFaturada.dtColumns"
+               dt-instance="propostaFaturada.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="propostaFaturada.dtColumnDefs"></table>
+    </div>
+</div>
+<form id="Exportar"></form>

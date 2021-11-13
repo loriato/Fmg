@@ -1,0 +1,98 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Security.Views
+
+<script src="~/Static/administrativo/log-acao/log-acao.js"></script>
+<script src="~/Static/administrativo/log-acao/log-acao-datatable.js"></script>
+
+@model Tenda.Domain.Security.Services.Models.LogAcaoDTO
+@{
+    ViewBag.Codigo = "SEG05";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+
+<script>
+    Europa.Components.Datatable.LogAcao.listAction = '@Url.Action("Listar", "LogAcao")';
+    Europa.Components.Datatable.LogAcao.UrlExportarPagina = '@Url.Action("ExportarPagina", "LogAcao")';
+    Europa.Components.Datatable.LogAcao.UrlExportarDatatable = '@Url.Action("ExportarDatatable", "LogAcao")';
+</script>
+
+@{
+    if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+    {
+        <div class="col-md-24">
+            <form id="form_filtro_log_acao">
+                <div class="col-md-24">
+                    <div class="col-md-9">
+                        @Html.Label(GlobalMessages.Usuario)
+                        <select name="IdUsuario" id="autocomplete_usuario_log_acao" class="select2-container form-control"></select>
+                    </div>
+                    <div class="col-md-7 col-md-offset-1">
+                        @Html.Label(GlobalMessages.DataLog)
+                        <div class="input-group">
+                            @Html.Label("De", new { @for = "DiaDe", @class = "input-group-addon", id = "diaLabel", style = "width: 35px;" })
+                            @Html.TextBox("DataInicio", "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", id = "DataInicio" })
+                            @Html.Label("Até", new { @for = "DiaAte", @class = "input-group-addon", id = "diaAteLabel", style = "width: 35px;" })
+                            @Html.TextBox("DataFim", "{0:dd/MM/yyyy}", new { @class = "form-control", datepicker = "datepicker", id = "DataFim" })
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-24">
+                    <div class="col-md-3">
+                        @Html.Label(GlobalMessages.Sistema)
+                        @Html.DropDownListFor(x => x.Sistema, Model.Sistemas, GlobalMessages.Selecione, new { @class = "form-control" })
+                    </div>
+                    <div class="col-md-5 col-md-offset-1">
+                        @Html.Label(GlobalMessages.UnidadeFuncional)
+                        <select name="IdUnidadeFuncional" id="autocomplete_unidade_funcional_log_acao" class="select2-container form-control"></select>
+                    </div>
+                    <div class="col-md-7 col-md-offset-1">
+                        @Html.Label(GlobalMessages.Funcionalidade)
+                        <select name="IdFuncionalidade" id="autocomplete_funcionalidade_log_acao" class="select2-container form-control"></select>
+                    </div>
+                    <div class="pull-right" style="margin-top: 20px">
+                        <button title="@GlobalMessages.Filtrar" class="btn btn-default" style="width: 100px" onClick="Europa.Components.Datatable.LogAcao.Filtrar()">
+                            <i class="fa fa-filter"></i> @GlobalMessages.Filtrar
+                        </button>
+                        <button title="@GlobalMessages.Limpar" class="btn btn-default" style="width: 100px" onClick="Europa.Controllers.LogAcao.LimparFiltros()">
+                            <i class="fa fa-eraser"></i> @GlobalMessages.Limpar
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+        <div ng-controller="LogAcaoDataTable as table">
+            <div class="col-md-24">
+                <div id="LogAcaoDatatable_barra">
+                    <div class="col-md-12" style="margin-left: 5px">
+                        <h5>@GlobalMessages.Logs</h5>
+                    </div>
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Exportar"))
+                    {
+                        <div class="pull-right" style="margin-right: 5px; margin-top: 5px">
+                            <button title="@GlobalMessages.Exportar" class="btn btn-default" onClick="Europa.Components.Datatable.LogAcao.ExportarDatatable()">
+                                <i class="fa fa-file-excel-o"></i> @GlobalMessages.Exportar
+                            </button>
+                            <button title="@GlobalMessages.ExportarPagina" class="btn btn-default" onClick="Europa.Components.Datatable.LogAcao.ExportarPagina()">
+                                <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                            </button>
+                        </div>
+                    }
+                </div>
+                <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                       dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                       dt-column-defs="table.dtColumnDefs"></table>
+            </div>
+        </div>
+    }
+    <form id="Exportar"></form>
+}
+@{
+    Html.RenderPartial("~/Views/LogAcao/_DetalhamentoModal.cshtml", new ViewLogAcao());
+}

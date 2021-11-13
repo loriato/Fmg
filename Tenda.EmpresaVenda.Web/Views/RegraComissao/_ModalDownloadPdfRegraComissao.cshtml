@@ -1,0 +1,45 @@
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+
+<script src="~/Static/projeto/regra-comissao/download-pdf-regra-comissao-modal.js"></script>
+<script>
+    Europa.Controllers.ModalDownloadPdfRegraComissao.Url.ListarEmpresasVendas = '@Url.Action("ListarEmpresaVendasRegraComissao", "RegraComissao")';
+    Europa.Controllers.ModalDownloadPdfRegraComissao.Url.DownloadPdfRegraComissao = '@Url.Action("DownloadRegraComissao", "RegraComissao")';
+    Europa.Controllers.ModalDownloadPdfRegraComissao.Url.DownloadPdfRegraComissaoEvs = '@Url.Action("DownloadPdfRegraComissaoEvs", "RegraComissaoEvs")';
+</script>
+
+<style>
+</style>
+
+<div class="modal" id="modalDownloadPdfRegraComissao" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.ModalDownloadPdfRegraComissao.Fechar()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalNovaRegraComissao_titulo">@GlobalMessages.Download @GlobalMessages.PDF</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="col-md-24">
+                        @Html.Label(GlobalMessages.EmpresaVendas)
+                        <select id="empresa_vendas_select" class="form-control"></select>
+                    </div>
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.ModalDownloadPdfRegraComissao.Confirmar()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Download</button>
+                <button type="button" class="btn btn-default" onclick=" Europa.Controllers.ModalDownloadPdfRegraComissao.Fechar() ">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Cancelar</button>
+            </div>
+            <!-- #endregion -->
+        </div>
+    </div>
+</div>

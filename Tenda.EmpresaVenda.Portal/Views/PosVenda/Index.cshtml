@@ -1,0 +1,25 @@
+@using Tenda.EmpresaVenda.Portal.Models.Application
+
+<script src="~/Static/europa/js/europa-circular-progress.js"></script>
+<script src="~/Static/projeto/pos-venda/custom-charts.js"></script>
+
+@{
+    ViewBag.Codigo = "EVS11";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/pos-venda/pos-venda.js"></script>
+<link href="~/Static/projeto/pos-venda/pos-venda.css" rel="stylesheet"/>
+
+<script>
+    Europa.Controllers.PosVenda.UrlListarPosVenda = '@Url.Action("ListarConsultaPosVenda", "PosVenda")';
+    Europa.Controllers.PosVenda.UrlExportarPagina = '@Url.Action("ExportarPagina", "PosVenda")';
+    Europa.Controllers.PosVenda.UrlExportarTodos = '@Url.Action("ExportarTodos", "PosVenda")';
+    Europa.Controllers.PosVenda.Url.BuscarDadosGraficos = '@Url.Action("ListarDadosPosVendas", "PosVenda")';
+    Europa.Controllers.PosVenda.UrlCliente = '@Url.Action("Index","Cliente")';
+</script>
+
+@{
+    Html.RenderPartial("_Graficos");
+    Html.RenderPartial("_Listagem");
+}

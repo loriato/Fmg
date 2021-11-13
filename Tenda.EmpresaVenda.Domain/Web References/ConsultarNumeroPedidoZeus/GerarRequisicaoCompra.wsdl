@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://br.com.tenda.zeus/cadastro/request" xmlns:ns2="http://br.com.tenda.zeus/cadastro/response" name="GerarRequisicaoCompra" targetNamespace="http://br.com.tenda.zeus/cadastro/request" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema xmlns:tns="http://br.com.tenda.zeus/cadastro/request" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://br.com.tenda.zeus/cadastro/request" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="ConsultarPedidoRequest" type="tns:consultarPedidoRequest" />
+      <xs:element name="ConsultarPedidoResponse" type="tns:consultarPedidoResponse" />
+      <xs:element name="DadosAuditoria" type="tns:dadosAuditoria" />
+      <xs:complexType name="dadosAuditoria">
+        <xs:sequence>
+          <xs:element name="sistema" type="xs:string" />
+          <xs:element name="usuario" type="xs:string" />
+          <xs:element name="dataTransacao" type="xs:dateTime" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarPedidoRequest">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="NumeroRequisicaoCompra" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="consultarPedidoResponse">
+        <xs:sequence>
+          <xs:element minOccurs="0" maxOccurs="unbounded" name="Pedido" type="tns:pedido" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="pedido">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Mandante" type="xs:string" />
+          <xs:element minOccurs="0" name="NumeroRequisicaoCompra" type="xs:string" />
+          <xs:element minOccurs="0" name="NumeroItemRequisicaoCompra" type="xs:string" />
+          <xs:element minOccurs="0" name="NumeroDocumentoCompra" type="xs:string" />
+          <xs:element minOccurs="0" name="NumeroItemDocumentoCompra" type="xs:string" />
+          <xs:element minOccurs="0" name="Data" type="xs:dateTime" />
+          <xs:element minOccurs="0" name="CodigoLiberacaoDocumentoCompra" type="xs:string" />
+          <xs:element minOccurs="0" name="LinhaTexto" type="xs:string" />
+          <xs:element minOccurs="0" name="Status" type="xs:string" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:element name="AuditoriaHeader" nillable="true" type="tns:dadosAuditoria" />
+      <xs:element name="ConsultarNumeroPedidoRequest" nillable="true" type="tns:consultarPedidoRequest" />
+    </xs:schema>
+    <xsd:schema xmlns="http://br.com.tenda.zeus/cadastro/response" xmlns:tns="http://consultarnumerodepedido.cadastro.webservice.tenda.com.br/" xmlns:ns0="http://br.com.tenda.zeus/cadastro/request" attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://br.com.tenda.zeus/cadastro/response">
+      <xsd:import namespace="http://br.com.tenda.zeus/cadastro/request" />
+      <xsd:element name="ConsultarNumeroPedidoResponse" nillable="true" type="ns0:consultarPedidoResponse" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultarNumeroPedido">
+    <wsdl:part name="AuditoriaHeader" element="ns1:AuditoriaHeader" />
+    <wsdl:part name="ConsultarNumeroPedidoRequest" element="ns1:ConsultarNumeroPedidoRequest" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarNumeroPedidoResponse">
+    <wsdl:part name="ConsultarNumeroPedidoResponse" element="ns2:ConsultarNumeroPedidoResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GerarRequisicaoCompra">
+    <wsdl:operation name="ConsultarNumeroPedido">
+      <wsdl:input name="ConsultarNumeroPedido" message="ns1:ConsultarNumeroPedido" />
+      <wsdl:output name="ConsultarNumeroPedidoResponse" message="ns1:ConsultarNumeroPedidoResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

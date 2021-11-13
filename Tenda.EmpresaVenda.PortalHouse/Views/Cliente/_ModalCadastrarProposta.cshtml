@@ -1,0 +1,30 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.ApiService.Models.Cliente.ClienteDto
+
+<script>
+    Europa.Controllers.Cliente.UrlCadastrarProposta = '@Url.Action("Index","PreProposta")';
+</script>
+<div class="modal" id="modal_cadastrar_proposta" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="d-flex-column" style="position: relative;">
+                    <div class="">
+                        <img src="~/Static/images/tenda-logo.png" width="52px" height="52px" style="margin: 10px;">
+                    </div>
+                    <div class="w-100" style="top: 29px; position:absolute;">
+                        <h4 class="modal-title d-flex justify-content-center" id="myModalLabel">@GlobalMessages.ClienteCadastrado</h4>
+                    </div>
+                </div>
+                <div class="col-md-20  px-4" style="text-align: center;">
+                    @GlobalMessages.DesejaCadastrarProposta
+                </div>
+
+            </div>
+            <div class="modal-footer justify-content-end">
+                <button type="button" class="button__red__outline" title="@GlobalMessages.AgoraNao" onclick="Europa.Controllers.Cliente.FecharModalCadastroPPR()">@GlobalMessages.AgoraNao</button>
+                <button type="button" class="button__red__outline" title="@GlobalMessages.CadastrarProposta" onclick="Europa.Controllers.Cliente.CadastrarProposta()">@GlobalMessages.CadastrarProposta</button>
+            </div>
+        </div>
+    </div>
+</div>

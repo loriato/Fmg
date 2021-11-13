@@ -1,0 +1,129 @@
+﻿@using Europa.Extensions
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@model Tenda.EmpresaVenda.Portal.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+    //ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+    ViewBag.Title = GlobalMessages.CadastrarCliente;
+}
+
+<link href="~/Static/projeto/cliente/cliente.css" rel="stylesheet" />
+<script type="text/javascript" src="~/Static/projeto/cliente/cliente.js"></script>
+<script>
+    // URLs
+    Europa.Controllers.Cliente.UrlBuscarCliente = '@Url.Action("BuscarDadosCliente", "PreProposta")';
+    Europa.Controllers.Cliente.UrlIndex = '@Url.Action("Index", "Cliente")';
+    Europa.Controllers.Cliente.UrlIncluirCliente = '@Url.Action("Incluir", "Cliente")';
+    Europa.Controllers.Cliente.UrlAtualizarCliente = '@Url.Action("Atualizar", "Cliente")';
+    Europa.Controllers.Cliente.UrlValidarDadosVenda = '@Url.Action("ValidarDadosVenda", "Cliente")';
+    Europa.Controllers.Cliente.UrlValidarDadosIntegracao = '@Url.Action("ValidarDadosIntegracao", "Cliente")';
+</script>
+
+<div id="titlebar-name">
+    <div id="cliente_header_novo" class="pull-left" style="display: none;">@ViewBag.Title</div>
+    <div id="cliente_header_info" class="pull-left" style="display: none;width: 100%;">
+        <div class="col-md-24">
+            <div class="pull-left" id="cliente_header_nome"></div>
+        </div>
+        <div class="col-md-24" style="min-width: 300px;">
+            <div id="cliente_header_email" class="pull-left"></div>
+            <div id="cliente_header_telefone"></div>
+        </div>
+    </div>
+</div>
+<div id="titlebar-buttons">
+    <div class="col-md-24" style="display: inline-flex">
+        <div id="div_buttons_visualizacao">
+            @if (Model.Cliente.HasValue() && SessionAttributes.Current().HasPermission(ViewBag.Codigo, "MatrizOferta"))
+            {
+                <button id="btn_matriz_oferta" class="btn btn-white" type="submit" onclick="Europa.Controllers.Simulador.AbrirMatrizOfertaCliente()">
+                    @GlobalMessages.MatrizOferta
+                </button>
+            }
+
+            @if (!Model.Cliente.IsEmpty() && SessionAttributes.Current().HasPermission(ViewBag.Codigo, "MudarProprietario"))
+            {
+                <button id="btn_mudar_corretor" class="btn btn-white" type="button" onClick="Europa.Components.CorretorModal.OpenModal()">
+                    <i class="fa fa-refresh"></i> @GlobalMessages.MudarProprietario
+                </button>
+            }
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+            {
+                <button id="btn_buscar" class="btn btn-white" type="button" onClick="Europa.Components.ClienteModal.AbrirModal(Europa.Controllers.Cliente.SelectCliente)">
+                    <i class="fa fa-search"></i> @GlobalMessages.Buscar
+                </button>
+            }
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+            {
+                <button id="btn_novo" class="btn btn-white" type="button" onClick="Europa.Controllers.Cliente.Novo()">
+                    <i class="fa fa-plus"></i> @GlobalMessages.Novo
+                </button>
+            }
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar") && !Model.Cliente.IsEmpty())
+            {
+                <button id="btn_editar" class="btn btn-white" type="button" onclick="Europa.Controllers.Cliente.Editar()">
+                    <i class="fa fa-pencil"></i> @GlobalMessages.Editar
+                </button>
+            }
+        </div>
+        <div id="div_buttons_edicao" style="display: none">
+            @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir") || SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar"))
+            {
+                <button class="btn btn-white" type="button" onclick="Europa.Controllers.Cliente.Salvar()">
+                    <i class="fa fa-floppy-o"></i> @GlobalMessages.Salvar
+                </button>
+                <button class="btn btn-white" type="button" onclick="Europa.Controllers.Cliente.DesabilitarEdicao()">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Desistir
+                </button>
+            }
+        </div>
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ValidarDadosVenda"))
+        {
+            <button style="display: none; margin-left: 3px" id="btn_validar" class="btn btn-white" type="button" onclick="Europa.Controllers.Cliente.ValidarDadosIntegracao()">
+                <i class="fa fa-check"></i> @GlobalMessages.ValidarDadosIntegracao
+            </button>
+        }
+    </div>
+</div>
+<div id="titlebar-extra">
+    <div class="col-md-24">
+        <nav class="col-md-24">
+            <ul id="tabMenu" class="nav nav-tabs" role="tablist" style="background-color: #FFFFFF">
+                <li id="tabGeral" class="active">
+                    <a href="#tabGeralContent">@GlobalMessages.InformacoesGerais</a>
+                </li>
+                <li id="tabEndereco">
+                    <a href="#tabEnderecoContent">@GlobalMessages.Enderecos</a>
+                </li>
+                <li id="tabDadoPessoal">
+                    <a href="#tabDadoPessoalContent">@GlobalMessages.DadosPessoais</a>
+                </li>
+                <li id="tabEmpresa">
+                    <a href="#tabEmpresaContent">@GlobalMessages.DadosProfissionais</a>
+                </li>
+                <li id="tabDadoFinanceiro">
+                    <a href="#tabDadoFinanceiroContent">@GlobalMessages.DadoFinanceiro</a>
+                </li>
+                <li id="tabInformacoesComplementares">
+                    <a href="#tabInformacoesComplementaresContent">@GlobalMessages.InformacoesComplementares</a>
+                </li>
+                <li id="tabReferencia">
+                    <a href="#tabReferenciaContent">@GlobalMessages.Referencias</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+
+<div id="div_conteudo">
+    @{
+        Html.RenderPartial("_Conteudo", Model);
+    }
+</div>
+@{
+    Html.RenderPartial("_ModalBuscaCliente");
+    Html.RenderPartial("_ModalCadastrarProposta");
+    Html.RenderPartial("_ModalMudarCorretor");
+}

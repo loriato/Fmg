@@ -1,0 +1,70 @@
+﻿@using Europa.Resources
+<div class="modal fade" id="modal-confirm-alert" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="confirm-alert-header" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="confirm-alert-header"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="confirm-alert-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button__red__outline" onclick="Europa.Confirmacao.Confirm();">
+                    <span class="fas fa-check"></span> @GlobalMessages.Confirmar
+                </button>
+                <button type="button" class="button__red__outline" onclick="Europa.Confirmacao.Cancel();">
+                    <span class="fas fa-times"></span> @GlobalMessages.Desistir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-info-alert" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="info-alert-header" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="info-alert-header"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="info-alert-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="Europa.Informacao.Hide(); ">
+                    <span class="fa fa-times"></span> @GlobalMessages.Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-spinner" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="spinner-header" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="spinner-header">@GlobalMessages.Aguarde</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    #modal-confirm-alert, #modal-info-alert {
+        z-index: 10051;
+    }
+
+    #modal-spinner {
+        z-index: 10052;
+    }
+</style>

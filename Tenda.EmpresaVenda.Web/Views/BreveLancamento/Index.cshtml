@@ -1,0 +1,72 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "EVS09";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+
+<script src="~/Static/projeto/breve-lancamento/breve-lancamento.js"></script>
+<script src="~/Static/projeto/breve-lancamento/breve-lancamento-datatable.js"></script>
+<script src="~/Static/projeto/breve-lancamento/modal-breve-lancamento.js"></script>
+
+<script>
+    Europa.Controllers.BreveLancamento.UrlListar = '@Url.Action("Listar", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlIncluir = '@Url.Action("Incluir", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlAlterar = '@Url.Action("Atualizar", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlExcluir = '@Url.Action("Excluir", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlBuscarBreveLancamento = '@Url.Action("BuscarFormulario", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlAssociarComEmpreendimento = '@Url.Action("AssociarComEmpreendimento", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlListarPrioridade = '@Url.Action("ListarPrioridade", "BreveLancamento")';
+    Europa.Controllers.BreveLancamento.UrlSalvarPrioridade = '@Url.Action("SalvarPrioridade","BreveLancamento")';
+    Europa.Controllers.BreveLancamento.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar").ToString().ToLower()',
+        AssociarEmpreendimento: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "AssociarEmpreendimento").ToString().ToLower()'
+    };
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+    {
+        <div id="botoes_visualizacao">
+            <button class="btn btn-default" title="@GlobalMessages.Novo" type="button" onclick="Europa.Controllers.BreveLancamento.Incluir()">
+                <i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Novo
+            </button>
+        </div>
+    }
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir") || SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar"))
+    {
+        <div id="botoes_edicao" style="display:none">
+            <button type="button" title="@GlobalMessages.Salvar" class="btn btn-default" onClick="Europa.Controllers.BreveLancamento.Salvar()"><i class="fa fa-floppy-o"></i> @GlobalMessages.Salvar</button>
+            <button type="button" title="@GlobalMessages.Cancelar" class="btn btn-default" onClick="Europa.Controllers.BreveLancamento.CancelarEdicao()"><i class="fa fa-ban"></i> @GlobalMessages.Cancelar</button>
+        </div>
+        <div id="botoes_detalhamento" style="display:none">
+            <button type="button" title="@GlobalMessages.Voltar" class="btn btn-default" onClick="Europa.Controllers.BreveLancamento.CancelarEdicao()"><i class="fa fa-arrow-left"></i> @GlobalMessages.Voltar</button>
+        </div>
+    }
+</div>
+
+<div id="div_visualizacao">
+    @{
+        Html.RenderPartial("_DataTable");
+    }
+</div>
+
+<div id="div_edicao" style="display:none">
+    @{
+        Html.RenderPartial("_FormularioCompleto");
+    }
+</div>
+
+@{
+    Html.RenderPartial("~/Views/BookBreveLancamento/_BookBreveLancamento.cshtml");
+}
+
+@{
+    Html.RenderPartial("_ModalPrioridade");
+}

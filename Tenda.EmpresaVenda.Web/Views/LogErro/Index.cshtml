@@ -1,0 +1,83 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Security.Models
+@model Tenda.Domain.Security.Models.Error
+
+@{
+    ViewBag.Codigo = "SEG09";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/administrativo/log-erro/log-erro.js"></script>
+<script src="~/Static/administrativo/log-erro/datatable-log-erro.js"></script>
+<script>
+    Europa.Controllers.LogErro.UrlExcluir = '@Url.Action("Excluir", "LogErro")';
+    Europa.Components.Datatable.LogErro.listAction = '@Url.Action("Listar", "LogErro")';
+</script>
+
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExcluirLog"))
+    {
+        <button id="btnExcluirLog" type="button" class="btn btn-default" onclick="Europa.Controllers.LogErro.ExcluirLogs()" title="@GlobalMessages.ExcluirLogs">
+            <i class="fa fa-trash"></i> @GlobalMessages.ExcluirLogs
+        </button>
+    }
+</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    <div class="col-md-24">
+        <form id="form_filtro_log_erro">
+            <div class="col-md-3">
+                @Html.Label(GlobalMessages.Tipo)
+                @Html.TextBoxFor(x => x.Type, new {@class = "form-control"})
+            </div>
+            <div class="col-md-3" style="margin-left: 10px">
+                @Html.Label(GlobalMessages.Mensagem)
+                @Html.TextBoxFor(x => x.Message, new {@class = "form-control"})
+            </div>
+            <div class="col-md-6" style="margin-left: 10px">
+                @Html.Label(GlobalMessages.Horario)
+                <div class="input-group">
+                    <div class="input-group">
+                        @Html.Label("De", new {@for = "DiaDe", @class = "input-group-addon", id = "diaLabel", style = "width: 35px;"})
+                        @Html.TextBox("HorarioInicio", "{0:dd/MM/yyyy HH:mm}", new {@class = "form-control", datepicker = "datepicker", parent = "#form_filtro_log_webservice", format = "DD/MM/YYYY HH:MM"})
+                        @Html.Label("Até", new {@for = "DiaAte", @class = "input-group-addon", id = "diaAteLabel", style = "width: 35px;"})
+                        @Html.TextBox("HorarioFim", "{0:dd/MM/yyyy HH:mm}", new {@class = "form-control", datepicker = "datepicker", parent = "#form_filtro_log_webservice", format = "DD/MM/YYYY HH:MM"})
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3" style="margin-left: 10px">
+                @Html.Label(GlobalMessages.Origem)
+                @Html.TextBoxFor(x => x.Source, new {@class = "form-control"})
+            </div>
+            <div class="col-md-4" style="margin-left: 10px">
+                @Html.Label(GlobalMessages.Conteudo)
+                @Html.TextBoxFor(x => x.Stacktrace, new {@class = "form-control"})
+            </div>
+            <div class="col-md-4" style="margin-left: 10px">
+                <div class="pull-right" style="margin-top: 20px">
+                    <button title="@GlobalMessages.Filtrar" class="btn btn-default" style="width: 100px" onClick="Europa.Components.Datatable.LogErro.Filtrar()">
+                        <i class="fa fa-filter"></i> @GlobalMessages.Filtrar
+                    </button>
+                    <button title="@GlobalMessages.Limpar" class="btn btn-default" style="width: 100px" onClick="Europa.Controllers.LogErro.LimparFiltros()">
+                        <i class="fa fa-eraser"></i> @GlobalMessages.Limpar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div ng-controller="LogErroDataTable as table">
+        <div class="col-md-24">
+            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                   dt-column-defs="table.dtColumnDefs"></table>
+        </div>
+    </div>
+}
+@{
+    Html.RenderPartial("~/Views/LogErro/_DetalhamentoModal.cshtml", new Error());
+}

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="20" viewBox="0 0 25 20">
+    <g fill="none" fill-rule="evenodd">
+        <g fill="#DBDCDC" fill-rule="nonzero">
+            <g>
+                <g>
+                    <path d="M2.784.8h19.182c1.324 0 2.397 1.074 2.397 2.4v14.4c0 1.325-1.073 2.4-2.397 2.4H2.784C1.459 20 .386 18.925.386 17.6V3.2C.386 1.874 1.459.8 2.784.8zm9.59 8.4l9.592-6H2.784l9.59 6zm-9.59 8.4h19.182V6.044l-9.591 5.986-9.591-5.986V17.6z" transform="translate(-16 -46) translate(0 32) translate(16 14)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

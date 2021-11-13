@@ -1,0 +1,165 @@
+﻿.btn {
+    border-radius: 40px;
+    font-weight: bold;
+    font-size: 14px;
+    border-width: 2px;
+    border-style: solid;
+    padding: 4px 20px 0 20px;
+}
+
+/******************************* CORES *******/
+.btn,
+.btn:active,
+.btn:focus{
+    color: var(--chery-red);
+    background-color: transparent;
+    border-color: var(--chery-red);
+}
+.btn:hover{
+    color: white;
+    background-color: var(--chery-red);
+    border-color: var(--chery-red);
+}
+
+.btn-default,
+.btn-default:hover,
+.btn-default:active,
+.btn-default:focus{
+    color: white;
+    border-color: var(--dodger-blue);
+    background-color: var(--dodger-blue);
+}
+.btn-red,
+.btn-red:hover,
+.btn-red:active,
+.btn-red:focus{
+    color: white;
+    background-color: var(--chery-red);
+    border-color: var(--chery-red);
+}
+.btn-white,
+.btn-white:active,
+.btn-white:focus{
+    color: white;
+    background-color: transparent;
+    border-color: white;
+}
+
+.btn-white:hover{
+    color: var(--chery-red);
+    background-color: white;
+    border-width: 2px;
+    border-style: solid;
+}
+
+.btn-steel,
+.btn-steel:focus {
+    color: var(--steel);
+    border-color: var(--steel);
+}
+.btn-steel:active{
+    color: white;
+    background-color: var(--steel);
+    background: white;
+    border-color: var(--steel);
+}
+
+.btn-steel:hover{
+    color: white;
+    background-color: var(--steel);
+    border-color: var(--steel);
+}
+
+
+/********** TAMANHO ************************************/
+.btn-md {
+    border-style: solid;
+    border-width: 2px;
+    padding: 7px 20px 3px 20px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/********** Inline Edit ************************************/
+.btn-datatable,
+.btn-datatable:active,
+.btn-datatable:focus{
+    color: white;
+    background-color: transparent;
+    border-color: white;
+    background-image: url('');
+}
+.btn-datatable:hover{
+    color: var(--steel);
+    background-color: white;
+    border-width: 2px;
+    border-color: white;
+    border-style: solid;
+}
+
+/********** OUTROS ************************************/
+.input-group-btn:last-child>.btn,
+.input-group-btn:last-child>.btn.btn-default,
+.input-group-btn:last-child>.btn-group {
+    padding: 0;
+    height: 28px;
+    width: 33px;
+    border-color: var(--gray-input);
+    color: var(--slate);
+    background-color: white;
+    border-width: 1px;
+    -webkit-border-top-right-radius: 3px;
+    -webkit-border-bottom-right-radius: 3px;
+    -moz-border-radius-topright: 3px;
+    -moz-border-radius-bottomright: 3px;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+}
+.btn-close {
+    width: 16px;
+    height: 14px;
+    cursor: pointer;
+    border-radius: 0;
+    border-width: 0;
+    border-style: solid;
+    padding: 0;
+}
+
+.input-group-btn:last-child>.btn:disabled,
+.input-group-btn:last-child>.btn.btn-default:disabled,
+.input-group-btn:last-child>.btn-group:disabled {
+    background: var(--gray-disabled);
+}
+
+.btn-yellow,
+.btn-yellow:active,
+.btn-yellow:focus,
+.btn-yellow:hover {
+    background-color: #ffc400;
+    color: var(--dark);
+    border: 0;
+}
+
+.btn-blue, .btn-blue:active, .btn-blue:focus {
+    color: var(--marine-blue);
+    background-color: transparent;
+    border-color: var(--marine-blue);
+}
+
+    .btn-blue:hover {
+        color: white;
+        background-color: var(--marine-blue);
+        border-color: var(--marine-blue);
+    }
+
+.btn-blue-light, .btn-blue-light:active, .btn-blue-light:focus {
+    color: var(--dodger-blue);
+    background-color: transparent;
+    border-color: var(--dodger-blue);
+}
+
+    .btn-blue-light:hover {
+        color: white;
+        background-color: var(--dodger-blue);
+        border-color: var(--dodger-blue);
+    }    

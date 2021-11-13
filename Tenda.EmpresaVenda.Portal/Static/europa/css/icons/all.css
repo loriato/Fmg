@@ -1,0 +1,7 @@
+@import url("icones-bancos-brasileiros.min.css");
+@font-face {
+    font-family: 'Fonte-Empresas-Brasileiros';
+    src: url('Fonte-Empresas-Brasileiros.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

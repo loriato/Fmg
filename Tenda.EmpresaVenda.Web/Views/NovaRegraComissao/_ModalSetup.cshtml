@@ -1,0 +1,194 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.Domain.EmpresaVenda.Enums
+
+<script type="text/javascript" src="~/Static/projeto/nova-regra-comissao/index-nova-regra-comissao.js"></script>
+<script type="text/javascript" src="~/Static/projeto/nova-regra-comissao/setup-nova-regra-comissao.js"></script>
+<link href="~/Static/projeto/nova-regra-comissao/setup.css" rel="stylesheet" /> 
+
+<script>
+    //Europa.Controllers.ModalNovaRegraComissao.Url.Matriz = '@Url.Action("Index", "MatrizPagadoria")';
+    Europa.Controllers.NovaRegraComissao.Url = {
+        ListarEvs: '@Url.Action("ListarTree", "EmpresaVenda")',
+        ListarTreeIdEvs: '@Url.Action("ListarTreeIdEvs", "EmpresaVenda")',
+        MontarMatriz: '@Url.Action("MontarMatriz","NovaRegraComissao")',
+        GerarRegraComissao: '@Url.Action("GerarRegraComissao", "NovaRegraComissao")',
+        ValidarItemRegraComissao: '@Url.Action("ValidarItemRegraComissao", "NovaRegraComissao")',
+        GerarPdf: '@Url.Action("GerarPdf", "MatrizPagadoria")',
+    }
+</script>
+
+<style>
+    #modalSetupRegraComissao .empresa-venda-wrapper {
+        margin-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(133,166,176,0.42);
+    }
+
+    #modalSetupRegraComissao #empresa_venda_treeview_primeira_etapa {
+        max-height: 35vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #modalSetupRegraComissao #empresa_venda_treeview_primeira_etapa .list-group {
+        margin: 0;
+        padding: 0;
+    }
+
+    #modalSetupRegraComissao #empresa_venda_treeview_primeira_etapa li {
+        padding: 8px 0 7px 0;
+    }
+
+    #modalSetupRegraComissao #empresa_venda_treeview_segunda_etapa {
+        max-height: 35vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+
+    #modalSetupRegraComissao #empresa_venda_treeview_segunda_etapa .list-group {
+        margin: 0;
+        padding: 0;
+    }
+
+    #modalSetupRegraComissao #empresa_venda_treeview_segunda_etapa li {
+        padding: 8px 0 7px 0;
+    }
+</style>
+
+<div class="modal" id="modalSetupRegraComissao" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel" style="z-index:1030">
+    <div class="modal-dialog" role="document" style="width:90%">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.NovaRegraComissao.FecharSetup()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalSetupRegraComissao_titulo">Incluir Passo a Passo</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    @Html.Hidden("IdRegraComissaoReferencia")
+                    @Html.Hidden("EtapaSetup", 1)
+                    <!--Primeira etapa-->
+                    <div class="col-md-24 hidden" id="primeira-etapa">
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.Regional)
+                            @Html.DropDownList("Regional", RegionalHelper.RegionaisMatrizSelectListItem, new { @class = "select2-container form-control", onchange = "Europa.Controllers.NovaRegraComissao.OnRegionalChanged()" })
+                        </div>
+                        <div class="col-md-24 empresa-venda-wrapper">
+                            <div class="col-md-10">
+                                @Html.Label(GlobalMessages.EmpresaVendas)
+                            </div>
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-default" onclick="Europa.Controllers.NovaRegraComissao.MarcarTodos()">
+                                    @GlobalMessages.MarcarTodos
+                                </button>
+                                <button type="button" class="btn btn-default" onclick="Europa.Controllers.NovaRegraComissao.DesmarcarTodos()">
+                                    @GlobalMessages.DesmarcarTodos
+                                </button>
+                            </div>
+                            <div class="col-md-24" id="empresa_venda_treeview_primeira_etapa"></div>
+                        </div>
+                        <div id="opcao_buscar_ultima_wrapper" class="col-md-24" style="padding-top: 8px;">
+                            @*<label class="col-md-24">
+                                @Html.RadioButton("BuscarUltimaAtt", false, new { @checked = true }) @GlobalMessages.CriarEmBranco
+                            </label>
+                            <label class="col-md-24">
+                                @Html.RadioButton("BuscarUltimaAtt", true) @GlobalMessages.UtilizarRegrasRecentes
+                            </label>*@
+                        </div>
+                    </div>
+                    <!--Segunda Etapa-->
+                    <div class="col-md-24 hidden" id="segunda-etapa">
+                        <div class="col-md-24 empresa-venda-wrapper">
+                            <div class="col-md-10">
+                                @Html.Label(GlobalMessages.EmpresaVendas)
+                            </div>
+                            <div class="col-md-24" id="empresa_venda_treeview_segunda_etapa"></div>
+                        </div>
+                    </div>
+                    <!--Terceira Etapa-->
+                    <div class="col-md-24 hidden" id="terceira-etapa" style="min-height:400px">
+
+                        <div class="tabs-container col-md-24">
+                            <input type="radio" name="tabs" class="tabs" id="tab1" checked>
+                            <label for="tab1">@GlobalMessages.Fixa</label>
+                            <div style="padding-top: 0px;
+                                padding-left: 0px;
+                                padding-right: 0px;
+                                padding-bottom: 0px;">
+                                <div id="matriz_fixa" class="col-md-24">
+                                </div>
+                            </div>
+
+                            <input type="radio" name="tabs" class="tabs" id="tab2" checked>
+                            <label for="tab2">@GlobalMessages.Nominal</label>
+                            <div style="padding-top: 0px;
+                                padding-left: 0px;
+                                padding-right: 0px;
+                                padding-bottom: 0px;">
+                                <div id="matriz_nominal" class="col-md-24">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <!--Quinta Etapa-->
+                    <div id="quinta-etapa" class="col-md-24 hidden">
+                        <div class="col-md-6">
+                            @Html.Label(GlobalMessages.Regional + " *", new { @class = "control-label" })
+                            @Html.TextBox("setup-regional", "", new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-12 col-md-offset-1">
+                            @Html.Label(GlobalMessages.Descricao + " *", new { @class = "control-label" })
+                            @Html.TextBox("setup-descricao", "", new { @class = "form-control", maxlength = 255 })
+                        </div>
+                        <div class="col-md-4 col-md-offset-1">
+                            @Html.Label(GlobalMessages.TipoRegraComissao + " *", new { @class = "control-label" })
+                            @*@Html.EnumDropDownListFor(x => x.Tipo, GlobalMessages.Selecione, new { @class = "form-control", onchange = "Europa.Controllers.MatrizPagadoria.OnChangeVigencia()" })*@
+                            @Html.DropDownList("setup-tipo-regra-comissao", EnumHelper.GetSelectList(typeof(TipoRegraComissao)), new { @class = "form-control", onchange = "Europa.Controllers.NovaRegraComissao.OnChangeTipoRegraComissao()" })
+                        </div>
+
+                        <div id="vigencia" class="col-md-24 hidden">
+                            <div class="col-md-4 form-group">
+                                @Html.Label(GlobalMessages.InicioVigencia + " *", new { @class = "control-label" })
+                                @Html.TextBox("setup-inicio-vigencia",DateTime.Now, new { @class = "form-control", maxlength = 128, @datepicker = "datepicker", onchange = "Europa.Controllers.NovaRegraComissao.OnChangeInicioVigencia()" })
+                            </div>
+                            <div class="col-md-4 col-md-offset-1 form-group">
+                                @Html.Label(GlobalMessages.TerminoVigencia + " *", new { @class = "control-label" })
+                                @Html.TextBox("setup-termino-vigencia",DateTime.Now, new { @class = "form-control", maxlength = 128, @datepicker = "datepicker" })
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+
+                @*</div>*@
+            </div>
+            <!-- #endregion -->
+            <!-- #region footer -->
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-default" onclick=" Europa.Controllers.NovaRegraComissao.FecharSetup() ">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Cancelar
+                </button>
+
+                <button id="btn-proximo" type="button" class="btn btn-default" onclick="Europa.Controllers.NovaRegraComissao.AvancarEtapa()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Proximo
+                </button>
+
+                <button id="btn-preencher-itens-diferenciados" type="button" class="btn btn-default hidden" onclick="Europa.Controllers.NovaRegraComissao.QuartaEtapa()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Proximo
+                </button>
+
+                <button id="btn-gerar-regra-comissao" type="button" class="btn btn-default hidden" onclick="Europa.Controllers.NovaRegraComissao.GerarRegraComissao()">
+                    <i class="fa fa-check"></i> @GlobalMessages.GerarRegraComissao
+                </button>
+            </div>
+            <!-- #endregion -->
+        </div>
+    </div>
+</div>

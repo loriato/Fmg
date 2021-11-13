@@ -1,0 +1,314 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@model Tenda.EmpresaVenda.Web.Models.PrePropostaDTO
+
+<div id="modal-simulacao" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="width: 90%;" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@GlobalMessages.Resultado</h4>
+            </div>
+            <div class="modal-body">
+                <div class="col-md-24">
+                    <div class="col-md-20">
+                        @GlobalMessages.Simulacoes
+                        @Html.DropDownList("simulacoes", new List<SelectListItem>(), GlobalMessages.Selecione, new { @class = "form-control", onChange = "Europa.Controllers.PreProposta.ModalSimulacao.OnChangeSimulacao()" })
+                    </div>
+                    <div class="col-md-1 pull-left" >
+                        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Simulacao"))
+                        {
+                            <button id="btn_simulador" class="btn btn-default" type="button"
+                                    style="margin-top:16px"
+                                    onclick="Europa.Controllers.PreProposta.ModalSimulacao.AtualizarSimulacoes()">
+                                <i class="fa fa-refresh"></i>
+                            </button>
+                        }
+                        </div>
+
+                    <div class="col-md-1 col-md-offset-1">
+                        @if (Model.PreProposta.SituacaoProposta == SituacaoProposta.FluxoEnviado && SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Simulacao"))
+                        {
+                            <button id="btn_simulador" class="btn btn-default" type="button"
+                                    style="margin-top:16px"
+                                    onclick="Europa.Controllers.PreProposta.Simulador()">
+                                <i class="fa fa-archive"></i> Simulador
+                            </button>
+                        }
+                    </div>
+                </div>
+
+                <div class="col-md-24">
+                    <div class="col-md-11">
+                        <form id="form-simulador">   
+                            <div class="col-md-24">
+                                <div ng-controller="ResultadoSimulacaoModalTable as simulacao">
+                                    <div id="resultado_simulacao_datatable_modal_header">
+                                        <div class="col-md-8 ">
+                                            <h5>@GlobalMessages.Resultado</h5>
+                                        </div>
+                                        <div class="col-md-2 pull-right" style="margin-top:3px;margin-right:14px">
+                                            @if (Model.PodeManterAssociacoes &&
+                                                    (Model.PreProposta.SituacaoProposta == SituacaoProposta.FluxoEnviado ||
+                                                    Model.PreProposta.SituacaoProposta == SituacaoProposta.AguardandoIntegracao))
+                                            {
+                                                <button class="btn btn-default" title="@GlobalMessages.Novo" onClick="Europa.Controllers.PreProposta.ModalSimulacao.Novo()"><i class="fa fa-plus"></i> @GlobalMessages.Novo</button>
+                                            }
+                                        </div>
+                                    </div>
+                                    <table datatable="" dt-options="simulacao.dtOptions" dt-columns="simulacao.dtColumns"
+                                           dt-instance="simulacao.dtInstance" class="table table-striped table-bordered"
+                                           dt-column-defs="simulacao.dtColumnDefs"></table>
+                                </div>
+                            </div>
+                            <!--<div class="col-md-24">
+                                <div class="col-md-24">
+                                    <b>@GlobalMessages.InformacoesFinanceiras</b>
+                                </div>
+                                <div class="col-md-6"style="margin-top: 16px;">
+                                    @Html.Label(GlobalMessages.CotaFinanciamento)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.CotaFinanciamento, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-4 col-md-offset-1"style="margin-top: 16px;">
+                                    @Html.Label(GlobalMessages.Subsidio)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.Subsidio, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-6 col-md-offset-1">
+                                    @Html.Label(GlobalMessages.FinanciamentoPreAprovado)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.FinanciamentoPreAprovado, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-5 col-md-offset-1"style="margin-top: 16px;">
+                                    @Html.Label(GlobalMessages.TaxaDeJuros)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.TaxaJuros, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            <div class="col-md-24">
+                                <div class="col-md-6">
+                                    @Html.Label(GlobalMessages.PrazoAmortizacao)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.PrazoAmortizacao, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-5 col-md-offset-1">
+                                    @Html.Label(GlobalMessages.PrazoObraCef)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.PrazoObraCef, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-9 col-md-offset-1">
+                                    @Html.Label(GlobalMessages.PrimeiraParcelaFinanciamento)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.PrimeiraParcelaFinanciamento, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-24">
+                                <hr />
+                                <div class="col-md-24">
+                                    <b>@GlobalMessages.InformacoesEntradaFgts</b>
+                                </div>
+                                <div class="col-md-12">
+                                    @Html.Label(GlobalMessages.ValorEntrada)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.ValorEntrada, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                                <div class="col-md-11 col-md-offset-1">
+                                    @Html.Label(GlobalMessages.ValorTotalFgts)
+                                    @Html.TextBoxFor(x => x.SimuladorDto.ValorFgts, new { @class = "form-control ", @disabled = "disabled" })
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-24">
+                                <hr />
+                                <div class="col-md-24">
+                                    <b>@GlobalMessages.InformacoesPreChavesIntermediaria</b>
+                                </div>
+                                <div class="col-md-24" style="margin-top:10px">
+                                    <b>@GlobalMessages.ValorTotalLiberadoCliente</b>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7" style="margin-top: 16px;">
+                                        @Html.Label(GlobalMessages.ValorTotalPreChaves)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorTotalPreChavesIntermediaria)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.TotalPreChavesIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-1" style="margin-top: 16px;">
+                                        @Html.Label(GlobalMessages.ValorTotalAprovado)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalAprovadoCliente, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <hr />
+                                </div>
+                                
+                                <div class="col-md-24" style="margin-top:10px">
+                                    <b>@GlobalMessages.ValorTotalLiberadoPreChaves</b>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7">
+                                        @Html.Label(GlobalMessages.QuantidadeParcelasProduto)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.QuantidadeParcelaAprovadaPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ParcelasAprovadasCliente)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorParcelaAprovadaPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorTotalAprovado, new { style = "margin-top:20px" })
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalAprovadoPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7">
+                                        @Html.Label(GlobalMessages.QuantidadeParcelas)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.QuantidadeParcelaNegociadaPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-9 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorParcela)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorParcelaNegociadaPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-6 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorTotalNegociado)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalNegociadoPreChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-24"style="margin-top:10px">
+                                    <b>@GlobalMessages.ValorMaximoLiberadoPreChavesIntermediaria</b>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-12">
+                                        @Html.Label(GlobalMessages.ValorTotalIntermediaria)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-11 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.DataLimite)-->@*perguntar capucho*@
+                                        <!--@Html.TextBoxFor(x => Model.SimuladorDto.DataVencimentoPre, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7"style="margin-top:16px">
+                                        @Html.Label(GlobalMessages.PrimeiraIntermediaria)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorPrimeiraIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-8 col-md-offset-1"style="margin-top:16px">
+                                        @Html.Label(GlobalMessages.Data)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.DataPrimeiraIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.TotalPreChavesIntermediaria)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.TotalPreChavesIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7"style="margin-top:16px">
+                                        @Html.Label(GlobalMessages.SegundaIntermediaria)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorSegundaIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-4 col-md-offset-1"style="margin-top:16px">
+                                        @Html.Label(GlobalMessages.Data)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.DataSegundaIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-11 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.TotalPreChaves+"+"+GlobalMessages.PreChavesIntermediaria)
+                                        @Html.TextBox("totalIntermediaria", "", new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-md-24">
+                                <hr />
+                                <div class="col-md-24">
+                                    <b>@GlobalMessages.InformacoesPosChaves</b>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-12">
+                                        @Html.Label(GlobalMessages.ValorMaximoLiberadoPosChaves)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.DataSegundaIntermediaria, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-11 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.InicioPagamentoPosChaves)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.InicioPagamentoPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7">
+                                        @Html.Label(GlobalMessages.QuantidadeParcelasProduto)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.QuantidadeParcelaAprovadaPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-8 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ParcelasAprovadasCliente)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorParcelaAprovadaPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorTotalAprovado, new { style = "margin-top:20px" })
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalAprovadoPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7">
+                                        @Html.Label(GlobalMessages.QuantidadeParcelas)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.QuantidadeParcelaNegociadaPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-5 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorParcela)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorParcelaNegociadaPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-10 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorTotalNegociado)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotalNegociadoPosChaves, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="col-md-24">
+                                <hr />
+                                <div class="col-md-24">
+                                    <b>@GlobalMessages.InformacoesItbiRegistro</b>
+                                </div>
+                                <div class="col-md-24">
+                                    @Html.Label(GlobalMessages.CondicoesPagamentoDocumentacao)
+                                </div>
+                                <div class="col-md-24">
+                                    <div class="col-md-7">
+                                        @Html.Label(GlobalMessages.ValorEmolumento)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorEmolumento, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-8 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorItbi)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorItbi, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                    <div class="col-md-7 col-md-offset-1">
+                                        @Html.Label(GlobalMessages.ValorTotal)
+                                        @Html.TextBoxFor(x => x.SimuladorDto.ValorTotal, new { @class = "form-control ", @disabled = "disabled" })
+                                    </div>
+                                </div>
+                            </div>-->
+                    </div>
+
+                    <div class="col-md-12 col-md-offset-1">
+                        <div ng-controller="detalhamentoFinanceiroModalTable as table">
+                            <div id="detalhamento_financeiro_datatable_modal_header">
+                                <div class="col-md-8 ">
+                                    <h5>@GlobalMessages.DetalhamentoFinanceiro</h5>
+                                </div>
+                                <div class="col-md-2 pull-right" style="margin-top:3px;margin-right:14px">
+                                    @if (Model.PodeManterAssociacoes &&
+                                            (Model.PreProposta.SituacaoProposta == SituacaoProposta.FluxoEnviado ||
+                                            Model.PreProposta.SituacaoProposta == SituacaoProposta.AguardandoIntegracao))
+                                    {
+                                        <button class="btn btn-default" title="@GlobalMessages.Novo" onClick="Europa.Controllers.PreProposta.ModalSimulacao.Novo()"><i class="fa fa-plus"></i> @GlobalMessages.Novo</button>
+                                    }
+                                </div>
+                            </div>
+                            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                                   dt-column-defs="table.dtColumnDefs"></table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> @GlobalMessages.Fechar</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

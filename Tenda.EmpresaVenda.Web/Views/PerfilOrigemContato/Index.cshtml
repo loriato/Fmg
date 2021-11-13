@@ -1,0 +1,40 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+
+<script src="~/Static/portal-pos-venda/perfil-origem-contato/perfil-origem-contato-datatable.js"></script>
+
+@{
+       ViewBag.Codigo = "CAD26";
+        ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script>
+    Europa.Controllers.PerfilOrigemContato.Datatable.listAction = '@Url.Action("Listar", "PerfilOrigemContato")';
+    Europa.Controllers.PerfilOrigemContato.Datatable.Salvar = '@Url.Action("Salvar", "PerfilOrigemContato")';
+    Europa.Controllers.PerfilOrigemContato.Datatable.Excluir = '@Url.Action("Excluir", "PerfilOrigemContato")';
+    Europa.Controllers.PerfilOrigemContato.Datatable.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()'
+    };
+    @*
+    Europa.Controllers.PerfilOrigemContato.DropDownOrigem = '@Html.Raw(Ajax.JavaScriptStringEncode(Html.DropDownList("TipoOrigemInteracao", new SelectList(ViewBag.Itens, "Value", "Key", typeof(TipoOrigemInteracao)), new { @class = "select2-container form-control", multiple = "multiple" }).ToHtmlString()))';
+    *@
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    Html.RenderPartial("~/Views/PerfilOrigemContato/Datatable.cshtml");
+}
+else
+{
+    <div>
+        <h3>
+            @GlobalMessages.PermissaoNegada
+        </h3>
+    </div>
+}

@@ -1,0 +1,247 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+@using Tenda.Domain.Core.Enums
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Europa.Resources
+@using Europa.Extensions
+
+@{
+    ViewBag.Codigo = "EVS11";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+@{
+    var statusDoc = new List<SelectListItem>();
+    statusDoc.Add(new SelectListItem { Text = "Selecione", Value = "0" });
+    statusDoc.Add(new SelectListItem { Text = "Sim", Value = "1" });
+    statusDoc.Add(new SelectListItem { Text = "Não", Value = "2" });
+}
+
+<script src="~/Static/projeto/consulta-pre-proposta/consulta-pre-proposta.js"></script>
+
+<script>
+    Europa.Controllers.ConsultaPreProposta.UrlListar = '@Url.Action("Listar", "ConsultaPreProposta")';
+    Europa.Controllers.ConsultaPreProposta.UrlExportarPagina = '@Url.Action("ExportarPagina", "ConsultaPreProposta")';
+    Europa.Controllers.ConsultaPreProposta.UrlExportarTodos = '@Url.Action("ExportarTodos", "ConsultaPreProposta")';
+</script>
+
+<style>
+    .info-proposta {
+        display: none;
+    }
+
+    .hr-mais-filtro {
+        margin-top: 5px;
+        margin-bottom: 5px;
+        border-top: 2px solid #eee;
+    }
+</style>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons"></div>
+
+<form>
+    <div class="col-md-24">
+
+        <div class="col-md-3 form-group">
+            @Html.Label(GlobalMessages.Regional)
+            <select id="autocomplete_regional" multiple="multiple" name="autocomplete_regional" class="select2-container form-control .select-increase-height"></select>
+        </div>
+
+        <div class="col-md-2 form-group col-md-offset-1">
+            @Html.Label(GlobalMessages.UF)
+            @Html.DropDownList("filtro_estados", new SelectList(EstadosSelectList.ValuesWithEmpty, "Value", "Text"), new { @class = "form-control", multiple = "multiple" })
+        </div>
+
+
+
+        <div class="col-md-3 form-group  col-md-offset-1">
+            @Html.Label(GlobalMessages.Viabilizador)
+            <select id="autocomplete_viabilizador" multiple="multiple" name="autocomplete_viabilizador" class="select2-container form-control"></select>
+        </div>
+
+        <div class="col-md-3 form-group col-md-offset-1">
+            @Html.Label(GlobalMessages.CodigoProposta)
+            @Html.TextBox("filtro_codigo_proposta", "", new { @class = "form-control", maxlength = 128, onkeyup = "this.value = this.value.toUpperCase();" })
+        </div>
+
+        <div class="col-md-9 col-md-offset-1">
+            @{
+                var situacoesParaVisualizacao = new List<SituacaoProposta>() {
+                            SituacaoProposta.AguardandoAnaliseSimplificada,
+                            SituacaoProposta.AguardandoAuditoria,
+                            SituacaoProposta.AguardandoFluxo,
+                            SituacaoProposta.AnaliseCompletaAprovada,
+                            SituacaoProposta.AnaliseSimplificadaAprovada,
+                            SituacaoProposta.Cancelada,
+                            SituacaoProposta.Condicionada,
+                            SituacaoProposta.DocsInsuficientesCompleta,
+                            SituacaoProposta.DocsInsuficientesSimplificado,
+                            SituacaoProposta.EmAnaliseSimplificada,
+                            SituacaoProposta.EmElaboracao,
+                            SituacaoProposta.AguardandoIntegracao,
+                            SituacaoProposta.FluxoEnviado,
+                            SituacaoProposta.SICAQComErro,
+                            SituacaoProposta.Integrada,
+                            SituacaoProposta.Reprovada,
+                            SituacaoProposta.EmAnaliseCompleta,
+                            SituacaoProposta.AguardandoAnaliseCompleta
+
+                        };
+
+                var situacoesSelectList = new List<SelectListItem>();
+                foreach (var situacao in situacoesParaVisualizacao)
+                {
+                    situacoesSelectList.Add(new SelectListItem { Text = situacao.AsString(), Value = situacao.GetHashCode().ToString() });
+                }
+                situacoesSelectList = situacoesSelectList.AsQueryable().OrderBy(reg => reg.Text).ToList();
+            }
+            @Html.Label(GlobalMessages.SituacaoPreProposta)
+            @Html.DropDownList("situacao_pre_proposta", situacoesSelectList, new { @class = "form-control ", multiple = "multiple" })
+        </div>
+    </div>
+
+    <div class="col-md-24 mais-filtros">
+        <div class="col-md-24">
+            <div class="col-md-4 form-group">
+                @Html.Label(GlobalMessages.Cliente)
+                @Html.TextBox("filtro_cliente", "", new { @class = "form-control", maxlength = 128 })
+            </div>
+            @* CAMPO ABAIXO ESCONDIDO VIA DISPLAY. NÃO HAVIA SIDO PEDIDO NO TICKET *@
+            <div class="col-md-4 form-group col-md-offset-1" style="display: none">
+                @Html.Label(GlobalMessages.Cliente)
+                @Html.TextBox("filtro_cliente", "", new { @class = "form-control", maxlength = 128 })
+            </div>
+            <div class="col-md-4 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.StandVenda)
+                <select id="autocomplete_stand_venda" @*onchange="Europa.Controllers.ConsultaPreProposta.OnChangeEmpresaFiltro()"*@ multiple="multiple" name="autocomplete_stand_venda" class="select2-container form-control"></select>
+            </div>
+            <div class="col-md-4 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.EmpresaVenda)
+                <select id="autocomplete_empresa_venda" onchange="Europa.Controllers.ConsultaPreProposta.OnChangeEmpresaFiltro()" multiple="multiple" name="autocomplete_empresa_venda" class="select2-container form-control"></select>
+            </div>
+
+            <div class="col-md-4 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.PontoVenda)
+                <select id="autocomplete_ponto_venda" multiple="multiple" name="autocomplete_ponto_venda" class="select2-container form-control"></select>
+            </div>
+
+            <div class="col-md-4 form-group  col-md-offset-1">
+                @Html.Label(GlobalMessages.Corretor)
+                <select id="autocomplete_corretor" multiple="multiple" name="autocomplete_corretor" class="select2-container form-control"></select>
+            </div>
+        </div>
+
+        <div class="col-md-24">
+            <div class="col-md-4 form-group">
+                @Html.Label(GlobalMessages.Produto)
+                <select id="autocomplete_breve_lancamento" multiple="multiple" name="autocomplete_breve_lancamento" class="select2-container form-control"></select>
+            </div>
+
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.DataElaboracao)
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.De</span>
+                    @Html.TextBox("ElaboracaoDe", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.DataElaboracao, new { style = "visibility:hidden" })
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                    @Html.TextBox("ElaboracaoAte", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.DataUltimoEnvio)
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.De</span>
+                    @Html.TextBox("DataEnvioDe", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.DataUltimoEnvio, new { style = "visibility:hidden" })
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                    @Html.TextBox("DataEnvioAte", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-4">
+                @Html.Label(GlobalMessages.Faturado)
+                <select class="form-control" id="filtro_faturado" name="filtro_faturado">
+                    <option value="0" selected>@GlobalMessages.Selecione</option>
+                    <option value="1">@GlobalMessages.Sim</option>
+                    <option value="2">@GlobalMessages.Nao</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.UltimoCCAResponsavel)
+                @Html.TextBox("filtro_cca", "", new { @class = "form-control", maxlength = 128 })
+            </div>
+            <div class="col-md-9 col-md-offset-1">
+                @Html.Label(GlobalMessages.SituacaoAvalista)
+                @Html.DropDownList("situacao_avalista", EnumHelper.GetSelectList(typeof(SituacaoAvalista)), new { @class = "form-control", multiple = "multiple" })
+            </div>
+        </div>
+    </div>
+</form>
+
+<div class="col-md-24 teste-aparecer" style="text-align: center;margin-top: 7px;"><hr class="hr-mais-filtro" /><a id="btn-show-hide-filtro" style="cursor: pointer;text-decoration:none" onclick="Europa.Controllers.ConsultaPreProposta.AlternarExibicaoInformacoes()"><p id="info-hide-filtro" style="margin-bottom:inherit"></p></a></div>
+
+<div class="col-md-24">
+    <div class="col-md-4 pull-right">
+        <div class="col-md-24 text-right " style="vertical-align:central">
+            @Html.Label(GlobalMessages.Filtrar, new { style = "visibility:hidden" })
+            <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.ConsultaPreProposta.Filtrar()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+            <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.ConsultaPreProposta.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-24">
+    <div ng-controller="consultaPrePropostaTable as table">
+        <div id="consulta_pre_proposta_datatable_header">
+            <div class="col-md-12 form-group">
+                <h5 style="margin-top:6px;margin-bottom:0px;">@GlobalMessages.PreProposta</h5>
+            </div>
+            <div class="col-md-11 text-right" style="float: right;">
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.ConsultaPreProposta.ExportarPagina()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina</button>
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.ConsultaPreProposta.ExportarTodos()"><i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos</button>
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>
+
+<form id="form_exportar" hidden></form>

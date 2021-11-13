@@ -1,0 +1,210 @@
+﻿.date-filter-label {
+    height: 17px;
+    border-radius: 0;
+    border: none;
+    font-family: AktivGrotesk;
+    font-size: 13px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+    color:var(--marine-blue);
+    background: white;
+    padding: 3px 8px 0;
+}
+
+.date-filter-input {
+    height: 35px;
+    background: white;
+    border-radius: 0;
+    border: none;
+}
+.date-filter-input-btn-wrapper {
+    height: 35px;
+    background: white;
+    border-radius: 0;
+    border: none;
+}
+.btn-date-filter-input {
+    background: white;
+    border: none;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-filtrar 
+{
+    width: 143px;
+    height: 38px;
+    font-family: AktivGrotesk;
+    font-size: 16px;
+    font-weight: 500;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: 0.15px;
+    text-align: center;
+}
+
+.btn-anexar {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+    background-color: var(--white);
+    color: var(--marine-blue);
+    border-color: var(--marine-blue);
+    border-width: 1px;
+    padding: 8px 7px 2px 6px !important;
+}
+
+.btn-substituir {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+    background-color: var(--white);
+    color:var(--marine-blue);
+    border-color:var(--marine-blue);
+    border-width: 1px;
+    padding: 8px 7px 2px 6px !important;
+}
+    .btn-substituir:hover {
+        color: white;
+        background-color:var(--marine-blue);
+        border-color:var(--marine-blue);
+    }
+    .btn-substituir, .btn-substituir:active, .btn-substituir:focus {
+        color:var(--marine-blue);
+        background-color: white;
+        border-color:var(--marine-blue);
+    }
+
+.btn-recusado {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+    border-width: 1px;
+    padding: 8px 7px 2px 6px !important;
+}
+
+    .btn-recusado:hover {
+        background-color: #e4002b;
+        color: #fff;
+        border-color: #fff;
+    }
+
+    .btn-recusado, .btn-recusado:active, .btn-recusado:focus {
+        background-color: #fff;
+        color: #e4002b;
+        border-color: #e4002b;
+    }
+
+.btn-purple {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+    background-color: var(--white);
+    color: var(--marine-blue);
+    border-color: var(--light-purple);
+    border-width: 1px;
+    padding: 8px 7px 2px 6px !important;
+}
+
+    .btn-purple:hover {
+        color: white;
+        background-color: var(--light-purple);
+        border-color: var(--light-purple);
+    }
+
+    .btn-purple:active, .btn-purple:focus {
+        color: var(--marine-blue);
+        background-color: white;
+        border-color: var(--light-purple);
+    }
+
+.btn-purple-pendente {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.35);
+    background-color: #bbe5ee;
+    color: var(--marine-blue);
+    border-color: var(--marine-blue);
+    border-width: 1px;
+    padding: 8px 7px 2px 6px !important;
+}
+
+    .btn-purple-pendente:hover {
+        color: #bbe5ee;
+        background-color: var(--marine-blue);
+        border-color: #bbe5ee;
+    }
+
+    .btn-purple-pendente:active, .btn-purple:focus {
+        color: var(--marine-blue);
+        background-color: #bbe5ee;
+        border-color: var(--light-purple);
+    }
+
+.btn-em-fechamento-contabil {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    border: solid 1px var(--brown-grey);
+    background-color: var(--white);
+    color: var(--brown-grey);
+    padding: 8px 7px 2px 6px !important;
+}
+    .btn-em-fechamento-contabil:hover {
+        color: var(--brown-grey);
+        background-color: #ffffff;
+        border: solid 1px var(--brown-grey);
+    }
+
+    .btn-em-fechamento-contabil:active, .btn-em-fechamento-contabil:focus {
+        color: var(--brown-grey);
+        background-color: #ffffff;
+        border: solid 1px var(--brown-grey);
+    }
+
+.btn-em-fechamento-contabil-recusado {
+    width: 161px;
+    height: 35px;
+    border-radius: 3px;
+    border: solid 1px var(--white);
+    background-color: rgba(242, 169, 0, 0.4);
+    padding: 8px 7px 2px 6px !important;   
+    color: rgba(0, 61, 98, 0.4);
+}
+    .btn-em-fechamento-contabil-recusado:hover {
+        color: rgba(0, 61, 98, 0.4);
+        background-color: rgba(242, 169, 0, 0.4);
+        border: solid 1px var(--white);
+    }
+
+    .btn-em-fechamento-contabil-recusado:active, .btn-em-fechamento-contabil-recusado:focus {
+        color: rgba(0, 61, 98, 0.4);
+        background-color: rgba(242, 169, 0, 0.4);
+        border: solid 1px var(--white);
+    }
+.dataTable > thead > tr > th {
+    background-color: var(--marine-blue);
+}
+
+.sub-titulo {
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color:var(--marine-blue);
+}
+
+table.dataTable tbody tr .row-details {
+    background-color: #eff7fd;
+}

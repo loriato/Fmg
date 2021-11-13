@@ -1,0 +1,37 @@
+﻿@using Tenda.Domain.EmpresaVenda.Models
+@model Tenda.Domain.EmpresaVenda.Models.EmpresaVenda
+
+@{
+    ViewBag.Codigo = "GEC02";
+}
+
+<div class="col-md-24" id="div_form_empresa_venda">
+    @{
+        Html.RenderPartial("~/Views/NovaEv/_FormularioEmpresaVenda.cshtml", Model);
+    }
+</div>
+<div class="col-md-24" id="div_form_endereco">
+    @{
+        Html.RenderPartial("~/Views/NovaEv/_FormularioEndereco.cshtml", Model);
+    }
+</div>
+<div class="col-md-24" id="div_form_dados_tributarios">
+    @{
+        Html.RenderPartial("~/Views/NovaEv/_FormularioDadosTributarios.cshtml", Model);
+    }
+</div>
+<div class="col-md-24" id="div_form_representante_legal">
+    @{
+        Html.RenderPartial("~/Views/NovaEv/_FormularioDadosRepresentanteLegal.cshtml", new Corretor());
+    }
+</div>
+<div class="col-md-24" id="div_form_responsavel_tecnico">
+    @{
+        Html.RenderPartial("~/Views/NovaEv/_FormularioResponsavelTecnico.cshtml", Model);
+    }
+</div>
+<div class="col-md-24" id="div_form_documentos_empresa_venda">
+    @{ 
+        Html.RenderPartial("~/Views/NovaEv/_DocumentosEmpresaVenda.cshtml");
+    }
+</div>

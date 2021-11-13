@@ -1,0 +1,84 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "EVS06";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+
+<script src="~/Static/projeto/empreendimento/empreendimento.js"></script>
+<script src="~/Static/projeto/empreendimento/empreendimento-datatable.js"></script>
+
+<script>
+    Europa.Controllers.Empreendimento.UrlListar = '@Url.Action("Listar", "Empreendimento")';
+    Europa.Controllers.Empreendimento.UrlIncluir = '@Url.Action("Incluir", "Empreendimento")';
+    Europa.Controllers.Empreendimento.UrlAlterar = '@Url.Action("Atualizar", "Empreendimento")';
+    Europa.Controllers.Empreendimento.UrlExcluir = '@Url.Action("Excluir", "Empreendimento")';
+    Europa.Controllers.Empreendimento.UrlExportarTodos = '@Url.Action("ExportarTodos", "Empreendimento")';
+    Europa.Controllers.Empreendimento.UrlExportarPagina = '@Url.Action("ExportarPagina", "Empreendimento")';
+    Europa.Controllers.Empreendimento.UrlBuscarEmpreendimento = '@Url.Action("BuscarEmpreendimento", "Empreendimento")';
+    Europa.Controllers.Empreendimento.Permissoes = {
+        Visualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar").ToString().ToLower()',
+        Incluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir").ToString().ToLower()',
+        Excluir: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Excluir").ToString().ToLower()',
+        Atualizar: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar").ToString().ToLower()'
+    };
+    Europa.Controllers.Empreendimento.UrlIntegrarEmpreendimento = '@Url.Action("IntegrarEmpreendimento", "Empreendimento")';
+</script>
+
+<div id="titlebar-name">@ViewBag.Title</div>
+<div id="titlebar-buttons">
+    
+    <div id="botoes_visualizacao">
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+        {
+            <button class="btn btn-default" title="@GlobalMessages.Novo" type="button"
+                    onclick="Europa.Controllers.Empreendimento.Incluir()">
+                <i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Novo
+            </button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarTabelas"))
+        {
+            <button type="button" class="btn btn-default"
+                    onclick="Europa.Controllers.EmpreendimentoImportExcel.AbrirModal()">
+                <i class="fa fa-cog"></i> Importar Empreendimentos
+            </button>
+        }
+        @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+        {
+            <button type="button" class="btn btn-default"
+                    onclick="Europa.Controllers.Empreendimento.IntegrarEmpreendimento()">
+                <i class="fa fa-cog"></i> Integrar com SUAT
+            </button>
+        }
+    </div>
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir") || SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Alterar"))
+    {
+        <div id="botoes_edicao" style="display:none">
+            <button type="button" title="@GlobalMessages.Salvar" class="btn btn-default" onClick="Europa.Controllers.Empreendimento.Salvar()"><i class="fa fa-floppy-o"></i> @GlobalMessages.Salvar</button>
+            <button type="button" title="@GlobalMessages.Cancelar" class="btn btn-default" onClick="Europa.Controllers.Empreendimento.CancelarEdicao()"><i class="fa fa-ban"></i> @GlobalMessages.Cancelar</button>
+        </div>
+        <div id="botoes_detalhamento" style="display:none">
+            <button type="button" title="@GlobalMessages.Voltar" class="btn btn-default" onClick="Europa.Controllers.Empreendimento.CancelarEdicao()"><i class="fa fa-arrow-left"></i> @GlobalMessages.Voltar</button>
+        </div>
+    }
+</div>
+
+<div id="div_visualizacao">
+    @{
+        Html.RenderPartial("_EmpreendimentoDataTable");
+    }
+</div>
+
+<div id="div_edicao" style="display:none">
+    @{
+        Html.RenderPartial("_FormularioCompleto");
+    }
+</div>
+
+@{
+    Html.RenderPartial("~/Views/BookEmpreendimento/_BookEmpreendimento.cshtml");
+    Html.RenderPartial("_Anexo");
+    Html.RenderPartial("_StatusImportacao");
+}

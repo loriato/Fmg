@@ -1,0 +1,40 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+
+<!DOCTYPE html>
+<html ng-app="europaApp">
+<head>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Static/images/favicon.ico" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/europa")
+    @Scripts.Render("~/bundles/bootstrap-treeview")
+    @* LINK PARA OS ARQUIVOS DO NOVO LAYOUT - TEMPORARIO *@
+    <link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-layout-acesso.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="col-md-24 div-imgs-balls">
+        <img src="~/Static/images/logo-credenciada.png" />
+        <img src="~/Static/images/login/bola-gde-menor-red-cima.png" />
+    </div>
+    <div>
+        <img class="img-3-bolls" src="~/Static/images/login/3-bolas-rosas.png" />
+    </div>
+    @{
+        Html.RenderPartial("~/Views/Shared/_LayoutBackGroundLogin.cshtml");
+    }
+    <div class="conteudo-layout">
+        <div class="wrapper container-fluid">
+            @RenderBody()
+            <div class="msg-footer-tenda" style="position: fixed;width: 100%; background-color: #a6b9c8; height: 56px; bottom: 0;">
+                <div style="margin-left:40px;display: -webkit-inline-box;">
+                    <img src="~/Static/images/tenda-logo.png" style="width: 37px; margin-top: 11px;" />
+                    <p style="margin-top: 23px; margin-left: 15px; color: white; font-size: 16px; font-weight: 400;">@string.Format(GlobalMessages.TodosDireitosReservadosTenda, DateTime.Now.Year)</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

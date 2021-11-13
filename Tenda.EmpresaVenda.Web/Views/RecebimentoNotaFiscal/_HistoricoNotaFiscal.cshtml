@@ -1,0 +1,52 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Extensions
+@using Tenda.Domain.EmpresaVenda.Models
+@model NotaFiscalPagamento
+
+    <div id="dados">
+        @Html.HiddenFor(x => x.DataRecebido)
+        @Html.HiddenFor(x => x.DataAprovado)
+        @Html.HiddenFor(x => x.DataEnviado)
+        @Html.HiddenFor(x => x.DataPedido)
+        <div class="col-md-24">
+            <div class="modal" id="historico_nota_fiscal" tabindex="-1" role="dialog" data-backdrop="static">
+                <div class="modal-dialog" role="document" style="width: 700px;">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Historico @GlobalMessages.NotaFiscal</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="col-md-24 flex-parent">
+                                <div class="input-flex-container">
+                                    <div class="input active">
+                                        <span data-year="@Model.DataPedido" data-info="Data do pedido"></span>
+                                    </div>
+                                    <div class="input" id="enviada">
+                                        <span data-year="@Model.DataEnviado" data-info="Data da NF enviada"></span>
+                                    </div>
+                                    <div class="input" id="recebido">
+                                        <span data-year="@Model.DataRecebido" data-info="Data de recebido "></span>
+                                    </div>
+                                    <div class="input" id="aprovado">
+                                        <span data-year="@Model.DataAprovado" data-info="Data de aprovado"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <div class="pull-right">
+                                <button type="button" class="btn btn-default" data-dismiss="modal" title="@GlobalMessages.Fechar" onclick="">
+                                    <i class="fa fa-close"></i> @GlobalMessages.Fechar
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+

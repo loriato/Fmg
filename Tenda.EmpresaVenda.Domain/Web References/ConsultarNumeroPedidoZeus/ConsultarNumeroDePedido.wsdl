@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://consultarnumerodepedido.cadastro.webservice.tenda.com.br/" xmlns:ns1="http://br.com.tenda.zeus/cadastro/request" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns3="http://schemas.xmlsoap.org/soap/http" name="ConsultarNumeroDePedido" targetNamespace="http://consultarnumerodepedido.cadastro.webservice.tenda.com.br/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:import namespace="http://br.com.tenda.zeus/cadastro/request" location="http://zeusqa.tenda.com/consultarnumerodepedido/service/process?wsdl=GerarRequisicaoCompra.wsdl" />
+  <wsdl:types />
+  <wsdl:binding name="ConsultarNumeroDePedidoSoapBinding" type="ns1:GerarRequisicaoCompra">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ConsultarNumeroPedido">
+      <soap:operation soapAction="ConsultarNumeroPedido" style="document" />
+      <wsdl:input name="ConsultarNumeroPedido">
+        <soap:header message="ns1:ConsultarNumeroPedido" part="AuditoriaHeader" use="literal" />
+        <soap:body use="literal" parts="ConsultarNumeroPedidoRequest" />
+      </wsdl:input>
+      <wsdl:output name="ConsultarNumeroPedidoResponse">
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConsultarNumeroDePedido">
+    <wsdl:port name="ConsultarNumeroDePedidoPort" binding="tns:ConsultarNumeroDePedidoSoapBinding">
+      <soap:address location="http://zeusqa.tenda.com/consultarnumerodepedido/service/process" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

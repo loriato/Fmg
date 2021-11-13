@@ -1,0 +1,43 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Models
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "REL03";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<script src="~/Static/projeto/pre-proposta-avalista-aguardando-analise/index-pre-proposta-avalista-aguardando-analise.js"></script>
+<script>
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlListar = '@Url.Action("Listar", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlBuscarPreProposta = '@Url.Action("BuscarPreProposta", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlAlterarSicaq = '@Url.Action("AlterarSicaq", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlRevisarPreProposta = '@Url.Action("Revisar", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlRetornarSituacao = '@Url.Action("RetornarSituacao", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlVerDocumentacao = '@Url.Action("Index", "DocumentacaoPreProposta")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlExportarPagina = '@Url.Action("ExportarPagina", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlExportarTodos = '@Url.Action("ExportarTodos", "PrePropostaAvalistaAguardandoAnalise")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlDescricaoSuat = '@Url.Action("DescricaoSuat", "StatusSuatStatusEvs")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.UrlDocumentacaoAvalista = '@Url.Action("Index","DocumentacaoAvalista")';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.CodigoUf = '@ViewBag.Codigo';
+    Europa.Controllers.PrePropostaAvalistaAguardandoAnalise.Permissoes = {
+        AlterarSicaq: 'true',
+        VerDocumentacao: '@SessionAttributes.Current().HasPermission("EVS12", "VisualizarDocumento").ToString().ToLower()',
+        //AlterarSicaq: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "AlterarSicaq").ToString().ToLower()'
+        RetornarSituacao: '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "RetornarSituacao").ToString().ToLower()',
+    }
+</script>
+
+<form id="form_exportar" hidden></form>
+
+
+
+@{
+    Html.RenderPartial("_ModalAlterarSicaq", new PreProposta());
+}
+@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+{
+    @Html.Partial("_Datatable")
+}

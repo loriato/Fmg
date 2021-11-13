@@ -1,0 +1,80 @@
+﻿@using Europa.Resources
+@using Tenda.Domain.Security.Enums
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+@{ 
+    var listaTipoParametro = EnumHelper.GetSelectList(typeof(TipoParametro));
+    listaTipoParametro.FirstOrDefault(x => x.Value == "1").Selected = true;
+}
+
+<script src="~/Static/administrativo/parametro/parametro-datatable.js"></script>
+<script>
+    Europa.Controllers.Parametro.urlListar = '@Url.Action("ListarDatatable", "Parametro")';
+    Europa.Controllers.Parametro.urlSelecionar = '@Url.Action("ListarSistemas", "Parametro")';
+    Europa.Controllers.Parametro.urlIncluir = '@Url.Action("IncluirParametro", "Parametro")';
+    Europa.Controllers.Parametro.urlAlterar = '@Url.Action("AlterarParametro", "Parametro")';
+    Europa.Controllers.Parametro.urlRemover = '@Url.Action("ExcluirParametro", "Parametro")';
+    Europa.Controllers.Parametro.CheckPerms = '@SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Atualizar")';
+    Europa.Controllers.Parametro.UrlExportarPagina = '@Url.Action("ExportarPagina", "Parametro")';
+    Europa.Controllers.Parametro.UrlExportarTodos = '@Url.Action("ExportarTodos", "Parametro")';
+
+    Europa.Controllers.Parametro.urlBuscarMidiaContato = '@Url.Action("BuscarMidiaContato", "MidiaContato")';
+    Europa.Controllers.Parametro.urlBuscarPerfil = '@Url.Action("BuscarPerfil", "Perfil")';
+    Europa.Controllers.Parametro.urlBuscarTabulacaoAtendimento = '@Url.Action("BuscarTabulacaoAtendimento", "TabulacaoAtendimento")';
+    Europa.Controllers.Parametro.urlBuscarMeioComunicacao = '@Url.Action("BuscarMeioComunicacao", "MeioComunicacao")';
+    Europa.Controllers.Parametro.urlBuscarUsuarioPortal = '@Url.Action("BuscarUsuarioPortal", "Usuario")';
+    Europa.Controllers.Parametro.urlBuscarTemplateMensagem = '@Url.Action("BuscarTemplateMensagem", "TemplateMensagem")';
+
+    Europa.Controllers.Parametro.DropDownTipoParametro =
+        '@Html.Raw(Ajax.JavaScriptStringEncode(Html.DropDownList("TipoParametro", listaTipoParametro.OrderBy(x => x.Text),
+        new { @class = "form-control", onchange = "Europa.Controllers.Parametro.OnChangeTipoParametro()" }).ToHtmlString()))';
+</script>
+
+<div ng-controller="listaParametro as lista">
+    <div id="datatable_parametro_header" class="col-md-24 container-fluid">
+        <form class="form-inline">
+            <div class="col-md-24 form-group">
+                <div class="col-md-4">
+                    @{
+                        Html.RenderAction("ListarSistemas", "Parametro");
+                    }
+                </div>
+                <div class="col-md-5" style="margin-left: 5px">
+                    @Html.TextBox("filtro-chave", null, new { @class = "form-control", placeholder = "Chave, valor ou descrição", maxlength = "256" })
+                </div>
+                <div class="col-md-2" style="margin-left: 5px">
+                    <button class="btn btn-default" title="@GlobalMessages.Filtrar" type="submit" onclick="Europa.Controllers.Parametro.Filtrar()">
+                        <i class="fa fa-filter" aria-hidden="true"></i>
+                    </button>
+                    <button class="btn btn-default" title="@GlobalMessages.Limpar" type="button" onclick="Europa.Controllers.Parametro.LimparFiltro()">
+                        <i class="fa fa-eraser" aria-hidden="true"></i>
+                    </button>
+                </div>
+                <div class="pull-right" style="margin-right:5px">
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir"))
+                    {
+                        <button title="@GlobalMessages.Incluir" class="btn btn-default" onclick="Europa.Controllers.Parametro.Novo()" type="button">
+                            <i class="fa fa-plus"></i> @GlobalMessages.Incluir
+                        </button>
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                    {
+                        <button title="@GlobalMessages.ExportarPagina" class="btn btn-default" onClick="Europa.Controllers.Parametro.ExportarPagina()">
+                            <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                        </button>
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                    {
+                        <button title="@GlobalMessages.ExportarTodos" class="btn btn-default" onClick="Europa.Controllers.Parametro.ExportarTodos()">
+                            <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                        </button>
+                    }
+                </div>
+            </div>
+        </form>
+    </div>
+    <table id="dt_parametro" datatable="" dt-options="lista.dtOptions" dt-columns="lista.dtColumns"
+           dt-instance="lista.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="lista.dtColumnDefs"></table>
+</div>
+<form id="Exportar"></form>

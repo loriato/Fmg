@@ -1,0 +1,105 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Extensions
+@using Europa.Resources
+@model Tenda.Domain.EmpresaVenda.Models.Views.ViewCargarelatorioRepasseJunix
+<script type="text/javascript" src="~/Static/projeto/carga-rel-repasse/relatorio-importacao.js"></script>
+<script type="text/javascript" src="~/Static/administrativo/parametro-robo/modal-log-execucao.js"></script>
+
+<script>
+    Europa.Controllers.StatusImportacao.UrlListarImportacoes = '@Url.Action("ListarDatatable", "CargaRelatorioRepasse")';
+    Europa.Controllers.StatusImportacao.UrlDownloadArquivo = '@Url.Action("DownloadArquivoImportacao", "CargaRelatorioRepasse")';
+    Europa.Controllers.StatusImportacao.UrlExportarTodos = '@Url.Action("ExportarTodos","CargaRelatorioRepasse")';
+    Europa.Controllers.StatusImportacao.UrlExportarPagina = '@Url.Action("ExportarPagina","CargaRelatorioRepasse")';
+    Europa.Controllers.StatusImportacao.UrlIntegrarRepasseJunix = '@Url.Action("IntegrarRepasseJunix", "CargaRelatorioRepasse")';
+    Europa.Controllers.StatusImportacao.UrlBuscarSituacao = '@Url.Action("BuscarImportacaoEmProcessamento", "CargaRelatorioRepasse")';
+</script>
+
+<form name="formFiltroLogs">
+    <div class="col-md-24">
+        <div class="col-md-7">
+            @Html.Label(GlobalMessages.NomeArquivo)
+            @Html.TextBox("NomeArquivo", null, new { @class = "form-control", @id = "filtro_nomeArquivo" })
+        </div>
+        <div class="col-md-7 col-md-offset-1">
+            @Html.Label(GlobalMessages.CriadoPor)
+            @Html.TextBox("CriadoPor", null, new { @class = "form-control", @id = "filtro_criadoPor" })
+        </div>
+        <div class="col-md-4 col-md-offset-1">
+            @GlobalMessages.Situacao
+            @Html.EnumDropDownListFor(x => x.Situacao,new { @class = "form-control", @id = "filtro_situacao"})
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @GlobalMessages.Origem
+            @Html.EnumDropDownListFor(x => x.Origem, new { @class = "form-control", @id = "filtro_origem" })
+        </div>
+
+    </div>
+    <div class="col-md-24">
+        <div class="col-md-3">
+            @Html.Label(GlobalMessages.DataCriacao)
+            <div class="input-group">
+                @Html.Label("De", new { @for = "DiaHoraDe", @class = "input-group-addon", id = "diaLabel", style = "width: 35px;" })
+                @Html.TextBox("DataCriacaoInicio", "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", datepicker = "datepicker" })
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.DataInicio, new { style = "visibility:hidden" })
+            <div class="input-group">
+                @Html.Label("Até", new { @for = "DiaHoraAte", @class = "input-group-addon", id = "diaAteLabel", style = "width: 35px;" })
+                @Html.TextBox("DataCriacaoFim", "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", datepicker = "datepicker" })
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.DataInicio)
+            <div class="input-group">
+                @Html.Label("De", new { @for = "DiaHoraDe", @class = "input-group-addon", id = "diaLabel", style = "width: 35px;" })
+                @Html.TextBox("DataInicio", "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", datepicker = "datepicker", id = "DataInicio" })
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-1">
+            @Html.Label(GlobalMessages.Fim)
+            <div class="input-group">
+                @Html.Label("Até", new { @for = "DiaHoraAte", @class = "input-group-addon", id = "diaAteLabel", style = "margin-left:5px; width: 35px;" })
+                @Html.TextBox("DataFim", "{0:dd/MM/yyyy HH:mm}", new { @class = "form-control", datepicker = "datepicker", id = "DataFim" })
+            </div>
+        </div>
+        <div class="col-md-3 col-md-offset-6" style="text-align: right;margin-top: 22px;">
+            <button class="btn btn-default"  style="width: 49%" onClick="Europa.Controllers.StatusImportacao.Filtrar()">
+                <i class="fa fa-filter"></i> @GlobalMessages.Filtrar
+            </button>
+            <button class="btn btn-default" style="width: 49%" onClick="Europa.Controllers.StatusImportacao.LimparFiltros()">
+                <i class="fa fa-eraser"></i> @GlobalMessages.Limpar
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<div class="col-lg-24 col-md-24 col-sm-24 col-xs-24" style="margin-top: 15px;">
+    <div ng-controller="listaImportacoes as Execucao">
+        <div id="datatable_barra">
+            @*<meta http-equiv="refresh" content="5">*@
+            <div class="pull-left">
+                <h5>@Html.Label(GlobalMessages.Importacoes, new { @class = "control-label" })</h5>
+            </div>
+            <div class="pull-right">
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarPagina" class="btn btn-default" onclick="Europa.Controllers.StatusImportacao.ExportarPagina()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarPagina
+                    </button>
+                }
+                @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                {
+                    <button type="button" title="@GlobalMessages.ExportarTodos" class="btn btn-default" onclick="Europa.Controllers.StatusImportacao.ExportarTodos()">
+                        <i class="fa fa-file-excel-o"></i> @GlobalMessages.ExportarTodos
+                    </button>
+                }
+            </div>
+        </div>
+        <table datatable="" dt-options="Execucao.dtOptions" dt-columns="Execucao.dtColumns"
+               dt-instance="Execucao.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="Execucao.dtColumnDefs"></table>
+    </div> 
+</div>
+<form id="Exportar"></form>

@@ -1,0 +1,52 @@
+﻿@using Europa.Resources
+<script src="~/Static/administrativo/parametro-robo/modal-log-excluir.js"></script>
+
+<div class="modal"  id="dialog_excluir_log" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.ExpurgoLogs</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_excluir_log">
+                    <div class="col-md-24">
+                        @Html.Hidden("IdExcluirQuartz")
+                        <div class="col-md-24">
+                            <div class="col-md-11">
+                                @Html.Label(GlobalMessages.Data)
+                                <div class="input-group">
+                                    <span class="input-group-addon">@GlobalMessages.De</span>
+                                    @Html.TextBox("DataExcluirDe", "", new { @class = "form-control", datepicker = "datepicker", parent = "#dialog_excluir_log" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-11 col-md-offset-2">
+                                @Html.Label(GlobalMessages.DataElaboracao, new { style = "visibility:hidden" })
+                                <div class="input-group">
+                                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                                    @Html.TextBox("DataExcluirAte", "", new { @class = "form-control", datepicker = "datepicker", parent = "#dialog_excluir_log" })
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button" onclick="Europa.Components.DatePicker.ClosestInput(this)">
+                                            <i class="fa fa-calendar"></i>
+                                        </button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-default" type="button" onclick="Europa.Components.ExcluirExecucaoModal.Excluir()">
+                    <i class="fa fa-floppy-o"></i> @GlobalMessages.Excluir
+                </button>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-ban" aria-hidden="true"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>

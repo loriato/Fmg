@@ -1,0 +1,106 @@
+﻿@using Europa.Resources
+@using Europa.Extensions
+@model Tenda.EmpresaVenda.ApiService.Models.PreProposta.PrePropostaCreateDto
+
+
+@{
+    bool fatorSocial = Model.PreProposta.FatorSocial ?? false;
+    bool faixaUmMeioPrevio = Model.PreProposta.FaixaUmMeioPrevio ?? false;
+    bool faixaUmMeio = Model.PreProposta.FaixaUmMeio ?? false;
+}
+
+<div class="modal" id="fator_social_modal" tabindex="-1" role="dialog" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.FatorSocial</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close" onclick="$('#fator_social_modal').hide();"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div class="modal-body">
+                <form id="form_fator_social">
+                    <div class="row">
+                        <div class="col-md-6 form-group">
+                            @Html.Label(GlobalMessages.FatorSocial, new { @class = "control-label" })
+                            @Html.TextBox("PreProposta_FatorSocial", fatorSocial ? GlobalMessages.Sim : GlobalMessages.Nao, new { @class = "form-control form-control-sm", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.Label("Novo " + GlobalMessages.FatorSocial, new { @class = "control-label" })
+                            <select id="novo_fator_social" class="form-control form-control-sm">
+                                <option value=""></option>
+                                <option value="true">@GlobalMessages.Sim</option>
+                                <option value="false">@GlobalMessages.Nao</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            @Html.Label(GlobalMessages.DadosSicaq, new { @class = "control-label" })
+                        </div>
+                    </div>
+                    <div style="border: 1px solid lightgray; padding: 8px;">
+                        <div class="row">
+                            <div class="col form-group">
+                                @Html.Label(GlobalMessages.Codigo, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.PreProposta.Codigo, new { @class = "form-control form-control-sm", @readonly = "readonly" })
+                            </div>
+                            <div class="col form-group">
+                                @Html.Label(GlobalMessages.Cliente, new { @class = "control-label" })
+                                @Html.TextBoxFor(x => x.PreProposta.Cliente.NomeCompleto, new { @class = "form-control form-control-sm", @readonly = "readonly" })
+                            </div>
+                        </div>
+                        @if (Model.PreProposta.StatusSicaq.IsEmpty())
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.StatusSicaq, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.PreProposta.StatusSicaqPrevio, new { @class = "form-control form-control-sm", @readonly = "readonly" })
+                                </div>
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.ParcelaAprovada, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.PreProposta.ParcelaAprovadaPrevio, new { @class = "form-control form-control-sm", @readonly = "readonly", Value = Model.PreProposta.ParcelaAprovadaPrevio.ToString("F") })
+                                </div>
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.DataSicaq, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.PreProposta.DataSicaqPrevio, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @readonly = "readonly", datepicker = "datepicker" })
+                                </div>
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.FaixaUmMeio, new { @class = "control-label" })
+                                    @Html.TextBox("PreProposta_FaixaUmMeioPrevio", faixaUmMeioPrevio ? GlobalMessages.Sim : GlobalMessages.Nao, new { @id = "PreProposta_FaixaUmMeio_Modal", @class = "form-control form-control-sm", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="row">
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.StatusSicaq, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.PreProposta.StatusSicaq, new { @class = "form-control form-control-sm", @readonly = "readonly" })
+                                </div>
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.ParcelaAprovada, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.PreProposta.ParcelaAprovada, new { @class = "form-control form-control-sm", @readonly = "readonly", Value = Model.PreProposta.ParcelaAprovada.ToString("F") })
+                                </div>
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.DataSicaq, new { @class = "control-label" })
+                                    @Html.TextBoxFor(x => x.PreProposta.DataSicaq, "{0:dd/MM/yyyy}", new { @class = "form-control form-control-sm", @readonly = "readonly" })
+                                </div>
+                                <div class="col">
+                                    @Html.Label(GlobalMessages.FaixaUmMeio, new { @class = "control-label" })
+                                    @Html.TextBox("PreProposta_FaixaUmMeio", faixaUmMeio ? GlobalMessages.Sim : GlobalMessages.Nao, new { @id = "PreProposta_FaixaUmMeio_Modal", @class = "form-control form-control-sm", @readonly = "readonly" })
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button__red__outline" title="@GlobalMessages.Salvar" onclick="Europa.Controllers.PreProposta.MudarFatorSocial()">
+                    @GlobalMessages.Salvar
+                </button>
+                <button type="button" class="button__red__outline" title="@GlobalMessages.Fechar" data-dismiss="modal" onclick="$('#fator_social_modal').hide();">
+                    @GlobalMessages.Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

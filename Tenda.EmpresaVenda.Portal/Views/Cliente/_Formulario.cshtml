@@ -1,0 +1,47 @@
+﻿@model Tenda.EmpresaVenda.Portal.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+<form id="form_cliente">
+    <div class="col-md-24">
+        <fieldset id="fieldset_formulario" disabled="disabled">
+            <div class="col-md-24" id="tabGeralContent" style="padding-top: 5px">
+                @{
+                    Html.RenderPartial("_Geral", Model);
+                }
+            </div>
+            <div class="col-md-24" id="tabEnderecoContent">
+                @{
+                    Html.RenderPartial("_Endereco", Model);
+                }
+            </div>
+            <div class="col-md-24" id="tabDadoPessoalContent">
+                @{
+                    Html.RenderPartial("_DadosPessoais", Model);
+                }
+            </div>
+            <div class="col-md-24" id="tabEmpresaContent">
+                @{
+                    Html.RenderPartial("_EmpresaOndeTrabalha", Model);
+                }
+            </div>
+            <div class="col-md-24" id="tabDadoFinanceiroContent">
+                @{
+                    Html.RenderPartial("_DadosFinanceiros", Model);
+                }
+            </div>
+            <div class="col-md-24" id="tabInformacoesComplementaresContent">
+                @{
+                    Html.RenderPartial("_InformacoesComplementares", Model);
+                }
+            </div>
+            <div class="col-md-24" id="tabReferenciaContent">
+                @{
+                    Html.RenderPartial("_Referencias", Model);
+                }
+            </div>
+
+        </fieldset>
+    </div>
+</form>

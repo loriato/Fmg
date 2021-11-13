@@ -1,0 +1,46 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.ClienteDTO
+
+@{
+    ViewBag.Codigo = "EVS05";
+}
+
+<div class="col-md-24">
+    <br />
+    <div class="geenFieldSet">
+        <div class="panel-heading">
+            <div>
+                <h3 class="panel-title pull-left">@GlobalMessages.Referencias</h3>
+                <div class="pull-right">
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="col-md-24">
+    <div class="col-md-15 form-group">
+        @Html.Label(GlobalMessages.PrimeiraReferencia, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.PrimeiraReferencia, new { @class = "form-control", maxlength = 128 })
+    </div>
+    <div class="col-md-8 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.PrimeiroTelefone, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.TelefonePrimeiraReferencia, new { @class = "form-control telefone", maxlength = 128 })
+    </div>
+</div>
+
+<div class="col-md-24">
+    <div class="col-md-15 form-group">
+        @Html.Label(GlobalMessages.SegundaReferencia, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.SegundaReferencia, new { @class = "form-control", maxlength = 128 })
+    </div>
+    <div class="col-md-8 col-md-offset-1 form-group">
+        @Html.Label(GlobalMessages.SegundoTelefone, new { @class = "control-label" })
+        @Html.TextBoxFor(x => x.Cliente.TelefoneSegundaReferencia, new { @class = "form-control telefone", maxlength = 128 })
+    </div>
+</div>
+
+<div class="col-md-24">
+    @Html.Label(GlobalMessages.Descricao)
+    @Html.TextAreaFor(x => x.Cliente.DescricaoReferencias, new { @class = "form-control", maxlength = 2048, rows = "5" })
+</div>

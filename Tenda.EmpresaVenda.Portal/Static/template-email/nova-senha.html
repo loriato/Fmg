@@ -1,0 +1,49 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+    <table style="font-family: sans-serif;margin:auto">
+        <tr style="text-align: center;">
+            <th colspan="3"><img style="max-width: 800px;" src="{{imgHeader}}" /></th>
+        </tr>
+        <tr>
+            <td style="max-width: 300px;"><img style="max-width: 500px; max-height: 500px;" src="{{imgLeft}}" /></td>
+            <td valign="top" style="max-width: 500px;">
+                <span style="font-size:29px;color: #252529;font-weight: bold;">Olá {{nome}},</span>
+                <div style="line-height: 1.56;font-size:20px;color:#6b6c6f;margin-top: 20px;">
+                    <div style="margin-bottom: 20px;display: inline-grid;">
+                        <span>Esqueceu a Senha? Não se preocupe</span>
+                        <span>Para redefinir a senha de acesso ao portal de vendas, basta acessar o link abaixo.</span>
+                        <span>Qualquer dúvida, entre em contato com o viabilizador tenda responsável por sua região.</span>
+                    </div>
+                    <p></p>
+                    <span style="color:#465662;font-weight:bold">Boas vendas!!!</span>
+                </div>
+                <div>
+                    <a href="{{linkAtivacao}}">
+                        <button type="button" style="width: 70%; margin-left: 15%; height: 6vh; border-radius: 50px;cursor:pointer; border: solid 2px #ec1d24; font-size: 16px; background: transparent; font-weight: bold; color: #ec1d24; margin-top: 50px;">
+                            Redefinir Senha
+                        </button>
+                    </a>
+                </div>
+                <div style="margin-top: 6vh;">
+                    <span style="font-size:15px;color:#6b6c6f;line-height: 1.97; letter-spacing: 0.14px;">
+                        Este documento pode conter informações confidenciais e/ou privilegiadas.
+                        Se você não for o destinatário ou a pessoa autorizada a receber este documento,
+                        não deve usar, copiar ou divulgar as informações nele contidas ou tomar qualquer ação baseada nessas informações,
+                        sob o conhecimento de que qualquer disseminação, distribuição ou cópia deste conteúdo é proibida.
+                    </span>
+                </div>
+            </td>
+            <td style="max-width:300px"><img style="max-width: 500px; max-height: 500px;" src="{{imgRight}}" /></td>
+        </tr>
+        <tr style="text-align: center;">
+            <td colspan="3"><img style="max-width: 800px;" src="{{imgFooter}}" /></td>
+        </tr>
+        <tr></tr>
+    </table>
+</body>
+</html>

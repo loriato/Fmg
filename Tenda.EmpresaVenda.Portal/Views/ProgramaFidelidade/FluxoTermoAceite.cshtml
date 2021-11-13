@@ -1,0 +1,57 @@
+﻿@using Europa.Resources
+@using Europa.Extensions;
+@using Tenda.EmpresaVenda.Portal.Models
+@model TermoAceiteDTO
+
+@{
+    ViewBag.Codigo = "EVSNN";
+    ViewBag.Title = "NOVO TERMO DE ACEITE";
+
+}
+
+<script src="~/Static/europa/js/pdf.js"></script>
+<script src="~/Static/europa/js/pdf.worker.js"></script>
+
+<script src="~/Static/projeto/programa-fidelidade/fluxo-termo-aceite.js"></script>
+<script>
+    Europa.Controllers.TermoAceite.UrlAvancar = '@Url.Action("Avancar","ProgramaFidelidade")';
+</script>
+@Html.HiddenFor(x => x.TermoAceite)
+<div id="titlebar-name">
+    @ViewBag.Title
+</div>
+
+<link href="~/Static/projeto/programa-fidelidade/fluxo-termo-aceite.css" rel="stylesheet" />
+<style>
+    .block-content {
+        padding-top: 0px;
+    }
+
+    .aling-content {
+        margin-top: -15px;
+    }
+</style>
+
+<div style="width:100%">
+    <div id="div-pdf" onscroll="Europa.Controllers.TermoAceite.FimPdf(this)" style="overflow-x: hidden;width: max-content; margin: auto;height: 45vh; overflow-y: auto;margin-top:25px">
+    </div>
+    <div class="div_inputs">
+        <div class="col-md-24">
+            <img id="check_false" style="position:relative;top: 20px;height:31px;width:29px;opacity:0.5" src="~/Static/images/inputCheckBox/icon-checkmark.png" />
+            <div style="top: 20px;position:relative;display:none" id="check_true">
+                <img style="cursor:pointer;height:31px;width:29px" onclick="" src="~/Static/images/inputCheckBox/icon-checkmark_red.png" />
+                <img style="cursor:pointer;height:15px;width:20px;position: absolute;left: 5px;top:-12px" onclick="" src="~/Static/images/inputCheckBox/tick.png" />
+            </div>
+            <input onclick="Europa.Controllers.TermoAceite.HabilitarBtn()" type="checkbox" id="aceite_flag" disabled name="aceite_flag">
+            <span for="aceite_flag" id="text-aceite-termos">@GlobalMessages.AceiteTermos</span>
+            <button disabled id="btn_aceitar" onclick="Europa.Controllers.TermoAceite.Avancar()" style="margin-top: 10px">@GlobalMessages.Aceitar</button>
+        </div>
+
+        <div class="col-md-24" style="margin:25px 0px;">
+            <span style="font-size: 13px;letter-spacing: 0.13px;color: #6b6c6f;">
+                *@GlobalMessages.LeiaDocumento
+            </span>
+        </div>
+    </div>
+    
+</div>

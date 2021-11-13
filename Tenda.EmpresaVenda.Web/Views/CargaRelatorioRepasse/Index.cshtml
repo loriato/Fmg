@@ -1,0 +1,33 @@
+﻿@using Tenda.EmpresaVenda.Web.Models.Application
+@using Europa.Resources
+
+@{
+    ViewBag.Codigo = "PAG02";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div id="titlebar-buttons">
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ImportarTabelas"))
+    {
+        <button type="button" class="btn btn-default"
+                onclick="Europa.Controllers.CargaRelRepasseImportExcel.AbrirModal()">
+            <i class="fa fa-cog"></i> @GlobalMessages.Importar
+        </button>
+    }
+    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Executar"))
+    {
+        <button id="btnExecutarRobo" type="button" class="btn btn-default" onclick="Europa.Controllers.StatusImportacao.Executar()">
+            <i class="fa fa-bolt"></i> @GlobalMessages.ExecutarRobo
+        </button>
+    }
+
+</div>
+
+
+@{
+    Html.RenderPartial("_Anexo");
+    Html.RenderPartial("_StatusImportacao");
+    Html.RenderPartial("_RelatorioImportacao");
+    Html.RenderAction("Index", "LogsExecucao");
+}

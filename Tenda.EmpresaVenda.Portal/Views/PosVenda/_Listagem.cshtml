@@ -1,0 +1,145 @@
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+
+<script type="text/javascript" src="~/Static/projeto/pos-venda/datatable-pos-venda.js"></script>
+<link href="~/Static/projeto/pos-venda/pos-venda.css" rel="stylesheet"/>
+
+<script>
+    Europa.Controllers.PosVenda.Permissoes = {
+        Visualizar: true
+    };
+</script>
+
+<div class="col-md-24 pos-venda-titlebar">
+    @GlobalMessages.ConsultaPosVenda.ToUpper()
+</div>
+
+<div class="col-md-24" style="padding: 40px 24px;">
+    <form id="form-consulta-pos-venda">
+        <div class="col-md-24">
+            <div class="col-md-4">
+                @Html.Label(GlobalMessages.Periodo)
+                <div class="input-group filtro-data">
+                    <span class="input-group-addon date-filter-label" disabled="disabled">@GlobalMessages.De</span>
+                    @Html.TextBox("DataInicio", "", new { @class = "form-control date-filter-input", disabled = "disabled" })
+                    <span class="input-group-btn date-filter-input-btn-wrapper">
+                        <span class="btn btn-default btn-date-filter-input">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.Periodo, new { style = "visibility:hidden" })
+                <div class="input-group filtro-data">
+                    <span class="input-group-addon date-filter-label" disabled="disabled">@GlobalMessages.Ate</span>
+                    @Html.TextBox("DataTermino", "", new { @class = "form-control date-filter-input", disabled = "disabled" })
+                    <span class="input-group-btn date-filter-input-btn-wrapper">
+                        <span class="btn btn-default btn-date-filter-input">
+                            <i class="fa fa-calendar"></i>
+                        </span>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-6 col-md-offset-4">
+                @Html.Label(GlobalMessages.ContratosGerados)
+                @Html.DropDownList("TipoFiltroPosVenda", EnumHelper.GetSelectList(typeof(TipoFiltroPosVenda)), GlobalMessages.Selecione, new { @class = "form-control"} )
+            </div>
+            <div class="col-md-5 pull-right">
+                <div class="col-md-24" style="padding-top:5px">
+                    @Html.Label(GlobalMessages.Filtrar, new { style = "visibility:hidden" })
+                </div>
+                <div class="col-md-24 text-right">
+                    <button class="btn" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.PosVenda.Filtrar()">
+                        <i class="fa fa-filter"></i> @GlobalMessages.Filtrar
+                    </button>
+                    <button type="button" title="@GlobalMessages.Limpar" class="btn" onClick="Europa.Controllers.PosVenda.LimparFiltro()">
+                        <i class="fa fa-eraser"></i> @GlobalMessages.Limpar
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-24">
+            <div class="col-md-5 form-group">
+                @Html.Label(GlobalMessages.CodigoPreProposta)
+                @Html.TextBox("filtro_codigo_pre_proposta", "", new {@class = "form-control", maxlength = 128})
+            </div>
+    
+            <div class="col-md-6 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.CodigoDaProposta)
+                @Html.TextBox("filtro_codigo_proposta", "", new {@class = "form-control", maxlength = 128})
+            </div>
+    
+            <div class="col-md-6 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.Cliente)
+                @Html.TextBox("filtro_cliente", "", new {@class = "form-control", maxlength = 128})
+            </div>
+    
+            <div class="col-md-4 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.Corretor)
+                <select id="autocomplete_corretor" name="autocomplete_corretor" class="select2-container form-control"></select>
+            </div>
+        </div>
+    
+        <div class="col-md-24">
+            <div class="col-md-5 form-group">
+                @Html.Label(GlobalMessages.Produto)
+                <select id="autocomplete_produto" name="autocomplete_produto" class="select2-container form-control"></select>
+            </div>
+            <div class="col-md-6 form-group col-md-offset-1">
+                @Html.Label(GlobalMessages.PontoVenda)
+                <select id="autocomplete_ponto_venda" name="autocomplete_ponto_venda" class="select2-container form-control"></select>
+            </div>
+
+            <div class="col-md-6 form-group col-md-offset-1">
+                @{
+                    Html.RenderAction("RenderSituacaoPreProposta");
+                }
+            </div>
+
+            <div class="col-md-4 form-group col-md-offset-1 hidden">
+                @{
+                    Html.RenderAction("RenderStatusConformidade");
+                }
+            </div>
+
+            <div class="col-md-4 col-md-offset-1">
+                @Html.Label(GlobalMessages.SituacaoContrato)
+                @Html.DropDownList("situacaoContrato",EnumHelper.GetSelectList(typeof(SituacaoContrato)),GlobalMessages.Selecione, new { @class = "form-control"})
+            </div>
+
+        </div>
+    </form>
+    
+    <div class="col-md-24" id="tabela_consulta">
+        <div ng-controller="consultaPosVendaDatatable as table">
+            <div id="consulta_pos_venda_datatable_header">
+                <div class="col-md-5 form-group" style="margin-left:0px">
+                    <h5 style="margin-top:6px;margin-bottom:0px;">@GlobalMessages.ResultadoPesquisa</h5>
+                </div>
+                <div class="col-md-19 text-right" style="float: right;">
+                    
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarPagina"))
+                    {
+                        <button class="btn" type="button" onclick="Europa.Controllers.PosVenda.ExportarPagina()">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarPagina
+                        </button>
+                    }
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "ExportarTodos"))
+                    {
+                        <button class="btn" type="button" onclick="Europa.Controllers.PosVenda.ExportarTodos()">
+                            <i class="fa fa-file-excel-o" aria-hidden="true"></i> @GlobalMessages.ExportarTodos
+                        </button>
+                    }
+                </div>
+            </div>
+            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                   dt-instance="table.dtInstance" class="table"
+                   dt-column-defs="table.dtColumnDefs">
+            </table>
+        </div>
+    </div>
+    
+    <form id="form_exportar" hidden></form>
+</div>

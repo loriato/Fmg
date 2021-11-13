@@ -1,0 +1,15 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Portal.Models.PrePropostaDTO
+
+<div class="col-md-3 col-md-offset-2">
+    @Html.Label(GlobalMessages.TotalDetalhamentoFinanceiro, new { @class = "control-label" })
+    @Html.TextBoxFor(reg => reg.PreProposta.TotalDetalhamentoFinanceiro, new { @class = "form-control text-right dinheiro", maxlength = 13, @readonly = "readonly", Value = Model.PreProposta.TotalDetalhamentoFinanceiro.ToString("F"), @style = "text-align:right" })
+</div>
+<div class="col-md-3 col-md-offset-1">
+    @Html.Label(GlobalMessages.TotalItbiEmolumento, new { @class = "control-label" })
+    @Html.TextBoxFor(reg => reg.PreProposta.TotalItbiEmolumento, new { @class = "form-control text-right dinheiro", @maxlength = 13, Value = Model.PreProposta.TotalItbiEmolumento.ToString("F"), @readonly = "readonly", @style = "text-align:right" })
+</div>
+<div class="col-md-3 col-md-offset-1">
+    @Html.Label(GlobalMessages.Total, new { @class = "control-label" })
+    @Html.TextBoxFor(reg => reg.PreProposta.Valor, new { @class = "form-control text-right dinheiro", @maxlength = 13, Value = Model.PreProposta.Valor.ToString("F"), @readonly = "readonly", @style = "text-align:right" })
+</div>

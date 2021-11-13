@@ -1,0 +1,35 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.ApiService.Models.PreProposta.PrePropostaCreateDto
+
+<div class="form-group col-md-3">
+    @Html.Label(GlobalMessages.ParcelaSolicitada + "*")
+    @Html.TextBoxFor(reg => reg.PreProposta.ParcelaSolicitada, new { @class = "form-control form-control-sm dinheiro", Value = Model.PreProposta.ParcelaSolicitada.ToString("F") })
+</div>
+@if (Model.PreProposta.ParcelaAprovada != 0)
+{
+    <div class="form-group col-md-3">
+        @Html.Label(GlobalMessages.ParcelaAprovada)
+        @Html.TextBoxFor(reg => reg.PreProposta.ParcelaAprovada, new { @class = "form-control form-control-sm dinheiro", @readonly = "readonly", Value = Model.PreProposta.ParcelaAprovada.ToString("F") })
+        @Html.HiddenFor(reg=> reg.PreProposta.ParcelaAprovadaPrevio)
+    </div>
+}
+else
+{
+<div class="form-group col-md-3">
+    @Html.Label(GlobalMessages.ParcelaAprovada)
+    @Html.TextBoxFor(reg => reg.PreProposta.ParcelaAprovadaPrevio, new { @class = "form-control form-control-sm dinheiro", @readonly = "readonly", Value = Model.PreProposta.ParcelaAprovadaPrevio.ToString("F") })
+    @Html.HiddenFor(reg => reg.PreProposta.ParcelaAprovada)
+</div>
+}
+<div class="form-group col-md-2">
+    @Html.Label(GlobalMessages.TotalDetalhamentoFinanceiro + "*")
+    @Html.TextBoxFor(x => x.PreProposta.TotalDetalhamentoFinanceiro, new { @class = "form-control form-control-sm dinheiro", maxlength = 13, @readonly = "readonly", Value = Model?.PreProposta?.TotalDetalhamentoFinanceiro.ToString("F") })
+</div>
+<div class="form-group col-md-2">
+    @Html.Label(GlobalMessages.TotalItbiEmolumento + "*")
+    @Html.TextBoxFor(x => x.PreProposta.TotalItbiEmolumento, new { @class = "form-control form-control-sm dinheiro", @maxlength = 13, Value = Model?.PreProposta?.TotalItbiEmolumento.ToString("F"), @readonly = "readonly" })
+</div>
+<div class="form-group col-md-2">
+    @Html.Label(GlobalMessages.Total + "*")
+    @Html.TextBoxFor(x => x.PreProposta.Valor, new { @class = "form-control form-control-sm dinheiro", @maxlength = 13, Value = Model?.PreProposta?.Valor.ToString("F"), @readonly = "readonly" })
+</div>

@@ -1,0 +1,68 @@
+@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+<script src="~/Static/projeto/regra-comissao-padrao/nova-regra-comissao-padrao-modal.js"></script>
+<script>
+    Europa.Controllers.ModalNovaRegraComissaoPadrao.Url.Matriz = '@Url.Action("Matriz", "RegraComissaoPadrao")';
+</script>
+
+<style>
+    #modalNovaRegraComissaoPadrao .empresa-venda-wrapper {
+        margin-top: 10px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(133,166,176,0.42);
+    }
+    #modalNovaRegraComissaoPadrao #empresa_venda_treeview {
+        max-height: 35vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    #modalNovaRegraComissaoPadrao #empresa_venda_treeview .list-group {
+        margin: 0;
+        padding: 0;
+    }
+    #modalNovaRegraComissaoPadrao #empresa_venda_treeview li {
+        padding: 8px 0 7px 0;
+    }
+</style>
+
+<div class="modal" id="modalNovaRegraComissaoPadrao" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.ModalNovaRegraComissaoPadrao.Fechar()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="modalNovaRegraComissaoPadrao_titulo">@GlobalMessages.Nova @GlobalMessages.RegraComissao</h4>
+            </div>
+
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="col-md-24">
+                        @Html.Hidden("IdRegraComissaoReferencia")
+                        @Html.Label(GlobalMessages.Regional)
+                        @Html.DropDownList("Regional", RegionalHelper.RegionaisMatrizSelectListItem, new {@class = "select2-container form-control"})
+                    </div>
+                    <div id="opcao_buscar_ultima_wrapper" class="col-md-24" style="padding-top: 8px;">
+                        <label class="col-md-24">
+                            @Html.RadioButton("BuscarUltimaAtt", false, new {@checked = true}) @GlobalMessages.CriarEmBranco
+                        </label>
+                        <label class="col-md-24">
+                            @Html.RadioButton("BuscarUltimaAtt", true) @GlobalMessages.UtilizarRegrasRecentes
+                        </label>
+                    </div>
+                </div>
+            </div>
+            <!-- #endregion -->
+
+            <!-- #region footer -->
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" onclick="Europa.Controllers.ModalNovaRegraComissaoPadrao.Confirmar()">
+                    <i class="fa fa-check"></i> @GlobalMessages.Confirmar</button>
+                <button type="button" class="btn btn-default" onclick=" Europa.Controllers.ModalNovaRegraComissaoPadrao.Fechar() ">
+                    <i class="fa fa-ban"></i> @GlobalMessages.Cancelar</button>
+            </div>
+            <!-- #endregion -->
+        </div>
+    </div>
+</div>

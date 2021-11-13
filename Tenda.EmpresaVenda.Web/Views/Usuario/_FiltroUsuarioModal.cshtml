@@ -1,0 +1,60 @@
+﻿@using Europa.Resources
+@model Tenda.Domain.Core.Models.UsuarioPortal
+<script src="~/Static/administrativo/usuario/usuario-filtro-modal.js"></script>
+
+<div class="modal" id="FiltroUsuario" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Components.Modal.FiltroUsuario.CloseModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">
+                    @GlobalMessages.FiltrarUsuario
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <form id="formFiltroUsuario" class="form-group">
+                        <div class="col-md-11">
+                            @Html.Label(GlobalMessages.Nome, new {@class = "control-label"})
+                            @Html.TextBoxFor(x => x.Nome, new {@class = "form-control", maxlength = 254})
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-12">
+                            @Html.Label(GlobalMessages.Email, new {@class = "control-label"})
+                            @Html.TextBoxFor(x => x.Email, new {@class = "form-control", maxlength = 254})
+                        </div>
+                        <div class="col-md-11">
+                            @Html.Label(GlobalMessages.Login, new {@class = "control-label"})
+                            @Html.TextBoxFor(x => x.Login, new {@class = "form-control", maxlength = 254})
+                            @Html.Label(GlobalMessages.Perfil, new {@class = "control-label"})
+                            <div class="input-group">
+                                <select id="autocomplete_perfil_modal_filtro_usuario" class="select2-container form-control"></select>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button" onclick=" Europa.Components.Modal.FiltroUsuario.AbrirModalPerfil() ">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                        <div class="col-md-1"></div>
+                        <div class="col-md-12">
+                            @Html.Label(GlobalMessages.Situacao)
+                            <div class="col-md-24">
+                                @Html.CheckBox("Ativos") @GlobalMessages.FiltrarUsuariosAtivos
+                            </div>
+                            <div class="col-md-24">
+                                @Html.CheckBox("Suspensos") @GlobalMessages.FiltrarUsuariosSuspensos
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="pull-left btn btn-default" onclick=" Europa.Components.Modal.FiltroUsuario.LimparFiltros() "><i class="fa fa-eraser"></i> @GlobalMessages.LimparFiltro</button>
+                <button type="button" class="btn btn-default" onclick="Europa.Components.Datatable.Usuario.FiltrarModal()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+                <button type="button" class="btn btn-default" onclick=" Europa.Components.Modal.FiltroUsuario.CloseModal() "><i class="fa fa-ban"></i> @GlobalMessages.Desistir</button>
+            </div>
+        </div>
+    </div>
+</div>
+

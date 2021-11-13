@@ -1,0 +1,36 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+<script type="text/javascript" src="~/Static/projeto/hierarquia-house/datatable-agente-venda-house.js"></script>
+
+<script>
+    Europa.Controllers.HierarquiaHouse.UrlListarAgenteVendaHouse = '@Url.Action("ListarAgenteVendaHouse", "HierarquiaHouse")';
+
+    Europa.Controllers.HierarquiaHouse.UrlVincularSupervisorAgenteVendaHouse = '@Url.Action("VincularSupervisorAgenteVendaHouse", "HierarquiaHouse")';
+    Europa.Controllers.HierarquiaHouse.UrlDesvincularSupervisorAgenteVendaHouse = '@Url.Action("DesvincularSupervisorAgenteVendaHouse", "HierarquiaHouse")';
+</script>
+
+<div ng-controller="DatatableAgenteVendaHouse as table">
+    <div id="agente_venda_house_datatable_barra" class="col-md-24 container-fluid">
+        <div class="col-md-24 form-group">
+            <form>
+                <div class="col-md-13" style="margin-right:5px">
+                    <input type="text" id="nomeAgenteVendaHouse" maxlength="50" placeholder="@GlobalMessages.AgenteVenda" class="form-control">
+                    
+
+                </div>
+                @*@if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "VisualizarGrupoCCA"))
+                    {*@
+                <div class="col-md-5" style="margin-left: 5px">
+                    <button class="btn btn-default" onclick="Europa.Controllers.HierarquiaHouse.FiltrarDatatableAgenteVendaHouse()"><i class="fa fa-filter" aria-hidden="true"></i></button>
+                    <button class="btn btn-default" type="button" onclick="Europa.Controllers.HierarquiaHouse.LimparFiltroAgenteVendaHouse()"><i class="fa fa-eraser"></i></button>
+                </div>
+                @*}*@
+            </form>
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>
+

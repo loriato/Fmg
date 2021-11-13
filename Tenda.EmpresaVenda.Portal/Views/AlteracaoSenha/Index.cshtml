@@ -1,0 +1,140 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@using Tenda.EmpresaVenda.Portal.Models
+@model AlteracaoSenhaCorretorDTO
+
+
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ApplicationInfo.NomeSistema()</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Static/images/favicon.ico" />
+
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/europa")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/bootstrap-validator")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/Static/scripts/jquery-placeholder.js")
+
+
+    <link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-menu-icons.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-button.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-input.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-tabs.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-text.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-action-bar.css" rel="stylesheet" />
+
+
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+    <script src="~/Static/tinymce/tinymce.min.js"></script>
+    <script src="~/Static/europa/js/europa-dialogo.js"></script>
+
+
+    <script src="~/Static/projeto/alteracao-senha/alteracao-senha.js"></script>
+
+    <link href="~/Static/europa/css/login.css" rel="stylesheet" />
+
+
+    <script>
+        Europa.Controllers.DefinirSenha.UrlDefinirSenha = '@Url.Action("AlterarSenha", "AlteracaoSenha")';
+        Europa.Controllers.DefinirSenha.UrlConsultaPreProposta = '@Url.Action("Index", "ConsultaPreProposta")';
+        Europa.Controllers.DefinirSenha.UrlSucesso = '@Url.Action("Sucesso","AlteracaoSenha")';
+    </script>
+</head>
+
+<body>
+    <div class="col-md-24 div-imgs-balls">
+        <img src="~/Static/images/logo-credenciada.png" />
+        <img src="~/Static/images/login/bola-gde-menor-red-cima.png" />
+        <img src="~/Static/images/login/bola-rosa-menor-alto.png" />
+    </div>
+
+    @{Html.RenderPartial("~/Views/Shared/Dialogo.cshtml");}
+
+    <div id="titlebar-name">@ViewBag.Title</div>
+
+    <div class="col-md-24 wrapper container-fluid" style="float: left;margin: 0;margin-top: 8%;height:100%">
+        <div class="div-text-login" style="font-size:23px;">
+            <span>@GlobalMessages.RedefinicaoSenha</span>
+        </div>
+        <div class="msg-acesso" style="margin-top: 20px">
+            <span>@GlobalMessages.ParaComecarCadastreSenha</span>
+        </div>
+
+        <form id="form_alteracao_senha">
+            @Html.HiddenFor(x => x.Id)
+            <div class="col-md-24">
+                <img class="img-3-bolls" src="~/Static/images/login/3-bolas-rosas.png" style="margin-top: 40px;" />
+                <div style="margin-left: auto;margin-right: auto; width: 450px;margin-top: 30px;">
+                    <div class="div-senha-input">
+                        <span>
+                            @GlobalMessages.NovaSenha
+                        </span>
+                        <div class="inner-addon left-addon img-styles-bg">
+                            <img class="iconlogin" src="~/Static/images/key-icon.png" />
+                            <img class="iconlogin" id="nova_senha_normal_eye" src="~/Static/images/eye-icon.png" />
+                            <img onclick="Europa.Controllers.DefinirSenha.MostrarNovaSenha()" id="nova_senha_black_eye" class="iconlogin" src="~/Static/images/black-eye-icon.png" />
+                            <input class="form-control" onkeyup="Europa.Controllers.DefinirSenha.CheckInputs()" onchange="Europa.Controllers.DefinirSenha.CheckInputs()" type="password" id="nova_senha" name="NovaSenha" placeholder="@GlobalMessages.NovaSenha" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-24">
+                <div style="margin-left: auto;margin-right: auto; width: 450px;margin-top: 30px;">
+                    <img class="small-ball" src="~/Static/images/login/bola-menor.png" />
+                    <div class="div-senha-input">
+                        <span>
+                            @GlobalMessages.ConfirmeNovaSenha
+                        </span>
+                        <div class="inner-addon left-addon img-styles-bg">
+                            <img class="iconlogin" src="~/Static/images/key-icon.png" />
+                            <img class="iconlogin" id="confirme_senha_normal_eye" src="~/Static/images/eye-icon.png" />
+                            <img onclick="Europa.Controllers.DefinirSenha.MostrarConfirmeSenha()" id="confirme_senha_black_eye" class="iconlogin" src="~/Static/images/black-eye-icon.png" />
+                            <input class="form-control" onkeyup="Europa.Controllers.DefinirSenha.CheckInputs()" onchange="Europa.Controllers.DefinirSenha.CheckInputs()" type="password" id="confirme_senha" name="ConfirmeSenha" placeholder="@GlobalMessages.ConfirmeNovaSenha" />
+                        </div>
+                    </div>
+                    <div class="col-md-24 msg-error-login-failure" id="div_error">
+                    </div>
+                    <div class="form-group col-md-11 col-sm-11 col-xs-11" style="margin-top:25px">
+                        <button class="btn" type="button" onclick="Europa.Controllers.DefinirSenha.ConsultaPreProposta()" style="width:100%;height:48px;font-size:18px;">@GlobalMessages.Cancelar</button>
+                    </div>
+                    <div class="form-group col-md-11 col-sm-11 col-xs-11 col-md-offset-1 col-sm-offset-1 col-xs-offset-1" style="margin-top:25px">
+                        <button id="btn_login" type="button" onclick="Europa.Controllers.DefinirSenha.Definir()">@GlobalMessages.Avancar</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </form>
+
+        <div class="div-img-footer">
+            <img src="~/Static/images/login/bola-rosa.png" />
+            <img src="~/Static/images/login/bola-gde-menor-red-baixo.png" />
+        </div>
+        <div class="col-md-24 msg-footer-tenda">
+            <div class="col-md-23 col-md-offset-1">
+                <img src="~/Static/images/tenda-logo.png" />
+                <p>@string.Format(GlobalMessages.TodosDireitosReservadosTenda, DateTime.Now.Year)</p>
+            </div>
+        </div>
+        <div class="col-md-24" style="color: transparent; font-size: smaller">
+            @{Html.RenderPartial("~/Views/Shared/Footer.cshtml");}
+        </div>
+    </div>
+</body>
+</html>
+

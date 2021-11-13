@@ -1,0 +1,32 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Web.Models.Application
+
+<div ng-controller="SinteseDataTable as table">
+    <div id="SinteseDatatable_barra" class="col-md-24 container-fluid">
+        <div class="col-md-24 form-group">
+            <form>
+                <div class="col-md-7" style="margin-right:5px">
+                    <input type="text" id="filtroSintese" maxlength="50" placeholder="@GlobalMessages.Sintese" class="form-control">
+                </div>
+                <div class="col-md-8" style="margin-right:5px">
+                    <input type="text" id="filtroStatusContrato" maxlength="50" placeholder="@GlobalMessages.StatusContrato" class="form-control">
+                </div>
+                <div class="col-md-6" style="margin-left: 5px">
+                    @if (SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Visualizar"))
+                    {
+                        <button class="btn btn-default" onclick="Europa.Controllers.StatusContratoJunix.SinteseJunix.Filtrar()"><i class="fa fa-filter" aria-hidden="true"></i> @GlobalMessages.Filtrar</button>
+                        <button class="btn btn-default" type="button" onclick="Europa.Controllers.StatusContratoJunix.SinteseJunix.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+                    }
+                </div>
+                <div class="pull-right" style="margin-right:5px">
+                    @if(SessionAttributes.Current().HasPermission(ViewBag.Codigo, "Incluir")){
+                        <button class="btn btn-default" onclick="Europa.Controllers.StatusContratoJunix.SinteseJunix.Novo()"><i class="fa fa-plus" aria-hidden="true"></i> @GlobalMessages.Incluir</button>
+                    }
+                </div>
+            </form>
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

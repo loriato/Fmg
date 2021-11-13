@@ -1,0 +1,192 @@
+﻿
+table.dataTable {
+    border-collapse: collapse;
+}
+
+.dataTables_wrapper .dataTables_info {
+    clear: none;
+    float: left;
+}
+
+.dataTables_length {
+    margin: 0;
+}
+
+.europa-datatable-table,
+.europa-datatable-table table,
+.europa-datatable-footer,
+.europa-datatable-custom-header,
+.europa-datatable-top {
+    margin: 0 !important;
+    padding: 0;
+    float: left;
+    width: 100%;
+}
+
+.europa-datatable-top,
+.europa-datatable-footer {
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #DDDDDD;
+}
+
+.europa-datatable-footer {
+    min-height: 35px;
+}
+
+.europa-datatable-custom-header {
+    border: 1px solid #DDDDDD;
+    padding: 2px;
+    display: none;
+}
+
+.fc-center h2 {
+    font-size: large;
+    margin: 0;
+}
+
+.fc-toolbar {
+    margin-bottom: 4px;
+}
+
+.europa-datatable-custom-header h4 {
+    padding: 0px;
+}
+
+.europa-datatable-custom-header .pull-left .panel-title {
+    display: inline-block;
+    font-size: medium;
+    line-height: 27px;
+    margin-left: 5px;
+}
+
+.europa-datatable-custom-header .panel-title {
+    display: inline-block;
+    font-size: medium;
+    line-height: 27px;
+    margin-left: 5px;
+}
+
+.europa-datatable-custom-header .form-group {
+    display: inline-block;
+    font-size: medium;
+    line-height: 27px;
+    margin-left: 5px;
+}
+
+.europa-datatable-custom-header label {
+    padding: 0px;
+    margin: 0px;
+}
+
+.europa-datatable-custom-header .pull-left {
+    padding: 0px;
+}
+
+.europa-datatable-custom-header h3 {
+    padding: 0px;
+}
+
+.europa-datatable-custom-header h2 {
+    padding: 0px;
+}
+
+.europa-datatable-custom-header .btn-group {
+    padding: 0px;
+}
+
+.europa-datatable-custom-header .input-group {
+    padding: 0px;
+}
+
+.europa-datatable-reload {
+    float: left;
+    margin: 4px 12px;
+    display: none;
+    position: absolute;
+    padding: 0px;
+    left: 0px;
+}
+
+    .europa-datatable-reload > .btn {
+        padding: 2px;
+        width: 24px;
+        height: 24px;
+        font-size: 12px;
+    }
+
+.europa-datatable-top,
+.europa-datatable-custom-header {
+    border-bottom: none;
+}
+
+.europa-datatable-footer {
+    border-top: none;
+    position: relative;
+}
+
+.dataTables_wrapper .dataTables_processing {
+    position: absolute;
+    width: 48px;
+    height: 10px;
+    top: 32px;
+    padding: 0;
+    text-align: center !important;
+    background: none !important;
+}
+
+.europa-datatable-container-block {
+    display: inline-block;
+    vertical-align: text-top;
+}
+
+.europa-datable-info,
+.europa-datable-paginator,
+.europa-datatable-max-visible {
+    float: left;
+    margin: 0;
+    padding: 0;
+    margin-right: 10px;
+}
+
+    .europa-datatable-max-visible select {
+        border: 1px solid #ccc !important;
+    }
+
+    .europa-datatable-max-visible label {
+        margin: 3px;
+    }
+
+.ng-scope > div > .btn {
+    padding: 2px 6px;
+}
+
+.ng-scope > .btn {
+    padding: 2px 6px;
+}
+
+table.dataTable tbody > tr.selected, table.dataTable tbody > tr > .selected {
+    background-color: #E6E8EA;
+}
+
+table.dt-rowReorder-float {
+    z-index: 10060 !important;
+}
+
+.europa-datatable-navegar-para {
+    display: block !important;
+    float: left;
+    margin: 3px 0;
+    display: none;
+    padding: 0px;
+}
+
+.europa-datatable-navegar-para span {
+    margin-right: 5px;
+}
+
+.europa-datatable-navegar-para input {
+    width: 60px !important;
+    margin-right: 5px;
+    height: 25px;
+}

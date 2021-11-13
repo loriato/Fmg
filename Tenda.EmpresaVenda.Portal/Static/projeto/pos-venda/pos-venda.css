@@ -1,0 +1,63 @@
+#titlebar-wrapper, .titlebar {
+    display: none;
+}
+
+.block-content {
+    padding: 0;
+}
+
+.pos-venda-titlebar {
+    padding: 14px 0px 13px 24px;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.18px;
+    color: var(--white);
+    background-color: var(--bluey-grey);
+    font-family: AktivGrotesk;
+}
+
+#corpo-conteudo-layout {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.titulo-ps-venda {
+    font-family: AktivGrotesk;
+    font-size: 20px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: 0.18px;
+    color: #ffffff;
+}
+
+.Rectangle {
+    background-color: #93a6b4;
+    padding: 14px 0px 13px 24px;
+}
+
+.Rectangle-9 {
+    width: 101px;
+    height: 35px;
+    border-radius: 17.4px;
+    border: solid 0.8px var(--brown-grey);
+    background-color: var(--white);
+    padding: 4px 0px;
+}
+
+.Oval-3-Copy-2 {
+    width: 25px;
+    height: 26px;
+    border: solid 0.8px var(--brown-grey);
+    border-radius: 50%;
+    margin: 0px 4px 0px 4px;
+}
+
+.Oval-3-Copy-3 {
+    width: 25px;
+    height: 26px;
+    border-radius: 50%;
+    margin: 0px 4px 0px 4px;
+}

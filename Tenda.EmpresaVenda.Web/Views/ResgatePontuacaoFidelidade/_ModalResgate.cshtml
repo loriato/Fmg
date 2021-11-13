@@ -1,0 +1,36 @@
+﻿@using Europa.Resources
+@model Tenda.EmpresaVenda.Domain.Repository.Models.PontuacaoFidelidadeDTO
+
+<div class="modal" id="modal_solicitar_resgate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+    <div class="modal-dialog " role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" onclick="Europa.Controllers.ResgatePontuacaoFidelidade.FecharModal()" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">@GlobalMessages.Resgate</h4>
+            </div>
+            <div class="modal-body">
+                <form id="form_solicitar_resgate">
+                    <div class="col-md-24">
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.PontuacaoDisponivel)
+                            @Html.TextBoxFor(x => x.PontuacaoDisponivel, new { @class = "form-control",@readOnly=true})
+                        </div>
+                        <div class="col-md-24">
+                            @Html.Label(GlobalMessages.PontuacaoSolicitada)
+                            @Html.TextBoxFor(x => x.PontuacaoSolicitada, new { @class = "form-control",type="number"})
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button id="btn_salvar" class="btn" type="button" onclick="Europa.Controllers.ResgatePontuacaoFidelidade.SolicitarResgate()">
+                    <i class="fa fa-check"></i> @GlobalMessages.SolicitarResgate
+                </button>
+                <button id="btn_desistir" class="btn" type="button" onclick="Europa.Controllers.ResgatePontuacaoFidelidade.FecharModal()">
+                    <i class="fa fa-close"></i> @GlobalMessages.Cancelar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,147 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Portal.Models.Application
+@model Tenda.EmpresaVenda.Portal.Models.LoginViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ApplicationInfo.NomeSistema()</title>
+    <link rel="shortcut icon" type="image/x-icon" href="~/Static/images/favicon.ico" />
+
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/europa")
+    @Scripts.Render("~/Static/scripts/jquery-placeholder.js")
+
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+    <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+
+
+    <link href="~/Static/europa/css/login.css" rel="stylesheet" />
+</head>
+
+<body>
+    <div class="col-md-24 div-imgs-balls">
+        <img src="~/Static/images/logo-credenciada.png" />
+        <img src="~/Static/images/login/bola-gde-menor-red-cima.png" />
+        <img src="~/Static/images/login/bola-rosa-menor-alto.png" />
+        <a href="#" style="z-index: 3000;float: right;margin-top: 88px;margin-right: 237px;font-size:16px" onclick="Europa.Controllers.Login.PreCadastroEv()">@GlobalMessages.SejaParceiro</a>
+    </div>
+    <div class="col-md-24 wrapper container-fluid" style="float: left;margin: 0;margin-top: 8%;height:100%">
+        <div class="msg-acesso">
+            <span>@GlobalMessages.AcessoExclusivoParceiros</span>
+        </div>
+        <div class="div-text-login">
+            <span>@GlobalMessages.FacaLoginConta</span>
+        </div>
+        @using (Html.BeginForm("Logar", "Login", FormMethod.Post, new { role = "form", @class = "col-md-24", id = "login" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("ReturnUrl", Request["ReturnUrl"])
+            <div class="col-md-24 ">
+                <img class="img-3-bolls" src="~/Static/images/login/3-bolas-rosas.png" style="margin-top: 40px;" />
+                <div style="margin-left: auto;margin-right: auto; width: 450px;margin-top: 30px;">
+                    <div class="form">
+                        <div class="div-login-input">
+                            <span>
+                                @GlobalMessages.Usuario
+                            </span>
+                            <div class="inner-addon left-addon">
+                                <i class="iconlogin fa fa-envelope-o"></i>
+                                <input id="Username" class="@(ViewData.ModelState.Values.Count == 0 ? "form-control":"errorBorder")" onkeyup="Europa.Controllers.Login.CheckInputs()" name="Username" value="@Model.Username" placeholder="@GlobalMessages.SeuEmail" />
+                            </div>
+                        </div>
+                        <img class="small-ball" src="~/Static/images/login/bola-menor.png" />
+                        <div class="div-senha-input">
+                            <span>
+                                @GlobalMessages.Senha
+                            </span>
+                            <div class="inner-addon left-addon img-styles-bg">
+                                <img class="iconlogin" src="~/Static/images/key-icon.png" />
+                                <img class="iconlogin" id="normal_eye" src="~/Static/images/eye-icon.png" />
+                                <img onclick="Europa.Controllers.Login.ShowPassword()" id="black_eye" class="iconlogin" src="~/Static/images/black-eye-icon.png" />
+                                <input class="@(ViewData.ModelState.Values.Count == 0 ? "form-control":"errorBorder")" onkeyup="Europa.Controllers.Login.CheckInputs()" onchange="Europa.Controllers.Login.CheckInputs()" type="password" id="Password" name="Password" placeholder="@GlobalMessages.Senha" onkeypress="keyPress(event)" />
+                            </div>
+                        </div>
+                        <div class="col-md-24 msg-error-login-failure">
+                            @{Html.RenderPartial("~/Views/Shared/Message.cshtml");}
+                        </div>
+                        <div class="form-group col-md-13 col-sm-13 col-xs-13 col-md-offset-6 col-sm-offset-6 col-xs-offset-6" style="margin-top:25px">
+                            <button id="btn_login" type="button" onclick="checkBrowser()">@GlobalMessages.Entrar</button>
+                        </div>
+
+                        <div class="form-group col-md-13 col-sm-13 col-xs-13 col-md-offset-6 col-sm-offset-6 col-xs-offset-6" style="margin-top:25px; text-align: center;">
+                            <a href="#" onclick="Europa.Controllers.Login.RecuperarConta()">@GlobalMessages.EsqueciMinhaSenha </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        <div class="div-img-footer">
+            <img src="~/Static/images/login/bola-rosa.png" />
+            <img src="~/Static/images/login/bola-gde-menor-red-baixo.png" />
+        </div>
+        <div class="col-md-24 msg-footer-tenda">
+            <div class="col-md-23 col-md-offset-1">
+                <img src="~/Static/images/tenda-logo.png" />
+                <p>@string.Format(GlobalMessages.TodosDireitosReservadosTenda, DateTime.Now.Year)</p>
+            </div>
+        </div>
+        <div class="col-md-24" style="color: transparent; font-size: smaller">
+            @{Html.RenderPartial("~/Views/Shared/Footer.cshtml");}
+        </div>
+    </div>
+
+    @{Html.RenderPartial("~/Views/Shared/Dialogo.cshtml");}
+
+
+    <script src="~/Static/projeto/login/login.js"></script>
+
+    <script>
+        Europa.Controllers.Login.UrlReenviarTokenAtivacao = '@Url.Action("ReenviarTokenAtivacao", "Login")';
+        Europa.Controllers.Login.UrlRecuperarConta = '@Url.Action("Index","RecuperarConta")';
+        Europa.Controllers.Login.UrlPreCadastro = '@Url.Action("Index","PreCadastro")';
+
+        var div = document.createElement("div");
+        div.innerHTML = "<!--[if lt IE 9]><i></i><![endif]-->";
+        var isIeLessThan9 = (div.getElementsByTagName("i").length == 1);
+        if (isIeLessThan9) {
+            showMessage();
+        }
+
+        function keyPress(e) {
+            if (e.keyCode == 13) {
+                checkBrowser();
+            }
+        };
+        function checkBrowser() {
+            if (isIeLessThan9) {
+                showMessage();
+                return false;
+            }
+            Spinner.Show();
+            document.getElementById("login").submit();
+            return true;
+        };
+
+        function showMessage() {
+            alert("O seu navegador não é compatível com o sistema. Utilize a versão 9 ou superior do IE.");
+        };
+
+        $(function () {
+            $("[placeholder]").placeholder();
+        });
+
+    </script>
+</body>
+</html>

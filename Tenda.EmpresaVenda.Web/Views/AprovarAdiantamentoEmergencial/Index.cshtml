@@ -1,0 +1,130 @@
+﻿@using Europa.Resources
+@using Tenda.EmpresaVenda.Domain.Commons
+@using Tenda.EmpresaVenda.Web.Models.Application
+@using Tenda.Domain.EmpresaVenda.Enums
+@using Europa.Extensions
+
+@{
+    ViewBag.Codigo = "PAG09";
+    ViewBag.Title = ApplicationInfo.TituloUnidadeFuncional(ViewBag.Codigo);
+}
+
+<script src="~/Static/projeto/aprovar-adiantamento-emergencial/aprovar-adiantamento-emergencial.js"></script>
+
+<script>
+    Europa.Controllers.AprovarAdiantamentoEmergencial.UrlListar = '@Url.Action("Listar", "AprovarAdiantamentoEmergencial")';
+    Europa.Controllers.AprovarAdiantamentoEmergencial.UrlRegraComissao = '@Url.Action("Index", "MatrizPagadoria")';
+    Europa.Controllers.AprovarAdiantamentoEmergencial.UrlAprovar = '@Url.Action("Aprovar", "AprovarAdiantamentoEmergencial")';
+    Europa.Controllers.AprovarAdiantamentoEmergencial.UrlReprovar = '@Url.Action("Reprovar", "AprovarAdiantamentoEmergencial")';   
+</script>
+@{
+    var tiposPagamentoParaVisualizacao = new List<TipoPagamento>() {
+                                        TipoPagamento.Conformidade,
+                                        TipoPagamento.Repasse
+                                    };
+
+    var tipoPagamentoSelectList = new List<SelectListItem>();
+    foreach (var situacao in tiposPagamentoParaVisualizacao)
+    {
+        tipoPagamentoSelectList.Add(new SelectListItem { Text = situacao.AsString(), Value = situacao.GetHashCode().ToString() });
+    }
+    tipoPagamentoSelectList = tipoPagamentoSelectList.AsQueryable().ToList();
+
+    
+    var statusAdiantamentoParaView = new List<StatusAdiantamentoPagamento>() {
+        StatusAdiantamentoPagamento.Aprovado,
+        StatusAdiantamentoPagamento.Solicitado 
+    };
+    var statusAdiantamentoSelectList = new List<SelectListItem>();
+    foreach (var adiantamento in statusAdiantamentoParaView)
+    {
+        statusAdiantamentoSelectList.Add(new SelectListItem { Text = adiantamento.AsString(), Value = adiantamento.GetHashCode().ToString() });
+    }
+    statusAdiantamentoSelectList = statusAdiantamentoSelectList.AsQueryable().ToList();
+}
+
+<div id="titlebar-name">@ViewBag.Title</div>
+
+<div class="col-md-24">
+    <form class="form-filtro">
+        <div class="col-md-24">
+            <div class="col-md-6 form-group">
+                @Html.Label(GlobalMessages.EmpresaVenda, new { @class = "control_label" })
+                <select id="autocomplete_empresa_venda" name="autocomplete_empresa_venda" class="select2-container form-control" multiple="multiple"></select>
+            </div>
+            <div class="col-md-3 col-md-offset-1  form-group">
+                @Html.Label(GlobalMessages.DataVenda)
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.De</span>
+                    @Html.TextBox("filtro_data_venda_de", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-3 col-md-offset-1">
+                @Html.Label(GlobalMessages.DataVenda, new { style = "visibility:hidden" })
+                <div class="input-group">
+                    <span class="input-group-addon">@GlobalMessages.Ate</span>
+                    @Html.TextBox("filtro_data_venda_ate", "", new { @class = "form-control", datepicker = "datepicker", parent = "#form_filtro", @style = "height:30px" })
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" style="height:30px" onclick=" Europa.Components.DatePicker.ClosestInput(this) ">
+                            <i class="fa fa-calendar"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+            <div class="col-md-4 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.TipoPagamento, new { @class = "control-label" })
+                @Html.DropDownList("filtro_tipo_pagamento", tipoPagamentoSelectList, "", new { @class = "form-control" })
+            </div>
+            <div class="col-md-4 col-md-offset-1 form-group">
+                @Html.Label(GlobalMessages.StatusAdiantamento, new { @class = "control-label" })
+                @Html.DropDownList("filtro_status_adiantamento", statusAdiantamentoSelectList, "", new { @class = "form-control" })
+            </div>
+        </div>
+        <div class=" col-md-24">
+            <div class="pull-right" style="margin-top:18px;">
+                <button class="btn btn-default" title="@GlobalMessages.Filtrar" onClick="Europa.Controllers.AprovarAdiantamentoEmergencial.Filtrar()"><i class="fa fa-filter"></i> @GlobalMessages.Filtrar</button>
+                <button type="button" title="@GlobalMessages.Limpar" class="btn btn-default" onClick="Europa.Controllers.AprovarAdiantamentoEmergencial.LimparFiltro()"><i class="fa fa-eraser"></i> @GlobalMessages.Limpar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<div ng-controller="AprovarAdiantamentoEmergencial as table">
+    <div id="datatable_header" class="col-md-24">
+        <div class="col-md-5">
+            <h5 style="margin-top:6px;margin-bottom:0px;">@ViewBag.Title</h5>
+        </div>
+        <div class="pull-right">
+            @if (SessionAttributes.Current().HasPermission("PAG09", "Aprovar") ||
+                SessionAttributes.Current().HasPermission("PAG09", "Reprovar"))
+            {
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default dropdown-toggle" title="@GlobalMessages.Opcoes" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-bars" aria-hidden="true"></i>
+                        @GlobalMessages.Opcoes <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu pull-right">
+                        @if (SessionAttributes.Current().HasPermission("PAG09", "Aprovar"))
+                        {
+                            <li><a href="#" title="@GlobalMessages.Aprovar" onclick="Europa.Controllers.AprovarAdiantamentoEmergencial.Aprovar()">@GlobalMessages.Aprovar</a></li>
+                        }
+                        @if (SessionAttributes.Current().HasPermission("PAG09", "Reprovar"))
+                        {
+
+                            <li><a href="#" title="@GlobalMessages.Reprovar" onclick="Europa.Controllers.AprovarAdiantamentoEmergencial.Reprovar()">@GlobalMessages.Reprovar</a></li>
+                        }
+                    </ul>
+                </div>
+            }
+        </div>
+    </div>
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

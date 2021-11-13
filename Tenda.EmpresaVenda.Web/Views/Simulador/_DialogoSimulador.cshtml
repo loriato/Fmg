@@ -1,0 +1,56 @@
+﻿@using Europa.Resources
+
+<style>
+    .modal-simulador {
+        margin-top: 3%;
+        overflow-y: auto !important;
+        z-index: 1000;
+        min-height: fit-content;
+    }
+    .dialogo-simulador {
+        min-width: -webkit-fill-available;
+        min-height: -webkit-fill-available;
+        margin:0px;
+    }
+
+    .content-simulador {
+        height: auto;
+        min-height: 515px;
+        border-radius: 0;
+    }
+
+    .div-frame {
+        width: 100%;
+    }
+
+</style>
+
+<script>
+    Europa.Controllers.Simulador.UrlAplicarSimulacaoAtual = '@Url.Action("AplicarSimulacaoAtual", "Simulador")';
+    Europa.Controllers.Simulador.UrlBuscarUrlMatrizOferta = '@Url.Action("BuscarUrlMatrizOferta","Simulador")';
+</script>
+
+<div class="modal fade modal-fullscreen modal-simulador" id="dialogo_simulador" tabindex="-1" data-backdrop="static" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog dialogo-simulador">
+        <div class="modal-content content-simulador">
+            <div class="modal-header" style="cursor: unset !important; height: 53px !important; background-image: linear-gradient(to bottom, #ed1c24, #d0021b 250%)">
+                <div onclick="Europa.Controllers.Simulador.FecharDialogo();" style="margin-left: 96.5%;width: 4%;display: flex;flex-direction: column;">
+                    <img id="btn_close" data-dismiss="modal"
+                         style="cursor: pointer; width: 25px; margin-left: 5px;" src="~/Static/images/fechar-dialogo.png">
+                    <br />
+                    <label style="color: white; margin-top: -15px">Fechar</label>
+                </div>
+            </div>
+            <div class="modal-body" id="modal_simulador" style="padding:0;border-top:0;min-height: inherit;">
+                <div id="div-frame-simulador" name="div_frame" class="div-frame">
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,25 @@
+﻿@using Tenda.Domain.Shared
+<script>
+    Europa.Components.DetailAction = {};
+    Europa.Components.DetailAction.Empreendimento = '@ProjectProperties.SuatBaseUrl/empreendimento/index/';
+    Europa.Components.DetailAction.Torre = '@ProjectProperties.SuatBaseUrl/torre/index/';
+    Europa.Components.DetailAction.Unidade = '@ProjectProperties.SuatBaseUrl/unidadelote/detalharunidade/';
+    Europa.Components.DetailAction.Proposta = '@ProjectProperties.SuatBaseUrl/novaproposta/index/';
+    Europa.Components.DetailAction.Cliente = '@UrlHelper.GenerateUrl("AbsoluteRoute", "Index", "Cliente", null, Url.RouteCollection, new RequestContext(Html.ViewContext.HttpContext, new RouteData()), false)';
+    Europa.Components.DetailAction.PreProposta = '@UrlHelper.GenerateUrl("AbsoluteRoute", "Index", "PreProposta", null, Url.RouteCollection, new RequestContext(Html.ViewContext.HttpContext, new RouteData()), false)';
+    Europa.Components.DetailAction.ClienteSUAT = '@ProjectProperties.SuatBaseUrl/ClienteNovo/index/';
+    Europa.Components.DetailAction.EmpreendimentoSUAT = '@ProjectProperties.SuatBaseUrl/Empreendimento/DetalharEmpreendimento/';
+    Europa.Components.DetailAction.TorreSUAT = '@ProjectProperties.SuatBaseUrl/Torre/DetalharTorre/';
+
+
+
+    Europa.Components.DetailAction.Links = {
+        "Empreendimento": Europa.Components.DetailAction.Empreendimento,
+        "Torre": Europa.Components.DetailAction.Torre,
+        "Unidade": Europa.Components.DetailAction.Unidade,
+        "Proposta": Europa.Components.DetailAction.Proposta,
+        "PreProposta": Europa.Components.DetailAction.PreProposta,
+        "Cliente": Europa.Components.DetailAction.Cliente
+    }
+
+</script>

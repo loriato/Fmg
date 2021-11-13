@@ -1,0 +1,116 @@
+﻿ @using System 
+ @using Europa.Resources 
+ @using Europa.Extensions 
+ @using System.ComponentModel 
+ @using System.Globalization 
+@model Tenda.EmpresaVenda.Domain.Services.Models.PagamentoDTO
+
+<div class="col-md-24">
+    <div ng-controller="Datatable as table" data-id="@Model.IdEmpresaVenda">
+        <div id="datatable_header_@(Model.IdEmpresaVenda)" class="col-md-24" style="background-color:rgba(129, 6, 8, 1);color: #fff;height: 30px;">
+            @Html.Label(Model.NomeEmpresaVenda + " - " , new { @class = "cabecalho", style = "color: #fff;text-align: left;margin: 8px 0px 0px 5px;" })
+        </div>
+        <div class="col-md-24">
+            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                   dt-column-defs="table.dtColumnDefs" style="padding:0px;"></table>
+        </div>
+        <div id="datatable_footer_@(Model.IdEmpresaVenda)" class="col-md-24 table-bordered" style="margin-bottom: 20px;">
+            <div class="col-md-2 col-md-offset-9">
+                @Html.Label(GlobalMessages.TotalPagar.ToUpper(), new { @class = "cabecalho" })
+            </div>
+            <div class="col-md-3" style="margin-top: 3px;">
+                @String.Format(new CultureInfo("pt-BR"), "{0:C}", Model.TotalAPagar)
+            </div>
+            <div class="col-md-2">
+                <span>@Html.Label(GlobalMessages.TotalPago.ToUpper(), new { @class = "cabecalho" })</span>
+            </div>
+            <div class="col-md-2" style="margin-top: 3px;">
+                <span id="valor_@(Model.IdEmpresaVenda)">@String.Format(new CultureInfo("pt-BR"), "{0:C}", Model.TotalPago)</span>
+                @Html.Hidden("pago_"+Model.IdEmpresaVenda,Model.TotalPago)
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* @using System *@
+@* @using Europa.Resources *@
+@* @using Europa.Extensions *@
+@* @using System.ComponentModel *@
+@* @using System.Globalization *@
+@* @using Tenda.EmpresaVenda.Web.Models.Application *@
+@* @model Tenda.EmpresaVenda.Domain.Services.Models.PagamentoDTO *@
+@* *@
+@* @{ *@
+@*     var datatable = "datatable_" + Model.IdEmpresaVenda; *@
+@*     var div = "div_" + Model.IdEmpresaVenda; *@
+@*     var select = "select_" + Model.IdEmpresaVenda; *@
+@*     var onChangePageSize = "Europa.Controllers.Pagamento.OnChangePageSize(" + Model.IdEmpresaVenda + ")"; *@
+@*     var pagina = "pagina_" + Model.IdEmpresaVenda; *@
+@*     var pg = "pg_" + Model.IdEmpresaVenda; *@
+@* *@
+@*     var firstPage = "Europa.Controllers.Pagamento.OnClickPage(" + Model.IdEmpresaVenda + ",0)"; *@
+@* *@
+@* } *@
+@* *@
+@* <div class="col-md-24"> *@
+@*     <div style="background-color:rgba(129, 6, 8, 1)">@Html.Label(Model.NomeEmpresaVenda, new { @class = "cabecalho", style = "color: #fff" })</div> *@
+@*     <table id=@datatable class="display table table-bordered nowrap"> *@
+@*         <thead> *@
+@*             <tr> *@
+@*                 <th style="width:100px" class="datatable-actions center-btn-actions sorting_disabled">@Html.Label(GlobalMessages.Acoes, new { @class = "acoes" })</th> *@
+@*                 <th value="NomeLoja">@Html.Label(GlobalMessages.Central, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.Empreendimento, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.Proposta, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.Situacao, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.Data + " " + GlobalMessages.Situacao, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.DataVenda, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.FaixaPagamento, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.Percentual, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.PorcentagemComissao, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.DataComissao, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.ValorSemPremiada, new { @class = "cabecalho" })</th> *@
+@*                 <th width="100px">@Html.Label(GlobalMessages.ValorPagar, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.CodigoRegra, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.EmReversao, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.Pagamento, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.DataPedido, new { @class = "cabecalho" })</th> *@
+@*                 <th>@Html.Label(GlobalMessages.PedidoSap, new { @class = "cabecalho" })</th> *@
+@*             </tr> *@
+@*         </thead>         *@
+@*     </table> *@
+@*     <tr> *@
+@*             <td colspan="7"></td> *@
+@*             <td colspan="2">@Html.Label(GlobalMessages.TotalPagar.ToUpper(), new { @class = "cabecalho" })</td> *@
+@*             <td>@string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Model.TotalAPagar)</td> *@
+@*             <td></td> *@
+@*             <td>@Html.Label(GlobalMessages.TotalPago.ToUpper(), new { @class = "cabecalho" })</td> *@
+@*             @{ *@
+@*                 var totalPago = Model.TotalPago == null ? "R$ 0,00" : string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:C}", Model.TotalPago); *@
+@*             } *@
+@*             <td colspan="2">@totalPago</td> *@
+@*             <td colspan="4"></td> *@
+@*         </tr> *@
+@* </div> *@
+@* *@
+@* <script> *@
+@*     Europa.Controllers.Pagamento.Footer = '<div>footer<div>'; *@
+@* </script> *@
