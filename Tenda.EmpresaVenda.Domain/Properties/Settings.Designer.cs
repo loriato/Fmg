@@ -12,7 +12,7 @@ namespace Tenda.EmpresaVenda.Domain.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -20,26 +20,6 @@ namespace Tenda.EmpresaVenda.Domain.Properties {
         public static Settings Default {
             get {
                 return defaultInstance;
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://zeusqa.tenda.com/consultarnumerodepedido/service/process")]
-        public string Tenda_EmpresaVenda_Domain_ConsultarNumeroPedidoZeus_ConsultarNumeroDePedido {
-            get {
-                return ((string)(this["Tenda_EmpresaVenda_Domain_ConsultarNumeroPedidoZeus_ConsultarNumeroDePedido"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process")]
-        public string Tenda_EmpresaVenda_Domain_GerarRequisicaoDeCompraZeus_GerarRequisicaoCompra {
-            get {
-                return ((string)(this["Tenda_EmpresaVenda_Domain_GerarRequisicaoDeCompraZeus_GerarRequisicaoCompra"]));
             }
         }
     }

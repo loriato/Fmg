@@ -589,8 +589,6 @@
     <Compile Include="Core\Models\Loja.cs" />
     <Compile Include="Core\Models\UsuarioPortal.cs" />
     <Compile Include="Core\Services\BaseService.cs" />
-    <Compile Include="Core\Services\CepService.cs" />
-    <Compile Include="Core\Services\Models\CepDTO.cs" />
     <Compile Include="Core\Services\UsuarioPortalService.cs" />
     <Compile Include="Layers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -717,11 +715,6 @@
     <Compile Include="Shared\PhoneticWrapper.cs" />
     <Compile Include="Shared\ProjectProperties.cs" />
     <Compile Include="Shared\ProjectPropertyDto.cs" />
-    <Compile Include="Web References\Tenda.CEP\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
@@ -733,39 +726,18 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\Tenda.CEP\BuscaCEPPSv1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Web References\Tenda.CEP\BuscaCEPService.wsdl" />
-    <None Include="Web References\Tenda.CEP\endereco.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\Tenda.CEP\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <WebReferences Include="Web References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WebReferenceUrl Include="http://osbdev.tenda.local/Utilitarios/BuscaCEPBSv1/BuscaCEPPSv1%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\Tenda.CEP\</RelPath>
-      <UpdateFromURL>http://osbdev.tenda.local/Utilitarios/BuscaCEPBSv1/BuscaCEPPSv1%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Tenda_Domain_Tenda_CEP_BuscaCEPPortBindingQSService</CachedSettingsPropName>
-    </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Europa\Europa.csproj">
       <Project>{cd8ed417-3217-4342-8c55-66055f630fcd}</Project>
       <Name>Europa</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Services\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />

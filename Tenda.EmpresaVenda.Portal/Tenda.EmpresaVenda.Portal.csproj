@@ -1264,10 +1264,6 @@
       <Project>{7cae0a72-fcf9-4302-90c4-74dcfddea11f}</Project>
       <Name>Tenda.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tenda.EmpresaVenda.ApiService\Tenda.EmpresaVenda.ApiService.csproj">
-      <Project>{5BB20EEC-39C6-437F-A667-DC6807419248}</Project>
-      <Name>Tenda.EmpresaVenda.ApiService</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Tenda.EmpresaVenda.Domain\Tenda.EmpresaVenda.Domain.csproj">
       <Project>{c0615c67-a849-43c0-9ddc-9fc64fb0d041}</Project>
       <Name>Tenda.EmpresaVenda.Domain</Name>

@@ -1,12 +1,5 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tenda.EmpresaVenda.Domain.Properties" GeneratedClassName="Settings">
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)">
   <Profiles />
-  <Settings>
-    <Setting Name="Tenda_EmpresaVenda_Domain_ConsultarNumeroPedidoZeus_ConsultarNumeroDePedido" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://zeusqa.tenda.com/consultarnumerodepedido/service/process</Value>
-    </Setting>
-    <Setting Name="Tenda_EmpresaVenda_Domain_GerarRequisicaoDeCompraZeus_GerarRequisicaoCompra" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process</Value>
-    </Setting>
-  </Settings>
+  <Settings />
 </SettingsFile>

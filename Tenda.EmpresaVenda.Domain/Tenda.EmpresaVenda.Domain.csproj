@@ -60,8 +60,8 @@
     <Reference Include="Common.Logging.Core, Version=3.4.1.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
       <HintPath>..\packages\Common.Logging.Core.3.4.1\lib\net40\Common.Logging.Core.dll</HintPath>
     </Reference>
-    <Reference Include="EPPlus, Version=4.5.3.3, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
-      <HintPath>..\packages\EPPlus.4.5.3.3\lib\net40\EPPlus.dll</HintPath>
+    <Reference Include="EPPlus, Version=5.0.3.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.5.0.3\lib\net45\EPPlus.dll</HintPath>
     </Reference>
     <Reference Include="FluentNHibernate, Version=3.1.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentNHibernate.3.1.0\lib\net461\FluentNHibernate.dll</HintPath>
@@ -347,36 +347,10 @@
     <Compile Include="Dto\Column.cs" />
     <Compile Include="Dto\ColumnType.cs" />
     <Compile Include="Dto\Header.cs" />
-    <Compile Include="Integration\Conecta\ConectaApiService.cs" />
-    <Compile Include="Integration\Conecta\Models\AtributosDinamicosLeadDto.cs" />
-    <Compile Include="Integration\Conecta\Models\FiltroLeadConectaDto.cs" />
-    <Compile Include="Integration\Conecta\Models\GerarTokenAcessoConectaResponseDto.cs" />
-    <Compile Include="Integration\Conecta\Models\LeadConectaDto.cs" />
-    <Compile Include="Integration\Conecta\Models\LeadConectaResponseDto.cs" />
-    <Compile Include="Integration\Indique\BaseIndiqueRestClient.cs" />
-    <Compile Include="Integration\Indique\BaseIndiqueService.cs" />
-    <Compile Include="Integration\Indique\IndiqueService.cs" />
-    <Compile Include="Integration\Indique\Models\ClienteDetailDto.cs" />
     <Compile Include="Maps\ViewNotasCockpitMidasMap.cs" />
     <Compile Include="Maps\ViewOcorrenciasCockpitMidasMap.cs" />
-    <Compile Include="Repository\ViewNotasCockpitMidasRepository.cs" />
-    <Compile Include="Repository\ViewOcorrenciasMidasRepository.cs" />
-    <Compile Include="Services\CockpitMidasService.cs" />
     <Compile Include="Maps\ResponsavelAceiteRegraComissaoMap.cs" />
     <Compile Include="Maps\ViewResponsavelAceiteRegraComissaoMap.cs" />
-    <Compile Include="Repository\ResponsavelAceiteRegraComissaoRepository.cs" />
-    <Compile Include="Repository\ViewResponsavelAceiteRegraComissaoRepository.cs" />
-    <Compile Include="Services\Models\Indique\DestinatarioIndicadoDto.cs" />
-    <Compile Include="Services\Models\Indique\DestinatarioIndicadorDto.cs" />
-    <Compile Include="Integration\Indique\Models\IndicadoDto.cs" />
-    <Compile Include="Integration\Simulador\Models\ApiSimuladorResponseDto.cs" />
-    <Compile Include="Integration\Simulador\SimuladorApiService.cs" />
-    <Compile Include="Integration\Zeus\Midas\MidasApiService.cs" />
-    <Compile Include="Integration\Zeus\Midas\Models\AprovarIntegracaoRequestDto.cs" />
-    <Compile Include="Integration\Zeus\Midas\Models\AprovarIntegracaoResponseDto.cs" />
-    <Compile Include="Integration\Zeus\Midas\Models\MidasApiResponseDto.cs" />
-    <Compile Include="Integration\Zeus\Models\CancelarPagamentoResponseDTO.cs" />
-    <Compile Include="Integration\Zeus\ZeusApiService.cs" />
     <Compile Include="Maps\AgenteVendaHouseMap.cs" />
     <Compile Include="Maps\AgrupamentoProcessoPrePropostaMap.cs" />
     <Compile Include="Maps\AgrupamentoSituacaoProcessoPrePropostaMap.cs" />
@@ -406,59 +380,7 @@
     <Compile Include="Maps\ViewProdutoMap.cs" />
     <Compile Include="Maps\ViewPontoEmpresaVendaMap.cs" />
     <Compile Include="Maps\ViewSupervisorAgenteVendaHouseMap.cs" />
-    <Compile Include="Repository\AgenteVendaHouseRepository.cs" />
-    <Compile Include="Repository\AgrupamentoProcessoPrePropostaRepository.cs" />
-    <Compile Include="Repository\AgrupamentoSituacaoProcessoPrePropostaRepository.cs" />
-    <Compile Include="Repository\AreaKanbanPrePropostaRepository.cs" />
-    <Compile Include="Repository\CardKanbanSituacaoPrePropostaRepository.cs" />
     <Compile Include="Maps\ViewTiposDocumentoProponenteMap.cs" />
-    <Compile Include="Repository\ConsultaAceitesContratosCorretagemRepository.cs" />
-    <Compile Include="Repository\CoordenadorSupervisorHouseRepository.cs" />
-    <Compile Include="Repository\DocumentoJuridicoRepository.cs" />
-    <Compile Include="Repository\DocumentoMidasRepository.cs" />
-    <Compile Include="Repository\CardKanbanPrePropostaRepository.cs" />
-    <Compile Include="Repository\GrupoCCAPrePropostaRepository.cs" />
-    <Compile Include="Repository\HistoricoRecusaIndicacaoRepository.cs" />
-    <Compile Include="Repository\HierarquiaHouseRepository.cs" />
-    <Compile Include="Repository\HistoricoRecusaIndicacaoRepository.cs" />
-    <Compile Include="Repository\Models\BreveLancamentoListarDTO.cs" />
-    <Compile Include="Repository\HistoricoRecusaIndicacaoRepository.cs" />
-    <Compile Include="Repository\Models\BreveLancamentoListarDTO.cs" />
-    <Compile Include="Repository\Models\ClienteExportarDTO.cs" />
-    <Compile Include="Repository\Models\GrupoCCAEmpresaDTO.cs" />
-    <Compile Include="Repository\Models\MudarCorretorDTO.cs" />
-    <Compile Include="Repository\NotaFiscalPagamentoOcorrenciaRepository.cs" />
-    <Compile Include="Repository\OcorrenciasMidasRepository.cs" />
-    <Compile Include="Repository\RegionaisRepository.cs" />
-    <Compile Include="Repository\RegionalEmpresaRepository.cs" />
-    <Compile Include="Repository\SupervisorAgenteVendaHouseRepository.cs" />
-    <Compile Include="Repository\TransferenciaPontoVendaRepository.cs" />
-    <Compile Include="Repository\StatusPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewAgrupamentoProcessoPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewAgrupamentoSituacaoProcessoPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewCardKanbanSituacaoPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewCoordenadorHouseRepository.cs" />
-    <Compile Include="Repository\ViewCoordenadorHouseRepsository.cs" />
-    <Compile Include="Repository\ViewCoordenadorSupervisorHouseRepository.cs" />
-    <Compile Include="Repository\ViewHierarquiaHouseRepository.cs" />
-    <Compile Include="Repository\ViewProdutoRepository.cs" />
-    <Compile Include="Repository\ViewCCAPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewPontoEmpresaVendaRepository.cs" />
-    <Compile Include="Services\AgrupamentoProcessoPrePropostaService.cs" />
-    <Compile Include="Services\AgrupamentoSituacaoProcessoPrePropostaService.cs" />
-    <Compile Include="Services\ConsultaAceiteContratoCorretagemService.cs" />
-    <Compile Include="Repository\ViewSupervisorAgenteVendaHouseRepository.cs" />
-    <Compile Include="Services\HierarquiaHouseService.cs" />
-    <Compile Include="Services\HistoricoRecusaIndicacaoService.cs" />
-    <Compile Include="Repository\ViewTiposDocumentoProponenteRepository.cs" />
-    <Compile Include="Services\IndiqueService.cs" />
-    <Compile Include="Services\JuridicoService.cs" />
-    <Compile Include="Services\KanbanPrePropostaService.cs" />
-    <Compile Include="Services\Models\EmpresaVendaTendaDTO.cs" />
-    <Compile Include="Services\Models\FiltroConsultaAceitesContratosCorretagemDTO.cs" />
-    <Compile Include="Services\Models\GrupoCCAPrePropostaDTO.cs" />
-    <Compile Include="Services\Models\Indique\CarteiraDto.cs" />
-    <Compile Include="Services\Models\Indique\ClienteDto.cs" />
     <Compile Include="Dto\JExcelOptions.cs" />
     <Compile Include="Dto\PrePropostaDTO.cs" />
     <Compile Include="Dto\SetupRegraComissaoDTO.cs" />
@@ -470,46 +392,7 @@
     <Compile Include="Imports\PagamentoUnificadoImportService.cs" />
     <Compile Include="Imports\PontuacaoFidelidadeImportService.cs" />
     <Compile Include="Imports\ValorNominalEmpreendimentoImportService.cs" />
-    <Compile Include="Integration\AtualizacaoIdSapClienteDTO.cs" />
-    <Compile Include="Integration\AtualizacaoPropostaDTO.cs" />
     <Compile Include="Imports\PropostaSuatImportService.cs" />
-    <Compile Include="Integration\BaseRestClient.cs" />
-    <Compile Include="Integration\ClienteSuatDTO.cs" />
-    <Compile Include="Integration\DownloadDTO.cs" />
-    <Compile Include="Integration\MensagemRetornoDTO.cs" />
-    <Compile Include="Integration\MensagemRetornoDownloadDTO.cs" />
-    <Compile Include="Integration\RestSharpExtensions.cs" />
-    <Compile Include="Integration\Simulador\BaseSimuladorRestClient.cs" />
-    <Compile Include="Integration\Simulador\BaseSimuladorService.cs" />
-    <Compile Include="Integration\Simulador\JsonNetSerializer.cs" />
-    <Compile Include="Integration\Simulador\Models\LoginResponse.cs" />
-    <Compile Include="Integration\Simulador\SimuladorService.cs" />
-    <Compile Include="Integration\SuatError.cs" />
-    <Compile Include="Integration\SuatErrorList.cs" />
-    <Compile Include="Integration\Suat\BaseSuatRestClient.cs" />
-    <Compile Include="Integration\Suat\ConsultaEstoqueService.cs" />
-    <Compile Include="Integration\Suat\EmpreendimentoDTO.cs" />
-    <Compile Include="Integration\Suat\Models\CorretorDTO.cs" />
-    <Compile Include="Integration\Suat\Models\EstoqueEmpreendimentoDTO.cs" />
-    <Compile Include="Integration\Suat\Models\EstoqueUnidadeDTO.cs" />
-    <Compile Include="Integration\Suat\Models\LogIntegracaoPrePropostaDTO.cs" />
-    <Compile Include="Integration\Suat\Models\LojaDTO.cs" />
-    <Compile Include="Integration\Suat\Models\MensagemRetornoPropostaDTO.cs" />
-    <Compile Include="Integration\Suat\Models\PlanoPagamentoDTO.cs" />
-    <Compile Include="Integration\Suat\Models\ProfissaoDTO.cs" />
-    <Compile Include="Integration\Suat\Models\ProponenteDTO.cs" />
-    <Compile Include="Integration\Suat\Models\PropostaBoletoContratoDTO.cs" />
-    <Compile Include="Integration\Suat\Models\PropostaDTO.cs" />
-    <Compile Include="Integration\Suat\Models\TorreDTO.cs" />
-    <Compile Include="Integration\Suat\SuatService.cs" />
-    <Compile Include="Integration\Suat\BaseSuatService.cs" />
-    <Compile Include="Integration\Zeus\Models\DadosAuditoriaDTO.cs" />
-    <Compile Include="Integration\Zeus\Models\PedidoDTO.cs" />
-    <Compile Include="Integration\Zeus\Models\RequisicaoCompraDTO.cs" />
-    <Compile Include="Integration\Zeus\Models\ItemRequisicaoDTO.cs" />
-    <Compile Include="Integration\Zeus\Models\ContabilizacaoRequisicaoDTO.cs" />
-    <Compile Include="Integration\Zeus\Models\RequisicaoCompraResponseItemDTO.cs" />
-    <Compile Include="Integration\Zeus\ZeusService.cs" />
     <Compile Include="Layers.cs" />
     <Compile Include="Maps\AceiteContratoCorretagemMap.cs" />
     <Compile Include="Maps\AceiteRegraComissaoEvsMap.cs" />
@@ -669,105 +552,6 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Compile Include="Repository\AceitesBannersRepository.cs" />
-    <Compile Include="Repository\AceiteTermoAceiteProgramaFidelidadeRepository.cs" />
-    <Compile Include="Repository\CentroCustoRepository.cs" />
-    <Compile Include="Repository\ClassificacaoRepository.cs" />
-    <Compile Include="Repository\ConsolidadoPontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\ConsolidadoRelatorioComissaoRepository.cs" />
-    <Compile Include="Repository\BannerPortalEvRepository.cs" />
-    <Compile Include="Repository\CoordenadorSupervisorRepository.cs" />
-    <Compile Include="Repository\CoordenadorViabilizadorRepository.cs" />
-    <Compile Include="Repository\DocumentoEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\DocumentoRuleMachinePrePropostaRepository.cs" />
-    <Compile Include="Repository\DocumentoFormularioRepository.cs" />
-    <Compile Include="Repository\EnderecoEstabelecimentoRepository.cs" />
-    <Compile Include="Repository\EnderecoFornecedorRepository.cs" />
-    <Compile Include="Repository\EnvioNotaFiscalRepository.cs" />
-    <Compile Include="Repository\EstadoAvalistaRepository.cs" />
-    <Compile Include="Repository\EstadoCidadeRepository.cs" />
-    <Compile Include="Repository\FechamentoContabilRepository.cs" />
-    <Compile Include="Repository\LogConectaRepository.cs" />
-    <Compile Include="Repository\LogSimuladorRepository.cs" />
-    <Compile Include="Repository\Models\DocumentoFormularioDTO.cs" />
-    <Compile Include="Repository\Models\EstadoAvalistaDTO.cs" />
-    <Compile Include="Repository\Models\EstadoCidadeDTO.cs" />
-    <Compile Include="Repository\Models\FiltroPropostaDTO.cs" />
-    <Compile Include="Repository\Models\HierarquiaCicloFinanceiroDTO.cs" />
-    <Compile Include="Repository\SupervisorViabilizadorRepository.cs" />
-    <Compile Include="Repository\Models\SupervisorViabilizadorDTO .cs" />
-    <Compile Include="Repository\ViewClienteDuplicadoRepository.cs" />
-    <Compile Include="Repository\ViewCoordenadorRepository.cs" />
-    <Compile Include="Repository\ViewCoordenadorSupervisorRepository.cs" />
-    <Compile Include="Repository\ViewCoordenadorViabilizadorRepository.cs" />
-    <Compile Include="Repository\ViewDocumentoFormularioRepository.cs" />
-    <Compile Include="Repository\ViewLojaPortalUsuarioRepository.cs" />
-    <Compile Include="Repository\ViewLojasPortalRepository.cs" />
-    <Compile Include="Repository\ViewPontoVendaRepository.cs" />
-    <Compile Include="Repository\ViewPropostaFaturadaRepository.cs" />
-    <Compile Include="Repository\ViewRelatorioVendaUnificadoRepository.cs" />
-    <Compile Include="Repository\ViewAvalistaRepository.cs" />
-    <Compile Include="Repository\ViewViabilizadorRepository.cs" />
-    <Compile Include="Repository\ViewSupervisorRepository.cs" />
-    <Compile Include="Repository\FilaEmailRepository.cs" />
-    <Compile Include="Repository\FornecedorRepository.cs" />
-    <Compile Include="Repository\GestaoRepository.cs" />
-    <Compile Include="Repository\ItemPontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\LayoutProgramaFidelidadeRepository.cs" />
-    <Compile Include="Repository\LeadBackupRepository.cs" />
-    <Compile Include="Repository\LeadEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\LeadRepository.cs" />
-    <Compile Include="Repository\Models\DocumentoEmpresaVendaDto.cs" />
-    <Compile Include="Repository\Models\FiltroCorretorDTO.cs" />
-    <Compile Include="Repository\Models\FiltroDocumentoEmpresaVendaDto.cs" />
-    <Compile Include="Repository\Models\FiltroEmailDTO.cs" />
-    <Compile Include="Repository\Models\FiltroEmpreendimentoDTO.cs" />
-    <Compile Include="Repository\Models\FiltroFechementoContabil.cs" />
-    <Compile Include="Repository\Models\FiltroFilaUnificadaDTO.cs" />
-    <Compile Include="Repository\Models\FiltroUsuariosDTO.cs" />
-    <Compile Include="Repository\Models\FiltroLeadDTO.cs" />
-    <Compile Include="Repository\Models\BannerPortalEvDTO.cs" />
-    <Compile Include="Repository\Models\FiltroPagamentoDTO.cs" />
-    <Compile Include="Repository\Models\FiltroRateioComissaoDTO.cs" />
-    <Compile Include="Repository\Models\FiltroRequisicaoCompraSapDTO.cs" />
-    <Compile Include="Repository\Models\FiltroRuleMachineDTO.cs" />
-    <Compile Include="Repository\Models\FiltroValorNominalEmpreendimentoDTO.cs" />
-    <Compile Include="Repository\Models\FinanceiroGrupoDTO.cs" />
-    <Compile Include="Repository\Models\PontuacaoFidelidadeDTO.cs" />
-    <Compile Include="Repository\NotaFiscalPagamentoRepository.cs" />
-    <Compile Include="Repository\NumeroPedidoSapRepository.cs" />
-    <Compile Include="Repository\OrigemLeadRepository.cs" />
-    <Compile Include="Repository\PagamentoRepository.cs" />
-    <Compile Include="Repository\ParametroRequisicaoCompraRepository.cs" />
-    <Compile Include="Repository\ParecerDocumentoEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\PontuacaoFidelidadeEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\PontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\PrePropostaReintegradaRepository.cs" />
-    <Compile Include="Repository\PropostaFilaSUATRepository.cs" />
-    <Compile Include="Repository\GrupoCCAEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\GrupoCCARepository.cs" />
-    <Compile Include="Repository\Models\GrupoCCADTO.cs" />
-    <Compile Include="Repository\RateioComissaoRepository.cs" />
-    <Compile Include="Repository\RequisicaoCompraSapRepository.cs" />
-    <Compile Include="Repository\ResgatePontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\RuleMachinePrePropostaRepository.cs" />
-    <Compile Include="Repository\StandVendaEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\StandVendaRepository.cs" />
-    <Compile Include="Repository\TermoAceiteProgramaFidelidadeRepository.cs" />
-    <Compile Include="Repository\TipoCustoRepository.cs" />
-    <Compile Include="Repository\TipoDocumentoEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\TransferenciaCarteiraRepository.cs" />
-    <Compile Include="Repository\UsuarioGrupoCCARepository.cs" />
-    <Compile Include="Repository\ValorNominalRepository.cs" />
-    <Compile Include="Repository\ViewBannerPortalEVRepository.cs" />
-    <Compile Include="Repository\ViewConsolidadoPontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\ViewDocumentoEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewDocumentoProponenteRuleMachinePrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewFilaEmailRepository.cs" />
-    <Compile Include="Repository\ViewFilaUnificadaRepository.cs" />
-    <Compile Include="Repository\ViewGrupoCCAEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewGrupoCCAUsuarioRepository.cs" />
-    <Compile Include="Repository\ViewHistoricoRegraComissaoRepository.cs" />
     <Compile Include="Maps\ViewPlanoPagamentoMap.cs" />
     <Compile Include="Maps\ViewPreEmpresaVendaMap.cs" />
     <Compile Include="Maps\ViewPrePropostaAguardandoAnaliseMap.cs" />
@@ -781,194 +565,6 @@
     <Compile Include="Maps\ViewRelatorioComissaoAuxMap.cs" />
     <Compile Include="Maps\ViewRelatorioComissaoMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repository\AceiteContratoCorretagemRepository.cs" />
-    <Compile Include="Repository\AceiteRegraComissaoEvsRepository.cs" />
-    <Compile Include="Repository\AceiteRegraComissaoRepository.cs" />
-    <Compile Include="Repository\ArquivoBreveLancamentoRepository.cs" />
-    <Compile Include="Repository\ArquivoEmpreendimentoRepository.cs" />
-    <Compile Include="Repository\AvalistaRepository.cs" />
-    <Compile Include="Repository\BoletoPrePropostaRepository.cs" />
-    <Compile Include="Repository\ContratoCorretagemRepository.cs" />
-    <Compile Include="Repository\ContratoPrePropostaRepository.cs" />
-    <Compile Include="Repository\DocumentoAvalistaRepository.cs" />
-    <Compile Include="Repository\EnderecoAvalistaRepository.cs" />
-    <Compile Include="Repository\FamiliarRepository.cs" />
-    <Compile Include="Repository\BancoRepository.cs" />
-    <Compile Include="Repository\ConsolidadoPrePropostaRepository.cs" />
-    <Compile Include="Repository\DocumentoProponenteRepository.cs" />
-    <Compile Include="Repository\FaseStatusContratoRepository.cs" />
-    <Compile Include="Repository\HistoricoRegraComissaoRepository.cs" />
-    <Compile Include="Repository\ImportacaoJunixRepository.cs" />
-    <Compile Include="Repository\ItemRegraComissaoPadraoRepository.cs" />
-    <Compile Include="Repository\ItemRegraComissaoRepository.cs" />
-    <Compile Include="Repository\LojaRepository.cs" />
-    <Compile Include="Repository\EnderecoBreveLancamentoRepository.cs" />
-    <Compile Include="Repository\HistoricoPrePropostaRepository.cs" />
-    <Compile Include="Repository\Models\RegraComissaoDTO.cs" />
-    <Compile Include="Repository\MotivoRepository.cs" />
-    <Compile Include="Repository\NotificacaoRepository.cs" />
-    <Compile Include="Repository\ParecerDocumentoAvalistaRepository.cs" />
-    <Compile Include="Repository\ParecerDocumentoProponenteRepository.cs" />
-    <Compile Include="Repository\PropostaSuatRepository.cs" />
-    <Compile Include="Repository\RegraComissaoEvsRepository.cs" />
-    <Compile Include="Repository\RegraComissaoPadraoRepository.cs" />
-    <Compile Include="Repository\RegraComissaoRepository.cs" />
-    <Compile Include="Repository\SinteseStatusContratoJunixRepository.cs" />
-    <Compile Include="Repository\StatusConformidadeRepository.cs" />
-    <Compile Include="Repository\StatusSuatStatusEvsRepository.cs" />
-    <Compile Include="Repository\TipoDocumentoAvalistaRepository.cs" />
-    <Compile Include="Repository\ViewAceiteRegraComissaoRepository.cs" />
-    <Compile Include="Repository\TokenAceiteRepository.cs" />
-    <Compile Include="Repository\ViewArquivoBreveLancamentoRepository.cs" />
-    <Compile Include="Repository\ViewBreveLancamentoEnderecoRepository.cs" />
-    <Compile Include="Repository\ArquivoRepository.cs" />
-    <Compile Include="Repository\BreveLancamentoRepository.cs" />
-    <Compile Include="Repository\ClienteRepository.cs" />
-    <Compile Include="Repository\CorretorRepository.cs" />
-    <Compile Include="Repository\EmpreendimentoRepository.cs" />
-    <Compile Include="Repository\EmpresaVendaRepository.cs" />
-    <Compile Include="Repository\EnderecoClienteRepository.cs" />
-    <Compile Include="Repository\EnderecoCorretorRepository.cs" />
-    <Compile Include="Repository\EnderecoEmpreendimentoRepository.cs" />
-    <Compile Include="Repository\EnderecoEmpresaRepository.cs" />
-    <Compile Include="Repository\PlanoPagamentoRepository.cs" />
-    <Compile Include="Repository\PontoVendaRepository.cs" />
-    <Compile Include="Repository\PrePropostaRepository.cs" />
-    <Compile Include="Repository\ProfissaoRepository.cs" />
-    <Compile Include="Repository\ProponenteRepository.cs" />
-    <Compile Include="Repository\TipoDocumentoRepository.cs" />
-    <Compile Include="Repository\ViewArquivoEmpreendimentoRepository.cs" />
-    <Compile Include="Repository\ViewCargarelatorioRepasseJunixRepository.cs" />
-    <Compile Include="Repository\ViewConsultaPosVendaRepository.cs" />
-    <Compile Include="Repository\ViewCorretorRepository.cs" />
-    <Compile Include="Repository\ViewDocumentoAvalistaRepository.cs" />
-    <Compile Include="Repository\ViewDocumentoProponenteRepository.cs" />
-    <Compile Include="Repository\ViewEmpreendimentoEnderecoRepository.cs" />
-    <Compile Include="Repository\ViewEmpreendimentoExportacaoRepository.cs" />
-    <Compile Include="Repository\ViewEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewHistoricoPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewLeadEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewNotaFiscalPagamentoRepository.cs" />
-    <Compile Include="Repository\ViewPagamentoRepository.cs" />
-    <Compile Include="Repository\ViewPerfilSistemaGrupoActiveDirectoryRepository.cs" />
-    <Compile Include="Repository\ViewPlanoPagamentoRepository.cs" />
-    <Compile Include="Repository\ViewPontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\ViewPreEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewPrePropostaAguardandoAnaliseRepository.cs" />
-    <Compile Include="Repository\ViewPrePropostaRepository.cs" />
-    <Compile Include="Repository\ViewProponenteRepository.cs" />
-    <Compile Include="Repository\ViewRateioComissaoRepository.cs" />
-    <Compile Include="Repository\ViewRegraComissaoPadraoRepository.cs" />
-    <Compile Include="Repository\ViewRegraComissaoEvsRepository.cs" />
-    <Compile Include="Repository\ViewRegraComissaoRepository.cs" />
-    <Compile Include="Repository\ViewRelatorioComissaoAuxRepository.cs" />
-    <Compile Include="Repository\ViewRelatorioComissaoRepository.cs" />
-    <Compile Include="Repository\ViewRequisicaoCompraSapRepository.cs" />
-    <Compile Include="Repository\ViewResgatePontuacaoFidelidadeRepository.cs" />
-    <Compile Include="Repository\ViewStandVendaEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewStandVendaRepository.cs" />
-    <Compile Include="Repository\ViewTermoAceiteProgramaFidelidadeRepository.cs" />
-    <Compile Include="Repository\ViewUsuarioEmpresaVendaRepository.cs" />
-    <Compile Include="Repository\ViewValorNominalEmpreendimentoRepository.cs" />
-    <Compile Include="Repository\VizualizacaoBannerRepository.cs" />
-    <Compile Include="Services\AgenteVendaService.cs" />
-    <Compile Include="Services\ArquivoService.cs" />
-    <Compile Include="Services\AvalistaService.cs" />
-    <Compile Include="Services\AceiteBannerService.cs" />
-    <Compile Include="Services\CentroCustoService.cs" />
-    <Compile Include="Services\ClassificacaoService.cs" />
-    <Compile Include="Services\BannerPortalEvService.cs" />
-    <Compile Include="Services\ClienteService.cs" />
-    <Compile Include="Services\ConectaService.cs" />
-    <Compile Include="Services\ConsolidadoPontuacaoFidelidadeService.cs" />
-    <Compile Include="Services\ConsolidadoPrePropostaService.cs" />
-    <Compile Include="Services\ConsolidadoRelatorioComissaoService.cs" />
-    <Compile Include="Services\ContratoCorretagemService.cs" />
-    <Compile Include="Services\DocumentoAvalistaService.cs" />
-    <Compile Include="Services\DocumentoEmpresaVendaService.cs" />
-    <Compile Include="Services\DocumentoFormularioService.cs" />
-    <Compile Include="Services\EmailService.cs" />
-    <Compile Include="Services\CorretorService.cs" />
-    <Compile Include="Services\DocumentoProponenteService.cs" />
-    <Compile Include="Services\EmpreendimentoService.cs" />
-    <Compile Include="Services\EnderecoAvalistaService.cs" />
-    <Compile Include="Services\EnderecoClienteService.cs" />
-    <Compile Include="Services\EmpresaVendaService.cs" />
-    <Compile Include="Services\EnderecoCorretorService.cs" />
-    <Compile Include="Services\EnderecoEmpreendimentoService.cs" />
-    <Compile Include="Services\EnderecoEmpresaService.cs" />
-    <Compile Include="Services\BreveLancamentoService.cs" />
-    <Compile Include="Services\EnderecoBreveLancamentoService.cs" />
-    <Compile Include="Services\EnderecoEstabelecimentoService.cs" />
-    <Compile Include="Services\EnderecoFornecedorService.cs" />
-    <Compile Include="Services\EstadoCidadeService.cs" />
-    <Compile Include="Services\FaseStatusContratoJunixService.cs" />
-    <Compile Include="Services\FechamentoContabilService.cs" />
-    <Compile Include="Services\HierarquiaCoordenadorService.cs" />
-    <Compile Include="Services\Models\Indique\ContatoClienteDto.cs" />
-    <Compile Include="Services\Models\Indique\EmpreendimentoDto.cs" />
-    <Compile Include="Services\Models\Indique\LojaDto.cs" />
-    <Compile Include="Services\Models\Indique\PropostaDto.cs" />
-    <Compile Include="Services\Models\Indique\ProfissaoDto.cs" />
-    <Compile Include="Services\Models\Indique\ProponenteDto.cs" />
-    <Compile Include="Services\Models\Indique\UsuarioDto.cs" />
-    <Compile Include="Services\LojaPortalService.cs" />
-    <Compile Include="Services\MidasService.cs" />
-    <Compile Include="Services\RegionalEmpresaService.cs" />
-    <Compile Include="Services\ResponsavelAceiteRegraComissaoService .cs" />
-    <Compile Include="Services\RelatorioVendaUnificadoService.cs" />
-    <Compile Include="Services\SetupRegraComissaoService.cs" />
-    <Compile Include="Services\SimuladorServiceNovo.cs" />
-    <Compile Include="Services\SupervisorViabilizadorService.cs" />
-    <Compile Include="Services\FilaEmailService.cs" />
-    <Compile Include="Services\FornecedorService.cs" />
-    <Compile Include="Services\GestaoService.cs" />
-    <Compile Include="Services\GrupoCCAEmpresaVendaService.cs" />
-    <Compile Include="Services\GrupoCCAService.cs" />
-    <Compile Include="Services\HistoricoPrePropostaService.cs" />
-    <Compile Include="Services\HistoricoRegraComissaoService.cs" />
-    <Compile Include="Services\ImportacaoJunixService.cs" />
-    <Compile Include="Services\LayoutProgramaFidelidadeService.cs" />
-    <Compile Include="Services\LeadEmpresaVendaService.cs" />
-    <Compile Include="Services\Models\AcessoCorretorEvDTO.cs" />
-    <Compile Include="Services\Models\AcessoDiarioDTO.cs" />
-    <Compile Include="Services\Models\AcessoDiarioEvDTO.cs" />
-    <Compile Include="Services\Models\AcessoDiarioRegionalDTO.cs" />
-    <Compile Include="Services\Models\AcessoDiarioRegionalEvDTO.cs" />
-    <Compile Include="Services\Models\FechamentoContabilDto.cs" />
-    <Compile Include="Services\Models\FiltroFornecedorDTO.cs" />
-    <Compile Include="Services\Models\FiltroPeriodoDTO.cs" />
-    <Compile Include="Services\Models\FiltroStandVendaDTO.cs" />
-    <Compile Include="Services\Models\LayoutProgramaFidelidadeDTO.cs" />
-    <Compile Include="Services\Models\NotaFiscalDTO.cs" />
-    <Compile Include="Services\Models\NotaFiscalPagamentoPdfDTO.cs" />
-    <Compile Include="Services\Models\PerfilSistemaGrupoAdDTO.cs" />
-    <Compile Include="Services\Models\RuleMachineDTO.cs" />
-    <Compile Include="Services\Models\StandVendaDTO.cs" />
-    <Compile Include="Services\Models\TempoMedioAcessoDiarioCorretorEvDTO.cs" />
-    <Compile Include="Services\Models\TempoMedioAcessoDiarioEvDTO.cs" />
-    <Compile Include="Services\NotaFiscalPagamentoPdfService.cs" />
-    <Compile Include="Services\NotaFiscalPagamentoService.cs" />
-    <Compile Include="Services\NumeroPedidoSapService.cs" />
-    <Compile Include="Services\ParametroRequisicaoCompraService.cs" />
-    <Compile Include="Services\PerfilSistemaGrupoActiveDiretoryService.cs" />
-    <Compile Include="Services\PontuacaoFidelidadeEmpresaVendaService.cs" />
-    <Compile Include="Services\PontuacaoFidelidadePdfService.cs" />
-    <Compile Include="Services\PontuacaoFidelidadeService.cs" />
-    <Compile Include="Services\PropostaSuatService.cs" />
-    <Compile Include="Services\RateioComissaoService.cs" />
-    <Compile Include="Services\RelatorioAcessoService.cs" />
-    <Compile Include="Services\RequisicaoCompraSapService.cs" />
-    <Compile Include="Services\RequisicaoCompraService.cs" />
-    <Compile Include="Services\StandVendaEmpresaVendaService.cs" />
-    <Compile Include="Services\StandVendaService.cs" />
-    <Compile Include="Services\StateMachinePrePropostaService.cs" />
-    <Compile Include="Services\TermoAceiteProgramaFidelidadeService.cs" />
-    <Compile Include="Services\EstadoAvalistaService.cs" />
-    <Compile Include="Services\NotaFiscalPagamentoOcorrenciaService.cs" />
-    <Compile Include="Services\TiposDocumentoService.cs" />
-    <Compile Include="Services\StatusPrePropostaService.cs" />
-    <Compile Include="Services\ValorNominalService.cs" />
     <Compile Include="Validators\AgenteVendaValidator.cs" />
     <Compile Include="Validators\AgrupamentoProcessoPrePropostaValidator.cs" />
     <Compile Include="Validators\AgrupamentoSituacaoProcessoPrePropostaValidator.cs" />
@@ -1050,56 +646,6 @@
     <Compile Include="Validators\ItemRegraComissaoValidator.cs" />
     <Compile Include="Validators\LayoutProgramaFidelidadeValidator.cs" />
     <Compile Include="Validators\LeadEmpresaVendaValidator.cs" />
-    <Compile Include="Services\LeadService.cs" />
-    <Compile Include="Services\LojaService.cs" />
-    <Compile Include="Services\Models\CargaRelatorioRepasseDTO.cs" />
-    <Compile Include="Services\Models\ConsultaPrePropostaDto.cs" />
-    <Compile Include="Services\Models\DocumentoProponenteDTO.cs" />
-    <Compile Include="Services\Models\FilaUnificadaDTO.cs" />
-    <Compile Include="Services\Models\FiltroPrePropostaAguardandoAnaliseDTO.cs" />
-    <Compile Include="Services\Models\FiltroRegraComissaoDTO.cs" />
-    <Compile Include="Services\Models\GestaoDTO.cs" />
-    <Compile Include="Services\Models\ImportLeadDTO.cs" />
-    <Compile Include="Services\Models\ItemRegraComissaoDTO.cs" />
-    <Compile Include="Services\Models\JunixDTO.cs" />
-    <Compile Include="Services\Models\KeyValueDTO.cs" />
-    <Compile Include="Services\Models\LeadDTO.cs" />
-    <Compile Include="Services\Models\LojaDto.cs" />
-    <Compile Include="Services\Models\ImportTaskDTO.cs" />
-    <Compile Include="Services\Models\Metadado.cs" />
-    <Compile Include="Services\Models\PagamentoDTO.cs" />
-    <Compile Include="Services\Models\PontoVendaDto.cs" />
-    <Compile Include="Services\Models\PosVendaDTO.cs" />
-    <Compile Include="Services\Models\PosVendaGraficoFiltro.cs" />
-    <Compile Include="Services\Models\PropostaSuatDTO.cs" />
-    <Compile Include="Services\Models\RegraComissaoDTO.cs" />
-    <Compile Include="Services\Models\RelatorioComissaoDTO.cs" />
-    <Compile Include="Services\Models\StatusConformidadeDTO.cs" />
-    <Compile Include="Services\Models\StatusSuatStatusEvsDTO.cs" />
-    <Compile Include="Services\Models\TipoDocumentoAvalistaDTO.cs" />
-    <Compile Include="Services\NotificacaoService.cs" />
-    <Compile Include="Services\PagamentoService.cs" />
-    <Compile Include="Services\PlanoPagamentoService.cs" />
-    <Compile Include="Services\PontoVendaService.cs" />
-    <Compile Include="Services\PrePropostaReintegradaService.cs" />
-    <Compile Include="Services\PrePropostaService.cs" />
-    <Compile Include="Services\ProponenteService.cs" />
-    <Compile Include="Services\PropostaFilaSUATService.cs" />
-    <Compile Include="Services\RegraAtivaSemAceiteService.cs" />
-    <Compile Include="Services\RegraComissaoEvsService.cs" />
-    <Compile Include="Services\RegraComissaoPadraoPdfService.cs" />
-    <Compile Include="Services\RegraComissaoPadraoService.cs" />
-    <Compile Include="Services\RegraComissaoPdfService.cs" />
-    <Compile Include="Services\RegraComissaoService.cs" />
-    <Compile Include="Services\SinteseStatusContratoJunixService.cs" />
-    <Compile Include="Services\StaticResourceService.cs" />
-    <Compile Include="Services\StatusConformidadeService.cs" />
-    <Compile Include="Services\StatusSuatStatusEvsService.cs" />
-    <Compile Include="Services\TipoCustoService.cs" />
-    <Compile Include="Services\TokenAceiteService.cs" />
-    <Compile Include="Services\TransferenciaCarteiraService.cs" />
-    <Compile Include="Services\UsuarioGrupoCCAService.cs" />
-    <Compile Include="Services\ViewRegraComissaoEvsService.cs" />
     <Compile Include="Validators\AlteracaoSicaqPrePropostaValidator.cs" />
     <Compile Include="Validators\AnaliseProponenteValidator.cs" />
     <Compile Include="Validators\AprovarDocumentacaoAvalistaValidator.cs" />
@@ -1166,16 +712,6 @@
     <Compile Include="Validators\BreveLancamentoValidator.cs" />
     <Compile Include="Validators\EnderecoBreveLancamentoValidator.cs" />
     <Compile Include="Validators\PrePropostaWorkflow\PrePropostaWorkflowDeclaration.cs" />
-    <Compile Include="Web References\ConsultarNumeroPedidoZeus\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
-    <Compile Include="Web References\GerarRequisicaoDeCompraZeus\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.map</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -1183,24 +719,6 @@
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\ConsultarNumeroPedidoZeus\ConsultarNumeroDePedido.wsdl" />
-    <None Include="Web References\ConsultarNumeroPedidoZeus\GerarRequisicaoCompra.wsdl" />
-    <None Include="Web References\ConsultarNumeroPedidoZeus\pedido.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
-    </None>
-    <None Include="Web References\ConsultarNumeroPedidoZeus\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\GerarRequisicaoDeCompraZeus\GerarRequisicaoCompra.wsdl" />
-    <None Include="Web References\GerarRequisicaoDeCompraZeus\GerarRequisicaoCompra0.wsdl" />
-    <None Include="Web References\GerarRequisicaoDeCompraZeus\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
-    <None Include="Web References\GerarRequisicaoDeCompraZeus\requisicaoCompraResponseItem.datasource">
-      <DependentUpon>Reference.map</DependentUpon>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -1218,30 +736,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <WebReferenceUrl Include="http://zeusqa.tenda.com/consultarnumerodepedido/service/process%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ConsultarNumeroPedidoZeus\</RelPath>
-      <UpdateFromURL>http://zeusqa.tenda.com/consultarnumerodepedido/service/process%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Tenda_EmpresaVenda_Domain_ConsultarNumeroPedidoZeus_ConsultarNumeroDePedido</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process%3fwsdl">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\GerarRequisicaoDeCompraZeus\</RelPath>
-      <UpdateFromURL>http://zeusqa.tenda.com/gerarrequisicaodecompra/service/process%3fwsdl</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>Tenda_EmpresaVenda_Domain_GerarRequisicaoDeCompraZeus_GerarRequisicaoCompra</CachedSettingsPropName>
-    </WebReferenceUrl>
+    <Folder Include="Repository\Models\" />
+    <Folder Include="Services\Models\" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
