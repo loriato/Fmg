@@ -347,19 +347,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\BannerPortalEVController.cs" />
-    <Compile Include="Controllers\FinanceiroController.cs" />
-    <Compile Include="Controllers\JuridicoController.cs" />
-    <Compile Include="Controllers\LeadController.cs" />
-    <Compile Include="Controllers\PoliticaPrivacidadeController.cs" />
-    <Compile Include="Controllers\PosVendaController.cs" />
-    <Compile Include="Controllers\ProgramaFidelidadeController.cs" />
-    <Compile Include="Controllers\SimuladorController.cs" />
-    <Compile Include="Controllers\TabelaValorNominalController.cs" />
     <Compile Include="Models\ArquivoUrlDTO.cs" />
     <Compile Include="Models\AvalistaDTO.cs" />
     <Compile Include="Models\DadosGraficoPosVendaDTO.cs" />
-    <Compile Include="Controllers\PreCadastroController.cs" />
     <Compile Include="Models\PreCadastroDTO.cs" />
     <Compile Include="Models\ProgramaFidelidadeDTO.cs" />
     <Compile Include="Models\TabelaValorNominalDTO.cs" />
@@ -368,24 +358,6 @@
     <Compile Include="Security\PublicPage.cs" />
     <Content Include="Global.asax" />
     <Compile Include="Commons\MenuItemToBootStrap.cs" />
-    <Compile Include="Controllers\AlteracaoSenhaEmailController.cs" />
-    <Compile Include="Controllers\RecuperarContaController.cs" />
-    <Compile Include="Controllers\RegraComissaoController.cs" />
-    <Compile Include="Controllers\ContratoCorretagemController.cs" />
-    <Compile Include="Controllers\BancoController.cs" />
-    <Compile Include="Controllers\BreveLancamentoController.cs" />
-    <Compile Include="Controllers\ClienteController.cs" />
-    <Compile Include="Controllers\ConsultaPrePropostaController.cs" />
-    <Compile Include="Controllers\AlteracaoSenhaController.cs" />
-    <Compile Include="Controllers\CorretorController.cs" />
-    <Compile Include="Controllers\MenuController.cs" />
-    <Compile Include="Controllers\MotivoController.cs" />
-    <Compile Include="Controllers\NotificacaoController.cs" />
-    <Compile Include="Controllers\PontoVendaController.cs" />
-    <Compile Include="Controllers\PrePropostaController.cs" />
-    <Compile Include="Controllers\ProdutoController.cs" />
-    <Compile Include="Controllers\MeuCadastroController.cs" />
-    <Compile Include="Controllers\ProfissaoController.cs" />
     <Compile Include="Filters\ContratoCorretagemAceitoFilter.cs" />
     <Compile Include="Models\ContratoCorretagemViewModel.cs" />
     <Compile Include="Models\ErroDTO.cs" />
@@ -1085,10 +1057,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\MessagesPublisher.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CepController.cs" />
     <Compile Include="Controllers\CommonsController.cs" />
-    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
