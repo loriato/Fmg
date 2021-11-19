@@ -83,15 +83,12 @@ namespace Tenda.Domain.Shared
 
         #region Static Definitions
 
-        public static string CsEmpresaVenda { get; } = "CS_TND_EMPRESA_VENDA";
-        public static string CsEmpresaVendaPortal { get; } = "CS_TND_EMPRESA_VENDA_PORTAL";
-        public static string CsSeguranca { get; } = "CS_TND_EMPRESA_VENDA_SEG";
+        public static string CsEmpresaVenda { get; } = "CS_WEB";
+        public static string CsEmpresaVendaPortal { get; } = "CS_WEB_PORTAL";
+        public static string CsSeguranca { get; } = "CS_SEG";
 
-        public static string CodigoEmpresaVenda { get; } = "DES1818";
+        public static string Codigo { get; } = "DES0000";
         public static string CodigoEmpresaVendaPortal { get; } = "POR1818";
-        public static string CodigoSeguranca { get; } = "SEG1818";
-        public static string CodigoEmpresaVendaPortalHome { get; } = "DES2101";
-
         #endregion
 
         #region Properties Code Declaration

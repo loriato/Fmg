@@ -18,8 +18,6 @@ using Tenda.Domain.Security.Repository;
 using Tenda.Domain.Security.Services;
 using Tenda.Domain.Security.Services.Models;
 using Tenda.Domain.Shared;
-using Tenda.EmpresaVenda.Domain.Repository;
-using Tenda.EmpresaVenda.Domain.Services;
 using Tenda.EmpresaVenda.Portal.Commons;
 using Tenda.EmpresaVenda.Portal.Models;
 using Tenda.EmpresaVenda.Portal.Models.Application;
@@ -33,18 +31,8 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
         private LoginService _loginService { get; set; }
         private PermissaoService _permissaoService { get; set; }
         private UsuarioPortalRepository _usuarioPortalRepository { get; set; }
-        private CorretorRepository _corretorRepository { get; set; }
         private ParametroSistemaRepository _parametroSistemaRepository { get; set; }
-        private StaticResourceService _staticResourceService { get; set; }
-        private NotificacaoRepository _notificacaoRepository { get; set; }
-        private AceiteContratoCorretagemRepository _aceiteContratoCorretagemRepository { get; set; }
-        private RegraComissaoService _regraComissaoService { get; set; }
-        private CorretorService _corretorService { get; set; }
-        private RegraComissaoEvsService _regraComissaoEvsService { get; set; }
-        private RegraComissaoEvsRepository _regraComissaoEvsRepository { get; set; }
-        private ContratoCorretagemRepository _contratoCorretagemRepository { get; set; }
-        private RegionalEmpresaRepository _regionalEmpresaRepository { get; set; }
-        private ViewResponsavelAceiteRegraComissaoRepository _viewResponsavelAceiteRegraComissaoRepository { get; set; }
+
         public ActionResult Index()
         {
             if (SessionAttributes.Current().IsValidSession())
@@ -64,11 +52,6 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Logar(LoginViewModel viewModel)
         {
-            if (!ModelState.IsValid)
-            {
-                return View("Index", viewModel);
-            }
-
             try
             {
                 LoginDto loginDto = new LoginDto();
@@ -103,123 +86,15 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
                         _usuarioPortalRepository.Save(usuarioPortal);
                     }
 
-                    var corretor = _corretorRepository.FindByIdUsuario(acesso.Usuario.Id);
+                    current.LoginWithUser(usuarioPortal);
 
-                    //verifica se o corretor esta cadastrado para dar o aceite na regra de comissao
-                    var PodeAceitarRegraComissao = _viewResponsavelAceiteRegraComissaoRepository.PodeAceitarRegraComissao(corretor.EmpresaVenda.Id, corretor.Id);
-
-                    var perfis = _loginService.GetPerfisFromAcesso(acesso.Id);
-                    var idPerfis = perfis.Select(reg => reg.Id).ToList();
-
-                    bool isEVSuspensaWithAcess = HasAcessoEVSuspensa(corretor, idPerfis);
-
-                    // O usuário possui login, mas não tem corretor
-                    if (corretor == null)
-                    {
-                        ModelState.AddModelError("login_failed", GlobalMessages.LoginUsuarioSemAcessoPortalCorretores);
-                        return View("Index", viewModel);
-                    }
-
-                    // A empresa de venda do usuário está cancelada ou suspensa
-                    if (corretor.EmpresaVenda.Situacao != Situacao.Ativo && !isEVSuspensaWithAcess)
-                    {
-                        ModelState.AddModelError("login_failed", GlobalMessages.LoginEmpresaVendaSuspensa);
-                        return View("Index", viewModel);
-                    }
-
-                    if (corretor.TipoCorretor == TipoCorretor.AgenteVenda)
-                    {
-                        ModelState.AddModelError("login_failed", "Você não possui acesso a este portal");
-                        return View("Index", viewModel);
-                    }
-
-                    //Buscar ultimo Contrato Corretagem
-                    var idContratoCorretagem = _contratoCorretagemRepository.BuscarContratoMaisRecenteComArquivo().Id;
-                    // A empresa de venda já aceitou o ultimo contrato de corretagem
-                    bool contratoCorretagemAssinado = false;
-                    if (idContratoCorretagem.HasValue())
-                    {
-                        contratoCorretagemAssinado = _aceiteContratoCorretagemRepository.PossuiUltimoContratoAssinado(corretor.EmpresaVenda.Id, idContratoCorretagem);
-                    }
-                    // Se o contrato não estiver assinado, e o usuário não for diretor, preciso barrar o login
-                    if ((!contratoCorretagemAssinado && TipoFuncao.Diretor != corretor.Funcao) || (!contratoCorretagemAssinado && PodeAceitarRegraComissao))
-                    {
-                        ModelState.AddModelError("login_failed", GlobalMessages.LoginEmpresaVendaSemContratoAceite);
-                        return View("Index", viewModel);
-                    }
-
-                    if (corretor.EmpresaVenda.FotoFachada.HasValue())
-                    {
-                        var resourcePath = _staticResourceService.LoadResource(corretor.EmpresaVenda.FotoFachada.Id);
-                        string webRoot = GetWebAppRoot();
-                        corretor.EmpresaVenda.FotoFachadaUrl = _staticResourceService.CreateUrl(webRoot, resourcePath);
-                    }
-                    var Regionais = new List<Regionais>();
-                    if (!corretor.EmpresaVenda.IsEmpty())
-                    {
-                        Regionais = _regionalEmpresaRepository.ListarRegionaisPorEmpresa(corretor.EmpresaVenda.Id).Select(s=>s.Regional).ToList();
-                    }
-                    current.LoginWithUser(usuarioPortal, perfis, acesso, corretor, corretor.EmpresaVenda,Regionais);
-                    current.Menu = _menuService.MontarMenuPerfil(ApplicationInfo.CodigoSistema, idPerfis);
-                    current.Permissoes = _permissaoService.Permissoes(ApplicationInfo.CodigoSistema, idPerfis);
-
-                    MenuItemToBootStrap menuConverter = new MenuItemToBootStrap();
                     string urlAcesso = GetWebAppRoot();
-                    current.AcessoEVSuspensa = isEVSuspensaWithAcess;
-                    current.MenuHtml = menuConverter.ProcessMenu(urlAcesso, current.Menu);
-                    current.NotificacoesNaoLidas = _notificacaoRepository.NaoLidasDoUsuario(usuarioPortal.Id, usuarioPortal.UltimaLeituraNotificacao, DateTime.Now).Count();
-                    current.ExibirModalNotificacao = true;
-                    current.ExibirModalBannerShow = false;
-                    current.ExibirModalBannerPortalEV = true;
-                    current.ContratoAssinado = contratoCorretagemAssinado;
                     FormsAuthentication.SetAuthCookie(viewModel.Username, false);
 
-                    if (isEVSuspensaWithAcess)
-                    {
-                        current.Permissoes = current.Permissoes.Where(x => x.Key.Equals("EVS19")).ToDictionary(i => i.Key, i => i.Value);
-
-                        return RedirectToAction("Index", "Financeiro");
-                    }
-
-                    // O usuário é diretor e o contrato não foi assinado aceite
-                    if (!contratoCorretagemAssinado)
-                    {
-                        return RedirectToAction("FluxoAceiteContrato", "contratocorretagem");
-                    }
-
-                    _regraComissaoService.AtivarCampanhaNoLogin(SessionAttributes.Current().EmpresaVendaId);
-
-                    var regraEv = _regraComissaoEvsRepository.BuscarCampanhaAguardandoInativacao(SessionAttributes.Current().EmpresaVendaId);
-                    if (!regraEv.IsEmpty() && regraEv.Tipo == TipoRegraComissao.Campanha)
-                    {
-                        _regraComissaoService.InativarCampanha(regraEv.RegraComissao);
-                    }
-
-                    if (viewModel.ReturnUrl.IsNull())
-                    {
-                        // Se for diretor, tem que exibir mensagem referente ao aceite
-                        if (TipoFuncao.Diretor == corretor.Funcao || PodeAceitarRegraComissao)
-                        {
-                            bool possuiAceiteRegraEvsComissao = _regraComissaoEvsService.PossuiAceiteParaRegraComissaoEvsVigente(corretor.EmpresaVenda.Id);
-                            if (!possuiAceiteRegraEvsComissao)
-                            {
-                                return RedirectToAction("Index", "consultapreproposta", new { code = "0001" });
-                            }
-                        }
-
-                        return RedirectToAction("Index", "consultapreproposta");
-                    }
-
-                    return Redirect(viewModel.ReturnUrl);
                 }
-                else if (SituacaoUsuario.PendenteAprovacao.Equals(acesso.Usuario.Situacao))
-                {
-                    ModelState.AddModelError("login_failed", GlobalMessages.CadastroPendenteAprovacao);
-                }
-                else
-                {
-                    ModelState.AddModelError("login_failed", GlobalMessages.UsuarioBloqueado);
-                }
+
+                return RedirectToAction("Index", "Home");
+
             }
             catch (BusinessRuleException bre)
             {
@@ -235,7 +110,7 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
             var idsPerfisEVSuspensa = ProjectProperties.IdsPerfisLoginEVSuspensa;
             bool isUsuarioWithAcess = idsPerfisEVSuspensa.Intersect(idsPerfis).Any();
 
-            if(isEvSuspensa && isUsuarioWithAcess)
+            if (isEvSuspensa && isUsuarioWithAcess)
             {
                 return true;
             }
@@ -262,53 +137,11 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
         {
             SessionAttributes session = SessionAttributes.Current();
 
-            var regraEv = _regraComissaoEvsRepository.BuscarCampanhaAguardandoInativacao(session.EmpresaVendaId);
-            if (!regraEv.IsEmpty() && regraEv.Tipo == TipoRegraComissao.Campanha)
-            {
-                _regraComissaoService.InativarCampanha(regraEv.RegraComissao);
-            }
-
-            _loginService.Logout(session.Acesso);
+            //_loginService.Logout(session.Acesso);
             session.Invalidate();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Login");
         }
-
-        [Transaction(TransactionAttributeType.Required)]
-        public ActionResult ReenviarTokenAtivacao(string email)
-        {
-            var jsonResponse = new JsonResponse();
-            var bre = new BusinessRuleException();
-
-            using (var session = _usuarioPortalRepository._session)
-            {
-                using (var transaction = session.BeginTransaction())
-                {
-                    try
-                    {
-                        if (email.IsEmpty()) bre.AddError(String.Format(GlobalMessages.CampoObrigatorioVazio, GlobalMessages.Email)).Complete();
-                        bre.ThrowIfHasError();
-
-                        if (!email.IsValidEmail()) bre.AddError(GlobalMessages.EmailInvalido).Complete();
-                        bre.ThrowIfHasError();
-
-                        var corretor = _corretorRepository.FindByEmail(email);
-                        if (corretor.HasValue()) _corretorService.CriarTokenAtivacaoEEnviarEmail(corretor);
-
-                        jsonResponse.Sucesso = true;
-                        jsonResponse.Mensagens.Add(String.Format(GlobalMessages.TokenAtivacaoReenviado, email));
-                        transaction.Commit();
-                    }
-                    catch (BusinessRuleException ex)
-                    {
-                        jsonResponse.Mensagens.AddRange(ex.Errors);
-                        transaction.Rollback();
-                    }
-                }
-            }
-            return Json(jsonResponse, JsonRequestBehavior.AllowGet);
-        }
-
         private string GetWebAppRoot()
         {
             var host = (Request.Url.IsDefaultPort) ?

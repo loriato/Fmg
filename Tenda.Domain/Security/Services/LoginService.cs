@@ -37,51 +37,23 @@ namespace Tenda.Domain.Security.Services
             loginDto.Username = loginDto.Username.ToLower();
 
             Sistema sistema = _sistemaService.FindByCodigo(loginDto.CodigoSistema);
-            ParametroSistema parametro = _sistemaService.FindByCodigoSistema(loginDto.CodigoSistema);
 
             Session.Evict(sistema);
-            Session.Evict(parametro);
 
             Usuario usuario = _usuarioRepository.FindByLogin(loginDto.Username);
 
-            if (loginDto.LoginViaActiveDirectory)
+
+            string hashedPass = HashUtil.SHA512(loginDto.Password);
+
+            if (usuario == null || usuario.Senha.IsEmpty() || !usuario.Senha.Equals(hashedPass))
             {
-                if (!ParametroSistemaValido(parametro))
-                {
-                    throw new BusinessRuleException("Os parâmetros de sistemas não foram corretamente configurados. Entre em contato com a TI");
-                }
-
-                LdapAuth authService = new LdapAuth(parametro.ServidorAD);
-                LdapModel model = authService.Autenticate(parametro.DominioAD, loginDto.Username, loginDto.Password);
-                // Autenticação sem sucesso no AD
-                if (model == null) { return null; }
-
-                if (usuario == null)
-                {
-                    usuario = _usuarioPortalService.SelecionarOuCriarUsuarioPortal(model);
-                }
-
-                bool sincronizarGruposActiveDiretory = loginDto.SincronizarGruposActiveDirectory;
-                if (sincronizarGruposActiveDiretory)
-                {
-                    SincronizarGruposActiveDiretory(sistema, usuario, model);
-                    // :(
-                    _session.Flush();
-                }
-            }
-            else
-            {
-                string hashedPass = HashUtil.SHA512(loginDto.Password);
-
-                if (usuario == null || usuario.Senha.IsEmpty() || !usuario.Senha.Equals(hashedPass))
-                {
-                    BusinessRuleException exc = new BusinessRuleException();
-                    exc.AddError(GlobalMessages.UsuarioSenhaIncorreto).Complete();
-                    throw exc;
-                }
+                BusinessRuleException exc = new BusinessRuleException();
+                exc.AddError(GlobalMessages.UsuarioSenhaIncorreto).Complete();
+                throw exc;
             }
 
-            return LoginAsMultipleProfile(sistema, parametro, usuario, loginDto);
+
+            return LoginAsMultipleProfile(sistema, usuario, loginDto);
         }
 
         /// <summary>
@@ -143,31 +115,12 @@ namespace Tenda.Domain.Security.Services
             return _acessoPerfilRepository.Queryable().Where(x => x.Acesso.Id == idAcesso).Select(x => x.Perfil).ToList();
         }
 
-        private Acesso LoginAsMultipleProfile(Sistema sistema, ParametroSistema parametro, Usuario usuario, LoginDto loginDto)
+        private Acesso LoginAsMultipleProfile(Sistema sistema, Usuario usuario, LoginDto loginDto)
         {
-            var perfis = _upsRepository.PerfisAtivosUsuarioSistema(usuario.Id, sistema.Id);
+
 
             // Para tratativas de fluxo antigo, que deve continar
-            bool sincronizarGruposActiveDiretory = loginDto.SincronizarGruposActiveDirectory;
-            if (!sincronizarGruposActiveDiretory)
-            {
-                if (perfis.IsEmpty())
-                {
-                    var ups = new UsuarioPerfilSistema
-                    {
-                        Sistema = sistema,
-                        Usuario = usuario,
-                        Perfil = parametro.PerfilInicial
-                    };
-                    _upsRepository.Save(ups);
-                    perfis.Add(parametro.PerfilInicial);
-                }
-            }
 
-            if (perfis.IsEmpty())
-            {
-                throw new BusinessRuleException("O usuário não possui perfil de acesso para o sistema. Entre em contato com a TI Tenda");
-            }
 
             Acesso acesso = new Acesso();
             acesso.Usuario = usuario;
@@ -179,15 +132,6 @@ namespace Tenda.Domain.Security.Services
             acesso.Autorizacao = HashUtil.SHA1(DateTime.Now.ToString() + acesso.Id + Guid.NewGuid()) + HashUtil.MD5(acesso.Usuario.Login + acesso.IpOrigem);
             _acessoRepository.Save(acesso);
 
-            perfis.ForEach(x =>
-            {
-                var acessoPerfil = new AcessoPerfil
-                {
-                    Acesso = acesso,
-                    Perfil = x
-                };
-                _acessoPerfilRepository.Save(acessoPerfil);
-            });
 
             Session.Flush();
             //Necessário para resolver a regra de criação de usuário de portal do Pós Venda

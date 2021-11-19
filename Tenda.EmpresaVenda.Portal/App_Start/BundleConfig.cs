@@ -8,13 +8,30 @@ namespace Tenda.EmpresaVenda.Portal.App_Start
         public static void RegisterBundles(BundleCollection bundles)
         {
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                       "~/static/scripts/jquery-3.1.1.min.js",
-                       "~/static/scripts/jquery.mask.min.js",
-                       "~/static/scripts/jquery.form.min.js"));
+              "~/node_modules/jquery/dist/jquery.min.js",
+              "~/node_modules/jquery-mask-plugin/dist/jquery.mask.min.js",
+              "~/node_modules/jquery-form/dist/jquery.form.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
-                        "~/static/scripts/jquery.validate.min.js",
-                        "~/static/scripts/jquery.validate.unobstrusive.min.js"));
+                "~/node_modules/jquery-validation/dist/jquery.validate.min.js",
+                "~/node_modules/jquery-validation-unobtrusive/dist/jquery.validate.unobstrusive.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+               "~/node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+               "~/node_modules/bs-custom-file-input/dist/bs-custom-file-input.js"));
+
+            bundles.Add(new StyleBundle("~/css/bootstrap").Include(
+                            "~/node_modules/bootstrap/dist/css/bootstrap.min.css"));
+
+
+            //bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
+            //           "~/static/scripts/jquery-3.1.1.min.js",
+            //           "~/static/scripts/jquery.mask.min.js",
+            //           "~/static/scripts/jquery.form.min.js"));
+
+            //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
+            //            "~/static/scripts/jquery.validate.min.js",
+            //            "~/static/scripts/jquery.validate.unobstrusive.min.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/moment").Include(
                        "~/static/scripts/moment-with-locates.js"));
@@ -34,18 +51,18 @@ namespace Tenda.EmpresaVenda.Portal.App_Start
             bundles.Add(new ScriptBundle("~/bundles/pdfobject")
                 .Include("~/static/PDFObject/pdfobject.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                        "~/static/scripts/bootstrap.js",
-                        "~/static/scripts/respond.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            //            "~/static/scripts/bootstrap.js",
+            //            "~/static/scripts/respond.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap-daterangepicker").Include(
-                       "~/static/bootstrap-daterangepicker/js/daterangepicker.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap-daterangepicker").Include(
+            //           "~/static/bootstrap-daterangepicker/js/daterangepicker.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap-validator").Include(
-                      "~/static/bootstrap-validator/validator.min.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap-validator").Include(
+            //          "~/static/bootstrap-validator/validator.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap-treeview")
-                .Include("~/static/bootstrap-treeview/js/bootstrap-treeview.min.js"));
+            //bundles.Add(new ScriptBundle("~/bundles/bootstrap-treeview")
+            //    .Include("~/static/bootstrap-treeview/js/bootstrap-treeview.min.js"));
 
             //repare que aqui temos um Bundle e não um ScriptBundle. Foi decidigo não minificar por contas de erro do angular que a minificação gerava
             var angularBundle = new Bundle("~/bundles/angular").Include(
@@ -124,10 +141,6 @@ namespace Tenda.EmpresaVenda.Portal.App_Start
                          "~/static/europa/js/europa-validator.js"));
 
             //Cascade Style Sheets
-            bundles.Add(new StyleBundle("~/css/bootstrap").Include(
-                      "~/static/bootstrap/css/bootstrap.min.css",
-                      "~/static/bootstrap/css/bootstrap-switch.min.css",
-                      "~/static/bootstrap/css/bootstrap-theme.min.css"));
 
             bundles.Add(new StyleBundle("~/css/bootstrap-daterangepicker").Include(
                       "~/static/bootstrap-daterangepicker/css/daterangepicker.css"));
@@ -161,10 +174,10 @@ namespace Tenda.EmpresaVenda.Portal.App_Start
 
             bundles.Add(new StyleBundle("~/css/bootstrap-treeview")
                 .Include("~/static/bootstrap-treeview/css/bootstrap-treeview.min.css"));
-            
+
             bundles.Add(new StyleBundle("~/css/chartjs")
                 .Include("~/static/chartjs/chart.css"));
-            
+
             bundles.Add(new ScriptBundle("~/bundles/chartjs")
                 .Include("~/static/chartjs/chart.js"));
         }

@@ -76,24 +76,7 @@ namespace Tenda.EmpresaVenda.Portal.Security
                 {
                     //A funcionalidade é liberada para todo o usuário logado. 
                 }
-                else if (!_codigoUnidadeFuncional.IsEmpty() && _comandoFuncionalidade.IsEmpty() && !currentSession.HasPermission(_codigoUnidadeFuncional, _comandoFuncionalidade))
-                {
-                    //Tem acesso
-                }
-                else if (currentSession.HasPermission(_codigoUnidadeFuncional, _comandoFuncionalidade))
-                {
-                    //Tem acesso
-                }
-                else if (currentSession.AcessoEVSuspensa)
-                {
-                    filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
-                            new
-                            {
-                                controller = "Home",
-                                action = "AcessoNegadoEVSuspensa",
-                                isAjax = filterContext.RequestContext.HttpContext.Request.IsAjaxRequest()
-                            }));
-                }
+
                 else
                 {
                     filterContext.Result = new RedirectToRouteResult(new RouteValueDictionary(
@@ -144,10 +127,6 @@ namespace Tenda.EmpresaVenda.Portal.Security
                     {
                         segment = filterContext.HttpContext.Request.Url.Segments[1].ToLower();
                     }
-                    // Problema ref. disponibilização de URL pública
-                    // Quando o usuário acessava evs.tenda.com (sem / no final), o sistema concatenava errado e não entendia a página como pública
-                    // Ficava assim: "https://evs.tenda.comalteracaosenha"
-                    // Quando deveria estar assim: "https://evs.tenda.com/alteracaosenha"
                     if (!segment.IsEmpty() && segment.Last() != '/')
                     {
                         segment += '/';

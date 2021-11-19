@@ -1,0 +1,18 @@
+﻿.btn {
+    border-radius: 16px;
+    font-size: 14px;
+    padding: 5px 24px;
+}
+
+
+.btn-blue {
+    color: #fff;
+    background-color: var(--azul);
+    border-color: var(--azul);
+}
+
+    .btn-blue:hover {
+        color: var(--azul);
+        background: white;
+        text-decoration: none;
+    }

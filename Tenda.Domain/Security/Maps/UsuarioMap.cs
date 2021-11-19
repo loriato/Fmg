@@ -17,8 +17,6 @@ namespace Tenda.Domain.Security.Maps
             Map(reg => reg.Senha).Column("DS_SENHA").Nullable().Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
             Map(reg => reg.Nome).Column("NM_USUARIO").Nullable().Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
             Map(reg => reg.Situacao).Column("TP_SITUACAO").Not.Nullable().CustomType<EnumType<SituacaoUsuario>>();
-            Map(reg => reg.TokenAtivacao).Column("DS_TOKEN_ATIVACAO").Length(DatabaseStandardDefinitions.FortyLength).Nullable();
-            Map(reg => reg.DataAtivacaoToken).Column("DT_ATIVACAO_TOKEN").Nullable().CustomType<DateTimeType>();
         }
     }
 }

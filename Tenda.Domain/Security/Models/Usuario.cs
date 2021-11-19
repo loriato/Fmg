@@ -1,7 +1,6 @@
 ﻿using Europa.Data.Model;
 using Europa.Resources;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Tenda.Domain.Security.Enums;
@@ -26,9 +25,6 @@ namespace Tenda.Domain.Security.Models
         public virtual string Senha { get; set; }
         [Required(ErrorMessageResourceName = "CampoSituacaoObrigatorio", ErrorMessageResourceType = typeof(GlobalMessages))]
         public virtual SituacaoUsuario Situacao { get; set; }
-        public virtual string TokenAtivacao { get; set; }
-        public virtual DateTime? DataAtivacaoToken { get; set; }
-
 
         public override string ChaveCandidata()
         {

@@ -1,32 +1,39 @@
-﻿@using Europa.Resources
-@using System
+﻿<!DOCTYPE html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title>WebFMG</title>
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 
-@{
-    Layout = "~/Views/Shared/_Layout.cshtml";
-}
 
+    @Scripts.Render("~/bundles/angular")
+    @Scripts.Render("~/bundles/angular-datatable")
+    @Styles.Render("~/css/angular-datatable")
 
-<div id="title-bar-display">
-    <nav class="menu-actions titlebar">
-        <div id="titlebar-wrapper" class="container-fluid">
-            <div id="titlebar-empty-space"></div>
-            <div href="#" id="titlebar-name-target"></div>
-            <div id="titlebar-buttons-target"></div>
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/font-awesome")
+
+    @*@Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/europa")*@
+    <link rel="stylesheet" href="~/Static/css/main.css" />
+    <link rel="stylesheet" href="~/Static/css/button.css" />
+
+    @*<script src="~/Static/js/main.js"></script>*@
+</head>
+<body>
+    <div>
+        <div>
+            @Html.Partial("_Header")
         </div>
-    </nav>
-    <div id="titlebar-extra-target"></div>
-</div>
+        <div>
 
+            @RenderBody()
+        </div>
 
-<div id="block_content_page" class="block-content">
-    <div id="corpo-conteudo-layout" class="aling-content content">
-        @RenderBody()
     </div>
-    <script>
-        Europa.AjustTitleAndMenuAcitons();
-    </script>
-    <div id="footer" class="footer">
-        <img class="logo-tenda" src="~/Static/europa/css/icons/tenda.svg" />
-        <p>Todos os direitos reservados Tenda @DateTime.Now.Year</p>
-    </div>
-</div>
+    @Html.Partial("_Footer")
+</body>
+</html>

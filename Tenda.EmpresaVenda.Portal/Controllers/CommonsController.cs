@@ -9,7 +9,6 @@ using System.Web.Mvc;
 using Tenda.Domain.Shared;
 using Tenda.EmpresaVenda.Domain.Cache;
 using Tenda.EmpresaVenda.Domain.Commons;
-using Tenda.EmpresaVenda.Portal.Commons;
 using Tenda.EmpresaVenda.Portal.Security;
 
 namespace Tenda.EmpresaVenda.Portal.Controllers
@@ -45,7 +44,7 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
             toReplace.Add("nome", "NOME DA PESSOA");
             toReplace.Add("token", "TOKEN!");
             toReplace.Add("linkAtivacao", "TOKEN!");
-            
+
             return Content(TemplateEmailFactory.ResolveTemplateWithReplace(templateName, toReplace));
         }
 

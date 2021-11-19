@@ -3,9 +3,8 @@ using Europa.Web.Menu;
 using System.Collections.Generic;
 using System.Text;
 using Tenda.Domain.Shared;
-using Tenda.EmpresaVenda.Portal.Models.Application;
 
-namespace Tenda.EmpresaVenda.Portal.Commons
+namespace Europa.Fmg.Portal.Commons
 {
     public class MenuItemToBootStrap
     {
@@ -16,10 +15,7 @@ namespace Tenda.EmpresaVenda.Portal.Commons
         {
             _basePath = baseAppPath;
 
-            if (SessionAttributes.Current().AcessoEVSuspensa)
-            {
-                DesabilitarItensMenu(menu);
-            }
+
 
             if (menu?.Filhos == null)
             {
@@ -48,19 +44,19 @@ namespace Tenda.EmpresaVenda.Portal.Commons
             itensEnabled.Add("EVS19");
 
             var dropdownMenu = new MenuItem();
-            foreach(var m in menu.Filhos)
+            foreach (var m in menu.Filhos)
             {
-                if(m.Nome.ToLower().Equals("políticas de vendas"))
+                if (m.Nome.ToLower().Equals("políticas de vendas"))
                 {
                     dropdownMenu = m;
                 }
             }
 
-            foreach(var item in dropdownMenu.Filhos)
+            foreach (var item in dropdownMenu.Filhos)
             {
                 itensEnabled.Add(item.Codigo);
             }
-            
+
         }
 
         private string BuildDropdown(MenuItem item)
@@ -73,11 +69,11 @@ namespace Tenda.EmpresaVenda.Portal.Commons
             if (item.EnderecoAcesso.Equals("simulador"))
             {
                 //return $"<li class='{(!itensEnabled.Contains(item.Codigo) && SessionAttributes.Current().AcessoEVSuspensa ? "disabled" : "")}'>" +
-                  //  $"<a href='{_basePath}/{item.EnderecoAcesso.ToLower()}' target='_blank'><span class={item.Codigo.ToLower()}></span> <p>{item.Nome}</p></a></li>";
-                return $"<li class='{(!itensEnabled.Contains(item.Codigo) && SessionAttributes.Current().AcessoEVSuspensa ? "disabled" : "")}'>" +
+                //  $"<a href='{_basePath}/{item.EnderecoAcesso.ToLower()}' target='_blank'><span class={item.Codigo.ToLower()}></span> <p>{item.Nome}</p></a></li>";
+                return $"<li class='{(!itensEnabled.Contains(item.Codigo) ? "disabled" : "")}'>" +
                     $"<a href='#'  onclick='Europa.Controllers.Simulador.MontarUrlSimuladorMenu()'><span class={item.Codigo.ToLower()}></span> <p>{item.Nome}</p></a></li>";
             }
-            return $"<li class='{(!itensEnabled.Contains(item.Codigo) && SessionAttributes.Current().AcessoEVSuspensa ? "disabled" : "")}'>" +
+            return $"<li class='{(!itensEnabled.Contains(item.Codigo) ? "disabled" : "")}'>" +
                 $"<a href='{_basePath}/{item.EnderecoAcesso.ToLower()}'><span class={item.Codigo.ToLower()}></span> <p>{item.Nome}</p></a></li>";
         }
 

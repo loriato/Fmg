@@ -14,7 +14,7 @@ namespace Tenda.EmpresaVenda.Portal.Models.Application
 {
     public static class ApplicationInfo
     {
-        public static readonly string CodigoSistema = ProjectProperties.CodigoEmpresaVendaPortal;
+        public static readonly string CodigoSistema = ProjectProperties.Codigo;
 
         private static readonly string PropertyIsProductionMode = "IsProductionMode";
         private static bool _inProductionMode;

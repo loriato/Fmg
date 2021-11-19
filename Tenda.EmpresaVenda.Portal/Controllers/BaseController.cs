@@ -14,7 +14,6 @@ using System.Web.SessionState;
 using Tenda.Domain.Core.Data;
 using Tenda.Domain.Shared;
 using Tenda.Domain.Shared.Log;
-using Tenda.EmpresaVenda.Portal.Filters;
 using Tenda.EmpresaVenda.Portal.Models.Application;
 using Tenda.EmpresaVenda.Portal.Security;
 
@@ -24,7 +23,6 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
     [BaseAuthorize(true)]
     [Transaction(TransactionAttributeType.None)]
     [SessionState(SessionStateBehavior.ReadOnly)]
-    [ContratoCorretagemAceitoFilter]
     public abstract class BaseController : Controller
     {
         protected ISession _session { get; set; }
@@ -250,11 +248,6 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
                 return host;
             else
                 return host + Request.ApplicationPath;
-        }
-
-        protected long EmpresaVendaId
-        {
-            get { return SessionAttributes.Current().EmpresaVendaId; }
         }
     }
 }
