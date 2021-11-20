@@ -1,8 +1,8 @@
-﻿namespace Tenda.EmpresaVenda.Domain
+﻿namespace Europa.Fmg.Domain
 {
     public static class Layers
     {
-        public const string Namespace = "Tenda.EmpresaVenda.Domain";
+        public const string Namespace = "Europa.Fmg.Domain";
         public const string Repository = Namespace + ".Repository";
         public const string Services = Namespace + ".Services";
         public const string Maps = Namespace + ".Maps";

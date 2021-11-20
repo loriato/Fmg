@@ -1,5 +1,9 @@
 ﻿using Europa.Commons;
 using Europa.Extensions;
+using Europa.Fmg.Portal.Commons;
+using Europa.Fmg.Portal.Models;
+using Europa.Fmg.Portal.Models.Application;
+using Europa.Fmg.Portal.Security;
 using Europa.Resources;
 using Europa.Web;
 using System;
@@ -18,12 +22,8 @@ using Tenda.Domain.Security.Repository;
 using Tenda.Domain.Security.Services;
 using Tenda.Domain.Security.Services.Models;
 using Tenda.Domain.Shared;
-using Tenda.EmpresaVenda.Portal.Commons;
-using Tenda.EmpresaVenda.Portal.Models;
-using Tenda.EmpresaVenda.Portal.Models.Application;
-using Tenda.EmpresaVenda.Portal.Security;
 
-namespace Tenda.EmpresaVenda.Portal.Controllers
+namespace Europa.Fmg.Portal.Controllers
 {
     public class LoginController : Controller
     {
@@ -49,7 +49,6 @@ namespace Tenda.EmpresaVenda.Portal.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public ActionResult Logar(LoginViewModel viewModel)
         {
             try

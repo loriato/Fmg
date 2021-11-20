@@ -1,8 +1,8 @@
 ﻿@using Europa.Extensions
 @using Europa.Resources
-@using Tenda.EmpresaVenda.Domain.Commons
-@using Tenda.EmpresaVenda.Portal.Models.Application
-@model Tenda.EmpresaVenda.Portal.Models.PrePropostaDTO
+@using Europa.Fmg.Domain.Commons
+@using Europa.Fmg.Portal.Models.Application
+@model Europa.Fmg.Portal.Models.PrePropostaDTO
 
 @{
     var listaTipoParcelas = TipoParcelaWrapper.TipoParcelaDetalhamentoFinanceiro().Select(x => new SelectListItem

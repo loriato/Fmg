@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.SessionState;
 
-namespace Tenda.EmpresaVenda.Portal.Security
+namespace Europa.Fmg.Portal.Security
 {
     public sealed class ActionSessionStateAttribute : Attribute
     {

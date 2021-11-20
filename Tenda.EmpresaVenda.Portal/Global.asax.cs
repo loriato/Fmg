@@ -1,14 +1,14 @@
-﻿using Europa.Web;
+﻿using Europa.Fmg.Portal.App_Start;
+using Europa.Fmg.Portal.Commons;
+using Europa.Fmg.Portal.Models.Application;
+using Europa.Web;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Tenda.EmpresaVenda.Domain.Cache;
-using Tenda.EmpresaVenda.Portal.App_Start;
-using Tenda.EmpresaVenda.Portal.Commons;
-using Tenda.EmpresaVenda.Portal.Models.Application;
+using Europa.Fmg.Domain.Cache;
 
-namespace Tenda.EmpresaVenda.Portal
+namespace Europa.Fmg.Portal
 {
     public class MvcApplication : HttpApplication
     {

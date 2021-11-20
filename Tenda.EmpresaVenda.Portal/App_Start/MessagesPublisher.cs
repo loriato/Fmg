@@ -10,10 +10,10 @@ using System.Web.Hosting;
 using Tenda.Domain.Core.Enums;
 using Tenda.Domain.Security.Enums;
 using Tenda.Domain.Shared.Commons;
-using Tenda.EmpresaVenda.Domain.Data;
+using Europa.Fmg.Domain.Data;
 using Situacao = Tenda.Domain.Security.Enums.Situacao;
 
-namespace Tenda.EmpresaVenda.Portal.App_Start
+namespace Europa.Fmg.Portal.App_Start
 {
     public class MessagesPublisher
     {
@@ -58,7 +58,7 @@ namespace Tenda.EmpresaVenda.Portal.App_Start
                 "Tenda.Domain.Core.Enums",
                 "Tenda.Domain.EmpresaVenda.Enums",
                 "Tenda.Domain.Security.Enums",
-                "Tenda.EmpresaVenda.Domain.Enums",
+                "Europa.Fmg.Domain.Enums",
             };
 
             List<Type> enumsToPublish = new List<Type>();

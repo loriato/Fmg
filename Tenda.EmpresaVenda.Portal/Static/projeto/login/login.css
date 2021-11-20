@@ -1,0 +1,36 @@
+﻿html,
+body {
+    font-family: 'Roboto', sans-serif !important;
+    scroll-behavior: smooth;
+    height: 100%;
+    color: black;
+}
+
+body {
+    background-color: #00bcd41a;
+}
+
+form {
+    width: 300px;
+    margin: auto;
+}
+
+.app {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+@media(min-width:800px) {
+    .box-login {
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #ffffff;
+        box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.38);
+    }
+
+    form {
+        width: 400px;
+    }
+}

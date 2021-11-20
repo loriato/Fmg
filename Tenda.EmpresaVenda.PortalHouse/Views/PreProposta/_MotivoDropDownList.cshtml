@@ -1,4 +1,0 @@
-﻿@using Europa.Resources
-@model IEnumerable<SelectListItem>
-
-@Html.DropDownList("IdMotivo", Model, GlobalMessages.Selecione, new { @class = "form-control form-control-sm", onchange= "Europa.Controllers.PreProposta.DocumentoProponente.OnChangeMotivo()" })

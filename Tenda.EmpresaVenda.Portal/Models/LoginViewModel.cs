@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Tenda.EmpresaVenda.Portal.Models
+namespace Europa.Fmg.Portal.Models
 {
     public class LoginViewModel
     {

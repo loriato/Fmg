@@ -1,6 +1,6 @@
 ﻿using System.Web.Mvc;
 
-namespace Tenda.EmpresaVenda.Portal.App_Start
+namespace Europa.Fmg.Portal.App_Start
 {
     public class FilterConfig
     {

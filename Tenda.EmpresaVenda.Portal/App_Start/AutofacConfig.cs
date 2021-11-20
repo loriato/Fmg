@@ -1,6 +1,8 @@
 ﻿using Autofac;
 using Autofac.Core.NonPublicProperty;
 using Autofac.Integration.Mvc;
+using Europa.Fmg.Domain.Data;
+using Europa.Fmg.Portal.Models.Application;
 using Europa.Rest;
 using Europa.Web;
 using Flurl.Http;
@@ -10,10 +12,8 @@ using NHibernate;
 using System.Web;
 using System.Web.Mvc;
 using Tenda.Domain.Core.Data;
-using Tenda.EmpresaVenda.Domain.Data;
-using Tenda.EmpresaVenda.Portal.Models.Application;
 
-namespace Tenda.EmpresaVenda.Portal.App_Start
+namespace Europa.Fmg.Portal.App_Start
 {
     public class AutofacConfig
     {
@@ -54,7 +54,7 @@ namespace Tenda.EmpresaVenda.Portal.App_Start
             Tenda.Domain.Security.AppStart.AutofacConfig.Register(builder);
 
             //App
-            Tenda.EmpresaVenda.Domain.AppStart.AutofacConfig.Register(builder);
+            Europa.Fmg.Domain.AppStart.AutofacConfig.Register(builder);
 
 
             var container = builder.Build();

@@ -1,5 +1,0 @@
-﻿Europa.Controllers.HistoricoRegraComissao = {};
-
-$(function () {
-
-});

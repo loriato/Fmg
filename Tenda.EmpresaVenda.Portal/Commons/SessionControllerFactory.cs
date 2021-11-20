@@ -6,9 +6,9 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.SessionState;
-using Tenda.EmpresaVenda.Portal.Security;
+using Europa.Fmg.Portal.Security;
 
-namespace Tenda.EmpresaVenda.Portal.Commons
+namespace Europa.Fmg.Portal.Commons
 {
     public class SessionControllerFactory : DefaultControllerFactory
     {

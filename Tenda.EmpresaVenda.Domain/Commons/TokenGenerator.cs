@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text;
 
-namespace Tenda.EmpresaVenda.Domain.Commons
+namespace Europa.Fmg.Domain.Commons
 {
     public static class TokenGenerator
     {

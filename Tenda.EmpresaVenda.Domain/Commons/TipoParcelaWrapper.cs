@@ -2,7 +2,7 @@
 using System.Linq;
 using Tenda.Domain.EmpresaVenda.Enums;
 
-namespace Tenda.EmpresaVenda.Domain.Commons
+namespace Europa.Fmg.Domain.Commons
 {
     public static class TipoParcelaWrapper
     {

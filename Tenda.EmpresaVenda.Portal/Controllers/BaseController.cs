@@ -14,10 +14,10 @@ using System.Web.SessionState;
 using Tenda.Domain.Core.Data;
 using Tenda.Domain.Shared;
 using Tenda.Domain.Shared.Log;
-using Tenda.EmpresaVenda.Portal.Models.Application;
-using Tenda.EmpresaVenda.Portal.Security;
+using Europa.Fmg.Portal.Models.Application;
+using Europa.Fmg.Portal.Security;
 
-namespace Tenda.EmpresaVenda.Portal.Controllers
+namespace Europa.Fmg.Portal.Controllers
 {
 
     [BaseAuthorize(true)]

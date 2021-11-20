@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System.Web.Hosting;
 
-namespace Tenda.EmpresaVenda.Domain.Commons
+namespace Europa.Fmg.Domain.Commons
 {
     public static class TemplateEmailFactory
     {

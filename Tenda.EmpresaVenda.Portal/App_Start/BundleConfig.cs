@@ -1,7 +1,7 @@
 ﻿using Europa.Web;
 using System.Web.Optimization;
 
-namespace Tenda.EmpresaVenda.Portal.App_Start
+namespace Europa.Fmg.Portal.App_Start
 {
     public static class BundleConfig
     {

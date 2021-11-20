@@ -1,4 +1,7 @@
-﻿using Europa.Web;
+﻿using Europa.Fmg.Domain.Cache;
+using Europa.Fmg.Domain.Commons;
+using Europa.Fmg.Portal.Security;
+using Europa.Web;
 using NHibernate;
 using System;
 using System.Collections.Generic;
@@ -7,11 +10,8 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using Tenda.Domain.Shared;
-using Tenda.EmpresaVenda.Domain.Cache;
-using Tenda.EmpresaVenda.Domain.Commons;
-using Tenda.EmpresaVenda.Portal.Security;
 
-namespace Tenda.EmpresaVenda.Portal.Controllers
+namespace Europa.Fmg.Portal.Controllers
 {
     [BaseAuthorize(true)]
     public class CommonsController : BaseController

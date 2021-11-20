@@ -7,7 +7,7 @@ using System.Reflection;
 using Tenda.Domain.Core.Data;
 using Tenda.Domain.Shared;
 
-namespace Tenda.EmpresaVenda.Domain.Data
+namespace Europa.Fmg.Domain.Data
 {
     public static class NHibernateSession
     {

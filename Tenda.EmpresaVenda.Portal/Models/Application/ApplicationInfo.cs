@@ -1,6 +1,7 @@
 ﻿using Europa.Commons;
 using Europa.Data;
 using Europa.Extensions;
+using Europa.Fmg.Domain.Data;
 using NHibernate;
 using System.Collections.Generic;
 using System.Configuration;
@@ -8,9 +9,8 @@ using Tenda.Domain.Security;
 using Tenda.Domain.Security.Repository;
 using Tenda.Domain.Security.Services;
 using Tenda.Domain.Shared;
-using Tenda.EmpresaVenda.Domain.Data;
 
-namespace Tenda.EmpresaVenda.Portal.Models.Application
+namespace Europa.Fmg.Portal.Models.Application
 {
     public static class ApplicationInfo
     {

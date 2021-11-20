@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace Tenda.EmpresaVenda.Domain.Dto
+namespace Europa.Fmg.Domain.Dto
 {
     public class Header
     {

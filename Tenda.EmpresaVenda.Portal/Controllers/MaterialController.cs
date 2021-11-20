@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Tenda.EmpresaVenda.Portal.Controllers
+namespace Europa.Fmg.Portal.Controllers
 {
     public class MaterialController : Controller
     {

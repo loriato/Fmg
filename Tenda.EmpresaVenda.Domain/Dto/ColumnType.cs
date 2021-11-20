@@ -1,4 +1,4 @@
-﻿namespace Tenda.EmpresaVenda.Domain.Dto
+﻿namespace Europa.Fmg.Domain.Dto
 {
     public static class ColumnType
     {

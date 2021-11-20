@@ -14,7 +14,7 @@ using Tenda.Domain.Security;
 using Tenda.Domain.Security.Models;
 using Tenda.Domain.Shared;
 
-namespace Tenda.EmpresaVenda.Portal.Models.Application
+namespace Europa.Fmg.Portal.Models.Application
 {
     public class SessionAttributes : ISessionAttributes
     {

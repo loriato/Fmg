@@ -4,7 +4,7 @@ using FluentValidation;
 using Tenda.Domain.Core.Models;
 using Tenda.Domain.Security.Repository;
 
-namespace Tenda.EmpresaVenda.Domain.Validators
+namespace Europa.Fmg.Domain.Validators
 {
     public class UsuarioPortalValidator : AbstractValidator<UsuarioPortal>
     {

@@ -7,7 +7,7 @@ using Tenda.Domain.Core.Models;
 using Tenda.Domain.EmpresaVenda.Enums;
 using Tenda.Domain.EmpresaVenda.Models;
 
-namespace Tenda.EmpresaVenda.Domain.Dto
+namespace Europa.Fmg.Domain.Dto
 {
     public class SetupRegraComissaoDTO
     {

@@ -10,12 +10,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenda.Domain", "Tenda.Domai
 		{CD8ED417-3217-4342-8C55-66055F630FCD} = {CD8ED417-3217-4342-8C55-66055F630FCD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenda.EmpresaVenda.Domain", "Tenda.EmpresaVenda.Domain\Tenda.EmpresaVenda.Domain.csproj", "{C0615C67-A849-43C0-9DDC-9FC64FB0D041}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Europa.Fmg.Domain", "Tenda.EmpresaVenda.Domain\Europa.Fmg.Domain.csproj", "{C0615C67-A849-43C0-9DDC-9FC64FB0D041}"
 	ProjectSection(ProjectDependencies) = postProject
 		{7CAE0A72-FCF9-4302-90C4-74DCFDDEA11F} = {7CAE0A72-FCF9-4302-90C4-74DCFDDEA11F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tenda.EmpresaVenda.Portal", "Tenda.EmpresaVenda.Portal\Tenda.EmpresaVenda.Portal.csproj", "{B7FB9636-E75C-4334-A415-680428F172C4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Europa.Fmg.Portal", "Tenda.EmpresaVenda.Portal\Europa.Fmg.Portal.csproj", "{B7FB9636-E75C-4334-A415-680428F172C4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

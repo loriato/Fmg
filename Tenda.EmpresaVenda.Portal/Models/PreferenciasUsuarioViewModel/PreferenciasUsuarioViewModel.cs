@@ -2,7 +2,7 @@
 using System.Web.Mvc;
 using Tenda.Domain.Core.Models;
 
-namespace Tenda.EmpresaVenda.Portal.Models.PreferenciasUsuarioViewModel
+namespace Europa.Fmg.Portal.Models.PreferenciasUsuarioViewModel
 {
     public class PreferenciasUsuarioViewModel
     {

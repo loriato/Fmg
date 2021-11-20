@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tenda.EmpresaVenda.Domain.Cache.Models
+namespace Europa.Fmg.Domain.Cache.Models
 {
     public class BaseCacheModel
     {

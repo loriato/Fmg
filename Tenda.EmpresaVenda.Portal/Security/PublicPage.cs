@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace Tenda.EmpresaVenda.Portal.Security
+namespace Europa.Fmg.Portal.Security
 {
     /// <summary>
     /// FIXME: REfatorar e usar Public Action (para servir para APi e WEB)

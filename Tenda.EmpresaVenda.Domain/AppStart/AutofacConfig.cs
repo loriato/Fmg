@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using Tenda.Domain.Shared.Commons;
 
-namespace Tenda.EmpresaVenda.Domain.AppStart
+namespace Europa.Fmg.Domain.AppStart
 {
     public static class AutofacConfig
     {

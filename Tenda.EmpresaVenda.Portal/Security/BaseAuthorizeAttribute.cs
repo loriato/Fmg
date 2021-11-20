@@ -8,10 +8,10 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
 using System.Web.Security;
-using Tenda.EmpresaVenda.Portal.Controllers;
-using Tenda.EmpresaVenda.Portal.Models.Application;
+using Europa.Fmg.Portal.Controllers;
+using Europa.Fmg.Portal.Models.Application;
 
-namespace Tenda.EmpresaVenda.Portal.Security
+namespace Europa.Fmg.Portal.Security
 {
 
     public class BaseAuthorizeAttribute : AuthorizeAttribute

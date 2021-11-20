@@ -4,7 +4,7 @@ using System.Linq;
 using System.Web;
 using Tenda.Domain.EmpresaVenda.Models;
 
-namespace Tenda.EmpresaVenda.Portal.Models
+namespace Europa.Fmg.Portal.Models
 {
     public class ErroDTO
     {
