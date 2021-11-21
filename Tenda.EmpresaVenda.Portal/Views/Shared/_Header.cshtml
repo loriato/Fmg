@@ -17,6 +17,7 @@
         background-color: #FFFF;
     }
 </style>
+
 <nav class="navbar navbar-dark bg-blue">
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -27,4 +28,14 @@
     <a href="@Url.Action("Index","Usuario")"> <div class="link">Usuários</div></a>
     <a href="@Url.Action("Index","Viatura")"><div class="link">Viatura</div></a>
 </div>
+<nav class="menu-actions titlebar">
+    <div class="container">
+        <div id="titlebar-name-target" class="col-md-5">
+            @*Usuários*@
+        </div>
+        <div id="titlebar-buttons-target" style="padding-right: 10px;text-align: right;">
+            @*<button class="btn btn-blue" onclick="Europa.Controllers.Usuario.AbrirModalIncluir()"><i class="fa fa-plus"></i> Incluir</button>*@
+        </div>
+    </div>
+</nav>
 

@@ -12,11 +12,17 @@ Europa.Components.DatePicker = function () {
     this.isInvalidDate = undefined;
     this.selectCallBack = undefined;
     this.showCallBack = undefined;
+    this.autoApply = true;
 };
 
 //Builder pattern
 Europa.Components.DatePicker.prototype.WithFormat = function (format) {
     this.format = format;
+    return this;
+};
+
+Europa.Components.DatePicker.prototype.WithAutoApply = function (autoApply) {
+    this.autoApply = autoApply;
     return this;
 };
 
@@ -101,7 +107,7 @@ Europa.Components.DatePicker.prototype.BaseConfig = function () {
     return {
         "autoUpdateInput": false,
         "singleDatePicker": self.singleDatePicker,
-        "autoApply": false,
+        "autoApply": self.autoApply,
         "parentEl": self.parentEl,
         "showDropdowns": true,
         "locale": {
@@ -156,17 +162,17 @@ Europa.Components.DatePicker.prototype.BaseConfig = function () {
 Europa.Components.DatePicker.prototype.WithOptions = function (options) {
     this.AditionalOptions = options;
     return this;
-}
+};
 
 Europa.Components.DatePicker.prototype.WithSelectCallBack = function (callback) {
     this.selectCallBack = callback;
     return this;
-}
+};
 
 Europa.Components.DatePicker.prototype.WithShowCallBack = function (callback) {
     this.showCallBack = callback;
     return this;
-}
+};
 
 Europa.Components.DatePicker.prototype.Configure = function () {
     if (this.format == undefined) {
@@ -307,7 +313,7 @@ Europa.Components.DatePicker.prototype.SetDate = function (date) {
     $(this.target).data('daterangepicker').setEndDate(date);
     $(this.target).data('daterangepicker').updateView();
     return this;
-}
+};
 
 Europa.Components.DatePicker.CleanEvents = function (element) {
     $(element).unbind("apply.daterangepicker");
@@ -316,25 +322,25 @@ Europa.Components.DatePicker.CleanEvents = function (element) {
 
 Europa.Components.DatePicker.GetTemplate = function (id) {
     var buf = '<div class="daterangepicker dropdown-menu" id="' + id + '">' +
-           '<div class="calendar left">' +
-               '<div class="daterangepicker_input">' +
-                 '<input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />' +
-                 '<i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
-                 '<div class="calendar-time">' +
-                   '<div></div>' +
-                   '<i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
-                 '</div>' +
-               '</div>' +
-               '<div class="calendar-table"></div>' +
-           '</div>' +
-           '<div class="calendar right">' +
-               '<div class="daterangepicker_input">' +
-                 '<input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />' +
-                 '<i class="fa fa-calendar glyphicon glyphicon-calendar"></i>' +
-                 '<div class="calendar-time">' +
-                   '<div></div>' +
-                   '<i class="fa fa-clock-o glyphicon glyphicon-time"></i>' +
-                 '</div>' +
+        '<div class="calendar left">' +
+        '<div class="daterangepicker_input">' +
+        '<input class="input-mini form-control" type="text" name="daterangepicker_start" value="" />' +
+        '<i class="far fa-calendar glyphicon glyphicon-calendar"></i>' +
+        '<div class="calendar-time">' +
+        '<div></div>' +
+        '<i class="far fa-clock glyphicon glyphicon-time"></i>' +
+        '</div>' +
+        '</div>' +
+        '<div class="calendar-table"></div>' +
+        '</div>' +
+        '<div class="calendar right">' +
+        '<div class="daterangepicker_input">' +
+        '<input class="input-mini form-control" type="text" name="daterangepicker_end" value="" />' +
+        '<i class="far fa-calendar glyphicon glyphicon-calendar"></i>' +
+        '<div class="calendar-time">' +
+        '<div></div>' +
+        '<i class="far fa-clock glyphicon glyphicon-time"></i>' +
+        '</div>' +
                '</div>' +
                '<div class="calendar-table"></div>' +
            '</div>' +
@@ -346,4 +352,4 @@ Europa.Components.DatePicker.GetTemplate = function (id) {
            '</div>' +
        '</div>';
     return buf;
-}
+};

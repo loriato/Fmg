@@ -1,15 +1,14 @@
 Europa.Form = {}
 
-Europa.Form.Serialize = function(idForm){
-	return $(idForm).serialize();
+Europa.Form.Serialize = function (idForm) {
+    return $(idForm).serialize();
 };
 
 Europa.Form.SerializeJson = function (idForm) {
     var ua = window.navigator.userAgent;
     var msie = ua.indexOf("MSIE ");
 
-    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./))
-    {
+    if (msie > 0 || !!navigator.userAgent.match(/Trident.*rv\:11\./)) {
         if ($(idForm).is('fieldset')) {
             return Europa.Form.SerializeJsonInputs($(idForm).find(':input').not('disabled').not('button'));
         }

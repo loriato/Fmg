@@ -1,71 +1,53 @@
 ﻿@model List<Tenda.Domain.Security.Models.Usuario>
-<script src="~/Scripts/Projeto/Usuario/usuario.js"></script>
+
+<script src="~/Static/projeto/usuario/usuario.js"></script>
 <script>
     Europa.Controllers.Usuario.UrlListar = '@Url.Action("Listar","Usuario")';
+    Europa.Controllers.Usuario.UrlSalvar = '@Url.Action("Salvar","Usuario")';
 </script>
 
-<nav class="menu-actions titlebar">
-    <div class="container">
-        <div href="#" id="titlebar-name" class="col-md-5">
-            Usuários
-        </div>
-        <div id="titlebar-buttons" style="padding-right: 10px;text-align: right;">
-            <button class="btn btn-blue" onclick="Europa.Controllers.Usuario.AbrirModalIncluir()"><i class="fas fa-plus"></i> Incluir</button>
-        </div>
-    </div>
-</nav>
-
-
-
-@*<div class="container mt-5">
+<div id="titlebar-name">
+    Usuário
+</div>
+<div id="titlebar-buttons">
+    <button class="btn btn-blue" onclick="Europa.Controllers.Usuario.AbrirModalIncluir()"><i class="fa fa-plus"></i> Incluir</button>
+</div>
+<div class="container mt-5">
     <div class="mt-4">
         <form id="form-filtro">
             <div class="row">
                 <div class="col-md-4 form-group">
                     @Html.Label("Nome", new { @class = "control-label" })
-                    @Html.TextBox("Nome", null, new { @class = "form-control", maxlength = 128 })
+                    @Html.TextBox("filtro-nome", null, new { @class = "form-control", maxlength = 128 })
                 </div>
                 <div class="col-md-4 form-group">
                     @Html.Label("Cpf", new { @class = "control-label" })
-                    @Html.TextBox("Cpf", null, new { @class = "form-control" })
+                    @Html.TextBox("filtro-cpf", null, new { @class = "form-control" })
                 </div>
                 <div class="col-md-4 form-group">
                     @Html.Label("Número Funcional", new { @class = "control-label" })
-                    @Html.TextBox("NumeroFuncional", null, new { @class = "form-control" })
+                    @Html.TextBox("filtro-numero", null, new { @class = "form-control" })
                 </div>
             </div>
             <div class="pull-right mt-4">
-                <button class="btn btn-blue"><i class="fa fa-filter"></i> Filtrar</button>
+                <button class="btn btn-blue" onclick="Europa.Controllers.Usuario.Filtrar()"><i class="fa fa-filter"></i> Filtrar</button>
                 <button class="btn btn-blue" title="Limpar">
                     <i class="fa fa-eraser"></i> Limpar
                 </button>
             </div>
         </form>
     </div>
-
-    <table id="table-usuario" class="display">
-        <thead>
-            <tr>
-                <th>Nome</th>
-                <th>Numero Funcional</th>
-            </tr>
-        </thead>
-        <tbody>
-
-            @foreach (var item in Model)
-            {
-
-                <tr>
-                    <td>@item.Nome</td>
-                    <td>@item.NumeroFuncional</td>
-                </tr>
-            }
-        </tbody>
-    </table>
-</div>*@
-
+    <div class="mt-4">
+        <div ng-controller="UsuarioDataTable as table">
+            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                   dt-column-defs="table.dtColumnDefs"></table>
+        </div>
+    </div>
+    
+</div>
 
 
 @{
-    Html.RenderPartial("_ModalIncluirUsuario",Model);
+    Html.RenderPartial("_ModalIncluirUsuario", new Tenda.Domain.Security.Models.Usuario());
 }

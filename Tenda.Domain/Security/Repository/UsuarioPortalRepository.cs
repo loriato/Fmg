@@ -16,13 +16,23 @@ namespace Tenda.Domain.Security.Repository
         {
         }
 
-        public DataSourceResponse<UsuarioPortal> Listar(DataSourceRequest request, string nome)
+        public DataSourceResponse<UsuarioPortal> Listar(DataSourceRequest request, UsuarioPortal filtro)
         {
             var query = Queryable();
-            if (nome.HasValue())
+            if (filtro.Nome.HasValue())
             {
-                query = query.Where(x => x.Nome.ToLower().Contains(nome.ToLower()));
+                query = query.Where(x => x.Nome.Contains(filtro.Nome));
             }
+            if (filtro.Cpf.HasValue())
+            {
+                query = query.Where(x => x.Cpf.Contains(filtro.Cpf.OnlyNumber()));
+            }
+            if (filtro.NumeroFuncional.HasValue())
+            {
+                query = query.Where(x => x.NumeroFuncional.Contains(filtro.NumeroFuncional));
+            }
+
+
             return query.ToDataRequest(request);
         }
 

@@ -17,6 +17,11 @@ namespace Tenda.Domain.Security.Maps
             Map(reg => reg.Senha).Column("DS_SENHA").Nullable().Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
             Map(reg => reg.Nome).Column("NM_USUARIO").Nullable().Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
             Map(reg => reg.Situacao).Column("TP_SITUACAO").Not.Nullable().CustomType<EnumType<SituacaoUsuario>>();
+            Map(reg => reg.Cpf).Column("DS_CPF").Length(DatabaseStandardDefinitions.CpfLength);
+            Map(reg => reg.NumeroFuncional).Column("NR_FUNCIONAL").Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
+            Map(reg => reg.Telefone).Column("DS_TELEFONE").Length(11);
+            Map(reg => reg.Cargo).Column("DS_CARGO").Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
+            Map(reg => reg.DataNascimento).Column("DT_NASCIMENTO");
         }
     }
 }

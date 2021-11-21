@@ -1,4 +1,5 @@
-﻿using Europa.Fmg.Portal.App_Start;
+﻿using Europa.Fmg.Domain.Cache;
+using Europa.Fmg.Portal.App_Start;
 using Europa.Fmg.Portal.Commons;
 using Europa.Fmg.Portal.Models.Application;
 using Europa.Web;
@@ -6,7 +7,6 @@ using System.Web;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
-using Europa.Fmg.Domain.Cache;
 
 namespace Europa.Fmg.Portal
 {

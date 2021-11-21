@@ -36,8 +36,8 @@ function DataTableWrapper(vm, scope, compile, DTOptionsBuilder, DTColumnBuilder,
 
 DataTableWrapper.prototype = {
     getActionsEdit: function () {
-        this.btnSave = { html: '<button class="btn btn-steel" title="salvar"><i class="fa fa-save"><i/></button>' };
-        this.btnCancel = { html: '<button class="btn btn-steel" title="cancelar" ng-click="closeEdition"><i class="fa fa-ban"><i/></button>' };
+        this.btnSave = { html: '<button class="btn color-blue" title="salvar"><i class="fa fa-save"><i/></button>' };
+        this.btnCancel = { html: '<button class="btn color-blue" title="cancelar" ng-click="closeEdition"><i class="fa fa-ban"><i/></button>' };
         this.btnSave.to$ = $(this.btnSave.html);
         this.btnCancel.to$ = $(this.btnCancel.html);
 
@@ -122,10 +122,10 @@ DataTableWrapper.prototype = {
                                     'data': result.records
                                 };
                                 fnCallback(records);
-                                if(result.total > 0){
+                                if (result.total > 0) {
                                     self.hideAreaNoRecords(tableJ);
                                 }
-                                else{
+                                else {
                                     self.showAreaNoRecords(tableJ);
                                 }
                             });
@@ -151,10 +151,10 @@ DataTableWrapper.prototype = {
                     var navegarArea = table.find('.europa-datatable-navegar-para');
                     var selectionButtons = "";
                     if (self.multiSelection) {
-                        selectionButtons = '<button title="Selecionar Todos" class="btn btn-steel btn-sm selectAllDt" aria-label="Selecionar Todos"> <i class="fa fa-check-square-o"></i></button>'
-                            + '<button title="Remover Seleção" class="btn btn-steel btn-sm deselectAllDt"> <i class="fa fa-square-o" aria-label="Remover Seleção"></i></button>';
+                        selectionButtons = '<button title="Selecionar Todos" class="btn color-blue btn-sm selectAllDt" aria-label="Selecionar Todos"> <i class="fa fa-check-square-o"></i></button>'
+                            + '<button title="Remover Seleção" class="btn color-blue btn-sm deselectAllDt"> <i class="fa fa-square-o" aria-label="Remover Seleção"></i></button>';
                     }
-                    reloadArea.html('<button title="Atualizar" class="btn btn-steel btn-sm reloadDt"> <i class="fa fa-refresh"></i></button>' + selectionButtons);
+                    reloadArea.html('<button title="Atualizar" class="btn color-blue btn-sm reloadDt"> <i class="fa fa-refresh"></i></button>' + selectionButtons);
 
                     if (self.pageExport) {
                         table.find('.europa-datatable-buttons').show();
@@ -459,16 +459,16 @@ DataTableWrapper.prototype = {
             "sZeroRecords": "Nenhum registro encontrado",
             "sSearch": "Pesquisar",
             "oPaginate": {
-                "sNext": "<i class='fa fa-caret-right' title='Próxima página'></i>",
-                "sPrevious": "<i class='fa fa-caret-left' title='Página anterior'></i>",
-                "sFirst": "<i class='fa fa-step-backward' title='Primeira página'></i>",
-                "sLast": "<i class='fa fa-step-forward' title='Última página'></i>"
+                "sNext": "<i class='fas fa-angle-right' title='Próxima página'></i>",
+                "sPrevious": "<i class='fas fa-angle-left' title='Página anterior'></i>",
+                "sFirst": "<i class='fas fa-angle-double-left' title='Primeira página'></i>",
+                "sLast": "<i class='fas fa-angle-double-right' title='Última página'></i>"
             },
             "oAria": {
                 "sSortAscending": ": Ordenar colunas de forma ascendente",
                 "sSortDescending": ": Ordenar colunas de forma descendente"
             },
-            navegarPara: "Navegar",
+            navegarPara: "Ir Para",
             navegarParaTitle: "Digite o número da página e pressione enter para navegar",
             ir: "Ir",
             select: {
@@ -710,7 +710,7 @@ DataTableWrapper.prototype = {
         icon = $('<i/>').addClass(icon);
 
         var button = $('<a />')
-            .addClass('btn btn-steel')
+            .addClass('btn color-blue')
             .attr('title', title)
             .attr('ng-click', onClick)
             .append(icon);
@@ -728,7 +728,7 @@ DataTableWrapper.prototype = {
         icon = $('<i/>').addClass(icon);
 
         var button = $('<a />')
-            .addClass('btn btn-steel')
+            .addClass('btn color-blue')
             .attr('title', title)
             .attr('href', href)
             .append(icon);;

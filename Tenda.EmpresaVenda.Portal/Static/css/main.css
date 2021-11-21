@@ -6,12 +6,13 @@
     --vermelho: #e4002b;
     --azul: #003e62;
     --azul-claro: #bbe5ee;
+    --dark-blue: #131820;
 }
 
 body {
     font-family: "Roboto", sans-serif !important;
     overflow-x: hidden;
-    color: #000;
+    color: var(----dark-blue);
     height: 100vh;
     font-stretch: normal;
     font-style: normal;
@@ -51,7 +52,7 @@ body {
 }
 
 .barra {
-    background-color: #343a40;
+    background-color: var(--dark-blue);
     width: 300px;
     height: 100%;
     overflow-y: auto;
@@ -60,11 +61,11 @@ body {
     z-index: 2;
 }
 
-nav a {
-    text-decoration: none;
+a {
+    text-decoration: none !important;
 }
 
-#titlebar-name {
+#titlebar-name-target {
     box-sizing: border-box;
     float: left;
     font-size: 20px;
@@ -72,23 +73,23 @@ nav a {
     font-weight: bolder;
 }
 
-#titlebar-buttons {
+#titlebar-buttons-target {
     box-sizing: border-box;
     float: right;
     padding-top: 3px;
 }
 
 .link {
-    background-color: #494950;
+    background-color: var(--azul);
     padding: 20px;
     font-size: 12pt;
     transition: all .2s linear;
     color: #f4f4f9;
-    border-bottom: 2px solid #222;
+    border-bottom: 2px solid var(--azul-claro);
 }
 
     .link:hover {
-        background-color: var(--azul);
+        background-color: var(--dark-blue);
     }
 
 .modal-body {
@@ -104,4 +105,12 @@ nav a {
 
 .bg-blue {
     background-color: var(--azul);
+}
+.titlebar {
+    display: flex;
+    align-items: center;
+    border: 1px solid transparent;
+    min-height: 50px;
+    position: relative;
+    background-color: #E6E8EA;
 }

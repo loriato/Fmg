@@ -11,6 +11,7 @@ namespace Tenda.Domain.Core.Maps
             KeyColumn("ID_USUARIO_PORTAL");
             Map(reg => reg.IgnoraVerificacaoCadastral).Column("FL_IGNORA_VERIF_CADASTRAL");
             Map(reg => reg.UltimaLeituraNotificacao).Column("DT_ULTIMA_LEITURA_NOTIFICACAO").Nullable();
+
         }
     }
 }

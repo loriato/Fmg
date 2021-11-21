@@ -29,6 +29,9 @@ Europa.Mask.Decimal = function (input) {
 Europa.Mask.CpfCnpj = function (input, clearIfNotMatch) {
 	$(input).unmask().mask(Europa.Mask.Behavior.CpfCnpj, Europa.Mask.Options.CpfCnpj(clearIfNotMatch));
 };
+Europa.Mask.Cpf = function (input, clearIfNotMatch) {
+	$(input).unmask().mask(Europa.Mask.FORMAT_CPF, { clearIfNotMatch: clearIfNotMatch == true ? true : false });
+};
 
 Europa.Mask.Int = function (input) {
 	$(input).unmask().mask(Europa.Mask.FORMAT_INT, { reverse: true });
@@ -43,12 +46,12 @@ Europa.Mask.ApplyWithOptions = function (input, mask, options) {
 };
 
 Europa.Mask.ApplyByClass = function (classe, mask, clearIfNotMatch, reverse) {
-    var options = {};
-    if (clearIfNotMatch != undefined)
-        options.clearIfNotMatch = clearIfNotMatch;
-    if (reverse != undefined)
-        options.reverse = reverse;
-    $("." + classe).unmask().mask(mask, options);
+	var options = {};
+	if (clearIfNotMatch != undefined)
+		options.clearIfNotMatch = clearIfNotMatch;
+	if (reverse != undefined)
+		options.reverse = reverse;
+	$("." + classe).unmask().mask(mask, options);
 }
 
 Europa.Mask.GetMaskedValue = function (val, mask) {
@@ -84,15 +87,14 @@ Europa.Mask.Options.Telefones = function (dontClear) {
 	};
 };
 
-Europa.Mask.Options.CompletaZeroEsquerda = function (input, qtdZero) {
-	qtdZero = qtdZero ? qtdZero : 0; ///se não informar qtdZero então não coloca zero a esquerda
-	var zero = '';
-	for (var i = 1; i <= qtdZero; i++) { zero += '0'; }
-	return input.value = (zero + input.value).slice(-qtdZero);
+
+Europa.Mask.allowNegativeOffsetInteger = function (input) {
+    $(input).unmask().mask("S#############", {
+        translation: {
+            'S': {
+                pattern: /-/,
+                optional: true
+            }
+        }
+    });
 };
-
-Europa.Mask.Options.RemoveZeroEsquerda = function (input) {
-	if (parseInt(input.value, 10) > 9)
-		return input.value = parseInt(input.value, 10);
-
-}

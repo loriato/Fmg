@@ -45,12 +45,14 @@ Europa.Date.Format = function (value, pattern) {
     }
     return "";
 };
+
 Europa.Date.FormatText = function (value, pattern, format) {
     if (value) {
         return moment(value, pattern).locale(Europa.Date.Locale).format(format);
     }
     return "";
 };
+
 
 Europa.Date.GetDiferenceBetwenDays = function (start, end) {
     var a = moment(start);
@@ -137,6 +139,13 @@ Europa.Date.GetAge = function (date) {
             age--;
         }
         return age;
+    }
+    return "";
+};
+
+Europa.Date.ToFormatDateUtc = function (date, pattern) {
+    if (date) {
+        return moment(date).utc().locale(Europa.Date.Locale).format(pattern);
     }
     return "";
 };

@@ -1,27 +1,70 @@
 ﻿<!DOCTYPE html>
 <html class="no-js" lang="">
-<head>
+<head  ng-app="europaApp">
     <meta charset="utf-8">
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>WebFMG</title>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+   
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/bootstrap-daterangepicker")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/select2")
+    @Styles.Render("~/css/jquery-ui")
+    @Styles.Render("~/css/fullcalendar")
+    @Styles.Render("~/css/notify")
+    @Styles.Render("~/css/tinymce")
+  
+    @Styles.Render("~/css/chartjs")
 
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jquery-ui")
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryNumeric")
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/pdfjs")
+    @Scripts.Render("~/bundles/pdfobject")
+    @Scripts.Render("~/bundles/chartjs")
+
+    @Scripts.Render("~/bundles/bootstrap")
+   
 
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angular-datatable")
     @Styles.Render("~/css/angular-datatable")
+    @Scripts.Render("~/bundles/select2")
+    @Scripts.Render("~/bundles/fullcalendar")
+    @Scripts.Render("~/bundles/notify")
 
-    @Styles.Render("~/css/bootstrap")
-    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/europa")
+    @Scripts.Render("~/bundles/europa")
+    @*@Scripts.Render("~/bundles/bootstrap-treeview")*@
 
-    @*@Styles.Render("~/css/europa")
-    @Scripts.Render("~/bundles/europa")*@
+
+    @* LINK PARA OS ARQUIVOS DO NOVO LAYOUT - TEMPORARIO *@
+    <link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-menu-icons.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-button.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-input.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-tabs.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-text.css" rel="stylesheet" />
+    <link href="~/Static/europa/css/europa-action-bar.css" rel="stylesheet" />
+
+    <script src="~/Static/europa/js/europa-menu.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+    <script src="~/Static/tinymce/tinymce.min.js"></script>
+
+    @*<script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>*@
+
     <link rel="stylesheet" href="~/Static/css/main.css" />
     <link rel="stylesheet" href="~/Static/css/button.css" />
 
-    @*<script src="~/Static/js/main.js"></script>*@
+    <script src="~/Static/js/main.js"></script>
+
 </head>
 <body>
     <div>
@@ -29,10 +72,12 @@
             @Html.Partial("_Header")
         </div>
         <div>
-
             @RenderBody()
         </div>
-
+        <script>
+            Europa.AjustTitleAndMenuAcitons()
+        </script>
+        
     </div>
     @Html.Partial("_Footer")
 </body>

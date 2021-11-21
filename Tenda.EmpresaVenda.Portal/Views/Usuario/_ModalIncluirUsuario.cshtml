@@ -1,1 +1,60 @@
-﻿
+﻿@model Tenda.Domain.Security.Models.Usuario
+
+
+<div class="modal fade" id="incluir-usuario" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Incluir Usuário</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-usuario">
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Nome", new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", maxlength = 128 })
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Cpf", new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.Cpf, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Cargo", new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.Cargo, new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Telefone", new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control" })
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Data Nascimento", new { @class = "control-label" })
+                            <div class="input-group">
+                                @Html.TextBoxFor(x => x.DataNascimento, new { @class = "form-control ", datepicker = "datepicker", parent = "#form-usuario" })
+                                <span class="input-group-append">
+                                    <button class="btn btn-outline-secondary btn-sm py-0" type="button" onclick="Europa.Components.DatePicker.Closest(this)" >
+                                        <img class="color-blue" src="~/Static/europa/css/icons/calendar.svg" />
+                                    </button>
+                                </span>
+                            </div>
+                            @*@Html.Label("DataNascimento", new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.DataNascimento, new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Número Funcional", new { @class = "control-label" })
+                            @Html.TextBoxFor(x => x.NumeroFuncional, new { @class = "form-control" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-blue" onclick="Europa.Controllers.Usuario.Salvar()"><i class="far fa-save"></i> Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,9 @@
-﻿@using Europa.Fmg.Portal.Models.Application
-<!DOCTYPE html>
-<html class="no-js" lang="">
+﻿<!DOCTYPE html>
+<html ng-app="europaApp">
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    </title>
 
     @*@Styles.Render("~/css/bootstrap")
         @Styles.Render("~/css/bootstrap-daterangepicker")
@@ -15,9 +12,9 @@
         @Styles.Render("~/css/jquery-ui")
         @Styles.Render("~/css/fullcalendar")
         @Styles.Render("~/css/notify")
-        @Styles.Render("~/css/tinymce")*@
-    @* @Styles.Render("~/css/bootstrap-treeview")*@
-    @*@Styles.Render("~/css/chartjs")
+        @Styles.Render("~/css/tinymce")
+        @Styles.Render("~/css/bootstrap-treeview")
+        @Styles.Render("~/css/chartjs")
 
         @Scripts.Render("~/bundles/jquery")
         @Scripts.Render("~/bundles/jquery-ui")
@@ -29,11 +26,9 @@
         @Scripts.Render("~/bundles/pdfobject")
         @Scripts.Render("~/bundles/chartjs")
 
-        @Scripts.Render("~/bundles/bootstrap")*@
-    @*@Scripts.Render("~/bundles/bootstrap-daterangepicker")*@
-    @* @Scripts.Render("~/bundles/bootstrap-validator")*@
+        @Scripts.Render("~/bundles/bootstrap")
 
-    @*@Scripts.Render("~/bundles/angular")
+        @Scripts.Render("~/bundles/angular")
         @Scripts.Render("~/bundles/angular-datatable")
         @Styles.Render("~/css/angular-datatable")
         @Scripts.Render("~/bundles/select2")
@@ -42,49 +37,64 @@
 
         @Styles.Render("~/css/europa")
         @Scripts.Render("~/bundles/europa")*@
-    @*@Scripts.Render("~/bundles/bootstrap-treeview")*@
 
 
-    @*<link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />
-        <link href="~/Static/europa/css/europa-menu-icons.css" rel="stylesheet" />
-        <link href="~/Static/europa/css/europa-button.css" rel="stylesheet" />
-        <link href="~/Static/europa/css/europa-input.css" rel="stylesheet" />
-        <link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
+    @* LINK PARA OS ARQUIVOS DO NOVO LAYOUT - TEMPORARIO *@
+    @*<link href="~/Static/europa/css/europa-layout.css" rel="stylesheet" />*@
+    @*<link href="~/Static/europa/css/europa-button.css" rel="stylesheet" />*@
+    @*<link href="~/Static/europa/css/europa-input.css" rel="stylesheet" />*@
+    @*<link href="~/Static/europa/css/europa-modal.css" rel="stylesheet" />
         <link href="~/Static/europa/css/europa-tabs.css" rel="stylesheet" />
         <link href="~/Static/europa/css/europa-text.css" rel="stylesheet" />
-        <link href="~/Static/europa/css/europa-action-bar.css" rel="stylesheet" />*@
+        <link href="~/Static/europa/css/europa-action-bar.css" rel="stylesheet" />
 
-    @*<script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
-        <script src="~/Static/europa/dynamic/europa-messages.js"></script>*@
+        <script src="~/Static/europa/js/europa-menu.js"></script>
+        <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+        <script src="~/Static/europa/dynamic/europa-messages.js"></script>
+        <script src="~/Static/tinymce/tinymce.min.js"></script>*@
+
+
+
+    @Styles.Render("~/css/bootstrap")
+    @Styles.Render("~/css/bootstrap-daterangepicker")
+    @Styles.Render("~/css/font-awesome")
+    @Styles.Render("~/css/select2")
+    @Styles.Render("~/css/angular-datatable")
+
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
-
+    @Scripts.Render("~/bundles/moment")
+    @Scripts.Render("~/bundles/bootstrap-daterangepicker")
     @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/angular-datatable")
-    @Styles.Render("~/css/angular-datatable")
+    @Scripts.Render("~/bundles/select2")
+    @Scripts.Render("~/bundles/europa")
+    <script src="~/Static/europa/dynamic/europa-messages-enuns.js"></script>
+    <script src="~/Static/europa/dynamic/europa-messages.js"></script>
 
-    @Styles.Render("~/css/bootstrap")
-    @Styles.Render("~/css/font-awesome")
+    <link rel="stylesheet" href="~/Static/css/main.css" />
+    <link rel="stylesheet" href="~/Static/css/button.css" />
 
-    @*@Styles.Render("~/css/europa")
-    @Scripts.Render("~/bundles/europa")*@
-    @*<script src="~/Static/tinymce/tinymce.min.js"></script>*@
+    <script src="~/Static/js/main.js"></script>
+
 
 </head>
 <body>
-    <div>
         <div>
-            @Html.Partial("_Header")
-        </div>
-        <div>
+            <div>
+                @Html.Partial("_Header")
+            </div>
+            <div>
+                @RenderBody()
+            </div>
+            <script>
+                Europa.AjustTitleAndMenuAcitons()
+            </script>
 
-            @RenderBody()
         </div>
-
-    </div>
-    @Html.Partial("_Footer")
+        @Html.Partial("_Footer")
+    
 </body>
 </html>
 
