@@ -76,6 +76,6 @@ Europa.Controllers.Usuario.Salvar = function () {
             Europa.Controllers.Usuario.Filtrar();
             Europa.Controllers.Usuario.FecharModalIncluir();
         } else { }
-        Europa.Informacao.PosAcao(res);
+        Europa.Informacao.PosAcaoBaseResponse(res);
     });
 }

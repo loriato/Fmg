@@ -103,20 +103,6 @@ namespace Europa.Fmg.Portal.Controllers
 
         }
 
-        private bool HasAcessoEVSuspensa(Corretor corretor, List<long> idsPerfis)
-        {
-            bool isEvSuspensa = corretor.EmpresaVenda.Situacao == Situacao.Suspenso;
-            var idsPerfisEVSuspensa = ProjectProperties.IdsPerfisLoginEVSuspensa;
-            bool isUsuarioWithAcess = idsPerfisEVSuspensa.Intersect(idsPerfis).Any();
-
-            if (isEvSuspensa && isUsuarioWithAcess)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
         private bool UsuarioNoPerfilInicial(List<long> idPerfis)
         {
             var perfilInicial = _parametroSistemaRepository.Queryable()

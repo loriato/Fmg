@@ -91,17 +91,21 @@ a {
     .link:hover {
         background-color: var(--dark-blue);
     }
-
+.modal-header{
+    border:none;
+}
 .modal-body {
-    padding: 0 10px 10px;
+    padding: 10px 10px;
     max-height: calc(100 vh - 150 px );
     overflow-y: unset;
     background-color: #F6F8FA;
 }
-
-.pull-right {
-    text-align: right;
+.modal-footer{
+    border: none;
 }
+    .pull-right {
+        text-align: right;
+    }
 
 .bg-blue {
     background-color: var(--azul);

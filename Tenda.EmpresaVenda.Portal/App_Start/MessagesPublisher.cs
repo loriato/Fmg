@@ -1,4 +1,5 @@
-﻿using Europa.Resources;
+﻿using Europa.Fmg.Domain.Data;
+using Europa.Resources;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,7 +11,6 @@ using System.Web.Hosting;
 using Tenda.Domain.Core.Enums;
 using Tenda.Domain.Security.Enums;
 using Tenda.Domain.Shared.Commons;
-using Europa.Fmg.Domain.Data;
 using Situacao = Tenda.Domain.Security.Enums.Situacao;
 
 namespace Europa.Fmg.Portal.App_Start
@@ -58,7 +58,7 @@ namespace Europa.Fmg.Portal.App_Start
                 "Tenda.Domain.Core.Enums",
                 "Tenda.Domain.EmpresaVenda.Enums",
                 "Tenda.Domain.Security.Enums",
-                "Europa.Fmg.Domain.Enums",
+                "Tenda.Domain.Fmg.Enums",
             };
 
             List<Type> enumsToPublish = new List<Type>();

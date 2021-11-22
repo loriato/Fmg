@@ -16,25 +16,7 @@ namespace Tenda.Domain.Shared
         #region Implementação Inicial de Fila Personalziada
 
         //{"LojasIn":[],"LojasNotIn":[],"EmpreendimentosIn":[],"EmpreendimentosNotIn":[],"EstadosIn":[],"EstadosNotIn":[],"RegionaisIn":[],"RegionaisNotIn":[], "NodesIn":[], "StatusSicaqIn":[]}
-        public static FilaPersonalizadaDTO FiltrosDeFila(string codIdentificador, int timeToLive = 1)
-        {
-            //FIXME: use GetJsonParameter instead
 
-            if (codIdentificador == null)
-            {
-                return null;
-            }
-
-            var property = GetParameter(codIdentificador, timeToLive);
-            if (property == null)
-            {
-                return null;
-            }
-
-            FilaPersonalizadaDTO dto = (FilaPersonalizadaDTO)new JavaScriptSerializer()
-                .Deserialize(property.Value.ToString(), typeof(FilaPersonalizadaDTO));
-            return dto;
-        }
 
         #endregion
 

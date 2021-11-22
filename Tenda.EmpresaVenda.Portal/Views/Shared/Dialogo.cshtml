@@ -1,78 +1,70 @@
 ﻿@using Europa.Resources
-<style>
-    .close {
-        color: var(--chery-red) !important;
-    }
-</style>
-
-<div id="confirm-alert" class="modal col-md-12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-    <div class="modal-dialog" style="padding: 30px;">
-        <div class="modal-content modal-alert-content">
-            <div class="modal-header" style="padding: 0;">
-                <img title="@GlobalMessages.Fechar" onclick="Europa.Confirmacao.Cancel();"
-                     style="margin-bottom: 15px; text-align: right;" class="btn-close pull-right"
-                     src="~/Static/images/x-icon-red.png"
-                     width="20px" height="18px"/>
-                <div class="col-md-24">
-                    <div class="col-md-4">
-                        <img src="~/Static/images/tenda-logo.png" width="52px" height="52px" style="margin: 10px;"/>
-                    </div>
-                    <div class="col-md-19">
-                        <div id="confirm-alert-header" class="col-md-24 modal-alert-title"></div>
-                        <div id="confirm-alert-body" class="col-md-24 modal-confirm-message"></div>
-                        <div class="col-md-24" style="text-align: right; margin-top: 15px;">
-                            <button id="confirm-alert-positive-button" type="button" class="btn pull-right"
-                                    onclick="Europa.Confirmacao.Confirm();">
-                                @GlobalMessages.Confirmar
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-body" style="display: none;"></div>
-            <div class="modal-footer" style="display: none;"></div>
-        </div>
-    </div>
-</div>
-
-<div id="info-alert" class="modal col-md-12" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-    <div class="modal-dialog" style="padding: 30px;">
-        <div class="modal-content modal-alert-content">
-            <div class="modal-header">
-                <img title="@GlobalMessages.Fechar" onclick="Europa.Informacao.Hide();"
-                     style="margin-bottom: 15px; text-align: right;" class="btn-close pull-right"
-                     src="~/Static/images/x-icon-red.png"
-                     width="20px" height="18px"/>
-                <div class="col-md-24" style="display: flex; justify-content: center;">
-                    <div style="flex: 3; margin-bottom: auto; display: table;">
-                        <img src="~/Static/images/tenda-logo.png" width="52px" height="52px" style="margin: 10px; display: table-cell; vertical-align: top;"/>
-                    </div>
-                    <div style="flex: 17; display: table; margin-top: auto; margin-bottom: auto;">
-                        <div id="info-alert-header" class="col-md-24 modal-alert-title"></div>
-                        <div id="info-alert-body" class="col-md-24 modal-alert-message"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="modal-body" style="display: none;"></div>
-            <div class="modal-footer" style="display: none;"></div>
-        </div>
-    </div>
-</div>
-
-<div id="spinner" class="modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
-    <div class="modal-dialog" style="width:400px;">
+<div class="modal fade" id="modal-confirm-alert" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="confirm-alert-header" aria-hidden="true">
+    <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h5 class="modal-title">Aguarde </h5>
+                <h4 class="modal-title" id="confirm-alert-header"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
-            <div class="modal-body" style="padding:15px;">
+            <div class="modal-body" id="confirm-alert-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button__red__outline" onclick="Europa.Confirmacao.Confirm();">
+                    <span class="fas fa-check"></span> @GlobalMessages.Confirmar
+                </button>
+                <button type="button" class="button__red__outline" onclick="Europa.Confirmacao.Cancel();">
+                    <span class="fas fa-times"></span> @GlobalMessages.Desistir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-info-alert" data-backdrop="false" tabindex="-1" role="dialog" aria-labelledby="info-alert-header" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="info-alert-header"></h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="info-alert-body">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" onclick="Europa.Informacao.Hide(); ">
+                    <span class="fa fa-times"></span> @GlobalMessages.Fechar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modal-spinner" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="spinner-header" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-title" id="spinner-header">@GlobalMessages.Aguarde</h6>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
                 <div class="progress">
-                    <div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
-                        <div class="progress-percent"></div>
-                    </div>
+                    <div class="progress-bar progress-bar-striped bg-danger progress-bar-animated" role="progressbar" style="width: 100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<style>
+    #modal-confirm-alert, #modal-info-alert {
+        z-index: 10051;
+    }
+
+    #modal-spinner {
+        z-index: 10052;
+    }
+</style>

@@ -15917,4 +15917,22 @@ Entrar em contato com Viabilizador Tenda.</value>
   <data name="TipoOrigemSimulacao_Admin" xml:space="preserve">
     <value>Admin Empresa de Vendas</value>
   </data>
+  <data name="Modelo" xml:space="preserve">
+    <value>Modelo</value>
+  </data>
+  <data name="Renavam" xml:space="preserve">
+    <value>Renavam</value>
+  </data>
+  <data name="TipoCombustivel" xml:space="preserve">
+    <value>Tipo Combustível</value>
+  </data>
+  <data name="TipoCombustivel_EtanolComum" xml:space="preserve">
+    <value>Etanol Comum</value>
+  </data>
+  <data name="TipoCombustivel_GasNatural" xml:space="preserve">
+    <value>Gás Natural</value>
+  </data>
+  <data name="TipoCombustivel_GasolinaComum" xml:space="preserve">
+    <value>Gasolina Comum</value>
+  </data>
 </root>

@@ -128,7 +128,7 @@ Europa.Informacao.PosAcao = function (res) {
     if (res && res.Mensagens && res.Mensagens.length > 0) {
         if (res.Sucesso) {
             Europa.Informacao.ChangeHeaderAndContent(Europa.i18n.Messages.Sucesso, res.Mensagens.join("<br/>"));
-            Europa.Informacao.ShowAsSuccess();
+            Europa.Informacao.Show();
         }
         else {
             Europa.Informacao.ChangeHeaderAndContent(Europa.i18n.Messages.Atencao, res.Mensagens.join("<br/>"));
@@ -140,7 +140,7 @@ Europa.Informacao.PosAcao = function (res) {
 Europa.Informacao.PosAcaoBaseResponse = function (res) {
     if (res.Success) {
         Europa.Informacao.ChangeHeaderAndContent(Europa.i18n.Messages.Sucesso, res.Messages.join("<br/>"));
-        Europa.Informacao.ShowAsSuccess();
+        Europa.Informacao.Show();
     }
     else {
         if (res.Messages.length > 0) {
@@ -157,11 +157,5 @@ Europa.Informacao.PosAcaoBaseResponse = function (res) {
 
         Europa.Informacao.Show();
     }
-};
-
-Europa.Informacao.ShowAsSuccess = function () {
-    $(Europa.Informacao.Attr.Header).css('display', 'none');
-    $(Europa.Informacao.Attr.Body).addClass('sucesso');
-    $(Europa.Informacao.Attr.Modal).modal("show");
 };
 

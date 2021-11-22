@@ -340,21 +340,23 @@
     <Compile Include="AppStart\AutofacConfig.cs" />
     <Compile Include="Cache\Models\BaseCacheModel.cs" />
     <Compile Include="Commons\TemplateEmailFactory.cs" />
-    <Compile Include="Commons\TipoParcelaWrapper.cs" />
     <Compile Include="Commons\TokenGenerator.cs" />
     <Compile Include="Data\NHibernateSession.cs" />
     <Compile Include="Dto\Column.cs" />
     <Compile Include="Dto\ColumnType.cs" />
     <Compile Include="Dto\Header.cs" />
     <Compile Include="Dto\JExcelOptions.cs" />
-    <Compile Include="Dto\SetupRegraComissaoDTO.cs" />
+    <Compile Include="Dto\Viatura\FiltroViaturaDto.cs" />
     <Compile Include="Layers.cs" />
+    <Compile Include="Maps\ViaturaMap.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\ViaturaRepository.cs" />
+    <Compile Include="Services\ViaturaService.cs" />
     <Compile Include="Validators\UsuarioPortalValidator.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -376,7 +378,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Maps\" />
     <Folder Include="Repository\Models\" />
     <Folder Include="Services\Models\" />
   </ItemGroup>

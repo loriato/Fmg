@@ -20906,6 +20906,15 @@ namespace Europa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Modelo.
+        /// </summary>
+        public static string Modelo {
+            get {
+                return ResourceManager.GetString("Modelo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Modelo de Negócio.
         /// </summary>
         public static string ModeloNegocio {
@@ -32611,6 +32620,15 @@ namespace Europa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Renavam.
+        /// </summary>
+        public static string Renavam {
+            get {
+                return ResourceManager.GetString("Renavam", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Renda.
         /// </summary>
         public static string Renda {
@@ -38923,7 +38941,7 @@ namespace Europa.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Caro parceiro, a partir de agora suas vendas faturadas podem se transformar em pontos que se acumulam durante o período de 360 dias.{0} 
         ///Bem-vindo ao programa de fidelidade VIP TENDA, que traz o benefício da troca de pontos por produtos junto aos parceiros exclusivos da Tenda. Que tal trocar aquela cafeteira que todos andam reclamando? Ou dar aquele empurrão nas vendas disponibilizando um micro-ondas para ser sorteado entre seus corretores?{0} 
-        ///Essa é mais uma iniciativa da Tenda, que busca melhorar ainda [rest of string was truncated]&quot;;.
+        ///Essa é mais uma iniciativa da Tenda, que busca melhorar ainda m [rest of string was truncated]&quot;;.
         /// </summary>
         public static string TextoComoFuncionaProgramaFidelidade {
             get {
@@ -40296,6 +40314,42 @@ namespace Europa.Resources {
         public static string TipoClassificacaoTelefonema_TelefoneNaoExiste {
             get {
                 return ResourceManager.GetString("TipoClassificacaoTelefonema_TelefoneNaoExiste", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tipo Combustível.
+        /// </summary>
+        public static string TipoCombustivel {
+            get {
+                return ResourceManager.GetString("TipoCombustivel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Etanol Comum.
+        /// </summary>
+        public static string TipoCombustivel_EtanolComum {
+            get {
+                return ResourceManager.GetString("TipoCombustivel_EtanolComum", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gás Natural.
+        /// </summary>
+        public static string TipoCombustivel_GasNatural {
+            get {
+                return ResourceManager.GetString("TipoCombustivel_GasNatural", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gasolina Comum.
+        /// </summary>
+        public static string TipoCombustivel_GasolinaComum {
+            get {
+                return ResourceManager.GetString("TipoCombustivel_GasolinaComum", resourceCulture);
             }
         }
         
