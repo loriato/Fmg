@@ -1,0 +1,32 @@
+﻿<script src="~/Static/projeto/material/material.js"></script>
+<div id="titlebar-name">
+    Material
+</div>
+
+
+
+
+<div class="container mt-5">
+    <form id="form-filtro" style="display:flex">
+        <div class="" style="width:90%">
+            @Html.TextBox("Nome", null, new { @class = "form-control", id = "nome-filtro", maxlength = 128, placeholder = "Nome Filtro" })
+        </div>
+        <div class="ml-3">
+            <button class="btn-lupa" onclick="Europa.Controllers.Material.Filtrar()"><i class="fa fa-search"></i></button>
+        </div>
+    </form>
+    <div class="material-container mt-4">
+        <button class="btn btn-material" onclick="Europa.Controllers.Material.AbrirCautela()">Cautela</button>
+
+        <button class="btn btn-material" onclick="Europa.Controllers.Material.AbrirConsumo()">Consumo</button>
+    </div>
+
+    <div class="hidden" id="tabela-cautela">
+        @Html.Partial("_Cautela")
+    </div>
+    <div class="hidden" id="tabela-consumo">
+        @Html.Partial("_Consumo")
+    </div>
+</div>
+
+

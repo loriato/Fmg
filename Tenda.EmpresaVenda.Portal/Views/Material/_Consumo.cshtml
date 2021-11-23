@@ -1,0 +1,13 @@
+﻿<script src="~/Static/projeto/material/consumo.js"></script>
+<script>
+    Europa.Controllers.Material.Consumo.UrlListar = '@Url.Action("ListarMaterialConsumo", "Material")';
+</script>
+
+<div class="title-table">
+    <h5 class=""><b>Consumo</b></h5>
+</div>
+<div ng-controller="ConsumoDataTable as table">
+    <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+           dt-instance="table.dtInstance" class="table table-striped table-bordered"
+           dt-column-defs="table.dtColumnDefs"></table>
+</div>

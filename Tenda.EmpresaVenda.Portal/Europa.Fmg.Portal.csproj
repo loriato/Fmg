@@ -793,6 +793,9 @@
     <Content Include="Static\projeto\cliente\modal-cliente.js" />
     <Content Include="Static\projeto\cliente\modal-mudar-corretor.js" />
     <Content Include="Static\projeto\login\login.css" />
+    <Content Include="Static\projeto\material\consumo.js" />
+    <Content Include="Static\projeto\material\cautela.js" />
+    <Content Include="Static\projeto\material\material.js" />
     <Content Include="Static\projeto\programa-fidelidade\como-funciona.js" />
     <Content Include="Static\projeto\programa-fidelidade\fluxo-termo-aceite.css" />
     <Content Include="Static\projeto\programa-fidelidade\fluxo-termo-aceite.js" />
@@ -1171,6 +1174,9 @@
     <Content Include="Views\Usuario\_ModalIncluirUsuario.cshtml" />
     <Content Include="Views\Shared\Teste.cshtml" />
     <Content Include="Views\Viatura\_ModalIncluirViatura.cshtml" />
+    <Content Include="Views\Material\Index.cshtml" />
+    <Content Include="Views\Material\_Cautela.cshtml" />
+    <Content Include="Views\Material\_Consumo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

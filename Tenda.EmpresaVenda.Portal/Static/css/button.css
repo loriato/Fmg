@@ -16,3 +16,32 @@
         background: white;
         text-decoration: none;
     }
+
+.btn-material {
+    border-radius: 0px;
+    background-color: aliceblue;
+    width: 200px;
+    margin: 10px 10px;
+    width: 30%;
+    height: 55px;
+    font-size: 18px;
+    font-weight: 600;
+    border-color: var(--dark-blue);
+}
+    .btn-material:hover {
+        color: aliceblue;
+        background-color: var(--dark-blue);
+        border: aliceblue;
+    }
+    .btn-material:active {
+        color: aliceblue;
+        background-color: var(--dark-blue);
+        border: aliceblue;
+    }
+.btn-lupa {
+    height: 38px;
+    width: 38px;
+    background-color: aliceblue;
+    border: 1px solid var(--dark-blue);
+    border-radius: 0.25rem;
+}

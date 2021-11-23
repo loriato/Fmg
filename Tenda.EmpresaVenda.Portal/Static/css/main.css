@@ -118,3 +118,16 @@ a {
     position: relative;
     background-color: #E6E8EA;
 }
+.material-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hidden{
+    display:none;
+}
+.title-table {
+    margin: 16px 0px;
+    border-bottom: 2px solid gray
+}

@@ -348,6 +348,8 @@
     <Compile Include="Dto\JExcelOptions.cs" />
     <Compile Include="Dto\Viatura\FiltroViaturaDto.cs" />
     <Compile Include="Layers.cs" />
+    <Compile Include="Maps\CautelaMap.cs" />
+    <Compile Include="Maps\ConsumoMap.cs" />
     <Compile Include="Maps\ViaturaMap.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -355,7 +357,11 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\CautelaRepository.cs" />
+    <Compile Include="Repository\ConsumoRepository.cs" />
     <Compile Include="Repository\ViaturaRepository.cs" />
+    <Compile Include="Services\CautelaService.cs" />
+    <Compile Include="Services\ConsumoService.cs" />
     <Compile Include="Services\ViaturaService.cs" />
     <Compile Include="Validators\UsuarioPortalValidator.cs" />
   </ItemGroup>
