@@ -37,5 +37,21 @@ namespace Tenda.Domain.Core.Services
             _usuarioPortalRepository.Save(usuario);
             return usuario;
         }
+        public DataSourceResponse<UsuarioPortal> ListarUsuariosAutocomplete(DataSourceRequest request)
+        {
+            var query = _usuarioPortalRepository.Queryable();
+            if (request.filter.FirstOrDefault() != null)
+            {
+                var filtro = request.filter.FirstOrDefault()?.column.ToLower();
+                var queryTerm = request.filter.FirstOrDefault()?.value.ToLower();
+                if (filtro != null && filtro.Equals("nome"))
+                {
+                    query = query.Where(x => x.Nome.ToLower().Contains(queryTerm));
+                }
+
+            }
+
+            return query.ToDataRequest(request);
+        }
     }
 }

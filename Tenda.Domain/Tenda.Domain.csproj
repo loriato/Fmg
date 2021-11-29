@@ -294,12 +294,16 @@
     <Compile Include="Core\Data\RequestStateApi.cs" />
     <Compile Include="Core\Enums\EstadosSelectList.cs" />
     <Compile Include="Core\Enums\SelecioneSimNao.cs" />
+    <Compile Include="Fmg\Enums\SituacaoViatura.cs" />
     <Compile Include="Fmg\Enums\TipoCombustivel.cs" />
     <Compile Include="Fmg\Enums\TipoFiltroPosVenda.cs" />
     <Compile Include="Fmg\Enums\TipoPontuacaoFidelidade.cs" />
     <Compile Include="Fmg\Models\Cautela.cs" />
     <Compile Include="Fmg\Models\Consumo.cs" />
+    <Compile Include="Fmg\Models\PedidoCautela.cs" />
+    <Compile Include="Fmg\Models\PedidoConsumo.cs" />
     <Compile Include="Fmg\Models\Viatura.cs" />
+    <Compile Include="Fmg\Models\ViaturaUsuario.cs" />
     <Compile Include="Fmg\Models\Views\ViewViabilizador.cs" />
     <Compile Include="Fmg\Enums\TipoFamiliaridade.cs" />
     <Compile Include="Security\Enums\TipoSimNao.cs" />

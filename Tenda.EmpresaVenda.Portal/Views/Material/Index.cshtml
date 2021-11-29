@@ -9,7 +9,7 @@
 <div class="container mt-5">
     <form id="form-filtro" style="display:flex">
         <div class="" style="width:90%">
-            @Html.TextBox("Nome", null, new { @class = "form-control", id = "nome-filtro", maxlength = 128, placeholder = "Nome Filtro" })
+            @Html.TextBox("Nome", null, new { @class = "form-control", id = "nome-filtro", maxlength = 128, placeholder = "Buscar Material" })
         </div>
         <div class="ml-3">
             <button class="btn-lupa" onclick="Europa.Controllers.Material.Filtrar()"><i class="fa fa-search"></i></button>
@@ -28,5 +28,8 @@
         @Html.Partial("_Consumo")
     </div>
 </div>
+
+
+    @Html.Partial("PedidoModal");
 
 

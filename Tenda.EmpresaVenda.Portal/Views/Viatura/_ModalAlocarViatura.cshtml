@@ -1,0 +1,35 @@
+﻿<script src="~/Static/projeto/viatura/alocar-usuario.js"></script>
+<script>
+    Europa.Controllers.Alocar.UrlAlocar = '@Url.Action("Alocar","Viatura")';
+</script>
+<div class="modal fade" id="modal-alocar" data-backdrop="static" data-keyboard="false"  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Alocar Viatura</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-alocar">
+                    <div class="row">
+                        @Html.Hidden("IdViatura")
+                        <div class="col-md-6 form-group">
+                            @Html.Label("Viatura", new { @class = "control-label" })
+                            @Html.TextBox("Viatura","",  new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-6 form-group">
+                            @Html.Label("Usuario", new { @class = "control-label" })
+                            <select name="Usuario" id="autocomplete_usuario" class="form-control"></select>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-blue" onclick="Europa.Controllers.Alocar.Salvar()"><i class="far fa-save"></i> Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

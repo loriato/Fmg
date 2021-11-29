@@ -5,6 +5,7 @@
 <script>
     Europa.Controllers.Viatura.UrlListar = '@Url.Action("Listar","Viatura")';
     Europa.Controllers.Viatura.UrlSalvar = '@Url.Action("Salvar","Viatura")';
+    Europa.Controllers.Viatura.UrlVisualizar = '@Url.Action("Visualizar","Viatura")';
 </script>
 <div id="titlebar-name">
     Viatura
@@ -26,7 +27,7 @@
                 </div>
                 <div class="col-md-4 form-group">
                     @Html.Label("Renavam", new { @class = "control-label" })
-                    @Html.TextBoxFor(x => x.Renavam, null, new { @class = "form-control", id = "filtro-renavam", maxlength = 11})
+                    @Html.TextBoxFor(x => x.Renavam, null, new { @class = "form-control", id = "filtro-renavam", maxlength = 11 })
                 </div>
             </div>
             <div class="pull-right mt-4">
@@ -49,4 +50,6 @@
 
 @{
     Html.RenderPartial("_ModalIncluirViatura");
+    Html.RenderPartial("_ModalAlocarViatura");
+    Html.RenderPartial("_ModalDesalocarViatura");
 }

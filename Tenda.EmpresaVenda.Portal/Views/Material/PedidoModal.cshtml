@@ -1,0 +1,40 @@
+﻿
+<script>
+    Europa.Controllers.Material.UrlPedidoCautela = '@Url.Action("PedidoCautela","Material")';
+    Europa.Controllers.Material.UrlPedidoConsumo = '@Url.Action("PedidoConsumo","Material")';
+</script>
+<div class="modal fade" id="modal-pedido" data-backdrop="static" data-keyboard="false" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="form-alocar">
+                    <div class="row">
+                        @Html.Hidden("IdMaterial")
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Material", new { @class = "control-label" })
+                            @Html.TextBox("Material", "", new { @class = "form-control", @readonly = "readonly" })
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Usuario", new { @class = "control-label" })
+                            <select name="Usuario" id="autocomplete_usuario" class="form-control"></select>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            @Html.Label("Quantidade", new { @class = "control-label" })
+                            @Html.TextBox("Quantidade", "", new { @class = "form-control", @type="number" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-blue" onclick="Europa.Controllers.Material.Salvar()"><i class="far fa-save"></i> Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"><i class="fas fa-times"></i> Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>

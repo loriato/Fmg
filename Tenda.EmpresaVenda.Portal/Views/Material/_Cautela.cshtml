@@ -1,10 +1,13 @@
 ﻿<script src="~/Static/projeto/material/cautela.js"></script>
 <script>
     Europa.Controllers.Material.Cautela.UrlListar = '@Url.Action("ListarMaterialCautela", "Material")';
+    Europa.Controllers.Material.Cautela.UrlIncluir = '@Url.Action("IncluirMaterialCautela", "Material")';
+    Europa.Controllers.Material.Cautela.UrlAlterar = '@Url.Action("AlterarMaterialCautela", "Material")';
 </script>
 
 <div class="title-table">
-    <h5 class=""><b>Cautela</b></h5>
+    <div class=""> Cautela</div>
+    <div> <button class="pull-right btn btn-blue" onclick="Europa.Controllers.Material.Cautela.Novo()"><i class="fa fa-plus"></i> Novo</button></div>
 </div>
 <div ng-controller="CautelaDataTable as table">
     <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"

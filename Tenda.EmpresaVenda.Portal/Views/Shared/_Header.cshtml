@@ -28,6 +28,7 @@
     <a href="@Url.Action("Index","Usuario")"> <div class="link">Usuários</div></a>
     <a href="@Url.Action("Index","Viatura")"><div class="link">Viatura</div></a>
     <a href="@Url.Action("Index","Material")"><div class="link">Material</div></a>
+    <a onclick="realizarLogout()"><div class="link">Sair</div></a>
 </div>
 <nav class="menu-actions titlebar">
     <div class="container">
@@ -39,4 +40,9 @@
         </div>
     </div>
 </nav>
-
+<script>
+    const urlLogout = '@Url.Action("Logout", "Login")';
+    const realizarLogout = () => {
+        window.location = urlLogout;
+    }
+</script>

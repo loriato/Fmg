@@ -117,12 +117,11 @@ namespace Europa.Fmg.Portal.Controllers
             return idPerfis.TrueForAll(x => x == perfilInicial.Id);
         }
 
-        [HttpPost]
         public ActionResult Logout()
         {
             SessionAttributes session = SessionAttributes.Current();
 
-            //_loginService.Logout(session.Acesso);
+            _loginService.Logout();
             session.Invalidate();
             FormsAuthentication.SignOut();
             return RedirectToAction("Index", "Login");

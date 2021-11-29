@@ -812,7 +812,10 @@
     </Content>
     <Content Include="Static\projeto\usuario\usuario.js" />
     <Content Include="Static\projeto\verificar-mensagens.js" />
+    <Content Include="Static\projeto\viatura\alocar-usuario.js" />
+    <Content Include="Static\projeto\viatura\desalocar-usuario.js" />
     <Content Include="Static\projeto\viatura\viatura.js" />
+    <Content Include="Static\projeto\viatura\viatura-usuario-datatable.js" />
     <Content Include="Static\scripts\ai.0.22.9-build00167.js" />
     <Content Include="Static\scripts\ai.0.22.9-build00167.min.js" />
     <Content Include="Static\scripts\bootstrap.js" />
@@ -1177,6 +1180,10 @@
     <Content Include="Views\Material\Index.cshtml" />
     <Content Include="Views\Material\_Cautela.cshtml" />
     <Content Include="Views\Material\_Consumo.cshtml" />
+    <Content Include="Views\Viatura\Visualizar.cshtml" />
+    <Content Include="Views\Viatura\_ModalAlocarViatura.cshtml" />
+    <Content Include="Views\Viatura\_ModalDesalocarViatura.cshtml" />
+    <Content Include="Views\Material\PedidoModal.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

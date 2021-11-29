@@ -3,6 +3,7 @@ using Europa.Web;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Mvc;
 using Tenda.Domain.Core.Models;
@@ -42,6 +43,11 @@ namespace Europa.Fmg.Portal.Controllers
                 baseResponse.Success = false;
             }
             return Json(baseResponse, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ListarUsuariosAutocomplete(DataSourceRequest request)
+        {
+            var result = _usuarioPortalService.ListarUsuariosAutocomplete(request);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
     }
 }

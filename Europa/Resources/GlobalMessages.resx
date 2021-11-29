@@ -15935,4 +15935,16 @@ Entrar em contato com Viabilizador Tenda.</value>
   <data name="TipoCombustivel_GasolinaComum" xml:space="preserve">
     <value>Gasolina Comum</value>
   </data>
+  <data name="SituacaoViatura" xml:space="preserve">
+    <value>Situação Viatura</value>
+  </data>
+  <data name="SituacaoViatura_Ativo" xml:space="preserve">
+    <value>Ativo</value>
+  </data>
+  <data name="SituacaoViatura_EmManutencao" xml:space="preserve">
+    <value>Em Manutenção</value>
+  </data>
+  <data name="SituacaoViatura_EmPercurso" xml:space="preserve">
+    <value>Em Percurso</value>
+  </data>
 </root>

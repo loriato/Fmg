@@ -45,3 +45,7 @@
     border: 1px solid var(--dark-blue);
     border-radius: 0.25rem;
 }
+.btn-actions {
+    padding: 0px 4px;
+    color: var(--dark-blue);
+}

@@ -18,6 +18,7 @@ namespace Europa.Fmg.Domain.Maps
             Map(reg => reg.Modelo).Column("DS_MODELO").Length(DatabaseStandardDefinitions.OneHundredTwentyEigthLength);
             Map(reg => reg.TipoCombustivel).Column("TP_COMBUSTIVEL").CustomType<EnumType<TipoCombustivel>>();
             Map(reg => reg.Quilometragem).Column("NR_QUILOMETRAGEM");
+            Map(reg => reg.Situacao).Column("TP_SITUACAO").CustomType<EnumType<SituacaoViatura>>();
         }
     }
 

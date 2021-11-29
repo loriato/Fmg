@@ -350,7 +350,10 @@
     <Compile Include="Layers.cs" />
     <Compile Include="Maps\CautelaMap.cs" />
     <Compile Include="Maps\ConsumoMap.cs" />
+    <Compile Include="Maps\PedidoCautelaMap.cs" />
+    <Compile Include="Maps\PedidoConsumoMap.cs" />
     <Compile Include="Maps\ViaturaMap.cs" />
+    <Compile Include="Maps\ViaturaUsuarioMap.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -359,7 +362,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\CautelaRepository.cs" />
     <Compile Include="Repository\ConsumoRepository.cs" />
+    <Compile Include="Repository\PedidoCautelaRepository.cs" />
+    <Compile Include="Repository\PedidoConsumoRepository.cs" />
     <Compile Include="Repository\ViaturaRepository.cs" />
+    <Compile Include="Repository\ViaturaUsuarioRepository.cs" />
     <Compile Include="Services\CautelaService.cs" />
     <Compile Include="Services\ConsumoService.cs" />
     <Compile Include="Services\ViaturaService.cs" />

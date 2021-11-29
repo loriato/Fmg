@@ -2,7 +2,6 @@
 using System;
 using System.Text;
 using Tenda.Domain.Core.Services;
-using Tenda.Domain.Security.Models;
 using Tenda.Domain.Security.Repository;
 
 namespace Tenda.Domain.Security.Services

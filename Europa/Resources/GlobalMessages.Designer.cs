@@ -36535,6 +36535,42 @@ namespace Europa.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Situação Viatura.
+        /// </summary>
+        public static string SituacaoViatura {
+            get {
+                return ResourceManager.GetString("SituacaoViatura", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ativo.
+        /// </summary>
+        public static string SituacaoViatura_Ativo {
+            get {
+                return ResourceManager.GetString("SituacaoViatura_Ativo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Em Manutenção.
+        /// </summary>
+        public static string SituacaoViatura_EmManutencao {
+            get {
+                return ResourceManager.GetString("SituacaoViatura_EmManutencao", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Em Percurso.
+        /// </summary>
+        public static string SituacaoViatura_EmPercurso {
+            get {
+                return ResourceManager.GetString("SituacaoViatura_EmPercurso", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Situação da Vistoria.
         /// </summary>
         public static string SituacaoVistoria {

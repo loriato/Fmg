@@ -141,30 +141,14 @@ namespace Tenda.Domain.Security.Services
 
 
         #region Logout
-        public void Logout(Acesso acessoAtual)
+        public void Logout()
         {
-            Logout(acessoAtual, FormaEncerramento.Logout);
+            Logout(FormaEncerramento.Logout);
         }
 
-        public void LogoutForced(Acesso acessoAtual)
+        private void Logout(FormaEncerramento formaEncerramento)
         {
-            Logout(acessoAtual, FormaEncerramento.Forced);
-        }
 
-        public void LogoutTimeout(Acesso acessoAtual)
-        {
-            Logout(acessoAtual, FormaEncerramento.TimeOut);
-        }
-
-        private void Logout(Acesso acessoAtual, FormaEncerramento formaEncerramento)
-        {
-            if (acessoAtual == null)
-            {
-                return;
-            }
-            acessoAtual.FimSessao = DateTime.Now;
-            acessoAtual.FormaEncerramento = formaEncerramento;
-            _acessoRepository.Save(acessoAtual);
             Session.Flush();
         }
         #endregion

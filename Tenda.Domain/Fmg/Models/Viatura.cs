@@ -11,6 +11,7 @@ namespace Tenda.Domain.Fmg.Models
         public virtual string Modelo { get; set; }
         public virtual long Quilometragem { get; set; }
         public virtual TipoCombustivel TipoCombustivel { get; set; }
+        public virtual SituacaoViatura Situacao { get; set; }
         public override string ChaveCandidata()
         {
             throw new NotImplementedException();
