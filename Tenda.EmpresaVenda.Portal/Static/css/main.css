@@ -20,7 +20,12 @@ body {
     letter-spacing: normal;
     position: relative
 }
-
+.app {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
 .web-footer {
     display: flex;
     align-items: center;

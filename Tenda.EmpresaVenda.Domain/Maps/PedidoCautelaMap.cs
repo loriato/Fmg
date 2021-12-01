@@ -11,7 +11,7 @@ namespace Europa.Fmg.Domain.Maps
             Id(reg => reg.Id).Column("ID_PEDIDO_CAUTELA").GeneratedBy.Sequence("SEQ_PEDIDO_CAUTELAS");
             Map(reg => reg.Pedido).Column("DT_PEDIDO");
             Map(reg => reg.Devolucao).Column("DT_DEVOLUCAO").Nullable();
-            Map(reg => reg.Quantidade).Column("DT_QUANTIDADE");
+            Map(reg => reg.Quantidade).Column("NR_QUANTIDADE");
 
 
 

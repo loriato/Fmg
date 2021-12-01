@@ -1,0 +1,65 @@
+﻿@model Tenda.Domain.Security.Models.Usuario
+<script src="~/Static/projeto/usuario/usuario-visualizar.js"></script>
+<script>
+    Europa.Components.ViaturaUsuario.UrlListar = '@Url.Action("ListarViewViaturaUsuario","Viatura")';
+    Europa.Components.UsuarioPedidoConsumo.UrlListar = '@Url.Action("ListarUsuarioPedidoConsumo", "Material")';
+    Europa.Components.UsuarioPedidoCautela.UrlListar = '@Url.Action("ListarUsuarioPedidoCautela", "Material")';
+</script>
+
+<div id="titlebar-name">
+    Usuário
+</div>
+<div id="titlebar-buttons">
+    <a class="btn btn-blue" href="@Url.Action("Index","Usuario")"><i class="fas fa-arrow-left"></i> Voltar</a>
+</div>
+<div class="container mt-5">
+    <div class="mt-4">
+        <form id="form-usuario">
+            <div class="row">
+                @Html.HiddenFor(x => x.Id)
+                <div class="col-md-4 form-group">
+                    @Html.Label("Nome", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Nome, new { @class = "form-control", maxlength = 128, @readonly = "readonly" })
+                </div>
+                <div class="col-md-4 form-group">
+                    @Html.Label("Cpf", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Cpf, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-md-4 form-group">
+                    @Html.Label("Cargo", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Cargo, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3 form-group">
+                    @Html.Label("Telefone", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.Telefone, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-md-3 form-group">
+                    @Html.Label("Data Nascimento", new { @class = "control-label", @readonly = "readonly" })
+                    <div class="input-group">
+                        @Html.TextBoxFor(x => x.DataNascimento, new { @class = "form-control ", datepicker = "datepicker", parent = "#form-usuario", @readonly = "readonly"})
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary btn-sm py-0" type="button" onclick="Europa.Components.DatePicker.Closest(this)" disabled>
+                                <img class="color-blue" src="~/Static/europa/css/icons/calendar.svg" />
+                            </button>
+                        </span>
+                    </div>
+                </div>
+                <div class="col-md-3 form-group">
+                    @Html.Label("Número Funcional", new { @class = "control-label" })
+                    @Html.TextBoxFor(x => x.NumeroFuncional, new { @class = "form-control", @readonly = "readonly" })
+                </div>
+                <div class="col-md-3 form-group">
+                    @Html.Label("Situação", new { @class = "control-label" })
+                    @Html.EnumDropDownListFor(x => x.Situacao, new { @class = "form-control", disabled = "disabled" })
+                </div>
+            </div>
+        </form>
+        @{
+            Html.RenderPartial("~/Views/Shared/Componentes/_DatatableViaturaUsuario.cshtml");
+            Html.RenderPartial("~/Views/Shared/Componentes/_DatatableUsuarioPedidoCautela.cshtml");
+            Html.RenderPartial("~/Views/Shared/Componentes/_DatatableUsuarioPedidoConsumo.cshtml");
+        }
+    </div>
+</div>

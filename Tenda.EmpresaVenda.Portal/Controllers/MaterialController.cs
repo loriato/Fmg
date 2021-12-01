@@ -8,6 +8,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tenda.Domain.Fmg.Models;
+using Tenda.Domain.Fmg.Models.Views;
 using Tenda.Domain.Security.Repository;
 
 namespace Europa.Fmg.Portal.Controllers
@@ -19,6 +20,8 @@ namespace Europa.Fmg.Portal.Controllers
         private CautelaRepository _cautelaRepository { get; set; }
         private CautelaService _cautelaService { get; set; }
         private UsuarioRepository _usuarioRepository { get; set; }
+        private ViewUsuarioPedidoConsumoRepository _viewUsuarioPedidoConsumoRepository { get; set; }
+        private ViewUsuarioPedidoCautelaRepository _viewUsuarioPedidoCautelaRepository { get; set; }
         public ActionResult Index()
         {
             return View();
@@ -77,6 +80,13 @@ namespace Europa.Fmg.Portal.Controllers
             return Json(baseResponse, JsonRequestBehavior.AllowGet);
 
         }
+
+        public ActionResult ListarUsuarioPedidoCautela(DataSourceRequest request, ViewUsuarioPedidoCautela filtro)
+        {
+            var result = _viewUsuarioPedidoCautelaRepository.Listar(request, filtro);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+
         #endregion
 
         #region consumo
@@ -84,7 +94,6 @@ namespace Europa.Fmg.Portal.Controllers
         {
             var result = _consumoRepository.Listar(request, nome);
             return Json(result, JsonRequestBehavior.AllowGet);
-
         }
         [Transaction(TransactionAttributeType.Required)]
         public ActionResult IncluirMaterialConsumo(Consumo model)
@@ -132,6 +141,12 @@ namespace Europa.Fmg.Portal.Controllers
             }
             return Json(baseResponse, JsonRequestBehavior.AllowGet);
 
+        }
+
+        public ActionResult ListarUsuarioPedidoConsumo(DataSourceRequest request, ViewUsuarioPedidoConsumo filtro)
+        {
+            var result = _viewUsuarioPedidoConsumoRepository.Listar(request, filtro);
+            return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion
     }

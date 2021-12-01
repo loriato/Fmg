@@ -1,0 +1,13 @@
+﻿<script src="~/Static/projeto/datatable-viatura-usuario.js"></script>
+
+
+<div class="mt-4">
+    <div class="title-table">
+        <div class=""> Viaturas</div>
+    </div>
+    <div ng-controller="ViaturaUsuarioDataTable as table">
+        <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+               dt-instance="table.dtInstance" class="table table-striped table-bordered"
+               dt-column-defs="table.dtColumnDefs"></table>
+    </div>
+</div>

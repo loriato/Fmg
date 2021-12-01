@@ -16,6 +16,7 @@ Europa.Controllers.ViaturaUsuario.Tabela = function ($scope, $compile, DTOptions
             DTColumnBuilder.newColumn('QuilometragemNovo').withTitle('Quilometragem Novo').withOption('width', '15%'),
 
         ])
+        .setDefaultOrder([3, "desc"])
         .setDefaultOptions('POST', Europa.Controllers.ViaturaUsuario.UrlListar, Europa.Controllers.ViaturaUsuario.Params);
 
 

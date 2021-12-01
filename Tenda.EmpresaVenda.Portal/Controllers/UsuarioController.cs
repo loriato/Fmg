@@ -17,11 +17,16 @@ namespace Europa.Fmg.Portal.Controllers
     {
         private UsuarioPortalRepository _usuarioPortalRepository { get; set; }
         private UsuarioPortalService _usuarioPortalService { get; set; }
+
         public ActionResult Index()
         {
             return View();
         }
-
+        public ActionResult Visualizar(long id)
+        {
+            var dto = _usuarioPortalRepository.FindById(id);
+            return View(dto);
+        }
         public ActionResult Listar(DataSourceRequest request, UsuarioPortal filtro)
         {
             var query = _usuarioPortalRepository.Listar(request, filtro);

@@ -49,3 +49,27 @@
     padding: 0px 4px;
     color: var(--dark-blue);
 }
+
+.btn-home {
+    border-radius: 0px;
+    background-color: aliceblue;
+    width: 200px;
+    margin: 10px 10px;
+    width: 30%;
+    padding: 16px 0px;
+    font-size: 18px;
+    font-weight: 600;
+    border-color: var(--dark-blue);
+}
+
+.btn-home:hover {
+    color: aliceblue;
+    background-color: var(--dark-blue);
+    border: aliceblue;
+}
+
+.btn-home:active {
+    color: aliceblue;
+    background-color: var(--dark-blue);
+    border: aliceblue;
+}

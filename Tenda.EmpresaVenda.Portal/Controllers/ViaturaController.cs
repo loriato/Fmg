@@ -9,6 +9,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Tenda.Domain.Fmg.Models;
+using Tenda.Domain.Fmg.Models.Views;
 using Tenda.Domain.Security.Repository;
 
 namespace Europa.Fmg.Portal.Controllers
@@ -19,6 +20,7 @@ namespace Europa.Fmg.Portal.Controllers
         private ViaturaService _viaturaService { get; set; }
         private ViaturaUsuarioRepository _viaturaUsuarioRepository { get; set; }
         private UsuarioRepository _usuarioRepository { get; set; }
+        private ViewViaturaUsuarioRepository _viewViaturaUsuarioRepository { get; set; }
         public ActionResult Index()
         {
             return View();
@@ -94,6 +96,16 @@ namespace Europa.Fmg.Portal.Controllers
             }
 
             return Json(baseResponse, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ListarViewViaturaUsuario(DataSourceRequest request, ViewViaturaUsuario filtro)
+        {
+            var query = _viewViaturaUsuarioRepository.Listar(request, filtro);
+            return Json(query, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ListarViaturaEmPercuso(DataSourceRequest request)
+        {
+            var query = _viewViaturaUsuarioRepository.ListarViaturaEmPercuso(request);
+            return Json(query, JsonRequestBehavior.AllowGet);
         }
     }
 }

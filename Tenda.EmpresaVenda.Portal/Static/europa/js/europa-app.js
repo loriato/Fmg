@@ -5,6 +5,9 @@ Europa.Components.Datatable = {};
 Europa.Components.Modal = {};
 Europa.i18n = {};
 Europa.Form = {};
+Europa.Components.ViaturaUsuario = {};
+Europa.Components.UsuarioPedidoCautela = {};
+Europa.Components.UsuarioPedidoConsumo = {};
 
 Europa.AjaxStart = function (event) {
     if (event.delegateTarget.activeElement.className.indexOf("ajax-global-false") <= -1

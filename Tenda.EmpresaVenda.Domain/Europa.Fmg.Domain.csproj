@@ -354,6 +354,9 @@
     <Compile Include="Maps\PedidoConsumoMap.cs" />
     <Compile Include="Maps\ViaturaMap.cs" />
     <Compile Include="Maps\ViaturaUsuarioMap.cs" />
+    <Compile Include="Maps\ViewUsuarioPedidoCautelaMap.cs" />
+    <Compile Include="Maps\ViewUsuarioPedidoConsumoMap.cs" />
+    <Compile Include="Maps\ViewViaturaUsuarioMap.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -366,6 +369,9 @@
     <Compile Include="Repository\PedidoConsumoRepository.cs" />
     <Compile Include="Repository\ViaturaRepository.cs" />
     <Compile Include="Repository\ViaturaUsuarioRepository.cs" />
+    <Compile Include="Repository\ViewUsuarioPedidoCautelaRepository.cs" />
+    <Compile Include="Repository\ViewUsuarioPedidoConsumoRepository.cs" />
+    <Compile Include="Repository\ViewViaturaUsuarioRepository.cs" />
     <Compile Include="Services\CautelaService.cs" />
     <Compile Include="Services\ConsumoService.cs" />
     <Compile Include="Services\ViaturaService.cs" />

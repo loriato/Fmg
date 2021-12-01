@@ -22,18 +22,34 @@ Europa.Controllers.Usuario.Tabela = function ($scope, $compile, DTOptionsBuilder
 
     dataTableWrapper
         .setColumns([
-            DTColumnBuilder.newColumn('Nome').withTitle(Europa.i18n.Messages.Nome).withOption('width', '30%'),
-            DTColumnBuilder.newColumn('Email').withTitle(Europa.i18n.Messages.Email).withOption('width', '25%'),
+            DTColumnBuilder.newColumn('Nome').withTitle(Europa.i18n.Messages.Nome).withOption('width', '25%'),
+            DTColumnBuilder.newColumn('Email').withTitle(Europa.i18n.Messages.Email).withOption('width', '20%'),
             DTColumnBuilder.newColumn('Login').withTitle(Europa.i18n.Messages.Login).withOption('width', '20%'),
             DTColumnBuilder.newColumn('Situacao').withTitle(Europa.i18n.Messages.Situacao).withOption('type', 'enum-format-SituacaoUsuario').withOption('width', '25%')
         ])
-   
+        .setColActions(actionsHtml, '10%')
         .setDefaultOptions('POST', Europa.Controllers.Usuario.UrlListar, Europa.Controllers.Usuario.Params);
 
-    //$scope.edit = function (rowNr) {
-    //    var id = Europa.Controllers.Usuario.DataTable.getRowData(rowNr).Id;
-    //    Europa.Controllers.Usuario.Edit(id);
-    //}
+    function actionsHtml(data, type, full, meta) {
+        var html = '<div>' + $scope.renderButton("Visualizar", "fas fa-eye", "Visualizar(" + data.Id + ")");
+        html = html + '</div>';
+
+        return html;
+    }
+    $scope.renderButton = function (title, icon, onClick) {
+        icon = $('<i/>').addClass(icon);
+        var button = $('<a />')
+            .addClass('btn-actions')
+            .attr('title', title)
+            .attr('ng-click', onClick)
+            .append(icon);
+        return button.prop('outerHTML');
+    };
+
+    $scope.Visualizar = function (id) {
+        window.location = Europa.Controllers.Usuario.UrlVisualizar + '/' + id;
+    };
+    
 };
 
 DataTableApp.controller('UsuarioDataTable', Europa.Controllers.Usuario.Tabela);

@@ -1,1 +1,25 @@
-﻿
+﻿<script src="~/Static/projeto/home/home.js"></script>
+<script>
+    Europa.Components.ViaturaUsuario.UrlListar = '@Url.Action("ListarViaturaEmPercuso", "Viatura")';
+    Europa.Components.UsuarioPedidoConsumo.UrlListar = '@Url.Action("ListarUsuarioPedidoConsumo", "Material")';
+    Europa.Components.UsuarioPedidoCautela.UrlListar = '@Url.Action("ListarUsuarioPedidoCautela", "Material")';
+</script>
+<div class="container mt-5">
+    <div class="material-container mt-4">
+        <button class="btn btn-home" onclick="Europa.Controllers.Home.Cautela()">Materiais cautelas em falta</button>
+        <button class="btn btn-home" onclick="Europa.Controllers.Home.Consumo()">Materiais consumo em falta</button>
+        <button class="btn btn-home" onclick="Europa.Controllers.Home.Viatura()">Viaturas em andamento</button>
+
+    </div>
+    <div id="cautelas">
+        @Html.Partial("~/Views/Shared/Componentes/_DatatableUsuarioPedidoCautela.cshtml")
+    </div>
+    <div id="consumos">
+        @Html.Partial("~/Views/Shared/Componentes/_DatatableUsuarioPedidoConsumo.cshtml")
+
+    </div>
+    <div id="viaturas">
+        @Html.Partial("~/Views/Shared/Componentes/_DatatableViaturaUsuario.cshtml")
+    </div>
+</div>
+

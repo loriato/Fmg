@@ -304,8 +304,11 @@
     <Compile Include="Fmg\Models\PedidoConsumo.cs" />
     <Compile Include="Fmg\Models\Viatura.cs" />
     <Compile Include="Fmg\Models\ViaturaUsuario.cs" />
+    <Compile Include="Fmg\Models\Views\ViewUsuarioPedidoCautela.cs" />
+    <Compile Include="Fmg\Models\Views\ViewUsuarioPedidoConsumo.cs" />
     <Compile Include="Fmg\Models\Views\ViewViabilizador.cs" />
     <Compile Include="Fmg\Enums\TipoFamiliaridade.cs" />
+    <Compile Include="Fmg\Models\Views\ViewViaturaUsuario.cs" />
     <Compile Include="Security\Enums\TipoSimNao.cs" />
     <Compile Include="Security\Maps\PerfilSistemaGrupoActiveDirectoryMap.cs" />
     <Compile Include="Security\Models\PerfilSistemaGrupoActiveDirectory.cs" />

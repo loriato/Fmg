@@ -37,20 +37,18 @@
 
     }
     <script src="~/Static/projeto/autocomplete-declaration.js"></script>
-    <div>
+    <div class="app">
         <div>
             @Html.Partial("_Header")
         </div>
-        <div>
+        <div style="margin-bottom:100px">
             @RenderBody()
         </div>
         <script>
             Europa.AjustTitleAndMenuAcitons()
         </script>
-
+        @Html.Partial("_Footer")
     </div>
-    @Html.Partial("_Footer")
-
 </body>
 </html>
 
