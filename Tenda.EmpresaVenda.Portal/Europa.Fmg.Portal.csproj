@@ -571,6 +571,8 @@
     <Content Include="Static\europa\css\login.css" />
     <Content Include="Static\europa\css\rowReorder.dataTables.min.css" />
     <Content Include="Static\europa\css\spinner.css" />
+    <Content Include="Static\europa\dynamic\europa-messages-enuns.js" />
+    <Content Include="Static\europa\dynamic\europa-messages.js" />
     <Content Include="Static\europa\dynamic\init.js" />
     <Content Include="Static\europa\js\europa-circular-progress.js" />
     <Content Include="Static\europa\js\europa-custom-chartjs.js" />
