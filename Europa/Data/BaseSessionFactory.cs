@@ -71,7 +71,7 @@ namespace Europa.Domain.Data
                 .Mappings(map => map.FluentMappings.Conventions.Add<ColumnNullabilityConvention>()
             );
 
-            bool generateDdl = true;
+            bool generateDdl = false;
 
             SchemaUpdate schemaUpdate = null;
             if (generateDdl)
