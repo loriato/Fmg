@@ -16,5 +16,11 @@ namespace Europa.Fmg.Domain.Repository
             }
             return query.ToDataRequest(request);
         }
+        public DataSourceResponse<Consumo> ListarConsumoFalta(DataSourceRequest request)
+        {
+            var query = Queryable().Where(x => x.Total <= 0);
+
+            return query.ToDataRequest(request);
+        }
     }
 }

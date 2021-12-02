@@ -8,9 +8,9 @@ Europa.Controllers.Material.Cautela.Tabela = function ($scope, $compile, DTOptio
 
     dataTableWrapper
         .setTemplateEdit([
-            '<input id="Nome" name="Nome" class="form-control" ></input > ',
-            '<input id="Marca" name="Marca" class="form-control"></input>',
-            '<input id="Total" name="Total" class="form-control" ></input>'
+            '<input id="Nome" name="Nome" class="form-control"maxlength="128" ></input > ',
+            '<input id="Marca" name="Marca" class="form-control" maxlength="128"></input>',
+            '<input id="Total" name="Total" class="form-control" type="number"></input>'
         ])
         .setColumns([
             DTColumnBuilder.newColumn('Nome').withTitle(Europa.i18n.Messages.Nome).withOption('width', '30%'),

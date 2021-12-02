@@ -7,9 +7,9 @@ Europa.Controllers.Material.Consumo.Tabela = function ($scope, $compile, DTOptio
 
     dataTableWrapper
         .setTemplateEdit([
-            '<input id="Nome" name="Nome" class="form-control" ></input > ',
-            '<input id="Lote" name="Lote" class="form-control"></input>',
-            '<input id="Total" name="Total" class="form-control"></input>',
+            '<input id="Nome" name="Nome" class="form-control"maxlength="128" ></input > ',
+            '<input id="Lote" name="Lote" class="form-control" maxlength="20"></input>',
+            '<input id="Total" name="Total" class="form-control" type="number"></input>',
             '<input id="Validade" name="Validade" class="form-control" datepicker="datepicker"></input>'
         ])
         .setColumns([

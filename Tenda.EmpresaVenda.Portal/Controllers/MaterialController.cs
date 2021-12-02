@@ -33,6 +33,11 @@ namespace Europa.Fmg.Portal.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
 
         }
+        public ActionResult ListarCautelaFalta(DataSourceRequest request)
+        {
+            var result = _cautelaRepository.ListarCautelaFalta(request);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
         [Transaction(TransactionAttributeType.Required)]
         public ActionResult IncluirMaterialCautela(Cautela model)
         {
@@ -146,6 +151,11 @@ namespace Europa.Fmg.Portal.Controllers
         public ActionResult ListarUsuarioPedidoConsumo(DataSourceRequest request, ViewUsuarioPedidoConsumo filtro)
         {
             var result = _viewUsuarioPedidoConsumoRepository.Listar(request, filtro);
+            return Json(result, JsonRequestBehavior.AllowGet);
+        }
+        public ActionResult ListarConsumoFalta(DataSourceRequest request)
+        {
+            var result = _consumoRepository.ListarConsumoFalta(request);
             return Json(result, JsonRequestBehavior.AllowGet);
         }
         #endregion

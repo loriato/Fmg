@@ -1,8 +1,8 @@
 ﻿<script src="~/Static/projeto/home/home.js"></script>
 <script>
     Europa.Components.ViaturaUsuario.UrlListar = '@Url.Action("ListarViaturaEmPercuso", "Viatura")';
-    Europa.Components.UsuarioPedidoConsumo.UrlListar = '@Url.Action("ListarUsuarioPedidoConsumo", "Material")';
-    Europa.Components.UsuarioPedidoCautela.UrlListar = '@Url.Action("ListarUsuarioPedidoCautela", "Material")';
+    Europa.Controllers.Material.Cautela.UrlListar ='@Url.Action("ListarCautelaFalta", "Material")'
+    Europa.Controllers.Material.Consumo.UrlListar = '@Url.Action("ListarConsumoFalta", "Material")';
 </script>
 <div class="container mt-5">
     <div class="material-container mt-4">
@@ -12,11 +12,24 @@
 
     </div>
     <div id="cautelas">
-        @Html.Partial("~/Views/Shared/Componentes/_DatatableUsuarioPedidoCautela.cshtml")
+        <div class="title-table">
+            <div class=""> Cautela</div>
+        </div>
+        <div ng-controller="CautelaDataTable as table">
+            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                   dt-column-defs="table.dtColumnDefs"></table>
+        </div>
     </div>
     <div id="consumos">
-        @Html.Partial("~/Views/Shared/Componentes/_DatatableUsuarioPedidoConsumo.cshtml")
-
+        <div class="title-table">
+            <div class=""> Consumo</div>
+        </div>
+        <div ng-controller="ConsumoDataTable as table">
+            <table datatable="" dt-options="table.dtOptions" dt-columns="table.dtColumns"
+                   dt-instance="table.dtInstance" class="table table-striped table-bordered"
+                   dt-column-defs="table.dtColumnDefs"></table>
+        </div>
     </div>
     <div id="viaturas">
         @Html.Partial("~/Views/Shared/Componentes/_DatatableViaturaUsuario.cshtml")
