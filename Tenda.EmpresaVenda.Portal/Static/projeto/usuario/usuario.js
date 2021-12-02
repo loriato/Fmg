@@ -23,7 +23,7 @@ Europa.Controllers.Usuario.Tabela = function ($scope, $compile, DTOptionsBuilder
     dataTableWrapper
         .setColumns([
             DTColumnBuilder.newColumn('Nome').withTitle(Europa.i18n.Messages.Nome).withOption('width', '25%'),
-            DTColumnBuilder.newColumn('Email').withTitle(Europa.i18n.Messages.Email).withOption('width', '20%'),
+            DTColumnBuilder.newColumn('NumeroFuncional').withTitle('Número Funcional').withOption('width', '20%'),
             DTColumnBuilder.newColumn('Login').withTitle(Europa.i18n.Messages.Login).withOption('width', '20%'),
             DTColumnBuilder.newColumn('Situacao').withTitle(Europa.i18n.Messages.Situacao).withOption('type', 'enum-format-SituacaoUsuario').withOption('width', '25%')
         ])
